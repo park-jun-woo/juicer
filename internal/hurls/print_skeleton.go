@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // printSkeleton outputs skeleton info for an endpoint from scan data.

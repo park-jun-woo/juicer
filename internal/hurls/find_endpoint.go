@@ -3,7 +3,7 @@
 package hurls
 
 import (
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // findEndpoint returns the scanner.Endpoint matching the given id ("METHOD /path").

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/hurls"
+	"github.com/park-jun-woo/juicer/internal/hurls"
 )
 
 // handleHurlSubcommand dispatches hurl subcommands.

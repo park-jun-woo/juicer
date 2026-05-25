@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/sqls"
+	"github.com/park-jun-woo/juicer/internal/sqls"
 )
 
 // handleSQLSubcommand dispatches sql subcommands. Returns true if handled.

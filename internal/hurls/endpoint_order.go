@@ -3,7 +3,7 @@
 package hurls
 
 import (
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // endpointOrder returns a sort key for dependency-based ordering.

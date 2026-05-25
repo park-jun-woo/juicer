@@ -3,7 +3,7 @@
 package hurls
 
 import (
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // scanEndpoint performs a scan and returns the matching endpoint data.

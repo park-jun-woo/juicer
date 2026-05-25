@@ -5,7 +5,7 @@ package hurls
 import (
 	"sort"
 
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // sortEndpoints sorts endpoints by dependency order:

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 func runScan(args []string) {

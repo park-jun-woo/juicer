@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/hurls"
+	"github.com/park-jun-woo/juicer/internal/hurls"
 )
 
 func runHurlNext(args []string) {

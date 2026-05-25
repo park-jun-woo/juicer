@@ -5,7 +5,7 @@ package hurls
 import (
 	"strings"
 
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // isPublicEndpoint returns true if the endpoint requires no authentication.

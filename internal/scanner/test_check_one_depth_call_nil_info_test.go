@@ -19,5 +19,6 @@ func TestCheckOneDepthCall_NilInfo(t *testing.T) {
 		info:  make(map[token.Pos]*types.Info),
 	}
 	checkOneDepthCall(ep, call, "c", nil, idx)
+	// Should return immediately since info is nil
 	// Should return immediately
 }

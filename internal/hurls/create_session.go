@@ -5,7 +5,7 @@ package hurls
 import (
 	"fmt"
 
-	"github.com/park-jun-woo/juicer/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
 // createSession runs scanner.Scan and initializes a new hurl session.
