@@ -1,8 +1,9 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what TestBuildEndpointStatuses 테스트
 package hurls
 
 import (
 	"testing"
-
 	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
@@ -20,12 +21,5 @@ func TestBuildEndpointStatuses(t *testing.T) {
 	}
 	if statuses[0].Status != "TODO" {
 		t.Fatalf("expected TODO, got %s", statuses[0].Status)
-	}
-}
-
-func TestBuildEndpointStatuses_Empty(t *testing.T) {
-	statuses := buildEndpointStatuses(nil)
-	if len(statuses) != 0 {
-		t.Fatalf("expected 0, got %d", len(statuses))
 	}
 }

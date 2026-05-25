@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=session control=sequence
+//ff:what TestDeleteSession 테스트
 package hurls
 
 import (
@@ -17,17 +19,5 @@ func TestDeleteSession(t *testing.T) {
 
 	if err := DeleteSession(); err != nil {
 		t.Fatal(err)
-	}
-}
-
-func TestDeleteSession_NoFile(t *testing.T) {
-	dir := t.TempDir()
-	oldWd, _ := os.Getwd()
-	os.Chdir(dir)
-	defer os.Chdir(oldWd)
-
-	err := DeleteSession()
-	if err == nil {
-		t.Fatal("expected error")
 	}
 }

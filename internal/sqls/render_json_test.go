@@ -1,3 +1,5 @@
+//ff:func feature=sql type=parse control=sequence
+//ff:what TestRenderJSON_Empty 테스트
 package sqls
 
 import "testing"

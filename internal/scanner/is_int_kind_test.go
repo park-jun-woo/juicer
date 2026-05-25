@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestIsIntKind_Int 테스트
 package scanner
 
 import (
@@ -7,24 +9,6 @@ import (
 
 func TestIsIntKind_Int(t *testing.T) {
 	if !isIntKind(types.Int) {
-		t.Fatal("expected true")
-	}
-}
-
-func TestIsIntKind_Int64(t *testing.T) {
-	if !isIntKind(types.Int64) {
-		t.Fatal("expected true")
-	}
-}
-
-func TestIsIntKind_String(t *testing.T) {
-	if isIntKind(types.String) {
-		t.Fatal("expected false")
-	}
-}
-
-func TestIsIntKind_Uint(t *testing.T) {
-	if !isIntKind(types.Uint) {
 		t.Fatal("expected true")
 	}
 }

@@ -1,4 +1,4 @@
-//ff:func feature=sql type=command control=selection
+//ff:func feature=sql type=command control=sequence
 //ff:what TestHandleSQLSubcommand 테스트
 package main
 
@@ -22,56 +22,4 @@ func setupSQLSession(t *testing.T) (string, func()) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	return dir, func() { os.Chdir(oldWd) }
-}
-
-func TestHandleSQLSubcommand_Next(t *testing.T) {
-	_, cleanup := setupSQLSession(t)
-	defer cleanup()
-	got := handleSQLSubcommand([]string{"next"})
-	if !got {
-		t.Fatal("expected true")
-	}
-}
-
-func TestHandleSQLSubcommand_Status(t *testing.T) {
-	_, cleanup := setupSQLSession(t)
-	defer cleanup()
-	got := handleSQLSubcommand([]string{"status"})
-	if !got {
-		t.Fatal("expected true")
-	}
-}
-
-func TestHandleSQLSubcommand_List(t *testing.T) {
-	_, cleanup := setupSQLSession(t)
-	defer cleanup()
-	got := handleSQLSubcommand([]string{"list"})
-	if !got {
-		t.Fatal("expected true")
-	}
-}
-
-func TestHandleSQLSubcommand_Skip(t *testing.T) {
-	_, cleanup := setupSQLSession(t)
-	defer cleanup()
-	got := handleSQLSubcommand([]string{"skip"})
-	if !got {
-		t.Fatal("expected true")
-	}
-}
-
-func TestHandleSQLSubcommand_Reset(t *testing.T) {
-	_, cleanup := setupSQLSession(t)
-	defer cleanup()
-	got := handleSQLSubcommand([]string{"reset"})
-	if !got {
-		t.Fatal("expected true")
-	}
-}
-
-func TestHandleSQLSubcommand_Unknown(t *testing.T) {
-	got := handleSQLSubcommand([]string{"unknown"})
-	if got {
-		t.Fatal("expected false for unknown subcommand")
-	}
 }

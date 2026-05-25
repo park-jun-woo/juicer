@@ -1,3 +1,5 @@
+//ff:func feature=sql type=parse control=sequence
+//ff:what TestCountStatus_Basic 테스트
 package sqls
 
 import "testing"

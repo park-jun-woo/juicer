@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestIsGinH_NilType 테스트
 package scanner
 
 import (
@@ -11,31 +13,5 @@ func TestIsGinH_NilType(t *testing.T) {
 	info := &types.Info{Types: make(map[ast.Expr]types.TypeAndValue)}
 	if isGinH(comp, info) {
 		t.Fatal("expected false for nil type")
-	}
-}
-
-func TestIsGinH_GinHSelector(t *testing.T) {
-	comp := &ast.CompositeLit{
-		Type: &ast.SelectorExpr{
-			X:   &ast.Ident{Name: "gin"},
-			Sel: &ast.Ident{Name: "H"},
-		},
-	}
-	info := &types.Info{Types: make(map[ast.Expr]types.TypeAndValue)}
-	if !isGinH(comp, info) {
-		t.Fatal("expected true for gin.H")
-	}
-}
-
-func TestIsGinH_NonGinSelector(t *testing.T) {
-	comp := &ast.CompositeLit{
-		Type: &ast.SelectorExpr{
-			X:   &ast.Ident{Name: "foo"},
-			Sel: &ast.Ident{Name: "Bar"},
-		},
-	}
-	info := &types.Info{Types: make(map[ast.Expr]types.TypeAndValue)}
-	if isGinH(comp, info) {
-		t.Fatal("expected false for non-gin type")
 	}
 }

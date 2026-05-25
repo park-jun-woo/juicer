@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveResponseType_NilInfoCase 테스트
 package scanner
 
 import (

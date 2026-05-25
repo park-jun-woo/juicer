@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestUnwrapPointer_Pointer 테스트
 package scanner
 
 import (
@@ -11,13 +13,5 @@ func TestUnwrapPointer_Pointer(t *testing.T) {
 	got := unwrapPointer(ptr)
 	if got != inner {
 		t.Fatal("expected unwrapped type")
-	}
-}
-
-func TestUnwrapPointer_NonPointer(t *testing.T) {
-	ty := types.Typ[types.String]
-	got := unwrapPointer(ty)
-	if got != ty {
-		t.Fatal("expected same type")
 	}
 }

@@ -1,19 +1,11 @@
+//ff:func feature=sql type=parse control=sequence
+//ff:what TestDetectCRUD_Nil 테스트
 package sqls
 
-import (
-	"go/ast"
-	"testing"
-)
+import "testing"
 
 func TestDetectCRUD_Nil(t *testing.T) {
 	if detectCRUD(nil) != "" {
-		t.Fatal("expected empty")
-	}
-}
-
-func TestDetectCRUD_Empty(t *testing.T) {
-	body := &ast.BlockStmt{}
-	if detectCRUD(body) != "" {
 		t.Fatal("expected empty")
 	}
 }

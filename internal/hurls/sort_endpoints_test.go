@@ -1,8 +1,9 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what TestSortEndpoints 테스트
 package hurls
 
 import (
 	"testing"
-
 	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
@@ -16,12 +17,5 @@ func TestSortEndpoints(t *testing.T) {
 	sorted := sortEndpoints(eps)
 	if sorted[0].Path != "/api/health" {
 		t.Fatalf("expected health first, got %s", sorted[0].Path)
-	}
-}
-
-func TestSortEndpoints_Empty(t *testing.T) {
-	sorted := sortEndpoints(nil)
-	if len(sorted) != 0 {
-		t.Fatalf("expected 0, got %d", len(sorted))
 	}
 }

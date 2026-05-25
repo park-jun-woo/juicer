@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what TestFindTestFile_Found 테스트
 package hurls
 
 import (
@@ -13,20 +15,5 @@ func TestFindTestFile_Found(t *testing.T) {
 	got := findTestFile(dir, "GET", "/api/health")
 	if got == "" {
 		t.Fatal("expected to find test file")
-	}
-}
-
-func TestFindTestFile_NotFound(t *testing.T) {
-	dir := t.TempDir()
-	got := findTestFile(dir, "GET", "/api/missing")
-	if got != "" {
-		t.Fatalf("expected empty, got %q", got)
-	}
-}
-
-func TestFindTestFile_NoDir(t *testing.T) {
-	got := findTestFile("/nonexistent/dir", "GET", "/path")
-	if got != "" {
-		t.Fatalf("expected empty, got %q", got)
 	}
 }

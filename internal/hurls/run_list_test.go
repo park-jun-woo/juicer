@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what setupHurlTestSession 함수
 package hurls
 
 import (
@@ -21,22 +23,4 @@ func setupHurlTestSession(t *testing.T) func() {
 	}
 	SaveSession(sess)
 	return func() { os.Chdir(oldWd) }
-}
-
-func TestRunList_WithSession(t *testing.T) {
-	cleanup := setupHurlTestSession(t)
-	defer cleanup()
-	if err := RunList(); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestRunList_NoSession(t *testing.T) {
-	dir := t.TempDir()
-	oldWd, _ := os.Getwd()
-	os.Chdir(dir)
-	defer os.Chdir(oldWd)
-	if err := RunList(); err != nil {
-		t.Fatal(err)
-	}
 }

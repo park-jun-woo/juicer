@@ -1,3 +1,5 @@
+//ff:func feature=sql type=render control=sequence
+//ff:what TestRenderYAML_Empty 테스트
 package sqls
 
 import "testing"

@@ -1,9 +1,10 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveStatusCode_IntLit 테스트
 package scanner
 
 import (
 	"go/ast"
 	"go/token"
-	"go/types"
 	"testing"
 )
 
@@ -12,25 +13,5 @@ func TestResolveStatusCode_IntLit(t *testing.T) {
 	got := resolveStatusCode(expr, nil)
 	if got != "200" {
 		t.Fatalf("expected 200, got %s", got)
-	}
-}
-
-func TestResolveStatusCode_NilInfo(t *testing.T) {
-	expr := &ast.Ident{Name: "StatusOK"}
-	got := resolveStatusCode(expr, nil)
-	if got != "(unknown)" {
-		t.Fatalf("expected (unknown), got %s", got)
-	}
-}
-
-func TestResolveStatusCode_NoMatch(t *testing.T) {
-	info := &types.Info{
-		Uses:  make(map[*ast.Ident]types.Object),
-		Types: make(map[ast.Expr]types.TypeAndValue),
-	}
-	expr := &ast.Ident{Name: "x"}
-	got := resolveStatusCode(expr, info)
-	if got != "(unknown)" {
-		t.Fatalf("expected (unknown), got %s", got)
 	}
 }

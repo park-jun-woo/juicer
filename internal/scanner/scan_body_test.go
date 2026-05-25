@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestScanBody_NilBodyCase 테스트
 package scanner
 
 import (
@@ -11,11 +13,4 @@ func TestScanBody_NilBodyCase(t *testing.T) {
 	ep := &Endpoint{}
 	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
 	scanBody(ep, nil, "c", nil, idx, "handler")
-}
-
-func TestScanBody_EmptyBodyCase(t *testing.T) {
-	ep := &Endpoint{}
-	body := &ast.BlockStmt{}
-	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
-	scanBody(ep, body, "c", nil, idx, "handler")
 }

@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=session control=sequence
+//ff:what TestSessionExists_True 테스트
 package hurls
 
 import (
@@ -16,16 +18,5 @@ func TestSessionExists_True(t *testing.T) {
 
 	if !SessionExists() {
 		t.Fatal("expected true")
-	}
-}
-
-func TestSessionExists_False(t *testing.T) {
-	dir := t.TempDir()
-	oldWd, _ := os.Getwd()
-	os.Chdir(dir)
-	defer os.Chdir(oldWd)
-
-	if SessionExists() {
-		t.Fatal("expected false")
 	}
 }

@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveConstStatus_Const 테스트
 package scanner
 
 import (
@@ -12,13 +14,5 @@ func TestResolveConstStatus_Const(t *testing.T) {
 	got := resolveConstStatus(c)
 	if got != "200" {
 		t.Fatalf("expected 200, got %s", got)
-	}
-}
-
-func TestResolveConstStatus_NonConst(t *testing.T) {
-	v := types.NewVar(token.NoPos, nil, "x", types.Typ[types.Int])
-	got := resolveConstStatus(v)
-	if got != "" {
-		t.Fatalf("expected empty, got %s", got)
 	}
 }

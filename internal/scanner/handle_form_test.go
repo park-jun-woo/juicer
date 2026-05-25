@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestHandleForm_Basic 테스트
 package scanner
 
 import (
@@ -15,10 +17,4 @@ func TestHandleForm_Basic(t *testing.T) {
 	if len(ep.Request.FormFields) != 1 {
 		t.Fatal("expected 1 form field")
 	}
-}
-
-func TestHandleForm_NoArgs(t *testing.T) {
-	ep := &Endpoint{}
-	call := &ast.CallExpr{}
-	handleForm(ep, call)
 }

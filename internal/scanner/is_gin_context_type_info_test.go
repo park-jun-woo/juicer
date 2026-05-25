@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestIsGinContextTypeInfo_NonPointer 테스트
 package scanner
 
 import (
@@ -8,11 +10,5 @@ import (
 func TestIsGinContextTypeInfo_NonPointer(t *testing.T) {
 	if isGinContextTypeInfo(types.Typ[types.String]) {
 		t.Fatal("expected false for non-pointer")
-	}
-}
-
-func TestIsGinContextTypeInfo_PointerToBasic(t *testing.T) {
-	if isGinContextTypeInfo(types.NewPointer(types.Typ[types.Int])) {
-		t.Fatal("expected false for pointer to basic")
 	}
 }

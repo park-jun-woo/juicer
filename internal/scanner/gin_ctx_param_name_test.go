@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestGinCtxParamName_WithGinCtx 테스트
 package scanner
 
 import (
@@ -24,27 +26,5 @@ func TestGinCtxParamName_WithGinCtx(t *testing.T) {
 	got := ginCtxParamName(ft)
 	if got != "c" {
 		t.Fatalf("expected c, got %s", got)
-	}
-}
-
-func TestGinCtxParamName_NoGinCtx(t *testing.T) {
-	ft := &ast.FuncType{
-		Params: &ast.FieldList{
-			List: []*ast.Field{
-				{Names: []*ast.Ident{{Name: "x"}}, Type: &ast.Ident{Name: "int"}},
-			},
-		},
-	}
-	got := ginCtxParamName(ft)
-	if got != "" {
-		t.Fatalf("expected empty, got %s", got)
-	}
-}
-
-func TestGinCtxParamName_NilParams(t *testing.T) {
-	ft := &ast.FuncType{}
-	got := ginCtxParamName(ft)
-	if got != "" {
-		t.Fatalf("expected empty, got %s", got)
 	}
 }

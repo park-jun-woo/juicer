@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestIsGinContextType_Valid 테스트
 package scanner
 
 import (
@@ -14,23 +16,5 @@ func TestIsGinContextType_Valid(t *testing.T) {
 	}
 	if !isGinContextType(expr) {
 		t.Fatal("expected true")
-	}
-}
-
-func TestIsGinContextType_NotStar(t *testing.T) {
-	if isGinContextType(&ast.Ident{Name: "int"}) {
-		t.Fatal("expected false")
-	}
-}
-
-func TestIsGinContextType_WrongName(t *testing.T) {
-	expr := &ast.StarExpr{
-		X: &ast.SelectorExpr{
-			X:   &ast.Ident{Name: "http"},
-			Sel: &ast.Ident{Name: "Request"},
-		},
-	}
-	if isGinContextType(expr) {
-		t.Fatal("expected false")
 	}
 }

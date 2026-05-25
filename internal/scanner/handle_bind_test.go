@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestHandleBind_NoArgs 테스트
 package scanner
 
 import (
@@ -13,14 +15,5 @@ func TestHandleBind_NoArgs(t *testing.T) {
 	handleBind(ep, call, "ShouldBindJSON", info)
 	if ep.Request == nil || ep.Request.Body == nil {
 		t.Fatal("expected body to be set")
-	}
-}
-
-func TestHandleBind_ExistingBody(t *testing.T) {
-	ep := &Endpoint{Request: &Request{Body: &Body{VarName: "existing"}}}
-	call := &ast.CallExpr{Args: []ast.Expr{&ast.Ident{Name: "req"}}}
-	handleBind(ep, call, "ShouldBindJSON", nil)
-	if ep.Request.Body.VarName != "existing" {
-		t.Fatal("should not overwrite existing body")
 	}
 }

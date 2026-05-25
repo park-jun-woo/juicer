@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what TestScanEndpoint_InvalidDir 테스트
 package hurls
 
 import "testing"

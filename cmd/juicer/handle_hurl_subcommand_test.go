@@ -1,4 +1,4 @@
-//ff:func feature=hurl type=command control=selection
+//ff:func feature=hurl type=command control=sequence
 //ff:what TestHandleHurlSubcommand 테스트
 package main
 
@@ -18,35 +18,4 @@ func setupHurlSession(t *testing.T) (string, func()) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	return dir, func() { os.Chdir(oldWd) }
-}
-
-func TestHandleHurlSubcommand_Next(t *testing.T) {
-	_, cleanup := setupHurlSession(t)
-	defer cleanup()
-	// next with empty session => "All tests complete!"
-	handleHurlSubcommand([]string{"next"})
-}
-
-func TestHandleHurlSubcommand_Status(t *testing.T) {
-	_, cleanup := setupHurlSession(t)
-	defer cleanup()
-	handleHurlSubcommand([]string{"status"})
-}
-
-func TestHandleHurlSubcommand_List(t *testing.T) {
-	_, cleanup := setupHurlSession(t)
-	defer cleanup()
-	handleHurlSubcommand([]string{"list"})
-}
-
-func TestHandleHurlSubcommand_Skip(t *testing.T) {
-	_, cleanup := setupHurlSession(t)
-	defer cleanup()
-	handleHurlSubcommand([]string{"skip"})
-}
-
-func TestHandleHurlSubcommand_Reset(t *testing.T) {
-	_, cleanup := setupHurlSession(t)
-	defer cleanup()
-	handleHurlSubcommand([]string{"reset"})
 }

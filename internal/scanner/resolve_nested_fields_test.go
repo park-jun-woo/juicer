@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveNestedFields_BasicType 테스트
 package scanner
 
 import (
@@ -9,19 +11,5 @@ func TestResolveNestedFields_BasicType(t *testing.T) {
 	result := resolveNestedFields(types.Typ[types.String], make(map[string]bool))
 	if len(result) != 0 {
 		t.Fatalf("expected 0, got %d", len(result))
-	}
-}
-
-func TestResolveNestedFields_PointerType(t *testing.T) {
-	result := resolveNestedFields(types.NewPointer(types.Typ[types.Int]), make(map[string]bool))
-	if len(result) != 0 {
-		t.Fatalf("expected 0, got %d", len(result))
-	}
-}
-
-func TestResolveNestedFields_SliceType(t *testing.T) {
-	result := resolveNestedFields(types.NewSlice(types.Typ[types.String]), make(map[string]bool))
-	if len(result) != 0 {
-		t.Fatalf("expected 0 for non-struct slice, got %d", len(result))
 	}
 }

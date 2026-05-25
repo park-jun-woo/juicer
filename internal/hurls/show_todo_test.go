@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=render control=sequence
+//ff:what TestShowTODO_NoScan 테스트
 package hurls
 
 import "testing"

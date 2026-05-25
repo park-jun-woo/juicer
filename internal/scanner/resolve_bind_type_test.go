@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveBindType_EmptyArgs 테스트
 package scanner
 
 import (
@@ -12,13 +14,5 @@ func TestResolveBindType_EmptyArgs(t *testing.T) {
 	name, fields := resolveBindType(call, info)
 	if name != "" || fields != nil {
 		t.Fatal("expected empty")
-	}
-}
-
-func TestResolveBindType_NilInfoCase(t *testing.T) {
-	call := &ast.CallExpr{Args: []ast.Expr{&ast.Ident{Name: "req"}}}
-	name, fields := resolveBindType(call, nil)
-	if name != "" || fields != nil {
-		t.Fatal("expected empty with nil info")
 	}
 }

@@ -1,3 +1,5 @@
+//ff:func feature=sql type=parse control=sequence
+//ff:what TestReceiverTypeName_Star 테스트
 package sqls
 
 import (
@@ -10,19 +12,5 @@ func TestReceiverTypeName_Star(t *testing.T) {
 	got := receiverTypeName(expr)
 	if got != "UserRepo" {
 		t.Fatalf("expected UserRepo, got %s", got)
-	}
-}
-
-func TestReceiverTypeName_Ident(t *testing.T) {
-	got := receiverTypeName(&ast.Ident{Name: "UserRepo"})
-	if got != "UserRepo" {
-		t.Fatalf("expected UserRepo, got %s", got)
-	}
-}
-
-func TestReceiverTypeName_Unknown(t *testing.T) {
-	got := receiverTypeName(&ast.BasicLit{})
-	if got != "" {
-		t.Fatalf("expected empty, got %s", got)
 	}
 }

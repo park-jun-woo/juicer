@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestIsGinHMapType_NoTypesEntry 테스트
 package scanner
 
 import (

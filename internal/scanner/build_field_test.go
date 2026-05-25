@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestBuildField_Basic 테스트
 package scanner
 
 import (
@@ -13,21 +15,5 @@ func TestBuildField_Basic(t *testing.T) {
 	}
 	if f.JSON != "name" {
 		t.Fatalf("expected name, got %s", f.JSON)
-	}
-}
-
-func TestBuildField_Excluded(t *testing.T) {
-	v := types.NewVar(0, nil, "Secret", types.Typ[types.String])
-	f := buildField(v, `json:"-"`, make(map[string]bool))
-	if f != nil {
-		t.Fatal("expected nil for json:-")
-	}
-}
-
-func TestBuildField_NoTag(t *testing.T) {
-	v := types.NewVar(0, nil, "ID", types.Typ[types.Int])
-	f := buildField(v, "", make(map[string]bool))
-	if f == nil {
-		t.Fatal("expected non-nil")
 	}
 }

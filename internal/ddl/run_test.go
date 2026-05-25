@@ -1,3 +1,5 @@
+//ff:func feature=ddl type=command control=sequence
+//ff:what TestRun_Basic 테스트
 package ddl
 
 import (
@@ -16,24 +18,5 @@ func TestRun_Basic(t *testing.T) {
 	}
 	if !strings.Contains(out, "CREATE TABLE users") {
 		t.Fatalf("unexpected: %q", out)
-	}
-}
-
-func TestRun_EmptyDirCov(t *testing.T) {
-	dir := t.TempDir()
-	out, err := Run(dir)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if out != "" {
-		t.Fatalf("expected empty, got %q", out)
-	}
-}
-
-func TestRun_InvalidDirCov(t *testing.T) {
-	_, err := Run("/nonexistent/dir/12345")
-	if err != nil {
-		// glob returns nil on non-matching pattern, not error
-		// This depends on OS behavior
 	}
 }

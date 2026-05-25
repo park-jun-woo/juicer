@@ -1,3 +1,5 @@
+//ff:func feature=scan type=extract control=sequence
+//ff:what TestResolveCallerArgs_EmptyParams 테스트
 package scanner
 
 import (

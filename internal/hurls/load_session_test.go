@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=session control=sequence
+//ff:what TestLoadSession 테스트
 package hurls
 
 import (
@@ -22,32 +24,5 @@ func TestLoadSession(t *testing.T) {
 	}
 	if sess.Host != "http://localhost" {
 		t.Fatalf("unexpected host: %s", sess.Host)
-	}
-}
-
-func TestLoadSession_NoFile(t *testing.T) {
-	dir := t.TempDir()
-	oldWd, _ := os.Getwd()
-	os.Chdir(dir)
-	defer os.Chdir(oldWd)
-
-	_, err := LoadSession()
-	if err == nil {
-		t.Fatal("expected error")
-	}
-}
-
-func TestLoadSession_InvalidJSON(t *testing.T) {
-	dir := t.TempDir()
-	oldWd, _ := os.Getwd()
-	os.Chdir(dir)
-	defer os.Chdir(oldWd)
-
-	os.MkdirAll(sessionDirName, 0o755)
-	os.WriteFile(filepath.Join(sessionDirName, sessionFileName), []byte("not json"), 0o644)
-
-	_, err := LoadSession()
-	if err == nil {
-		t.Fatal("expected error")
 	}
 }

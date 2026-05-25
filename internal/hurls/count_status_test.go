@@ -1,3 +1,5 @@
+//ff:func feature=hurl type=parse control=sequence
+//ff:what TestCountStatus 테스트
 package hurls
 
 import "testing"
