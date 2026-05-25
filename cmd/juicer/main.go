@@ -23,7 +23,7 @@ func main() {
 	case "hurl":
 		runHurl(os.Args[2:])
 	case "version":
-		fmt.Printf("huma %s\n", Version)
+		fmt.Printf("juicer %s\n", Version)
 	default:
 		printUsage()
 		os.Exit(1)

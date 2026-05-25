@@ -8,23 +8,23 @@ import (
 )
 
 func printUsage() {
-	fmt.Fprintf(os.Stderr, `huma - Go Gin Endpoint Finder
+	fmt.Fprintf(os.Stderr, `juicer - Go Gin Endpoint Finder
 
 Usage:
-  huma scan [project-root] [flags]
-  huma ddl [migrations-dir] [flags]
-  huma sql [repository-dir] [flags]
-  huma sql next [--repo DIR --queries DIR]
-  huma sql status
-  huma sql list
-  huma sql skip
-  huma sql reset
-  huma hurl next [--host URL --tests DIR --repo DIR]
-  huma hurl status
-  huma hurl list
-  huma hurl skip
-  huma hurl reset
-  huma version
+  juicer scan [project-root] [flags]
+  juicer ddl [migrations-dir] [flags]
+  juicer sql [repository-dir] [flags]
+  juicer sql next [--repo DIR --queries DIR]
+  juicer sql status
+  juicer sql list
+  juicer sql skip
+  juicer sql reset
+  juicer hurl next [--host URL --tests DIR --repo DIR]
+  juicer hurl status
+  juicer hurl list
+  juicer hurl skip
+  juicer hurl reset
+  juicer version
 
 scan flags:
   --json      output JSON
