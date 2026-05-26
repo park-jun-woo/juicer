@@ -39,7 +39,9 @@ func Scan(root string) (*scanner.ScanResult, error) {
 	}
 
 	endpoints, handlerExprsMap := extractRoutes(pkgs, absRoot)
-	analyzeHandlers(pkgs, endpoints, absRoot, handlerExprsMap)
+	idx := buildFuncIndex(pkgs)
+	resolveGroupPrefix(pkgs, absRoot, idx, endpoints, handlerExprsMap)
+	analyzeHandlers(pkgs, endpoints, absRoot, handlerExprsMap, idx)
 
 	// gin 경로(:param)를 OpenAPI 경로({param})로 변환
 	for i := range endpoints {

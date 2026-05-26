@@ -1,5 +1,5 @@
 //ff:func feature=ddl type=test control=sequence
-//ff:what TestRunDDL_StdoutBranch 테스트
+//ff:what TestRunDDL_StdoutBranch stdout 분기 테스트
 package main
 
 import (

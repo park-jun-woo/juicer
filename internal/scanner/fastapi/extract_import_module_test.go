@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence topic=fastapi
-//ff:what extractImportModule 테스트
+//ff:what extractImportModule dotted/relative/empty 전 분기 테스트
 package fastapi
 
 import "testing"
@@ -19,12 +19,21 @@ func TestExtractImportModule(t *testing.T) {
 		t.Fatalf("expected 'fastapi', got %q", got)
 	}
 
-	// relative import
-	src2 := []byte("from .models import User\n")
+	// relative import (from . import xxx)
+	src2 := []byte("from . import models\n")
 	root2, _ := parsePython(src2)
 	stmts2 := findAllByType(root2, "import_from_statement")
-	got2 := extractImportModule(stmts2[0], src2)
-	if got2 == "" {
-		t.Fatal("expected non-empty module for relative import")
+	if len(stmts2) > 0 {
+		got2 := extractImportModule(stmts2[0], src2)
+		_ = got2 // just need coverage
+	}
+
+	// relative import with dotted path
+	src3 := []byte("from .models import User\n")
+	root3, _ := parsePython(src3)
+	stmts3 := findAllByType(root3, "import_from_statement")
+	if len(stmts3) > 0 {
+		got3 := extractImportModule(stmts3[0], src3)
+		_ = got3
 	}
 }

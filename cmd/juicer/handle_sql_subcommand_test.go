@@ -1,5 +1,5 @@
 //ff:func feature=sql type=test control=sequence
-//ff:what TestHandleSQLSubcommand_All 테스트
+//ff:what handleSQLSubcommand 전 분기 테스트 (에러 분기는 os.Exit 때문에 서브프로세스 테스트로 분리)
 package main
 
 import "testing"

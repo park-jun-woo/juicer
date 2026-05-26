@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence
-//ff:what TestDetectGoGin_Hit 테스트
+//ff:what TestDetectGoGin_Hit go.mod 히트 분기 테스트
 package scanner
 
 import (

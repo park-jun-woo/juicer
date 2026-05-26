@@ -31,4 +31,21 @@ func TestExtractDecoratorArgs(t *testing.T) {
 	if p != "" || s != 0 || r != "" {
 		t.Fatal("expected empty for nil")
 	}
+
+	// decorator without argument_list (bare attribute access)
+	src2 := []byte("@router.get\ndef f(): pass\n")
+	root2, err := parsePython(src2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	decs2 := findAllByType(root2, "decorator")
+	if len(decs2) == 0 {
+		t.Fatal("no decorator")
+	}
+	// The decorator's child is an attribute, not a call node; pass it directly
+	attr := findChildByType(decs2[0], "attribute")
+	p2, s2, r2 := extractDecoratorArgs(attr, src2)
+	if p2 != "" || s2 != 0 || r2 != "" {
+		t.Fatal("expected empty for non-call decorator")
+	}
 }

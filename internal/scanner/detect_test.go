@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence
-//ff:what TestDetectFramework_GoGinBranch 테스트
+//ff:what TestDetectFramework_GoGinBranch GoGin 감지 분기 테스트
 package scanner
 
 import (

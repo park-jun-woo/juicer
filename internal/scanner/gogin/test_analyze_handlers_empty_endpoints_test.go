@@ -8,6 +8,6 @@ import (
 )
 
 func TestAnalyzeHandlers_EmptyEndpoints(t *testing.T) {
-	analyzeHandlers(nil, nil, ".", nil)
-	analyzeHandlers(nil, []scanner.Endpoint{}, ".", nil)
+	analyzeHandlers(nil, nil, ".", nil, nil)
+	analyzeHandlers(nil, []scanner.Endpoint{}, ".", nil, nil)
 }

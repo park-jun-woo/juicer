@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence
-//ff:what TestRunScan_YAMLDefault 테스트
+//ff:what TestRunScan_YAMLDefault YAML 기본 출력 분기 테스트
 package main
 
 import "testing"

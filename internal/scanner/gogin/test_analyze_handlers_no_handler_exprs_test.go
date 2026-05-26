@@ -11,6 +11,6 @@ func TestAnalyzeHandlers_NoHandlerExprs(t *testing.T) {
 	endpoints := []scanner.Endpoint{
 		{Method: "GET", Path: "/test"},
 	}
-	analyzeHandlers(nil, endpoints, ".", nil)
+	analyzeHandlers(nil, endpoints, ".", nil, nil)
 	// Should not crash, handlerExprs is empty so loop skipped
 }

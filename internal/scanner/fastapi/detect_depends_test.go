@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=iteration dimension=1 topic=fastapi
-//ff:what TestExtractDependsFuncName 테스트
+//ff:what TestExtractDependsFuncName 전 분기 테스트
 package fastapi
 
 import "testing"

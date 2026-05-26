@@ -16,5 +16,5 @@ func TestAnalyzeHandlers_WithExprs(t *testing.T) {
 	handlerExprsMap := map[int][]ast.Expr{
 		0: {&ast.Ident{Name: "handler"}},
 	}
-	analyzeHandlers(nil, eps, ".", handlerExprsMap)
+	analyzeHandlers(nil, eps, ".", handlerExprsMap, nil)
 }

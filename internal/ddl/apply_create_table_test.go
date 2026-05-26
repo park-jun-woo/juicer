@@ -1,5 +1,5 @@
 //ff:func feature=ddl type=test control=sequence
-//ff:what TestApplyCreateTable_Basic 테스트
+//ff:what applyCreateTable 전 분기 테스트 (colName=="" 분기는 stripInlineComments 후 도달 불가)
 package ddl
 
 import "testing"

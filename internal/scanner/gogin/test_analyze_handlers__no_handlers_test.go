@@ -10,5 +10,5 @@ import (
 
 func TestAnalyzeHandlers_NoHandlers(t *testing.T) {
 	eps := []scanner.Endpoint{{Method: "GET", Path: "/test"}}
-	analyzeHandlers(nil, eps, ".", nil)
+	analyzeHandlers(nil, eps, ".", nil, nil)
 }

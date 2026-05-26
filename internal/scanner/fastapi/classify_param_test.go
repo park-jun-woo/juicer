@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=iteration dimension=1 topic=fastapi
-//ff:what classifyParam 테스트
+//ff:what TestClassifyParam path/query/body/file/default/self/empty 분기 테스트
 package fastapi
 
 import "testing"

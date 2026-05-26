@@ -1,5 +1,5 @@
 //ff:func feature=ratchet type=test control=sequence
-//ff:what TestRunSQLNext_FlagsBranch 테스트
+//ff:what runSQLNext 비-Exit 분기 테스트 (os.Exit 에러 분기는 서브프로세스 테스트로 분리)
 package main
 
 import (

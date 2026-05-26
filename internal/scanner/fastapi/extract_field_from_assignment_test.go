@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence topic=fastapi
-//ff:what extractFieldFromAssignment 테스트
+//ff:what extractFieldFromAssignment normal/dunder 분기 테스트 (ident==nil은 tree-sitter상 도달 불가)
 package fastapi
 
 import "testing"

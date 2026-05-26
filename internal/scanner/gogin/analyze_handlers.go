@@ -9,9 +9,7 @@ import (
 	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
-func analyzeHandlers(pkgs []*packages.Package, endpoints []scanner.Endpoint, root string, handlerExprsMap map[int][]ast.Expr) {
-	idx := buildFuncIndex(pkgs)
-
+func analyzeHandlers(pkgs []*packages.Package, endpoints []scanner.Endpoint, root string, handlerExprsMap map[int][]ast.Expr, idx *funcIndex) {
 	for i := range endpoints {
 		ep := &endpoints[i]
 		exprs := handlerExprsMap[i]

@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence topic=fastapi
-//ff:what extractDefault 테스트
+//ff:what TestExtractDefault default-found 분기 테스트
 package fastapi
 
 import "testing"

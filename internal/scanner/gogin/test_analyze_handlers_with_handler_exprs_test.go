@@ -52,5 +52,5 @@ func handler() {}
 		0: {handlerIdent},
 	}
 
-	analyzeHandlers([]*packages.Package{pkg}, endpoints, ".", handlerExprsMap)
+	analyzeHandlers([]*packages.Package{pkg}, endpoints, ".", handlerExprsMap, nil)
 }
