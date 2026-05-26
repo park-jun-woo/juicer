@@ -19,7 +19,7 @@ func fieldsToSchema(fields []Field) map[string]any {
 		prop := fieldToProperty(f)
 		props[propName] = prop
 
-		if isRequired(f) {
+		if isRequired(f) && !f.Nullable {
 			required = append(required, propName)
 		}
 	}

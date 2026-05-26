@@ -16,10 +16,14 @@ func pydanticFieldsToScannerFields(fields []pydanticField) []scanner.Field {
 		if oaType == "" {
 			oaType = "string"
 		}
+		if oa.Format != "" {
+			oaType = oaType + ":" + oa.Format
+		}
 		result[i] = scanner.Field{
-			Name: f.name,
-			Type: oaType,
-			JSON: f.name,
+			Name:     f.name,
+			Type:     oaType,
+			JSON:     f.name,
+			Nullable: f.nullable || oa.Nullable,
 		}
 	}
 	return result

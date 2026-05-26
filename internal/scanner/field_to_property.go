@@ -10,6 +10,10 @@ func fieldToProperty(f Field) map[string]any {
 	goType := f.Type
 	prop := map[string]any{}
 
+	if f.Nullable {
+		prop["nullable"] = true
+	}
+
 	// 중첩 struct
 	if len(f.Fields) > 0 {
 		if strings.HasPrefix(goType, "[]") {
@@ -17,7 +21,11 @@ func fieldToProperty(f Field) map[string]any {
 			prop["items"] = fieldsToSchema(f.Fields)
 			return prop
 		}
-		return fieldsToSchema(f.Fields)
+		schema := fieldsToSchema(f.Fields)
+		if f.Nullable {
+			schema["nullable"] = true
+		}
+		return schema
 	}
 
 	// 배열 타입
@@ -31,6 +39,13 @@ func fieldToProperty(f Field) map[string]any {
 	// 포인터 unwrap
 	if strings.HasPrefix(goType, "*") {
 		goType = goType[1:]
+	}
+
+	// type:format 규칙 (e.g. "string:date-time")
+	if i := strings.IndexByte(goType, ':'); i >= 0 {
+		prop["type"] = goType[:i]
+		prop["format"] = goType[i+1:]
+		return prop
 	}
 
 	oaType := goTypeToOpenAPI(goType)
