@@ -16,6 +16,7 @@ func walkForGroupArgs(stmts []ast.Stmt, ctx *groupArgCtx) {
 			if !ok {
 				continue
 			}
+			tryUseCall(call, ctx.routers)
 			tryGroupArgCall(call, ctx)
 		case *ast.BlockStmt:
 			walkForGroupArgs(s.List, ctx)

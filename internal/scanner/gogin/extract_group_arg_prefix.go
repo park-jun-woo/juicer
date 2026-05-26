@@ -1,5 +1,5 @@
 //ff:func feature=scan type=extract control=sequence
-//ff:what 인자가 router.Group("prefix") 호출이면 결합된 prefix와 부모 라우터 정보를 반환한다
+//ff:what 인자가 라우터 변수(*ast.Ident) 또는 router.Group("prefix") 호출이면 결합된 prefix와 라우터 정보를 반환한다
 package gogin
 
 import (
@@ -9,6 +9,13 @@ import (
 )
 
 func extractGroupArgPrefix(arg ast.Expr, ctx *groupArgCtx) (string, *routerInfo, bool) {
+	// Variable argument: authGroup etc — look up directly in routers map
+	if ident, ok := arg.(*ast.Ident); ok {
+		if ri, ok := ctx.routers[ident.Name]; ok {
+			return ri.prefix, ri, true
+		}
+	}
+
 	groupCall, ok := arg.(*ast.CallExpr)
 	if !ok {
 		return "", nil, false
