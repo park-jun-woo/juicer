@@ -6,5 +6,6 @@ import "strings"
 
 // applyAddConstraint appends a constraint definition to the table.
 func applyAddConstraint(t *Table, constraintDef string) {
-	t.Constraints = append(t.Constraints, strings.TrimSpace(constraintDef))
+	def := strings.Join(strings.Fields(constraintDef), " ")
+	t.Constraints = append(t.Constraints, def)
 }

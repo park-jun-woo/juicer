@@ -10,7 +10,7 @@ var (
 	reAddColumn      = regexp.MustCompile(`(?i)^\s*ADD\s+COLUMN\s+(?:IF\s+NOT\s+EXISTS\s+)?(.+)`)
 	reDropColumn     = regexp.MustCompile(`(?i)^\s*DROP\s+COLUMN\s+(?:IF\s+EXISTS\s+)?(\w+)`)
 	reAlterColumn    = regexp.MustCompile(`(?i)^\s*ALTER\s+COLUMN\s+(\w+)\s+(.+)`)
-	reAddConstraint  = regexp.MustCompile(`(?i)^\s*ADD\s+CONSTRAINT\s+(.+)`)
+	reAddConstraint  = regexp.MustCompile(`(?is)^\s*ADD\s+CONSTRAINT\s+(.+)`)
 	reDropConstraint = regexp.MustCompile(`(?i)^\s*DROP\s+CONSTRAINT\s+(?:IF\s+EXISTS\s+)?(\w+)`)
 	reCreateIndex    = regexp.MustCompile(`(?i)^\s*CREATE\s+(?:UNIQUE\s+)?INDEX\s+(?:IF\s+NOT\s+EXISTS\s+)?(\w+)\s+ON\s+(\w+)\s*\(`)
 	reDropIndex      = regexp.MustCompile(`(?i)^\s*DROP\s+INDEX\s+(?:IF\s+EXISTS\s+)?(\w+)`)
