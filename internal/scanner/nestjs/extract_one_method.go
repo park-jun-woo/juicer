@@ -27,6 +27,9 @@ func extractOneMethod(m *sitter.Node, src []byte, file string) (endpointInfo, bo
 		if d.name == DecRoles {
 			ep.roles = append(ep.roles, d.args...)
 		}
+		if ep.authLevel == "" {
+			ep.authLevel = matchAuthLevel(d.name)
+		}
 	}
 	if !foundHTTP {
 		return ep, false

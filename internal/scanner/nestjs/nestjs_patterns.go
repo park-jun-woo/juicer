@@ -27,6 +27,19 @@ const (
 	DecRoles     = "Roles"
 )
 
+// authLevelPatterns maps decorator name keywords to auth levels.
+// Checked in order: first match wins.
+// "Public" before "Auth" so @ApiPublic → "public", not "auth_required".
+// "AuthOptional" before "Auth" so @AuthOptional → "auth_optional", not "auth_required".
+var authLevelPatterns = []struct {
+	contains string
+	level    string
+}{
+	{"Public", "public"},
+	{"AuthOptional", "auth_optional"},
+	{"Auth", "auth_required"},
+}
+
 // httpMethods maps HTTP decorator names to HTTP method strings.
 var httpMethods = map[string]string{
 	DecGet:    "GET",

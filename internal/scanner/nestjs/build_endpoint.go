@@ -27,6 +27,7 @@ func buildEndpoint(globalPrefix string, uriVersioning bool, ci controllerInfo, e
 		Line:       ep.line,
 		Middleware: ep.middleware,
 		Roles:      ep.roles,
+		AuthLevel:  ep.authLevel,
 	}
 	req := buildRequest(ep)
 	if req != nil {

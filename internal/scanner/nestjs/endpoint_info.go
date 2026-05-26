@@ -19,4 +19,5 @@ type endpointInfo struct {
 	files      []scanner.Param
 	statusCode int
 	returnType string
+	authLevel  string
 }

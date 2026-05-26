@@ -11,6 +11,7 @@ type Endpoint struct {
 	Line       int        `yaml:"line,omitempty"       json:"line,omitempty"`
 	Middleware []string   `yaml:"middleware,omitempty"  json:"middleware,omitempty"`
 	Roles      []string   `yaml:"roles,omitempty"      json:"roles,omitempty"`
+	AuthLevel  string     `yaml:"authLevel,omitempty"  json:"authLevel,omitempty"`
 	Request    *Request   `yaml:"request,omitempty"     json:"request,omitempty"`
 	Responses  []Response `yaml:"responses,omitempty"   json:"responses,omitempty"`
 }
