@@ -14,7 +14,7 @@ func TestTryRouteCall_TooFewArgsCov(t *testing.T) {
 		Args: []ast.Expr{&ast.BasicLit{Kind: token.STRING, Value: `"/api"`}},
 	}
 	routers := map[string]*routerInfo{"r": {}}
-	_, ok := tryRouteCall(call, routers, "main.go", nil)
+	_, _, ok := tryRouteCall(call, routers, "main.go", nil)
 	if ok {
 		t.Fatal("expected false")
 	}

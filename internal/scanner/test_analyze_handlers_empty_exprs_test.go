@@ -6,5 +6,5 @@ import "testing"
 
 func TestAnalyzeHandlers_EmptyExprs(t *testing.T) {
 	eps := []Endpoint{{Method: "GET", Path: "/test"}}
-	analyzeHandlers(nil, eps, ".")
+	analyzeHandlers(nil, eps, ".", nil)
 }

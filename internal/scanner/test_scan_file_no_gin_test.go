@@ -14,7 +14,7 @@ func main() {}
 `
 	fset := token.NewFileSet()
 	file, _ := parser.ParseFile(fset, "main.go", src, 0)
-	eps := scanFile(file, "main.go", fset)
+	eps, _ := scanFile(file, "main.go", fset)
 	if len(eps) != 0 {
 		t.Errorf("expected 0, got %d", len(eps))
 	}

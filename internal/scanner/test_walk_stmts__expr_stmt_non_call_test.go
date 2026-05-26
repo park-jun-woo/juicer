@@ -13,7 +13,7 @@ func TestWalkStmts_ExprStmtNonCall(t *testing.T) {
 		&ast.ExprStmt{X: &ast.Ident{Name: "x"}},
 	}
 	var out []Endpoint
-	walkStmts(stmts, "gin", "test.go", token.NewFileSet(), map[string]*routerInfo{}, &out)
+	walkStmts(stmts, "gin", "test.go", token.NewFileSet(), map[string]*routerInfo{}, &out, map[int][]ast.Expr{})
 	if len(out) != 0 {
 		t.Fatal("expected empty")
 	}

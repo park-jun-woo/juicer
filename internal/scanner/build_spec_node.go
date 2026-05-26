@@ -15,7 +15,7 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 	deduplicated := deduplicateEndpoints(result.Endpoints)
 
 	for _, ep := range deduplicated {
-		oaPath := ginPathToOpenAPI(ep.Path)
+		oaPath := ep.Path
 		if paths[oaPath] == nil {
 			paths[oaPath] = map[string]any{}
 		}

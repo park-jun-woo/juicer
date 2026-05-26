@@ -7,7 +7,7 @@ import (
 )
 
 func TestExtractRoutes_Empty(t *testing.T) {
-	eps := extractRoutes(nil, ".")
+	eps, _ := extractRoutes(nil, ".")
 	if len(eps) != 0 {
 		t.Errorf("expected 0, got %d", len(eps))
 	}

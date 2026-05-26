@@ -9,12 +9,11 @@ import (
 
 func TestAnalyzeHandlers_WithExprs(t *testing.T) {
 	eps := []Endpoint{{
-		Path:         "/test",
-		Method:       "GET",
-		handlerExprs: []ast.Expr{&ast.Ident{Name: "handler"}},
+		Path:   "/test",
+		Method: "GET",
 	}}
-	analyzeHandlers(nil, eps, ".")
-	if eps[0].handlerExprs != nil {
-		t.Fatal("expected handlerExprs to be nil after analysis")
+	handlerExprsMap := map[int][]ast.Expr{
+		0: {&ast.Ident{Name: "handler"}},
 	}
+	analyzeHandlers(nil, eps, ".", handlerExprsMap)
 }

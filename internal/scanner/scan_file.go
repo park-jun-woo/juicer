@@ -7,13 +7,14 @@ import (
 	"go/token"
 )
 
-func scanFile(file *ast.File, filePath string, fset *token.FileSet) []Endpoint {
+func scanFile(file *ast.File, filePath string, fset *token.FileSet) ([]Endpoint, map[int][]ast.Expr) {
 	ginAlias := ginPkgName(file)
 	if ginAlias == "" {
-		return nil
+		return nil, nil
 	}
 
 	var endpoints []Endpoint
+	hmap := map[int][]ast.Expr{}
 	for _, decl := range file.Decls {
 		fn, ok := decl.(*ast.FuncDecl)
 		if !ok || fn.Body == nil {
@@ -22,9 +23,14 @@ func scanFile(file *ast.File, filePath string, fset *token.FileSet) []Endpoint {
 		routers := make(map[string]*routerInfo)
 		registerParams(fn, ginAlias, routers)
 		var eps []Endpoint
-		walkStmts(fn.Body.List, ginAlias, filePath, fset, routers, &eps)
+		localMap := map[int][]ast.Expr{}
+		walkStmts(fn.Body.List, ginAlias, filePath, fset, routers, &eps, localMap)
+		// localMap 인덱스를 전역 오프셋으로 변환
+		offset := len(endpoints)
+		for k, v := range localMap {
+			hmap[offset+k] = v
+		}
 		endpoints = append(endpoints, eps...)
 	}
-	return endpoints
+	return endpoints, hmap
 }
-

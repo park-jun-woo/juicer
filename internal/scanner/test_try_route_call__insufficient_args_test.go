@@ -14,7 +14,7 @@ func TestTryRouteCall_InsufficientArgs(t *testing.T) {
 		Args: []ast.Expr{&ast.BasicLit{Kind: token.STRING, Value: `"/test"`}},
 	}
 	routers := map[string]*routerInfo{"r": {}}
-	_, ok := tryRouteCall(call, routers, "", nil)
+	_, _, ok := tryRouteCall(call, routers, "", nil)
 	if ok {
 		t.Fatal("expected false with too few args")
 	}

@@ -7,7 +7,7 @@ import "strings"
 func buildRegisteredSet(scanResult *ScanResult) map[string]bool {
 	registered := map[string]bool{}
 	for _, ep := range scanResult.Endpoints {
-		oaPath := ginPathToOpenAPI(ep.Path)
+		oaPath := ep.Path
 		method := strings.ToLower(ep.Method)
 		for _, m := range expandAnyMethod(method) {
 			registered[m+"\t"+oaPath] = true

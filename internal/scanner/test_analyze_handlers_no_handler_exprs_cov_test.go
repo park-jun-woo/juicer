@@ -6,5 +6,5 @@ import "testing"
 
 func TestAnalyzeHandlers_NoHandlerExprsCov(t *testing.T) {
 	eps := []Endpoint{{Method: "GET", Path: "/test"}}
-	analyzeHandlers(nil, eps, ".")
+	analyzeHandlers(nil, eps, ".", nil)
 }

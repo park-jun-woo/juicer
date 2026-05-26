@@ -27,7 +27,7 @@ func createHandler(c *gin.Context) {}
 	if err != nil {
 		t.Fatal(err)
 	}
-	eps := scanFile(file, "main.go", fset)
+	eps, _ := scanFile(file, "main.go", fset)
 	if len(eps) != 2 {
 		t.Errorf("expected 2 endpoints, got %d", len(eps))
 	}

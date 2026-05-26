@@ -14,7 +14,7 @@ func TestTryRouteCall_NotGinMethod(t *testing.T) {
 	}
 	routers := map[string]*routerInfo{"r": {}}
 	fset := token.NewFileSet()
-	_, ok := tryRouteCall(call, routers, "test.go", fset)
+	_, _, ok := tryRouteCall(call, routers, "test.go", fset)
 	if ok {
 		t.Error("expected not ok for Use")
 	}

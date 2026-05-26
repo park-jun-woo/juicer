@@ -32,7 +32,7 @@ func handler(c *gin.Context) {}
 		Fset:            fset,
 	}
 
-	eps := extractRoutes([]*packages.Package{pkg}, ".")
+	eps, _ := extractRoutes([]*packages.Package{pkg}, ".")
 	if len(eps) != 0 {
 		t.Errorf("expected 0 for .gen.go, got %d", len(eps))
 	}

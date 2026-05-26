@@ -7,7 +7,7 @@ import (
 	"go/token"
 )
 
-func walkStmts(stmts []ast.Stmt, ginAlias, filePath string, fset *token.FileSet, routers map[string]*routerInfo, out *[]Endpoint) {
+func walkStmts(stmts []ast.Stmt, ginAlias, filePath string, fset *token.FileSet, routers map[string]*routerInfo, out *[]Endpoint, hmap map[int][]ast.Expr) {
 	for _, stmt := range stmts {
 		switch s := stmt.(type) {
 		case *ast.AssignStmt:
@@ -17,36 +17,36 @@ func walkStmts(stmts []ast.Stmt, ginAlias, filePath string, fset *token.FileSet,
 			if !ok {
 				continue
 			}
-			if ep, ok := tryRouteCall(call, routers, filePath, fset); ok {
+			if ep, exprs, ok := tryRouteCall(call, routers, filePath, fset); ok {
+				hmap[len(*out)] = exprs
 				*out = append(*out, ep)
 			} else {
 				tryUseCall(call, routers)
 			}
 		case *ast.BlockStmt:
-			walkStmts(s.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.IfStmt:
 			if s.Init != nil {
-				walkStmts([]ast.Stmt{s.Init}, ginAlias, filePath, fset, routers, out)
+				walkStmts([]ast.Stmt{s.Init}, ginAlias, filePath, fset, routers, out, hmap)
 			}
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 			if s.Else != nil {
-				walkStmts([]ast.Stmt{s.Else}, ginAlias, filePath, fset, routers, out)
+				walkStmts([]ast.Stmt{s.Else}, ginAlias, filePath, fset, routers, out, hmap)
 			}
 		case *ast.ForStmt:
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.RangeStmt:
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.SwitchStmt:
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.TypeSwitchStmt:
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.SelectStmt:
-			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.CaseClause:
-			walkStmts(s.Body, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body, ginAlias, filePath, fset, routers, out, hmap)
 		case *ast.CommClause:
-			walkStmts(s.Body, ginAlias, filePath, fset, routers, out)
+			walkStmts(s.Body, ginAlias, filePath, fset, routers, out, hmap)
 		}
 	}
 }
-

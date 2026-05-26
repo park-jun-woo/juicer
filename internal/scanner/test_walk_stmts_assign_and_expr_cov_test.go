@@ -32,5 +32,5 @@ func TestWalkStmts_AssignAndExprCov(t *testing.T) {
 		&ast.BlockStmt{List: nil},
 	}
 	var out []Endpoint
-	walkStmts(stmts, "gin", "test.go", fset, routers, &out)
+	walkStmts(stmts, "gin", "test.go", fset, routers, &out, map[int][]ast.Expr{})
 }

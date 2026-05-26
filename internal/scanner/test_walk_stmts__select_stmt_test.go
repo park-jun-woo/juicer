@@ -34,7 +34,7 @@ func TestWalkStmts_SelectStmt(t *testing.T) {
 	routers := map[string]*routerInfo{"r": {}}
 	var out []Endpoint
 	fset := token.NewFileSet()
-	walkStmts([]ast.Stmt{selectStmt}, "gin", "test.go", fset, routers, &out)
+	walkStmts([]ast.Stmt{selectStmt}, "gin", "test.go", fset, routers, &out, map[int][]ast.Expr{})
 	if len(out) != 1 {
 		t.Fatalf("expected 1 endpoint from select, got %d", len(out))
 	}

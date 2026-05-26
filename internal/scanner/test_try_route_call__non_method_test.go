@@ -11,7 +11,7 @@ func TestTryRouteCall_NonMethod(t *testing.T) {
 	call := &ast.CallExpr{
 		Fun: &ast.SelectorExpr{X: &ast.Ident{Name: "r"}, Sel: &ast.Ident{Name: "Render"}},
 	}
-	_, ok := tryRouteCall(call, map[string]*routerInfo{}, "", nil)
+	_, _, ok := tryRouteCall(call, map[string]*routerInfo{}, "", nil)
 	if ok {
 		t.Fatal("expected false")
 	}

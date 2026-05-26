@@ -20,7 +20,7 @@ func TestExtractRoutes_EmptyPkgCov(t *testing.T) {
 		CompiledGoFiles: []string{"main.go"},
 		Fset:            fset,
 	}
-	result := extractRoutes([]*packages.Package{pkg}, ".")
+	result, _ := extractRoutes([]*packages.Package{pkg}, ".")
 	if result == nil {
 		result = []Endpoint{}
 	}

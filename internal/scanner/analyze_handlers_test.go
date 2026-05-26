@@ -5,6 +5,6 @@ package scanner
 import "testing"
 
 func TestAnalyzeHandlers_Empty(t *testing.T) {
-	analyzeHandlers(nil, nil, ".")
-	analyzeHandlers(nil, []Endpoint{}, ".")
+	analyzeHandlers(nil, nil, ".", nil)
+	analyzeHandlers(nil, []Endpoint{}, ".", nil)
 }

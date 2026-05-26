@@ -25,7 +25,7 @@ func main() {}
 		Fset:            fset,
 	}
 
-	eps := extractRoutes([]*packages.Package{pkg}, ".")
+	eps, _ := extractRoutes([]*packages.Package{pkg}, ".")
 	if len(eps) != 0 {
 		t.Errorf("expected 0, got %d", len(eps))
 	}

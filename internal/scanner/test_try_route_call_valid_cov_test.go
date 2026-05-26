@@ -16,7 +16,7 @@ func TestTryRouteCall_ValidCov(t *testing.T) {
 		Args: []ast.Expr{&ast.BasicLit{Kind: token.STRING, Value: `"/api/users/:id"`}, &ast.Ident{Name: "handler"}},
 	}
 	routers := map[string]*routerInfo{"r": {prefix: "", middleware: []string{"auth"}}}
-	ep, ok := tryRouteCall(call, routers, "main.go", fset)
+	ep, _, ok := tryRouteCall(call, routers, "main.go", fset)
 	if !ok {
 		t.Fatal("expected true")
 	}

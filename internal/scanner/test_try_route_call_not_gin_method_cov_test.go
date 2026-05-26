@@ -9,7 +9,7 @@ import (
 
 func TestTryRouteCall_NotGinMethodCov(t *testing.T) {
 	call := &ast.CallExpr{Fun: &ast.SelectorExpr{X: &ast.Ident{Name: "r"}, Sel: &ast.Ident{Name: "Run"}}}
-	_, ok := tryRouteCall(call, nil, "", nil)
+	_, _, ok := tryRouteCall(call, nil, "", nil)
 	if ok {
 		t.Fatal("expected false")
 	}

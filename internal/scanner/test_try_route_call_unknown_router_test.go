@@ -15,7 +15,7 @@ func TestTryRouteCall_UnknownRouter(t *testing.T) {
 	}
 	routers := make(map[string]*routerInfo)
 	fset := token.NewFileSet()
-	_, ok := tryRouteCall(call, routers, "test.go", fset)
+	_, _, ok := tryRouteCall(call, routers, "test.go", fset)
 	if ok {
 		t.Error("expected not ok for unknown router")
 	}

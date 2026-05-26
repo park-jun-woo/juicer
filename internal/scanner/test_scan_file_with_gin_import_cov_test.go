@@ -22,5 +22,5 @@ func TestScanFile_WithGinImportCov(t *testing.T) {
 			&ast.GenDecl{Tok: token.IMPORT},
 		},
 	}
-	scanFile(file, "main.go", fset)
+	_, _ = scanFile(file, "main.go", fset)
 }

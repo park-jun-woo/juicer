@@ -13,7 +13,7 @@ func TestWalkStmts_NestedBlock(t *testing.T) {
 		&ast.BlockStmt{List: []ast.Stmt{}},
 	}
 	var out []Endpoint
-	walkStmts(stmts, "gin", "test.go", token.NewFileSet(), map[string]*routerInfo{}, &out)
+	walkStmts(stmts, "gin", "test.go", token.NewFileSet(), map[string]*routerInfo{}, &out, map[int][]ast.Expr{})
 	if len(out) != 0 {
 		t.Fatal("expected empty")
 	}

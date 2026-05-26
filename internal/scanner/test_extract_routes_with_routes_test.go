@@ -34,7 +34,7 @@ func handler(c *gin.Context) {}
 		Fset:            fset,
 	}
 
-	eps := extractRoutes([]*packages.Package{pkg}, ".")
+	eps, _ := extractRoutes([]*packages.Package{pkg}, ".")
 	if len(eps) != 3 {
 		t.Fatalf("expected 3 endpoints, got %d", len(eps))
 	}

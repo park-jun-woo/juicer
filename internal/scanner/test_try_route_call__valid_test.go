@@ -15,7 +15,7 @@ func TestTryRouteCall_Valid(t *testing.T) {
 	}
 	routers := map[string]*routerInfo{"r": {}}
 	fset := token.NewFileSet()
-	ep, ok := tryRouteCall(call, routers, "main.go", fset)
+	ep, _, ok := tryRouteCall(call, routers, "main.go", fset)
 	if !ok {
 		t.Fatal("expected true")
 	}

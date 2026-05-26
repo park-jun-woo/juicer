@@ -41,18 +41,15 @@ func handler() {}
 
 	// Create an Ident expr that references the handler function
 	handlerIdent := ast.NewIdent("handler")
-	// Set its position within the file range
 	endpoints := []Endpoint{
 		{
-			Method:       "GET",
-			Path:         "/test",
-			handlerExprs: []ast.Expr{handlerIdent},
+			Method: "GET",
+			Path:   "/test",
 		},
 	}
-
-	analyzeHandlers([]*packages.Package{pkg}, endpoints, ".")
-	// After analysis, handlerExprs should be nil (cleaned up)
-	if endpoints[0].handlerExprs != nil {
-		t.Error("expected handlerExprs to be nil after analysis")
+	handlerExprsMap := map[int][]ast.Expr{
+		0: {handlerIdent},
 	}
+
+	analyzeHandlers([]*packages.Package{pkg}, endpoints, ".", handlerExprsMap)
 }

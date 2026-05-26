@@ -9,7 +9,7 @@ import (
 
 func TestTryRouteCall_NonSelector(t *testing.T) {
 	call := &ast.CallExpr{Fun: &ast.Ident{Name: "f"}}
-	_, ok := tryRouteCall(call, nil, "", nil)
+	_, _, ok := tryRouteCall(call, nil, "", nil)
 	if ok {
 		t.Fatal("expected false")
 	}

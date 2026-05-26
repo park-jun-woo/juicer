@@ -15,7 +15,7 @@ func TestWalkStmts_NonCallExprStmt(t *testing.T) {
 	fset := token.NewFileSet()
 	routers := make(map[string]*routerInfo)
 	var out []Endpoint
-	walkStmts(stmts, "gin", "test.go", fset, routers, &out)
+	walkStmts(stmts, "gin", "test.go", fset, routers, &out, map[int][]ast.Expr{})
 	if len(out) != 0 {
 		t.Errorf("expected 0, got %d", len(out))
 	}

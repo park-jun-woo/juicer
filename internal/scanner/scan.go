@@ -37,8 +37,13 @@ func Scan(root string) (*ScanResult, error) {
 		}
 	}
 
-	endpoints := extractRoutes(pkgs, absRoot)
-	analyzeHandlers(pkgs, endpoints, absRoot)
+	endpoints, handlerExprsMap := extractRoutes(pkgs, absRoot)
+	analyzeHandlers(pkgs, endpoints, absRoot, handlerExprsMap)
+
+	// gin 경로(:param)를 OpenAPI 경로({param})로 변환
+	for i := range endpoints {
+		endpoints[i].Path = ginPathToOpenAPI(endpoints[i].Path)
+	}
+
 	return &ScanResult{Endpoints: endpoints}, nil
 }
-

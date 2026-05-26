@@ -18,6 +18,6 @@ func TestExtractRoutes_IndexOutOfRangeCov(t *testing.T) {
 		CompiledGoFiles: []string{"main.go"},
 		Fset:            fset,
 	}
-	result := extractRoutes([]*packages.Package{pkg}, ".")
+	result, _ := extractRoutes([]*packages.Package{pkg}, ".")
 	_ = result
 }

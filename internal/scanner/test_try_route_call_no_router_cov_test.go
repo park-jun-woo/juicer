@@ -13,7 +13,7 @@ func TestTryRouteCall_NoRouterCov(t *testing.T) {
 		Fun:  &ast.SelectorExpr{X: &ast.Ident{Name: "r"}, Sel: &ast.Ident{Name: "GET"}},
 		Args: []ast.Expr{&ast.BasicLit{Kind: token.STRING, Value: `"/api"`}, &ast.Ident{Name: "handler"}},
 	}
-	_, ok := tryRouteCall(call, map[string]*routerInfo{}, "", nil)
+	_, _, ok := tryRouteCall(call, map[string]*routerInfo{}, "", nil)
 	if ok {
 		t.Fatal("expected false")
 	}

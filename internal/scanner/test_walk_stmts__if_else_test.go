@@ -30,7 +30,7 @@ func handler(c *gin.Context) {}
 	if err != nil {
 		t.Fatal(err)
 	}
-	eps := scanFile(file, "main.go", fset)
+	eps, _ := scanFile(file, "main.go", fset)
 	if len(eps) != 2 {
 		t.Fatalf("expected 2 endpoints, got %d", len(eps))
 	}

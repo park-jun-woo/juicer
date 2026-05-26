@@ -23,7 +23,7 @@ func handler(c *gin.Context) {}
 `
 	fset := token.NewFileSet()
 	file, _ := parser.ParseFile(fset, "main.go", src, 0)
-	eps := scanFile(file, "main.go", fset)
+	eps, _ := scanFile(file, "main.go", fset)
 	if len(eps) != 1 {
 		t.Fatalf("expected 1 endpoint, got %d", len(eps))
 	}
