@@ -6,18 +6,21 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 // resolveRouterPrefixes finds all router variable assignments and builds
 // a map of variable name -> full prefix (including include_router chains).
+// Variable references (e.g., prefix=API_STR) are resolved against same-file
+// assignments.
 func resolveRouterPrefixes(root *sitter.Node, src []byte) map[string]string {
 	routers := findRouterAssignments(root, src)
 	includes := findIncludeRouterCalls(root, src)
 
 	prefixes := make(map[string]string)
 	for _, r := range routers {
-		prefixes[r.varName] = r.prefix
+		prefixes[r.varName] = resolveIfVariable(root, r.prefix, src)
 	}
 	for _, inc := range includes {
+		extra := resolveIfVariable(root, inc.extraPrefix, src)
 		parentPrefix := prefixes[inc.parentVar]
 		childPrefix := prefixes[inc.childVar]
-		prefixes[inc.childVar] = joinPath(parentPrefix, inc.extraPrefix, childPrefix)
+		prefixes[inc.childVar] = joinPath(parentPrefix, extra, childPrefix)
 	}
 	return prefixes
 }
