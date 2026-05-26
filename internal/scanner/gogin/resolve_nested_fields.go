@@ -26,6 +26,9 @@ func resolveNestedFields(t types.Type, visited map[string]bool) []scanner.Field 
 	defer delete(visited, key)
 
 	if named, ok := t.(*types.Named); ok {
+		if _, ok := wellKnownType(named); ok {
+			return nil // time.Time 등은 struct 전개하지 않음
+		}
 		t = named.Underlying()
 	}
 
