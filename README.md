@@ -22,10 +22,11 @@
 npx skills add park-jun-woo/juicer
 ```
 
-Or install the CLI directly:
+Or install the CLI directly (requires [Go](https://go.dev/dl/)):
 
 ```bash
-go install github.com/park-jun-woo/juicer/cmd/juicer@latest
+git clone https://github.com/park-jun-woo/juicer.git
+cd juicer && make install
 ```
 
 Then scan your project:

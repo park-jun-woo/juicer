@@ -24,11 +24,14 @@ metadata:
 
 ## Install
 
+Go is required. If not installed: https://go.dev/dl/
+
 ```bash
-go install github.com/park-jun-woo/juicer/cmd/juicer@latest
+git clone https://github.com/park-jun-woo/juicer.git
+cd juicer && make install
 ```
 
-Requires Go 1.25+ and CGo (for tree-sitter NestJS/FastAPI support).
+Requires Go 1.25+, CGo enabled, and a C compiler (gcc/clang) for tree-sitter (NestJS/FastAPI support).
 
 ## Commands
 
