@@ -24,6 +24,10 @@ func parseDecoratorCall(call *sitter.Node, src []byte) decoratorInfo {
 		case "number":
 			d.arg = nodeText(arg, src)
 			return d
+		case "object":
+			d.objectProps = make(map[string]string)
+			parseObjectArg(arg, src, &d)
+			return d
 		}
 	}
 	return d

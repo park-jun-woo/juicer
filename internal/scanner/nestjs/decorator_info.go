@@ -4,6 +4,7 @@ package nestjs
 
 // decoratorInfo holds a parsed decorator name and optional argument.
 type decoratorInfo struct {
-	name string
-	arg  string
+	name        string
+	arg         string
+	objectProps map[string]string // key-value pairs from object literal argument
 }

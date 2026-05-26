@@ -9,8 +9,12 @@ import (
 )
 
 // buildEndpoint creates a scanner.Endpoint from controller + endpoint info.
-func buildEndpoint(globalPrefix string, ci controllerInfo, ep endpointInfo) scanner.Endpoint {
-	fullPath := joinParts(globalPrefix, ci.prefix, ep.path)
+func buildEndpoint(globalPrefix string, uriVersioning bool, ci controllerInfo, ep endpointInfo) scanner.Endpoint {
+	versionPrefix := ""
+	if uriVersioning && ci.version != "" {
+		versionPrefix = "v" + ci.version
+	}
+	fullPath := joinParts(globalPrefix, versionPrefix, ci.prefix, ep.path)
 	fullPath = pathToOpenAPI(fullPath)
 	if !strings.HasPrefix(fullPath, "/") {
 		fullPath = "/" + fullPath

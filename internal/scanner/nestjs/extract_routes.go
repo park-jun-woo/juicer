@@ -16,6 +16,7 @@ func extractControllers(root *sitter.Node, src []byte, file string) []controller
 		}
 		ci := controllerInfo{
 			prefix:  prefix,
+			version: controllerVersion(cls, src),
 			imports: imports,
 		}
 		ci.endpoints = extractMethods(cls, src, file)

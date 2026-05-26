@@ -6,12 +6,12 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // buildControllerEndpoints builds endpoints for a single controller.
 // baseIdx is the current length of the global endpoints slice for correct DTO indexing.
-func buildControllerEndpoints(globalPrefix string, cwf controllerWithFile, baseIdx int) ([]scanner.Endpoint, []dtoRequest) {
+func buildControllerEndpoints(globalPrefix string, uriVersioning bool, cwf controllerWithFile, baseIdx int) ([]scanner.Endpoint, []dtoRequest) {
 	ci := cwf.info
 	var endpoints []scanner.Endpoint
 	var dtoReqs []dtoRequest
 	for _, ep := range ci.endpoints {
-		endpoint := buildEndpoint(globalPrefix, ci, ep)
+		endpoint := buildEndpoint(globalPrefix, uriVersioning, ci, ep)
 		epIdx := baseIdx + len(endpoints)
 		reqs := collectDTORequests(ep, ci.imports, cwf.absFile, epIdx)
 		dtoReqs = append(dtoReqs, reqs...)

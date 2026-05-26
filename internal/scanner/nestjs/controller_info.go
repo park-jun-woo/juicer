@@ -5,6 +5,7 @@ package nestjs
 // controllerInfo holds intermediate route extraction results.
 type controllerInfo struct {
 	prefix    string
+	version   string
 	endpoints []endpointInfo
 	imports   map[string]string // typeName -> relative import path
 }

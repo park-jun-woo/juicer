@@ -8,6 +8,8 @@ import (
 )
 
 // detectGlobalPrefix searches for setGlobalPrefix('prefix') in main.ts.
+// When the argument is not a string literal (e.g. configService.getOrThrow(...)),
+// it falls back to .env.example or config file defaults.
 func detectGlobalPrefix(root string) string {
 	mainPath := filepath.Join(root, "src", "main.ts")
 	src, err := os.ReadFile(mainPath)
@@ -19,10 +21,17 @@ func detectGlobalPrefix(root string) string {
 		return ""
 	}
 	calls := findAllByType(astRoot, "call_expression")
+	found := false
 	for _, call := range calls {
 		if prefix, ok := trySetGlobalPrefix(call, src); ok {
 			return prefix
 		}
+		if hasSetGlobalPrefix(call, src) {
+			found = true
+		}
+	}
+	if found {
+		return fallbackGlobalPrefix(root)
 	}
 	return ""
 }
