@@ -15,4 +15,12 @@ func TestMapTypeToOpenAPI(t *testing.T) {
 	if got := mapTypeToOpenAPI("UnknownModel"); got == "" {
 		t.Errorf("UnknownModel: got empty")
 	}
+	// UUID preserves format via "type:format" convention
+	if got := mapTypeToOpenAPI("uuid.UUID"); got != "string:uuid" {
+		t.Errorf("uuid.UUID: got %s, want string:uuid", got)
+	}
+	// datetime preserves format
+	if got := mapTypeToOpenAPI("datetime"); got != "string:date-time" {
+		t.Errorf("datetime: got %s, want string:date-time", got)
+	}
 }

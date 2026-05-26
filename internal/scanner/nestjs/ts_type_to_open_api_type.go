@@ -8,5 +8,8 @@ func tsTypeToOpenAPIType(ts string) string {
 	if t.Type == "" {
 		return "string"
 	}
+	if t.Format != "" {
+		return t.Type + ":" + t.Format
+	}
 	return t.Type
 }

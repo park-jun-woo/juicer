@@ -8,5 +8,8 @@ func mapTypeToOpenAPI(typeName string) string {
 	if oa.Type == "" {
 		return "string"
 	}
+	if oa.Format != "" {
+		return oa.Type + ":" + oa.Format
+	}
 	return oa.Type
 }

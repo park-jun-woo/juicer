@@ -8,6 +8,9 @@ import "strings"
 func pyTypeToOpenAPI(py string) openAPIType {
 	py = strings.TrimSpace(py)
 
+	if result, ok := tryAnnotated(py); ok {
+		return result
+	}
 	if result, ok := tryNullable(py); ok {
 		return result
 	}
@@ -32,6 +35,8 @@ func pyTypeToOpenAPI(py string) openAPIType {
 		return openAPIType{Type: "string", Format: "date"}
 	case "EmailStr":
 		return openAPIType{Type: "string", Format: "email"}
+	case "uuid.UUID", "UUID":
+		return openAPIType{Type: "string", Format: "uuid"}
 	case "Any":
 		return openAPIType{Type: "object"}
 	case "":

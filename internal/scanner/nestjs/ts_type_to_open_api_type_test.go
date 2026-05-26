@@ -9,6 +9,8 @@ func TestTsTypeToOpenAPIType_Cases(t *testing.T) {
 		{"string", "string"},
 		{"number", "number"},
 		{"boolean", "boolean"},
+		{"Uuid", "string:uuid"},
+		{"Date", "string:date-time"},
 		{"MyDto", "object"},
 		{"", "string"},
 		{"void", "string"},

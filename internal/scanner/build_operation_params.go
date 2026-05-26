@@ -13,14 +13,14 @@ func buildOperationParams(req *Request) []map[string]any {
 			"name":     p.Name,
 			"in":       "path",
 			"required": true,
-			"schema":   map[string]any{"type": "string"},
+			"schema":   buildParamSchema(p.Type),
 		})
 	}
 	for _, q := range req.Query {
 		qp := map[string]any{
 			"name":   q.Name,
 			"in":     "query",
-			"schema": map[string]any{"type": goTypeToOpenAPI(q.Type)},
+			"schema": buildParamSchema(q.Type),
 		}
 		if q.Default != "" {
 			qp["schema"].(map[string]any)["default"] = q.Default

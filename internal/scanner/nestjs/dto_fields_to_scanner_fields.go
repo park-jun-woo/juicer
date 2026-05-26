@@ -16,6 +16,9 @@ func dtoFieldsToScannerFields(fields []dtoField) []scanner.Field {
 		if len(f.validators) > 0 {
 			sf.Validate = strings.Join(f.validators, ",")
 		}
+		if hasIsEnum(f.validators) {
+			sf.Type = "string"
+		}
 		result = append(result, sf)
 	}
 	return result
