@@ -9,7 +9,7 @@ import (
 
 func runHurl(args []string) {
 	if len(args) == 0 {
-		fmt.Fprintf(os.Stderr, "Usage: huma hurl <next|status|list|skip|reset>\n")
+		fmt.Fprintf(os.Stderr, "Usage: juicer hurl <next|status|list|skip|reset>\n")
 		os.Exit(1)
 	}
 	handleHurlSubcommand(args)

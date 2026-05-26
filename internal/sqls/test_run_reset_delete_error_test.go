@@ -10,7 +10,7 @@ import (
 
 func TestRunReset_DeleteError(t *testing.T) {
 	dir := setupSessionDir(t)
-	humaDir := filepath.Join(dir, ".huma")
+	humaDir := filepath.Join(dir, ".juicer")
 	os.MkdirAll(humaDir, 0o755)
 	os.WriteFile(filepath.Join(humaDir, "sql-session.json"), []byte("{}"), 0o644)
 

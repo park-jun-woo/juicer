@@ -1,5 +1,5 @@
 //ff:func feature=sql type=parse control=sequence
-//ff:what .huma 디렉토리 삭제
+//ff:what .juicer 세션 파일 삭제
 package sqls
 
 import (
@@ -7,12 +7,13 @@ import (
 	"os"
 )
 
-// DeleteSession removes the .huma directory.
+// DeleteSession removes the sql session file.
 //
 func DeleteSession() error {
-	if _, err := os.Stat(sessionDirName); errors.Is(err, os.ErrNotExist) {
+	err := os.Remove(sessionPath())
+	if errors.Is(err, os.ErrNotExist) {
 		return nil
 	}
-	return os.RemoveAll(sessionDirName)
+	return err
 }
 

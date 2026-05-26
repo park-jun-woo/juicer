@@ -9,7 +9,7 @@ import (
 // RunList prints all endpoints with their status.
 func RunList() error {
 	if !SessionExists() {
-		fmt.Println("No session found. Run \"huma hurl next --host URL --tests DIR --repo DIR\" first.")
+		fmt.Println("No session found. Run \"juicer hurl next --host URL --tests DIR --repo DIR\" first.")
 		return nil
 	}
 	sess, err := LoadSession()

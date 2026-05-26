@@ -1,5 +1,9 @@
 # juicer
 
+[![Version](https://img.shields.io/badge/version-v0.1.0-blue.svg)](https://github.com/park-jun-woo/juicer/releases)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![skills.sh](https://skills.sh/b/park-jun-woo/juicer)](https://skills.sh/park-jun-woo/juicer)
+
 **Stop writing API specs by hand.** juicer reads your web framework source code and extracts OpenAPI specs, DDL schemas, and SQL query skeletons — automatically.
 
 - OpenAPI 3.0 spec from source code in seconds, not hours
@@ -16,7 +20,7 @@ npx skills add park-jun-woo/juicer
 Or install the CLI directly:
 
 ```bash
-go install github.com/park-jun-woo/juicer@latest
+go install github.com/park-jun-woo/juicer/cmd/juicer@latest
 ```
 
 Then scan your project:

@@ -1,6 +1,6 @@
 package hurls
 
 const (
-	sessionDirName  = ".huma"
+	sessionDirName  = ".juicer"
 	sessionFileName = "hurl-session.json"
 )

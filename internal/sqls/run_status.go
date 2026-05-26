@@ -10,7 +10,7 @@ import (
 //
 func RunStatus() error {
 	if !SessionExists() {
-		fmt.Println("No session found. Run \"huma sql next --repo DIR --queries DIR\" first.")
+		fmt.Println("No session found. Run \"juicer sql next --repo DIR --queries DIR\" first.")
 		return nil
 	}
 	sess, err := LoadSession()

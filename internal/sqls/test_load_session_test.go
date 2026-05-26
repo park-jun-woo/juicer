@@ -22,8 +22,8 @@ func TestLoadSession(t *testing.T) {
 	})
 
 	t.Run("invalid json", func(t *testing.T) {
-		os.MkdirAll(".huma", 0o755)
-		os.WriteFile(filepath.Join(".huma", "sql-session.json"), []byte("bad json"), 0o644)
+		os.MkdirAll(".juicer", 0o755)
+		os.WriteFile(filepath.Join(".juicer", "sql-session.json"), []byte("bad json"), 0o644)
 		_, err := LoadSession()
 		if err == nil {
 			t.Error("expected error for invalid json")
@@ -32,7 +32,7 @@ func TestLoadSession(t *testing.T) {
 
 	t.Run("valid", func(t *testing.T) {
 		data := `{"repo_dir":"repo","queries_dir":"queries","methods":[]}`
-		os.WriteFile(filepath.Join(".huma", "sql-session.json"), []byte(data), 0o644)
+		os.WriteFile(filepath.Join(".juicer", "sql-session.json"), []byte(data), 0o644)
 		sess, err := LoadSession()
 		if err != nil {
 			t.Fatalf("LoadSession() error: %v", err)

@@ -9,7 +9,7 @@ import (
 // RunSkip marks the current TODO item as SKIP.
 func RunSkip() error {
 	if !SessionExists() {
-		fmt.Println("No session found. Run \"huma hurl next --host URL --tests DIR --repo DIR\" first.")
+		fmt.Println("No session found. Run \"juicer hurl next --host URL --tests DIR --repo DIR\" first.")
 		return nil
 	}
 	sess, err := LoadSession()

@@ -14,7 +14,7 @@ func TestRunSQLNext_EmptySession(t *testing.T) {
 	queriesDir := filepath.Join(dir, "queries")
 	os.MkdirAll(repoDir, 0o755)
 	os.MkdirAll(queriesDir, 0o755)
-	sessionDir := filepath.Join(dir, ".huma")
+	sessionDir := filepath.Join(dir, ".juicer")
 	os.MkdirAll(sessionDir, 0o755)
 	sessionJSON := `{"repo_dir":"` + repoDir + `","queries_dir":"` + queriesDir + `","methods":[]}`
 	os.WriteFile(filepath.Join(sessionDir, "sql-session.json"), []byte(sessionJSON), 0o644)

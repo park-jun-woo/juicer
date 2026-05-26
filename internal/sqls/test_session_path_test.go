@@ -9,7 +9,7 @@ import (
 
 func TestSessionPath(t *testing.T) {
 	got := sessionPath()
-	expected := filepath.Join(".huma", "sql-session.json")
+	expected := filepath.Join(".juicer", "sql-session.json")
 	if got != expected {
 		t.Errorf("expected %q, got %q", expected, got)
 	}

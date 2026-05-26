@@ -17,7 +17,7 @@ func TestRunSQLNext_WithSession(t *testing.T) {
 	os.MkdirAll(queriesDir, 0o755)
 
 	// Create session file
-	sessionDir := filepath.Join(dir, ".huma")
+	sessionDir := filepath.Join(dir, ".juicer")
 	os.MkdirAll(sessionDir, 0o755)
 	sessionJSON := `{
   "repo_dir": "` + repoDir + `",
@@ -26,7 +26,7 @@ func TestRunSQLNext_WithSession(t *testing.T) {
 }`
 	os.WriteFile(filepath.Join(sessionDir, "sql-session.json"), []byte(sessionJSON), 0o644)
 
-	// Change to the dir so SessionExists() finds .huma/
+	// Change to the dir so SessionExists() finds .juicer/
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)

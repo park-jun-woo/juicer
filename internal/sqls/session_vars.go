@@ -1,6 +1,6 @@
 package sqls
 
 const (
-	sessionDirName  = ".huma"
+	sessionDirName  = ".juicer"
 	sessionFileName = "sql-session.json"
 )

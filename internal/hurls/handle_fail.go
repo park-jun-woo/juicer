@@ -12,5 +12,5 @@ func handleFail(stderr string) {
 	if stderr != "" {
 		fmt.Printf("  %s\n", stderr)
 	}
-	fmt.Printf("  > Fix the test. Next \"huma hurl next\" will re-verify.\n")
+	fmt.Printf("  > Fix the test. Next \"juicer hurl next\" will re-verify.\n")
 }

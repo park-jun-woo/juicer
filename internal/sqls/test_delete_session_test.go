@@ -22,14 +22,14 @@ func TestDeleteSession(t *testing.T) {
 	})
 
 	t.Run("with session", func(t *testing.T) {
-		os.MkdirAll(".huma", 0o755)
-		os.WriteFile(filepath.Join(".huma", "sql-session.json"), []byte("{}"), 0o644)
+		os.MkdirAll(".juicer", 0o755)
+		os.WriteFile(filepath.Join(".juicer", "sql-session.json"), []byte("{}"), 0o644)
 		err := DeleteSession()
 		if err != nil {
 			t.Fatalf("DeleteSession() error: %v", err)
 		}
-		if _, err := os.Stat(".huma"); !os.IsNotExist(err) {
-			t.Error("expected .huma to be deleted")
+		if _, err := os.Stat(filepath.Join(".juicer", "sql-session.json")); !os.IsNotExist(err) {
+			t.Error("expected sql-session.json to be deleted")
 		}
 	})
 }

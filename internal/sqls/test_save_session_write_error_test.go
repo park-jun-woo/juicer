@@ -13,9 +13,9 @@ func TestSaveSession_WriteError(t *testing.T) {
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
 
-	os.MkdirAll(".huma", 0o755)
-	os.Chmod(".huma", 0o555)
-	defer os.Chmod(".huma", 0o755)
+	os.MkdirAll(".juicer", 0o755)
+	os.Chmod(".juicer", 0o555)
+	defer os.Chmod(".juicer", 0o755)
 
 	sess := &Session{RepoDir: "repo"}
 	err := SaveSession(sess)

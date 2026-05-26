@@ -26,7 +26,7 @@ metadata:
 ## Install
 
 ```bash
-go install github.com/park-jun-woo/juicer@latest
+go install github.com/park-jun-woo/juicer/cmd/juicer@latest
 ```
 
 ## Commands
