@@ -1,0 +1,28 @@
+//ff:func feature=scan type=test control=sequence topic=fastapi
+//ff:what extractFieldFromExprStmt 테스트
+package fastapi
+
+import "testing"
+
+func TestExtractFieldFromExprStmt(t *testing.T) {
+	src := []byte("class M:\n    name: str\n")
+	root, err := parsePython(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	block := findAllByType(root, "block")
+	if len(block) == 0 {
+		t.Fatal("no block")
+	}
+	stmts := childrenOfType(block[0], "expression_statement")
+	if len(stmts) == 0 {
+		t.Fatal("no expression_statement")
+	}
+	f := extractFieldFromExprStmt(stmts[0], src)
+	if f == nil {
+		t.Fatal("expected field")
+	}
+	if f.name != "name" || f.typeName != "str" {
+		t.Fatalf("got %+v", f)
+	}
+}

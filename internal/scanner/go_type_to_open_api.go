@@ -43,6 +43,12 @@ func goTypeToOpenAPI(goType string) string {
 	if goType == "time.Time" {
 		return "string"
 	}
+	if goType == "time.Duration" {
+		return "string"
+	}
+	if goType == "uuid.UUID" {
+		return "string"
+	}
 
 	return "object"
 }

@@ -31,6 +31,9 @@ func resolveType(t types.Type) (typeName string, fields []scanner.Field) {
 
 	// named type에서 이름 추출
 	if named, ok := t.(*types.Named); ok {
+		if wk, ok := wellKnownType(named); ok {
+			return slicePrefix(isSlice) + wk, nil
+		}
 		typeName = named.Obj().Name()
 		t = named.Underlying()
 	}

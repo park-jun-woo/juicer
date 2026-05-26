@@ -18,6 +18,8 @@ func goTypeFormat(goType string, f Field) string {
 		return "float"
 	case "time.Time":
 		return "date-time"
+	case "uuid.UUID":
+		return "uuid"
 	}
 
 	// validate 태그에서 format 추론
