@@ -4,7 +4,8 @@ package fastapi
 
 // routerInfo tracks a FastAPI or APIRouter instance assignment.
 type routerInfo struct {
-	varName string // e.g., "app", "router", "v1_router"
-	prefix  string // e.g., "/users" from APIRouter(prefix="/users")
-	isFastAPI bool // true if FastAPI(), false if APIRouter()
+	varName    string   // e.g., "app", "router", "v1_router"
+	prefix     string   // e.g., "/users" from APIRouter(prefix="/users")
+	isFastAPI  bool     // true if FastAPI(), false if APIRouter()
+	middleware []string // e.g., ["verify_token"] from APIRouter(dependencies=[Depends(verify_token)])
 }

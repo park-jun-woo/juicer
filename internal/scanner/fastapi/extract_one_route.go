@@ -6,8 +6,9 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 // extractOneRoute extracts route info from a single decorated definition.
 // Returns nil if the definition is not a route handler.
+// routerDeps maps router variable names to their constructor-level dependencies.
 // aliasMap maps type alias names to their Depends function names.
-func extractOneRoute(def *sitter.Node, src []byte, prefixes map[string]string, file string, aliasMap map[string]string) *routeInfo {
+func extractOneRoute(def *sitter.Node, src []byte, prefixes map[string]string, routerDeps map[string][]string, file string, aliasMap map[string]string) *routeInfo {
 	decorators := childrenOfType(def, "decorator")
 	if len(decorators) == 0 {
 		return nil
@@ -43,6 +44,9 @@ func extractOneRoute(def *sitter.Node, src []byte, prefixes map[string]string, f
 		responseModel: responseModel,
 	}
 
+	if rDeps := routerDeps[routerVar]; len(rDeps) > 0 {
+		ri.middleware = append(ri.middleware, rDeps...)
+	}
 	ri.middleware = append(ri.middleware, collectDecoratorDeps(decorators, src)...)
 
 	extractParams(funcDef, src, ri, aliasMap)

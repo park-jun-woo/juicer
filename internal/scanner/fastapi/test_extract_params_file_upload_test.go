@@ -19,7 +19,7 @@ async def upload(file: UploadFile):
 		t.Fatal(err)
 	}
 	prefixes := resolveRouterPrefixes(root, src)
-	routes := extractRoutes(root, src, prefixes, "main.py", nil)
+	routes := extractRoutes(root, src, prefixes, nil, "main.py", nil)
 
 	if len(routes) != 1 {
 		t.Fatalf("expected 1 route, got %d", len(routes))

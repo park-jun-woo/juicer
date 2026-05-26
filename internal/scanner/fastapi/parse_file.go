@@ -19,12 +19,13 @@ func parseFile(absRoot, absPath string) (*fileInfo, error) {
 	}
 	relPath, _ := filepath.Rel(absRoot, absPath)
 	return &fileInfo{
-		absPath:  absPath,
-		relPath:  relPath,
-		src:      src,
-		root:     root,
-		imports:  extractImports(root, src),
-		prefixes: resolveRouterPrefixes(root, src),
-		models:   findAllPydanticModels(root, src),
+		absPath:    absPath,
+		relPath:    relPath,
+		src:        src,
+		root:       root,
+		imports:    extractImports(root, src),
+		prefixes:   resolveRouterPrefixes(root, src),
+		routerDeps: resolveRouterDeps(root, src),
+		models:     findAllPydanticModels(root, src),
 	}, nil
 }

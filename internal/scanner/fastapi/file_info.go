@@ -6,11 +6,12 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 // fileInfo holds parsed information for a single Python source file.
 type fileInfo struct {
-	absPath  string
-	relPath  string
-	src      []byte
-	root     *sitter.Node
-	imports  []importInfo
-	prefixes map[string]string // router variable -> resolved prefix
-	models   map[string][]pydanticField
+	absPath    string
+	relPath    string
+	src        []byte
+	root       *sitter.Node
+	imports    []importInfo
+	prefixes   map[string]string   // router variable -> resolved prefix
+	routerDeps map[string][]string // router variable -> middleware from APIRouter(dependencies=[...])
+	models     map[string][]pydanticField
 }

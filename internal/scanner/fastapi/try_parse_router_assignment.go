@@ -30,6 +30,7 @@ func tryParseRouterAssignment(assign *sitter.Node, src []byte) *routerInfo {
 	args := findChildByType(call, "argument_list")
 	if args != nil {
 		ri.prefix = extractKeywordArg(args, "prefix", src)
+		ri.middleware = findDependenciesKeyword(args, src)
 	}
 	return ri
 }
