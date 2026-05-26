@@ -6,8 +6,9 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // methodParams holds extracted parameter info from a method's formal parameters.
 type methodParams struct {
-	pathParams  []scanner.Param
-	queryParams []scanner.Param
-	bodyType    string
-	files       []scanner.Param
+	pathParams   []scanner.Param
+	queryParams  []scanner.Param
+	bodyType     string
+	files        []scanner.Param
+	queryDTOType string // @Query() DTO type name for field expansion
 }

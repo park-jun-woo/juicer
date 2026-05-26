@@ -10,4 +10,5 @@ type dtoRequest struct {
 	projectRoot string // project root for non-relative import resolution
 	epIdx       int    // index into endpoints slice
 	isBody      bool   // true=request body, false=response
+	isQuery     bool   // true=query DTO field expansion
 }

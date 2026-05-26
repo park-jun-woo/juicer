@@ -45,6 +45,7 @@ func extractOneMethod(m *sitter.Node, src []byte, file string) (endpointInfo, bo
 	ep.query = params.queryParams
 	ep.bodyType = params.bodyType
 	ep.files = params.files
+	ep.queryDTOType = params.queryDTOType
 	ep.returnType = extractReturnType(m, src)
 
 	return ep, true

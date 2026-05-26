@@ -12,6 +12,13 @@ func collectDTORequests(ep endpointInfo, imports map[string]string, absFile, pro
 			epIdx: epIdx, isBody: true,
 		})
 	}
+	if ep.queryDTOType != "" {
+		reqs = append(reqs, dtoRequest{
+			typeName: ep.queryDTOType, imports: imports,
+			referrer: absFile, projectRoot: projectRoot,
+			epIdx: epIdx, isQuery: true,
+		})
+	}
 	if needsResponseDTO(ep.returnType) {
 		reqs = append(reqs, dtoRequest{
 			typeName: ep.returnType, imports: imports,

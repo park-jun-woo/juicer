@@ -9,13 +9,15 @@ func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) {
 	cache := make(map[string][]scanner.Field)
 	for _, dr := range dtoReqs {
 		fields, err := resolveDTOFields(dr, cache)
-		if err != nil || fields == nil {
-			continue
-		}
-		if dr.epIdx >= len(endpoints) {
+		if err != nil || fields == nil || dr.epIdx >= len(endpoints) {
 			continue
 		}
 		ep := &endpoints[dr.epIdx]
+		if dr.isQuery {
+			ensureRequest(ep)
+			ep.Request.Query = fieldsToQueryParams(fields)
+			continue
+		}
 		if dr.isBody && ep.Request != nil && ep.Request.Body != nil {
 			ep.Request.Body.Fields = fields
 		}
