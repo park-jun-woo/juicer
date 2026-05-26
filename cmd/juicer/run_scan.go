@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/juicer/internal/scanner/fastapi"
 	"github.com/park-jun-woo/juicer/internal/scanner/gogin"
 	"github.com/park-jun-woo/juicer/internal/scanner/nestjs"
 )
@@ -44,7 +45,7 @@ func runScan(args []string) {
 	case "nestjs":
 		result, err = nestjs.Scan(root)
 	case "fastapi":
-		err = fmt.Errorf("fastapi scanner not yet implemented")
+		result, err = fastapi.Scan(root)
 	default:
 		err = fmt.Errorf("unknown framework: %s", fw)
 	}
