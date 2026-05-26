@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=nestjs
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=nestjs
 //ff:what 객체 리터럴에서 type: VersioningType.URI 프로퍼티를 확인한다
 package nestjs
 

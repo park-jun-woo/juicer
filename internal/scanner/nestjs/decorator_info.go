@@ -6,5 +6,6 @@ package nestjs
 type decoratorInfo struct {
 	name        string
 	arg         string
+	args        []string          // multiple arguments (e.g. @UseGuards(A, B))
 	objectProps map[string]string // key-value pairs from object literal argument
 }

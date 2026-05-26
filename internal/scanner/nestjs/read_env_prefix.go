@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=nestjs
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=nestjs
 //ff:what env 파일에서 API_PREFIX 값을 읽는다
 package nestjs
 

@@ -5,6 +5,9 @@ package nestjs
 import sitter "github.com/smacker/go-tree-sitter"
 
 // parseDecoratorCall handles @Name('arg') or @Name(value).
+// It supports string, template_string, number, object, identifier, and
+// member_expression argument types. All non-object arguments are collected
+// into d.args; d.arg is set to the first argument for backward compatibility.
 func parseDecoratorCall(call *sitter.Node, src []byte) decoratorInfo {
 	d := decoratorInfo{}
 	fn := findChildByType(call, "identifier")
@@ -19,16 +22,22 @@ func parseDecoratorCall(call *sitter.Node, src []byte) decoratorInfo {
 		arg := args.Child(i)
 		switch arg.Type() {
 		case "string", "template_string":
-			d.arg = unquoteTS(nodeText(arg, src))
-			return d
+			v := unquoteTS(nodeText(arg, src))
+			d.args = append(d.args, v)
 		case "number":
-			d.arg = nodeText(arg, src)
-			return d
+			d.args = append(d.args, nodeText(arg, src))
+		case "identifier":
+			d.args = append(d.args, nodeText(arg, src))
+		case "member_expression":
+			d.args = append(d.args, nodeText(arg, src))
 		case "object":
 			d.objectProps = make(map[string]string)
 			parseObjectArg(arg, src, &d)
 			return d
 		}
+	}
+	if len(d.args) > 0 {
+		d.arg = d.args[0]
 	}
 	return d
 }

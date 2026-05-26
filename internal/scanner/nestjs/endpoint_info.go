@@ -12,6 +12,7 @@ type endpointInfo struct {
 	file       string
 	line       int
 	middleware []string
+	roles      []string
 	params     []scanner.Param
 	query      []scanner.Param
 	bodyType   string

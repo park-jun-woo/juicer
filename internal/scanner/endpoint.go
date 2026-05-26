@@ -10,6 +10,7 @@ type Endpoint struct {
 	File       string     `yaml:"file,omitempty"       json:"file,omitempty"`
 	Line       int        `yaml:"line,omitempty"       json:"line,omitempty"`
 	Middleware []string   `yaml:"middleware,omitempty"  json:"middleware,omitempty"`
+	Roles      []string   `yaml:"roles,omitempty"      json:"roles,omitempty"`
 	Request    *Request   `yaml:"request,omitempty"     json:"request,omitempty"`
 	Responses  []Response `yaml:"responses,omitempty"   json:"responses,omitempty"`
 }

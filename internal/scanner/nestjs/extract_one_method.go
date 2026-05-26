@@ -22,7 +22,10 @@ func extractOneMethod(m *sitter.Node, src []byte, file string) (endpointInfo, bo
 			ep.statusCode = parseStatusCode(d.arg)
 		}
 		if d.name == DecUseGuards {
-			ep.middleware = append(ep.middleware, d.arg)
+			ep.middleware = append(ep.middleware, d.args...)
+		}
+		if d.name == DecRoles {
+			ep.roles = append(ep.roles, d.args...)
 		}
 	}
 	if !foundHTTP {

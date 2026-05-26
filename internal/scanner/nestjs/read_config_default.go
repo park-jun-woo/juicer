@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=nestjs
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=nestjs
 //ff:what app.config.ts에서 apiPrefix 기본값 리터럴을 추출한다
 package nestjs
 
