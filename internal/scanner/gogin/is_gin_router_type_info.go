@@ -1,5 +1,5 @@
 //ff:func feature=scan type=extract control=sequence
-//ff:what types.Type이 *gin.RouterGroup 또는 *gin.Engine인지 검사한다
+//ff:what types.Type이 gin 라우터 타입(*gin.Engine, *gin.RouterGroup, gin.IRouter 등)인지 검사한다
 package gogin
 
 import (
@@ -8,12 +8,13 @@ import (
 )
 
 func isGinRouterTypeInfo(t types.Type) bool {
-	ptr, ok := t.(*types.Pointer)
-	if !ok {
-		return false
+	var named *types.Named
+	if ptr, ok := t.(*types.Pointer); ok {
+		named, _ = ptr.Elem().(*types.Named)
+	} else {
+		named, _ = t.(*types.Named)
 	}
-	named, ok := ptr.Elem().(*types.Named)
-	if !ok {
+	if named == nil {
 		return false
 	}
 	obj := named.Obj()

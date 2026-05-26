@@ -4,37 +4,10 @@ package gogin
 
 import (
 	"go/ast"
-
-	"github.com/park-jun-woo/juicer/internal/scanner"
 )
 
+const maxRescanDepth = 2
+
 func rescanCalleeWithPrefix(call *ast.CallExpr, argIdx int, prefix string, parent *routerInfo, ctx *groupArgCtx) {
-	targetPos := resolveCallTarget(call, ctx.info)
-	if !targetPos.IsValid() {
-		return
-	}
-	fnDecl, fnInfo := lookupFunc(targetPos, ctx.idx)
-	if fnDecl == nil || fnDecl.Body == nil {
-		return
-	}
-
-	paramName := ginRouterParamAtIndex(fnDecl, fnInfo, argIdx)
-	if paramName == "" {
-		return
-	}
-
-	targetFile := resolveTargetFilePath(targetPos, ctx)
-	targetGinAlias := resolveTargetGinAlias(targetPos, ctx)
-	if targetGinAlias == "" {
-		targetGinAlias = ctx.ginAlias
-	}
-
-	targetRouters := map[string]*routerInfo{
-		paramName: {prefix: prefix, middleware: append([]string{}, parent.middleware...)},
-	}
-	var eps []scanner.Endpoint
-	localMap := map[int][]ast.Expr{}
-	walkStmts(fnDecl.Body.List, targetGinAlias, targetFile, ctx.fset, targetRouters, &eps, localMap)
-
-	applyRescanResults(eps, ctx)
+	rescanCalleeWithPrefixDepth(call, argIdx, prefix, parent, ctx, 0)
 }
