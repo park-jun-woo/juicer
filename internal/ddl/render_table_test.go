@@ -29,4 +29,20 @@ func TestRenderTable_Basic(t *testing.T) {
 	if !strings.Contains(out, "idx_name") {
 		t.Fatalf("missing index in output: %q", out)
 	}
+
+	// Multiple constraints to cover comma between constraints (line 28)
+	tbl2 := &Table{
+		Name:        "orders",
+		Columns:     []Column{{Name: "id", Raw: "id INT"}},
+		Constraints: []string{"CONSTRAINT pk PRIMARY KEY (id)", "CONSTRAINT uq UNIQUE (id)"},
+	}
+	var sb2 strings.Builder
+	renderTable(&sb2, tbl2)
+	out2 := sb2.String()
+	if !strings.Contains(out2, "CONSTRAINT pk") {
+		t.Fatalf("missing first constraint: %q", out2)
+	}
+	if !strings.Contains(out2, "CONSTRAINT uq") {
+		t.Fatalf("missing second constraint: %q", out2)
+	}
 }

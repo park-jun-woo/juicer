@@ -34,4 +34,13 @@ func TestWriteFiles_Basic(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected write error")
 	}
+
+	// WriteFile error — directory exists but is read-only, new file
+	roDir2 := t.TempDir()
+	os.Chmod(roDir2, 0o555)
+	defer os.Chmod(roDir2, 0o755)
+	err = WriteFiles(tables, roDir2)
+	if err == nil {
+		t.Fatal("expected WriteFile error on read-only dir")
+	}
 }

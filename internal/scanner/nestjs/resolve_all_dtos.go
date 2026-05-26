@@ -1,0 +1,26 @@
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=nestjs
+//ff:what 수집된 DTO 요청 목록을 해석하여 엔드포인트에 필드를 채운다
+package nestjs
+
+import "github.com/park-jun-woo/juicer/internal/scanner"
+
+// resolveAllDTOs resolves all DTO types and fills fields into endpoints.
+func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) {
+	cache := make(map[string][]scanner.Field)
+	for _, dr := range dtoReqs {
+		fields, err := resolveDTOFields(dr, cache)
+		if err != nil || fields == nil {
+			continue
+		}
+		if dr.epIdx >= len(endpoints) {
+			continue
+		}
+		ep := &endpoints[dr.epIdx]
+		if dr.isBody && ep.Request != nil && ep.Request.Body != nil {
+			ep.Request.Body.Fields = fields
+		}
+		if !dr.isBody && len(ep.Responses) > 0 {
+			ep.Responses[0].Fields = fields
+		}
+	}
+}

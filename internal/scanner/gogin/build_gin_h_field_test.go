@@ -48,4 +48,29 @@ func TestBuildGinHField_NonKV(t *testing.T) {
 	if f3 != nil {
 		t.Fatal("expected nil for empty key")
 	}
+
+	// KV with nested gin.H value
+	nestedGinH := &ast.CompositeLit{
+		Type: &ast.SelectorExpr{
+			X:   &ast.Ident{Name: "gin"},
+			Sel: &ast.Ident{Name: "H"},
+		},
+		Elts: []ast.Expr{
+			&ast.KeyValueExpr{
+				Key:   &ast.BasicLit{Kind: token.STRING, Value: `"nested"`},
+				Value: &ast.BasicLit{Kind: token.STRING, Value: `"value"`},
+			},
+		},
+	}
+	kv4 := &ast.KeyValueExpr{
+		Key:   &ast.BasicLit{Kind: token.STRING, Value: `"data"`},
+		Value: nestedGinH,
+	}
+	f4 := buildGinHField(kv4, info)
+	if f4 == nil {
+		t.Fatal("expected non-nil for nested gin.H")
+	}
+	if f4.Type != "object" {
+		t.Fatalf("expected object type, got %s", f4.Type)
+	}
 }

@@ -43,4 +43,16 @@ func TestAnalyzeExpr_FuncLit(t *testing.T) {
 
 	// nil/unsupported expr
 	analyzeExpr(ep, &ast.BasicLit{}, info, idx)
+
+	// Ident with valid Uses entry — obj != nil but lookupFunc returns nil
+	ident2 := &ast.Ident{Name: "myHandler"}
+	pkg := types.NewPackage("example.com/test", "test")
+	sig := types.NewSignatureType(nil, nil, nil, nil, nil, false)
+	fnObj := types.NewFunc(token.NoPos, pkg, "myHandler", sig)
+	info5 := &types.Info{
+		Uses: map[*ast.Ident]types.Object{
+			ident2: fnObj,
+		},
+	}
+	analyzeExpr(ep, ident2, info5, idx)
 }

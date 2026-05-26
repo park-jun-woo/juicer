@@ -34,4 +34,11 @@ func TestApplyCreateTable_Basic(t *testing.T) {
 	if tables3["t"] == nil {
 		t.Fatal("expected table t")
 	}
+
+	// line that is only a comment => extractColumnName returns ""
+	tables4 := make(map[string]*Table)
+	applyCreateTable(tables4, "t2", "CREATE TABLE t2 (id INT, -- just a comment)")
+	if tables4["t2"] == nil {
+		t.Fatal("expected table t2")
+	}
 }
