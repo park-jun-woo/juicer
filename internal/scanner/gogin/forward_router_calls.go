@@ -21,6 +21,8 @@ func forwardRouterCalls(stmts []ast.Stmt, paramName, prefix string, parent *rout
 		if fwdIdx < 0 {
 			continue
 		}
-		rescanCalleeWithPrefixDepth(call, fwdIdx, prefix, parent, ctx, depth+1)
+		fwdCtx := *ctx
+		fwdCtx.info = info
+		rescanCalleeWithPrefixDepth(call, fwdIdx, prefix, parent, &fwdCtx, depth+1)
 	}
 }
