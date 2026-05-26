@@ -6,7 +6,8 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 // extractParams analyzes the function signature and classifies parameters
 // into path, query, body, file, and depends categories.
-func extractParams(funcDef *sitter.Node, src []byte, ri *routeInfo) {
+// aliasMap maps type alias names to their Depends function names.
+func extractParams(funcDef *sitter.Node, src []byte, ri *routeInfo, aliasMap map[string]string) {
 	params := findChildByType(funcDef, "parameters")
 	if params == nil {
 		return
@@ -15,7 +16,7 @@ func extractParams(funcDef *sitter.Node, src []byte, ri *routeInfo) {
 	for i := 0; i < int(params.ChildCount()); i++ {
 		child := params.Child(i)
 		if isParamNode(child) {
-			classifyParam(child, src, ri, pathNames)
+			classifyParam(child, src, ri, pathNames, aliasMap)
 		}
 	}
 }

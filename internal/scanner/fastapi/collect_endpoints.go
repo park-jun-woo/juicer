@@ -6,10 +6,11 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // collectEndpoints extracts endpoints and model requests from all parsed files.
 func collectEndpoints(files []fileInfo) ([]scanner.Endpoint, []modelRequest) {
+	aliasMap := resolveTypeAliases(files)
 	var endpoints []scanner.Endpoint
 	var modelReqs []modelRequest
 	for _, fi := range files {
-		routes := extractRoutes(fi.root, fi.src, fi.prefixes, fi.relPath)
+		routes := extractRoutes(fi.root, fi.src, fi.prefixes, fi.relPath, aliasMap)
 		for _, ri := range routes {
 			epIdx := len(endpoints)
 			endpoints = append(endpoints, buildEndpoint(ri))

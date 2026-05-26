@@ -9,7 +9,9 @@ import (
 )
 
 // classifyParam classifies a single function parameter.
-func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[string]bool) {
+// aliasMap maps type alias names (e.g. "SessionDep") to their Depends function
+// names, built by resolveTypeAliases.
+func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[string]bool, aliasMap map[string]string) {
 	name, typeName, defaultVal, defaultCall := parseParamNode(param, src)
 	if name == "" || name == "self" || name == "cls" {
 		return
@@ -18,6 +20,8 @@ func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[
 	switch {
 	case defaultCall != "" && specialDefaults[defaultCall] != "":
 		classifyByDefault(defaultCall, name, typeName, defaultVal, ri)
+	case isAnnotatedDepends(typeName, aliasMap):
+		classifyAsMiddleware(typeName, aliasMap, ri)
 	case uploadFileTypes[typeName]:
 		ri.files = append(ri.files, scanner.Param{Name: name, Type: "file"})
 	case pathNames[name]:

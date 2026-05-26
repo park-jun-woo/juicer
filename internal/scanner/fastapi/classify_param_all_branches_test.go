@@ -20,7 +20,7 @@ func TestClassifyParam_AllBranches(t *testing.T) {
 	for i := 0; i < int(params.ChildCount()); i++ {
 		child := params.Child(i)
 		if isParamNode(child) {
-			classifyParam(child, src, ri, pathNames)
+			classifyParam(child, src, ri, pathNames, nil)
 		}
 	}
 

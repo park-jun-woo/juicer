@@ -19,7 +19,7 @@ async def get_user(user_id: int, skip: int = 0, limit: int = Query(default=100))
 		t.Fatal(err)
 	}
 	prefixes := resolveRouterPrefixes(root, src)
-	routes := extractRoutes(root, src, prefixes, "main.py")
+	routes := extractRoutes(root, src, prefixes, "main.py", nil)
 
 	if len(routes) != 1 {
 		t.Fatalf("expected 1 route, got %d", len(routes))

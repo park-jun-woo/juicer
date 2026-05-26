@@ -26,7 +26,7 @@ app.include_router(router)
 		t.Fatal(err)
 	}
 	prefixes := resolveRouterPrefixes(root, src)
-	routes := extractRoutes(root, src, prefixes, "main.py")
+	routes := extractRoutes(root, src, prefixes, "main.py", nil)
 
 	if len(routes) != 2 {
 		t.Fatalf("expected 2 routes, got %d", len(routes))

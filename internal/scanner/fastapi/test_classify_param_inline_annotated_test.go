@@ -1,18 +1,18 @@
 //ff:func feature=scan type=test control=iteration dimension=1 topic=fastapi
-//ff:what TestClassifyParam path/query/body/file/default/self/empty 분기 테스트
+//ff:what TestClassifyParam_InlineAnnotatedDepends 인라인 Annotated Depends 분류 테스트
 package fastapi
 
 import "testing"
 
-func TestClassifyParam(t *testing.T) {
-	src := []byte("def f(user_id: int, q: str = 'default', body: UserCreate = None): pass\n")
+func TestClassifyParam_InlineAnnotatedDepends(t *testing.T) {
+	src := []byte("def f(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]): pass\n")
 	root, err := parsePython(src)
 	if err != nil {
 		t.Fatal(err)
 	}
 	funcDef := findChildByType(root, "function_definition")
 	params := findChildByType(funcDef, "parameters")
-	pathNames := map[string]bool{"user_id": true}
+	pathNames := map[string]bool{}
 
 	ri := &routeInfo{}
 	for i := 0; i < int(params.ChildCount()); i++ {
@@ -22,7 +22,10 @@ func TestClassifyParam(t *testing.T) {
 		}
 	}
 
-	if len(ri.params) == 0 {
-		t.Fatal("expected at least 1 path param")
+	if len(ri.middleware) != 1 {
+		t.Fatalf("expected 1 middleware, got %d", len(ri.middleware))
+	}
+	if ri.bodyType != "" {
+		t.Errorf("body type should be empty, got %s", ri.bodyType)
 	}
 }

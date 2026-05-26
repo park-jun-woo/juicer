@@ -6,11 +6,12 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 // extractRoutes finds all decorated route functions in the AST and returns routeInfo slices.
 // prefixes maps router variable names to their resolved path prefixes.
-func extractRoutes(root *sitter.Node, src []byte, prefixes map[string]string, file string) []routeInfo {
+// aliasMap maps type alias names to their Depends function names.
+func extractRoutes(root *sitter.Node, src []byte, prefixes map[string]string, file string, aliasMap map[string]string) []routeInfo {
 	var routes []routeInfo
 	defs := findAllByType(root, "decorated_definition")
 	for _, def := range defs {
-		ri := extractOneRoute(def, src, prefixes, file)
+		ri := extractOneRoute(def, src, prefixes, file, aliasMap)
 		if ri != nil {
 			routes = append(routes, *ri)
 		}
