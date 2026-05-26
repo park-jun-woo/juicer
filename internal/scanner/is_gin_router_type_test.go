@@ -18,3 +18,4 @@ func TestIsGinRouterType_StarExpr(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

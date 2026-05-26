@@ -16,3 +16,4 @@ func TestResolveCallerArg_GinContext(t *testing.T) {
 		t.Fatal("should not skip for non-gin pointer")
 	}
 }
+

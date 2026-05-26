@@ -18,3 +18,4 @@ func TestHandlePathParam_Basic(t *testing.T) {
 		t.Fatal("expected 1 path param")
 	}
 }
+

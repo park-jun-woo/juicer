@@ -17,3 +17,4 @@ func TestRunStatus_WithSessionCov(t *testing.T) {
 	defer os.Chdir(oldWd)
 	RunStatus()
 }
+

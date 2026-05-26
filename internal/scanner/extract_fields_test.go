@@ -19,3 +19,4 @@ func TestExtractFields_Basic(t *testing.T) {
 		t.Fatalf("expected 2 fields, got %d", len(result))
 	}
 }
+

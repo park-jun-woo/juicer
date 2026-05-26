@@ -11,3 +11,4 @@ func TestFieldToProperty_String(t *testing.T) {
 		t.Fatalf("expected string, got %v", prop["type"])
 	}
 }
+

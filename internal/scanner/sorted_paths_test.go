@@ -16,3 +16,4 @@ func TestSortedPaths_Empty(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+

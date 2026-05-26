@@ -13,3 +13,4 @@ func TestResolveResponseType_NilInfoCase(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+

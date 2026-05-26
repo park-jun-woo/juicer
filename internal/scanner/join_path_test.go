@@ -10,3 +10,4 @@ func TestJoinPath_Both(t *testing.T) {
 		t.Fatalf("expected /api/v1, got %s", got)
 	}
 }
+

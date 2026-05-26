@@ -29,3 +29,4 @@ func TestGinCtxParamNameInfo_NilInfo(t *testing.T) {
 		t.Fatalf("expected c (AST fallback), got %s", got)
 	}
 }
+

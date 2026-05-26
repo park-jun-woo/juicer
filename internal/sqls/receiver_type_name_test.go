@@ -14,3 +14,4 @@ func TestReceiverTypeName_Star(t *testing.T) {
 		t.Fatalf("expected UserRepo, got %s", got)
 	}
 }
+

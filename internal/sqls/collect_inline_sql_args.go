@@ -5,6 +5,7 @@ package sqls
 import (
 	"go/ast"
 	"go/token"
+	"strconv"
 	"strings"
 )
 
@@ -41,10 +42,10 @@ func collectInlineSQLArgs(body *ast.BlockStmt) []string {
 			if strings.HasPrefix(val, "`") {
 				continue // already handled by collectSQLFragments
 			}
-			// Double-quoted string — unquote
-			content := val
-			if strings.HasPrefix(content, "\"") && strings.HasSuffix(content, "\"") {
-				content = content[1 : len(content)-1]
+			// Double-quoted string — unquote using strconv for proper escape handling
+			content, err := strconv.Unquote(val)
+			if err != nil {
+				content = val // fallback to original value
 			}
 			content = strings.TrimSpace(content)
 			if len(content) < 10 {

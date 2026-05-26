@@ -10,3 +10,4 @@ func TestRefineCRUDFromAST_Nil(t *testing.T) {
 		t.Fatalf("expected EXEC, got %s", got)
 	}
 }
+

@@ -7,22 +7,16 @@ import (
 )
 
 // printSkeleton outputs the skeleton info for the method at index idx.
+// methods is the pre-extracted list of MethodSkeleton from Extract.
 //
-func printSkeleton(sess *Session, idx int) {
+func printSkeleton(sess *Session, idx int, methods []MethodSkeleton) {
 	m := sess.Methods[idx]
-
-	// Re-extract to get full skeleton info
-	result, err := Extract(sess.RepoDir)
-	if err != nil {
-		fmt.Printf("%s  TODO\n", m.ID)
-		return
-	}
 
 	// Find matching skeleton
 	var sk *MethodSkeleton
-	for i, s := range result.Methods {
+	for i, s := range methods {
 		if s.Repo+"."+s.Method == m.ID {
-			sk = &result.Methods[i]
+			sk = &methods[i]
 			break
 		}
 	}

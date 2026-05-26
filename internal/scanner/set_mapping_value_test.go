@@ -15,3 +15,4 @@ func TestSetMappingValue_Add(t *testing.T) {
 		t.Fatal("expected 2")
 	}
 }
+

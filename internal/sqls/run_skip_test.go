@@ -17,3 +17,4 @@ func TestRunSkip_WithSessionCov(t *testing.T) {
 	defer os.Chdir(oldWd)
 	RunSkip()
 }
+

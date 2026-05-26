@@ -21,3 +21,4 @@ func TestMergeOperation_BothPresent(t *testing.T) {
 		t.Fatal("expected non-nil")
 	}
 }
+

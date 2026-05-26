@@ -2,16 +2,19 @@
 //ff:what 프로젝트 루트에서 기존 openapi.yaml 파일을 탐색한다
 package scanner
 
-import "os"
+import (
+	"os"
+	"path/filepath"
+)
 
 func FindBaseSpec(root string) string {
 	candidates := []string{
-		root + "/openapi.yaml",
-		root + "/openapi.yml",
-		root + "/api/openapi.yaml",
-		root + "/api/openapi.yml",
-		root + "/docs/openapi.yaml",
-		root + "/docs/openapi.yml",
+		filepath.Join(root, "openapi.yaml"),
+		filepath.Join(root, "openapi.yml"),
+		filepath.Join(root, "api", "openapi.yaml"),
+		filepath.Join(root, "api", "openapi.yml"),
+		filepath.Join(root, "docs", "openapi.yaml"),
+		filepath.Join(root, "docs", "openapi.yml"),
 	}
 	for _, path := range candidates {
 		if _, err := os.Stat(path); err == nil {

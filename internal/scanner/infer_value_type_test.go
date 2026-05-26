@@ -14,3 +14,4 @@ func TestInferValueType_String(t *testing.T) {
 		t.Fatalf("expected string, got %s", got)
 	}
 }
+

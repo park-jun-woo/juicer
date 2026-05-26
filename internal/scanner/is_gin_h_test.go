@@ -15,3 +15,4 @@ func TestIsGinH_NilType(t *testing.T) {
 		t.Fatal("expected false for nil type")
 	}
 }
+

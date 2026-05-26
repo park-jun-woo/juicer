@@ -16,3 +16,4 @@ func TestExtractGinHFields_Empty(t *testing.T) {
 		t.Fatalf("expected 0, got %d", len(result))
 	}
 }
+

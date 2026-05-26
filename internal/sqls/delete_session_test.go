@@ -10,3 +10,4 @@ func TestDeleteSession_NoSession(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+

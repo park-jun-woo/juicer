@@ -14,6 +14,6 @@ func TestPrintSkeleton_ExtractError(t *testing.T) {
 			{ID: "Repo.Method", Status: "TODO"},
 		},
 	}
-	// Should not panic, prints fallback
-	printSkeleton(sess, 0)
+	// Should not panic, prints fallback (nil methods simulates Extract error)
+	printSkeleton(sess, 0, nil)
 }

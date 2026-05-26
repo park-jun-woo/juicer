@@ -15,3 +15,4 @@ func TestResolveStatusCode_IntLit(t *testing.T) {
 		t.Fatalf("expected 200, got %s", got)
 	}
 }
+

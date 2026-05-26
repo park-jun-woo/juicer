@@ -16,3 +16,4 @@ func TestExtractTablesFromSQL_Select(t *testing.T) {
 		t.Fatalf("expected users table, got %v", tables)
 	}
 }
+

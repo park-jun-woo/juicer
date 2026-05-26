@@ -15,3 +15,4 @@ func TestIsGinHMapType_NoTypesEntry(t *testing.T) {
 		t.Fatal("expected false")
 	}
 }
+

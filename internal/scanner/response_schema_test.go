@@ -12,3 +12,4 @@ func TestResponseSchema_NamedType(t *testing.T) {
 		t.Fatal("expected $ref")
 	}
 }
+

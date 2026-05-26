@@ -9,3 +9,4 @@ func TestIsRequired_True(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

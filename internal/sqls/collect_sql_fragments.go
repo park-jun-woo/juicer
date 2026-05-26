@@ -26,6 +26,9 @@ func collectSQLFragments(body *ast.BlockStmt) []string {
 		if !strings.HasPrefix(val, "`") {
 			return true
 		}
+		if len(val) < 2 {
+			return true
+		}
 		// Strip backticks
 		content := val[1 : len(val)-1]
 		content = strings.TrimSpace(content)

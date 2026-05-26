@@ -22,3 +22,4 @@ func TestFindComponentSchemas_Found(t *testing.T) {
 		t.Fatal("expected schemas node")
 	}
 }
+

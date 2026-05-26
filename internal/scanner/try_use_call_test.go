@@ -18,3 +18,4 @@ func TestTryUseCall_ValidUse(t *testing.T) {
 		t.Fatal("expected 1 middleware")
 	}
 }
+

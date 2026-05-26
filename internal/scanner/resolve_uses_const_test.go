@@ -15,3 +15,4 @@ func TestResolveUsesConst_NotFound(t *testing.T) {
 		t.Fatalf("expected empty, got %s", got)
 	}
 }
+

@@ -14,3 +14,4 @@ func TestRender_YAML(t *testing.T) {
 		t.Fatal("expected non-empty")
 	}
 }
+

@@ -9,3 +9,4 @@ func TestStatusDescription_200(t *testing.T) {
 		t.Fatal("expected OK")
 	}
 }
+

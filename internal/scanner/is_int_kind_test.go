@@ -12,3 +12,4 @@ func TestIsIntKind_Int(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

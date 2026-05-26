@@ -10,3 +10,4 @@ func TestAppendUnique_New(t *testing.T) {
 		t.Fatal("expected 2")
 	}
 }
+

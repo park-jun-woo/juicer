@@ -24,3 +24,4 @@ func TestMergeSchemas_Both(t *testing.T) {
 		t.Fatal("expected scan")
 	}
 }
+

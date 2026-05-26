@@ -10,3 +10,4 @@ func TestGinPathToOpenAPI_Param(t *testing.T) {
 		t.Fatalf("expected /api/users/{id}, got %s", got)
 	}
 }
+

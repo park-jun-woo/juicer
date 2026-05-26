@@ -20,3 +20,4 @@ func TestResolveCallTarget_Ident(t *testing.T) {
 		t.Fatal("expected NoPos")
 	}
 }
+

@@ -18,3 +18,4 @@ func TestMergeRequestBody_Both(t *testing.T) {
 		t.Fatal("expected scan")
 	}
 }
+

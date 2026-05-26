@@ -14,3 +14,4 @@ func TestToOpenAPI_EmptyResult(t *testing.T) {
 		t.Fatal("expected non-empty")
 	}
 }
+

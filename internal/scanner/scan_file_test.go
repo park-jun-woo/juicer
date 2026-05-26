@@ -18,3 +18,4 @@ func TestScanFile_NoGinImport(t *testing.T) {
 		t.Fatal("expected empty for non-gin file")
 	}
 }
+

@@ -28,3 +28,4 @@ func TestGinCtxParamName_WithGinCtx(t *testing.T) {
 		t.Fatalf("expected c, got %s", got)
 	}
 }
+

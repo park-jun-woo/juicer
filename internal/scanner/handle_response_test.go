@@ -26,3 +26,4 @@ func TestHandleResponse_JSON(t *testing.T) {
 		t.Fatal("expected 1 response")
 	}
 }
+

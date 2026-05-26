@@ -7,3 +7,4 @@ import "testing"
 func TestRunSqlcGenerate_Cov(t *testing.T) {
 	runSqlcGenerate()
 }
+

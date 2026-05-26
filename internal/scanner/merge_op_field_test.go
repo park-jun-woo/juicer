@@ -18,3 +18,4 @@ func TestMergeOpField_PreserveSummary(t *testing.T) {
 		t.Fatalf("expected base-summary, got %s", result.Value)
 	}
 }
+

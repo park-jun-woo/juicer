@@ -13,3 +13,4 @@ func TestTypeString_Ident(t *testing.T) {
 		t.Fatalf("expected string, got %s", got)
 	}
 }
+

@@ -11,3 +11,4 @@ func TestSqlcHintInsert_NoReturning(t *testing.T) {
 		t.Fatalf("expected :exec, got %s", got)
 	}
 }
+

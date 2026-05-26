@@ -10,3 +10,4 @@ func TestLoadSession_NoFile(t *testing.T) {
 		t.Fatal("expected error when no session file")
 	}
 }
+

@@ -14,3 +14,4 @@ func TestExtract_EmptyDir(t *testing.T) {
 		t.Fatal("expected non-nil result")
 	}
 }
+

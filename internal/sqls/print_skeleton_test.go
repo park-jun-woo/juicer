@@ -15,5 +15,6 @@ func TestPrintSkeleton_NoMatchCov(t *testing.T) {
 		QueriesDir: dir + "/queries",
 		Methods:    []MethodStatus{{ID: "Repo.Method", Status: "TODO"}},
 	}
-	printSkeleton(sess, 0)
+	printSkeleton(sess, 0, nil)
 }
+

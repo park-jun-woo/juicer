@@ -18,3 +18,4 @@ func TestIsGinContextType_Valid(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

@@ -11,3 +11,4 @@ func TestGenerateOperationID_Handler(t *testing.T) {
 		t.Fatalf("expected listBuildings, got %s", got)
 	}
 }
+

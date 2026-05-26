@@ -11,3 +11,4 @@ func TestSqlcHint_Select(t *testing.T) {
 		t.Fatalf("expected :one, got %s", got)
 	}
 }
+

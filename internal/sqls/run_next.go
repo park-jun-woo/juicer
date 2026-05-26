@@ -33,13 +33,20 @@ func RunNext(repoDir, queriesDir string) error {
 		return nil
 	}
 
+	// Extract once for all printSkeleton calls in this invocation
+	result, extractErr := Extract(repoDir)
+	var methods []MethodSkeleton
+	if extractErr == nil {
+		methods = result.Methods
+	}
+
 	m := &sess.Methods[idx]
 	queryName := toQueryName(m.ID)
 
 	// Check if query exists in queriesDir
 	found := queryExists(queriesDir, queryName)
 	if !found {
-		printSkeleton(sess, idx)
+		printSkeleton(sess, idx, methods)
 		return nil
 	}
 
@@ -62,7 +69,7 @@ func RunNext(repoDir, queriesDir string) error {
 		nextIdx := firstTODO(sess)
 		if nextIdx >= 0 {
 			fmt.Println()
-			printSkeleton(sess, nextIdx)
+			printSkeleton(sess, nextIdx, methods)
 		}
 	} else {
 		fmt.Printf("  sqlc generate: FAIL\n")

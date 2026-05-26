@@ -4,6 +4,7 @@ package scanner
 
 import (
 	"fmt"
+	"os"
 	"sort"
 
 	"gopkg.in/yaml.v3"
@@ -60,9 +61,16 @@ func toYAMLNode(v any) *yaml.Node {
 
 	default:
 		// 폴백: yaml.Marshal → Decode
-		b, _ := yaml.Marshal(v)
+		b, err := yaml.Marshal(v)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "toYAMLNode: marshal failed: %v\n", err)
+			return &yaml.Node{Kind: yaml.ScalarNode, Value: fmt.Sprintf("<marshal-error: %v>", err)}
+		}
 		var n yaml.Node
-		yaml.Unmarshal(b, &n)
+		if err := yaml.Unmarshal(b, &n); err != nil {
+			fmt.Fprintf(os.Stderr, "toYAMLNode: unmarshal failed: %v\n", err)
+			return &yaml.Node{Kind: yaml.ScalarNode, Value: fmt.Sprintf("<unmarshal-error: %v>", err)}
+		}
 		if n.Kind == yaml.DocumentNode && len(n.Content) > 0 {
 			return n.Content[0]
 		}

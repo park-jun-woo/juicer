@@ -25,3 +25,4 @@ func TestLookupFunc_Found(t *testing.T) {
 		t.Fatal("expected info")
 	}
 }
+

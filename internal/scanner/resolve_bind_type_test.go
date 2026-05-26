@@ -16,3 +16,4 @@ func TestResolveBindType_EmptyArgs(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+

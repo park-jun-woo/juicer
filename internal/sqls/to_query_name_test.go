@@ -10,3 +10,4 @@ func TestToQueryName_WithRepo(t *testing.T) {
 		t.Fatalf("expected UserFindByID, got %s", got)
 	}
 }
+

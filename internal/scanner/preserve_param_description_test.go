@@ -11,3 +11,4 @@ func TestPreserveParamDescription_NilBase(t *testing.T) {
 	scan := &yaml.Node{Kind: yaml.MappingNode}
 	preserveParamDescription(scan, nil)
 }
+

@@ -15,3 +15,4 @@ func TestStringLitValue_String(t *testing.T) {
 		t.Fatalf("expected hello, got %s", got)
 	}
 }
+

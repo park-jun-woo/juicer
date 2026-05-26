@@ -9,3 +9,4 @@ func TestLcFirst_Simple(t *testing.T) {
 		t.Fatal("expected building")
 	}
 }
+

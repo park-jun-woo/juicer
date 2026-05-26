@@ -9,3 +9,4 @@ func TestGoTypeToOpenAPI_String(t *testing.T) {
 		t.Fatal("expected string")
 	}
 }
+

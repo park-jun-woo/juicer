@@ -13,3 +13,4 @@ func TestToYAMLNode_Map(t *testing.T) {
 		t.Fatal("expected mapping node")
 	}
 }
+

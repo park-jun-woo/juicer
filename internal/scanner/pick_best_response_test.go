@@ -11,3 +11,4 @@ func TestPickBestResponse_Single(t *testing.T) {
 		t.Fatal("expected 200")
 	}
 }
+

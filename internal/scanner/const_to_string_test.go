@@ -14,3 +14,4 @@ func TestConstToString_Int(t *testing.T) {
 		t.Fatalf("expected 200, got %s", got)
 	}
 }
+

@@ -12,3 +12,4 @@ func TestIsGinContextTypeInfo_NonPointer(t *testing.T) {
 		t.Fatal("expected false for non-pointer")
 	}
 }
+

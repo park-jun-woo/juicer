@@ -10,3 +10,4 @@ func TestRefineCRUD_Insert(t *testing.T) {
 		t.Fatalf("expected INSERT, got %s", got)
 	}
 }
+

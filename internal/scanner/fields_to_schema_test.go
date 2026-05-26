@@ -14,3 +14,4 @@ func TestFieldsToSchema_Basic(t *testing.T) {
 		t.Fatal("expected object type")
 	}
 }
+

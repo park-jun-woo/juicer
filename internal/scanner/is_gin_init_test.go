@@ -13,3 +13,4 @@ func TestIsGinInit_Default(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

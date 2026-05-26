@@ -37,5 +37,10 @@ func (r *UserRepo) GetAll(ctx context.Context) error {
 			{ID: "UserRepo.GetAll", Status: "TODO"},
 		},
 	}
-	printSkeleton(sess, 0)
+	result, _ := Extract(repoDir)
+	var methods []MethodSkeleton
+	if result != nil {
+		methods = result.Methods
+	}
+	printSkeleton(sess, 0, methods)
 }

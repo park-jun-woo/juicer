@@ -27,3 +27,4 @@ func TestMergeParameters_BothPresent(t *testing.T) {
 		t.Fatal("expected scan params returned")
 	}
 }
+

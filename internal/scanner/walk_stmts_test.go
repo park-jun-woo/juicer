@@ -14,3 +14,4 @@ func TestWalkStmts_Empty(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+

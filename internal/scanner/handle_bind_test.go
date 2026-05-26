@@ -17,3 +17,4 @@ func TestHandleBind_NoArgs(t *testing.T) {
 		t.Fatal("expected body to be set")
 	}
 }
+

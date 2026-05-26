@@ -44,7 +44,7 @@ func createSession(repoDir, queriesDir string) error {
 	fmt.Printf("Found %d methods.\nSession created.\n\n", len(methods))
 
 	if len(methods) > 0 {
-		printSkeleton(sess, 0)
+		printSkeleton(sess, 0, result.Methods)
 	}
 	return nil
 }

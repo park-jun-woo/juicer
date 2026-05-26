@@ -23,3 +23,4 @@ func (r *UserRepo) GetUser() {}
 		t.Fatal(err)
 	}
 }
+

@@ -15,3 +15,4 @@ func TestExtractPathString_BasicLit(t *testing.T) {
 		t.Fatalf("expected /api/v1, got %s ok=%v", path, ok)
 	}
 }
+

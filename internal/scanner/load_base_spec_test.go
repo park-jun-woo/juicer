@@ -21,3 +21,4 @@ func TestLoadBaseSpec_ValidCov(t *testing.T) {
 		t.Fatal("expected non-nil node")
 	}
 }
+

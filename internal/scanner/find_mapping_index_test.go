@@ -21,3 +21,4 @@ func TestFindMappingIndex_Found(t *testing.T) {
 		t.Fatalf("expected 2, got %d", idx)
 	}
 }
+

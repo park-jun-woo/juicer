@@ -10,3 +10,4 @@ func TestRichness_Empty(t *testing.T) {
 		t.Fatal("expected 0")
 	}
 }
+

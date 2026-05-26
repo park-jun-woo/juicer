@@ -9,3 +9,4 @@ func TestExtractReturns_Nil(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
+

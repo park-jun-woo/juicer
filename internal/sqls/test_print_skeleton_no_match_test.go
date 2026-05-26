@@ -21,5 +21,10 @@ func TestPrintSkeleton_NoMatch(t *testing.T) {
 		},
 	}
 	// Should print fallback since no matching skeleton
-	printSkeleton(sess, 0)
+	result, _ := Extract(repoDir)
+	var methods []MethodSkeleton
+	if result != nil {
+		methods = result.Methods
+	}
+	printSkeleton(sess, 0, methods)
 }

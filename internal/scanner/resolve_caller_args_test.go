@@ -15,3 +15,4 @@ func TestResolveCallerArgs_EmptyParams(t *testing.T) {
 		t.Fatal("expected empty results")
 	}
 }
+

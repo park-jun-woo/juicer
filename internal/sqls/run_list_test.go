@@ -20,3 +20,4 @@ func TestRunList_WithSessionCov(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+

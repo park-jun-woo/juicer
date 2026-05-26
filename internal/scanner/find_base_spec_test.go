@@ -16,3 +16,4 @@ func TestFindBaseSpec_Found(t *testing.T) {
 		t.Fatal("expected to find openapi.yaml")
 	}
 }
+

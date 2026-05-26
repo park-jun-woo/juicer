@@ -9,3 +9,4 @@ func TestDetectCRUD_Nil(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+

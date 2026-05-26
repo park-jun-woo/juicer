@@ -13,3 +13,4 @@ func TestParseMethodDecl_NoReceiver(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
+

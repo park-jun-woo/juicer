@@ -15,3 +15,4 @@ func TestUnwrapPointer_Pointer(t *testing.T) {
 		t.Fatal("expected unwrapped type")
 	}
 }
+

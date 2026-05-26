@@ -17,3 +17,4 @@ func TestScan_EmptyProjectDir(t *testing.T) {
 	// May or may not error depending on go packages loading
 	_ = err
 }
+

@@ -18,3 +18,4 @@ func TestGinPkgName_DefaultImport(t *testing.T) {
 		t.Fatalf("expected gin, got %s", got)
 	}
 }
+

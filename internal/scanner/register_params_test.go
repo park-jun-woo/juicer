@@ -15,3 +15,4 @@ func TestRegisterParams_EmptyParams(t *testing.T) {
 		t.Fatal("expected no routers")
 	}
 }
+

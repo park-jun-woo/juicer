@@ -13,3 +13,4 @@ func TestFormatType_Basic(t *testing.T) {
 		t.Fatalf("expected string, got %s", got)
 	}
 }
+

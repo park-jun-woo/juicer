@@ -9,3 +9,4 @@ func TestDetectDynamic_Nil(t *testing.T) {
 		t.Fatal("expected false")
 	}
 }
+

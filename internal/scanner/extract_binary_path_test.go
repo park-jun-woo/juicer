@@ -22,3 +22,4 @@ func TestExtractBinaryPath_AddOp(t *testing.T) {
 		t.Fatalf("expected /api/v1, got %s", path)
 	}
 }
+

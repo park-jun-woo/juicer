@@ -14,3 +14,4 @@ func TestFindInfoForExpr_NilPkgs(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
+

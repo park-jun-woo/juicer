@@ -15,3 +15,4 @@ func TestPreserveSchemaDescription_Both(t *testing.T) {
 	}}
 	preserveSchemaDescription(scan, base)
 }
+

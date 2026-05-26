@@ -10,3 +10,4 @@ func TestCreateSession_EmptyRepoCov(t *testing.T) {
 		t.Fatal("expected error for empty repo")
 	}
 }
+

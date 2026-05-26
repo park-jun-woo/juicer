@@ -16,3 +16,4 @@ func TestResolveType_Basic(t *testing.T) {
 		t.Fatal("expected nil fields for basic type")
 	}
 }
+

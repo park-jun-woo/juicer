@@ -13,3 +13,4 @@ func TestIsGinHSelector_Valid(t *testing.T) {
 		t.Fatal("expected true")
 	}
 }
+

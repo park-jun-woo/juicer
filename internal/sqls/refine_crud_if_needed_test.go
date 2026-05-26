@@ -10,3 +10,4 @@ func TestRefineCRUDIfNeeded_Select(t *testing.T) {
 		t.Fatalf("expected SELECT, got %s", got)
 	}
 }
+

@@ -10,3 +10,4 @@ func TestGoTypeFormat_Int64(t *testing.T) {
 		t.Fatalf("expected int64, got %s", got)
 	}
 }
+

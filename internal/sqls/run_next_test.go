@@ -24,3 +24,4 @@ func TestRunNext_WithSessionCov(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+

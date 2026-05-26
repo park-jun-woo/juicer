@@ -14,3 +14,4 @@ func TestScanBody_NilBodyCase(t *testing.T) {
 	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
 	scanBody(ep, nil, "c", nil, idx, "handler")
 }
+
