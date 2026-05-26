@@ -9,4 +9,7 @@ func TestHasColumn_Found(t *testing.T) {
 	if !hasColumn(tbl, "id") {
 		t.Fatal("expected true")
 	}
+	if hasColumn(tbl, "email") {
+		t.Fatal("expected false for missing column")
+	}
 }

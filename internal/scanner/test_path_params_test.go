@@ -16,9 +16,9 @@ func TestPathParams(t *testing.T) {
 		{"/users", 0},
 	}
 	for _, tt := range tests {
-		got := pathParams(tt.path)
+		got := PathParams(tt.path)
 		if len(got) != tt.want {
-			t.Errorf("pathParams(%q) = %d params, want %d", tt.path, len(got), tt.want)
+			t.Errorf("PathParams(%q) = %d params, want %d", tt.path, len(got), tt.want)
 		}
 	}
 }

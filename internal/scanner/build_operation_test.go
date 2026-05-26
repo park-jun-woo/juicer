@@ -11,4 +11,23 @@ func TestBuildOperation_Basic(t *testing.T) {
 	if op == nil {
 		t.Fatal("expected non-nil")
 	}
+
+	// with params and request body
+	ep2 := Endpoint{
+		Method: "POST",
+		Path:   "/api/users/:id",
+		Request: &Request{
+			PathParams: []Param{{Name: "id", Type: "string"}},
+			Query:      []Param{{Name: "q", Type: "string"}},
+			Body:       &Body{Fields: []Field{{Name: "name", JSON: "name", Type: "string"}}},
+		},
+		Responses: []Response{{Status: "200"}},
+	}
+	op2 := buildOperation(ep2, schemas)
+	if op2["parameters"] == nil {
+		t.Fatal("expected parameters")
+	}
+	if op2["requestBody"] == nil {
+		t.Fatal("expected requestBody")
+	}
 }

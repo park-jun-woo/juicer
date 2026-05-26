@@ -9,7 +9,7 @@ import (
 
 func TestConstToString_StringCov(t *testing.T) {
 	v := constant.MakeString("hello")
-	got := constToString(v)
+	got := ConstToString(v)
 	if got != `"hello"` {
 		t.Fatalf("expected quoted hello, got %s", got)
 	}

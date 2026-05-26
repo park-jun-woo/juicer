@@ -19,4 +19,21 @@ func TestParse_Basic(t *testing.T) {
 	if tables["users"] == nil {
 		t.Fatal("expected users table")
 	}
+
+	// glob error: bad pattern character
+	_, err = Parse("/tmp/[")
+	if err == nil {
+		t.Fatal("expected glob error")
+	}
+
+	// ReadFile error: unreadable file
+	dir2 := t.TempDir()
+	f := filepath.Join(dir2, "001.up.sql")
+	os.WriteFile(f, []byte("x"), 0o644)
+	os.Chmod(f, 0o000)
+	defer os.Chmod(f, 0o644)
+	_, err = Parse(dir2)
+	if err == nil {
+		t.Fatal("expected read error")
+	}
 }

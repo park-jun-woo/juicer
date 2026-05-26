@@ -20,5 +20,15 @@ func TestFindMappingIndex_Found(t *testing.T) {
 	if idx := findMappingIndex(node, "key2"); idx != 2 {
 		t.Fatalf("expected 2, got %d", idx)
 	}
+
+	// nil node
+	if findMappingIndex(nil, "x") != -1 {
+		t.Fatal("expected -1 for nil")
+	}
+
+	// key not found
+	if findMappingIndex(node, "missing") != -1 {
+		t.Fatal("expected -1 for missing key")
+	}
 }
 

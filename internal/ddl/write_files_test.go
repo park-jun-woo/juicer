@@ -19,4 +19,19 @@ func TestWriteFiles_Basic(t *testing.T) {
 	if _, err := os.Stat(filepath.Join(dir, "users.sql")); err != nil {
 		t.Fatalf("expected users.sql: %v", err)
 	}
+
+	// MkdirAll error
+	err := WriteFiles(tables, "/dev/null/impossible")
+	if err == nil {
+		t.Fatal("expected mkdir error")
+	}
+
+	// WriteFile error (read-only directory)
+	roDir := t.TempDir()
+	os.Chmod(roDir, 0o555)
+	defer os.Chmod(roDir, 0o755)
+	err = WriteFiles(tables, filepath.Join(roDir, "sub"))
+	if err == nil {
+		t.Fatal("expected write error")
+	}
 }

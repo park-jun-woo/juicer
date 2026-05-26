@@ -19,4 +19,10 @@ func TestRun_Basic(t *testing.T) {
 	if !strings.Contains(out, "CREATE TABLE users") {
 		t.Fatalf("unexpected: %q", out)
 	}
+
+	// Parse error
+	_, err = Run("/tmp/[")
+	if err == nil {
+		t.Fatal("expected error from Parse")
+	}
 }

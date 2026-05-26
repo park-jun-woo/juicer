@@ -8,7 +8,12 @@ import (
 )
 
 func TestRenderTable_Basic(t *testing.T) {
-	tbl := &Table{Name: "users", Columns: []Column{{Name: "id", Raw: "id INT"}, {Name: "name", Raw: "name TEXT"}}}
+	tbl := &Table{
+		Name:        "users",
+		Columns:     []Column{{Name: "id", Raw: "id INT"}, {Name: "name", Raw: "name TEXT"}},
+		Constraints: []string{"CONSTRAINT pk PRIMARY KEY (id)"},
+		Indexes:     []string{"CREATE INDEX idx_name ON users (name)"},
+	}
 	var sb strings.Builder
 	renderTable(&sb, tbl)
 	out := sb.String()
@@ -17,5 +22,11 @@ func TestRenderTable_Basic(t *testing.T) {
 	}
 	if !strings.Contains(out, "id INT") {
 		t.Fatalf("missing column in output: %q", out)
+	}
+	if !strings.Contains(out, "CONSTRAINT pk") {
+		t.Fatalf("missing constraint in output: %q", out)
+	}
+	if !strings.Contains(out, "idx_name") {
+		t.Fatalf("missing index in output: %q", out)
 	}
 }

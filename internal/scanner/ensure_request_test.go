@@ -6,7 +6,7 @@ import "testing"
 
 func TestEnsureRequest_NilRequest(t *testing.T) {
 	ep := &Endpoint{}
-	ensureRequest(ep)
+	EnsureRequest(ep)
 	if ep.Request == nil {
 		t.Fatal("expected non-nil request")
 	}

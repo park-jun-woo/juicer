@@ -6,12 +6,15 @@ import "testing"
 
 func TestFieldsToSchema_Basic(t *testing.T) {
 	fields := []Field{
-		{Name: "Name", Type: "string", JSON: "name"},
-		{Name: "Age", Type: "int", JSON: "age"},
+		{Name: "Name", Type: "string", JSON: "name", Validate: "required"},
+		{Name: "Age", Type: "int"},
 	}
 	schema := fieldsToSchema(fields)
 	if schema["type"] != "object" {
 		t.Fatal("expected object type")
+	}
+	if schema["required"] == nil {
+		t.Fatal("expected required field")
 	}
 }
 

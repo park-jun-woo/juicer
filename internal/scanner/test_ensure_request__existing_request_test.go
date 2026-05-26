@@ -7,7 +7,7 @@ import "testing"
 func TestEnsureRequest_ExistingRequest(t *testing.T) {
 	req := &Request{}
 	ep := &Endpoint{Request: req}
-	ensureRequest(ep)
+	EnsureRequest(ep)
 	if ep.Request != req {
 		t.Fatal("should not replace existing request")
 	}

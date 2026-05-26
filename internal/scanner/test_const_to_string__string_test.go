@@ -9,7 +9,7 @@ import (
 
 func TestConstToString_String(t *testing.T) {
 	v := constant.MakeString("hello")
-	got := constToString(v)
+	got := ConstToString(v)
 	if got == "" {
 		t.Fatal("expected non-empty")
 	}

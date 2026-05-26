@@ -12,4 +12,7 @@ func TestApplyCreateIndex_Existing(t *testing.T) {
 	if len(tables["users"].Indexes) != 1 {
 		t.Fatalf("expected 1 index, got %d", len(tables["users"].Indexes))
 	}
+
+	// nil table (not yet created)
+	applyCreateIndex(tables, "missing", "CREATE INDEX idx ON missing (col)")
 }

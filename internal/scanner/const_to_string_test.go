@@ -9,9 +9,16 @@ import (
 
 func TestConstToString_Int(t *testing.T) {
 	v := constant.MakeInt64(200)
-	got := constToString(v)
+	got := ConstToString(v)
 	if got != "200" {
 		t.Fatalf("expected 200, got %s", got)
+	}
+
+	// non-int constant (string)
+	sv := constant.MakeString("hello")
+	got = ConstToString(sv)
+	if got != `"hello"` {
+		t.Fatalf("expected \"hello\", got %s", got)
 	}
 }
 

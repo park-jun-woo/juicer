@@ -10,5 +10,11 @@ func TestSqlcHintSelect_One(t *testing.T) {
 	if got != ":one" {
 		t.Fatalf("expected :one, got %s", got)
 	}
+
+	// slice return -> :many
+	sk2 := &MethodSkeleton{Returns: []string{"[]User"}}
+	if sqlcHintSelect(sk2) != ":many" {
+		t.Fatal("expected :many")
+	}
 }
 

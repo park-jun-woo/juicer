@@ -6,7 +6,7 @@ import "testing"
 
 func TestApplyFieldTags_Binding(t *testing.T) {
 	f := &Field{Name: "Email"}
-	applyFieldTags(f, `json:"email" binding:"required"`)
+	ApplyFieldTags(f, `json:"email" binding:"required"`)
 	if f.Validate != "required" {
 		t.Fatalf("expected validate=required, got %s", f.Validate)
 	}

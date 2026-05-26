@@ -15,5 +15,11 @@ func TestFindBaseSpec_Found(t *testing.T) {
 	if result == "" {
 		t.Fatal("expected to find openapi.yaml")
 	}
+
+	// not found
+	dir2 := t.TempDir()
+	if FindBaseSpec(dir2) != "" {
+		t.Fatal("expected empty for missing spec")
+	}
 }
 

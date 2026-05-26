@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-// applyFieldTags applies json/validate/binding tags to a Field. Returns true if the field should be excluded.
-func applyFieldTags(field *Field, tag string) bool {
+// ApplyFieldTags applies json/validate/binding tags to a Field. Returns true if the field should be excluded.
+func ApplyFieldTags(field *Field, tag string) bool {
 	st := reflect.StructTag(tag)
 	if jsonTag := st.Get("json"); jsonTag != "" {
 		if idx := strings.Index(jsonTag, ","); idx >= 0 {

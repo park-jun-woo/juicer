@@ -11,4 +11,25 @@ func TestBodySchema_Named(t *testing.T) {
 	if result == nil {
 		t.Fatal("expected non-nil")
 	}
+
+	// slice type
+	sliceBody := &Body{TypeName: "[]Item", Fields: []Field{{Name: "name", JSON: "name", Type: "string"}}}
+	result = bodySchema(sliceBody, schemas)
+	if result["type"] != "array" {
+		t.Fatalf("expected array type, got %v", result)
+	}
+
+	// anonymous fields (no TypeName)
+	anonBody := &Body{Fields: []Field{{Name: "x", JSON: "x", Type: "string"}}}
+	result = bodySchema(anonBody, schemas)
+	if result == nil {
+		t.Fatal("expected non-nil for anonymous")
+	}
+
+	// empty body
+	emptyBody := &Body{}
+	result = bodySchema(emptyBody, schemas)
+	if result["type"] != "object" {
+		t.Fatalf("expected object type, got %v", result)
+	}
 }

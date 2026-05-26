@@ -17,9 +17,9 @@ func TestJoinPath(t *testing.T) {
 		{"/api", "users", "/api/users"},
 	}
 	for _, tt := range tests {
-		got := joinPath(tt.a, tt.b)
+		got := JoinPath(tt.a, tt.b)
 		if got != tt.want {
-			t.Errorf("joinPath(%q, %q) = %q, want %q", tt.a, tt.b, got, tt.want)
+			t.Errorf("JoinPath(%q, %q) = %q, want %q", tt.a, tt.b, got, tt.want)
 		}
 	}
 }

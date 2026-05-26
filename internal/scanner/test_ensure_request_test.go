@@ -8,13 +8,13 @@ import (
 
 func TestEnsureRequest(t *testing.T) {
 	ep := &Endpoint{}
-	ensureRequest(ep)
+	EnsureRequest(ep)
 	if ep.Request == nil {
 		t.Error("expected request to be created")
 	}
 	// Second call should not overwrite
 	ep.Request.RawBody = true
-	ensureRequest(ep)
+	EnsureRequest(ep)
 	if !ep.Request.RawBody {
 		t.Error("expected existing request to be preserved")
 	}

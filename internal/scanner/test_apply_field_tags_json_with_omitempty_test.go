@@ -6,7 +6,7 @@ import "testing"
 
 func TestApplyFieldTags_JSONWithOmitempty(t *testing.T) {
 	f := &Field{Name: "Name"}
-	excluded := applyFieldTags(f, `json:"name,omitempty"`)
+	excluded := ApplyFieldTags(f, `json:"name,omitempty"`)
 	if excluded {
 		t.Fatal("should not be excluded")
 	}

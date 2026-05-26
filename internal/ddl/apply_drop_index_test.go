@@ -6,10 +6,13 @@ import "testing"
 
 func TestApplyDropIndex_Existing(t *testing.T) {
 	tables := map[string]*Table{
-		"users": {Name: "users", Indexes: []string{"CREATE INDEX idx_name ON users (name)"}},
+		"users": {Name: "users", Indexes: []string{
+			"CREATE INDEX idx_name ON users (name)",
+			"CREATE INDEX idx_email ON users (email)",
+		}},
 	}
 	applyDropIndex(tables, "idx_name")
-	if len(tables["users"].Indexes) != 0 {
-		t.Fatalf("expected 0 indexes, got %d", len(tables["users"].Indexes))
+	if len(tables["users"].Indexes) != 1 {
+		t.Fatalf("expected 1 index, got %d", len(tables["users"].Indexes))
 	}
 }

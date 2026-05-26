@@ -9,5 +9,10 @@ func TestToQueryName_WithRepo(t *testing.T) {
 	if got != "UserFindByID" {
 		t.Fatalf("expected UserFindByID, got %s", got)
 	}
+
+	// no dot -> returns as-is
+	if toQueryName("NoDot") != "NoDot" {
+		t.Fatal("expected NoDot")
+	}
 }
 

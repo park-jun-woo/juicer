@@ -21,5 +21,11 @@ func TestFindComponentSchemas_Found(t *testing.T) {
 	if result != schemas {
 		t.Fatal("expected schemas node")
 	}
+
+	// no components
+	empty := &yaml.Node{Kind: yaml.MappingNode}
+	if findComponentSchemas(empty) != nil {
+		t.Fatal("expected nil for missing components")
+	}
 }
 

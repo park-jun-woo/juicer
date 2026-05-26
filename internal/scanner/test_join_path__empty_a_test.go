@@ -5,7 +5,7 @@ package scanner
 import "testing"
 
 func TestJoinPath_EmptyA(t *testing.T) {
-	got := joinPath("", "/v1")
+	got := JoinPath("", "/v1")
 	if got != "/v1" {
 		t.Fatalf("expected /v1, got %s", got)
 	}

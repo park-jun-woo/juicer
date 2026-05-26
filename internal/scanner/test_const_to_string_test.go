@@ -10,7 +10,7 @@ import (
 func TestConstToString(t *testing.T) {
 	t.Run("int constant", func(t *testing.T) {
 		v := constant.MakeInt64(200)
-		got := constToString(v)
+		got := ConstToString(v)
 		if got != "200" {
 			t.Errorf("expected '200', got %q", got)
 		}
@@ -18,7 +18,7 @@ func TestConstToString(t *testing.T) {
 
 	t.Run("string constant", func(t *testing.T) {
 		v := constant.MakeString("hello")
-		got := constToString(v)
+		got := ConstToString(v)
 		if got != `"hello"` {
 			t.Errorf("expected '\"hello\"', got %q", got)
 		}
@@ -26,7 +26,7 @@ func TestConstToString(t *testing.T) {
 
 	t.Run("float constant", func(t *testing.T) {
 		v := constant.MakeFloat64(3.14)
-		got := constToString(v)
+		got := ConstToString(v)
 		// Should use ExactString
 		if got == "" {
 			t.Error("expected non-empty string")
@@ -35,7 +35,7 @@ func TestConstToString(t *testing.T) {
 
 	t.Run("bool constant", func(t *testing.T) {
 		v := constant.MakeBool(true)
-		got := constToString(v)
+		got := ConstToString(v)
 		if got != "true" {
 			t.Errorf("expected 'true', got %q", got)
 		}

@@ -20,5 +20,12 @@ func TestFindMappingValue_Found(t *testing.T) {
 	if result != val {
 		t.Fatal("expected val node")
 	}
+
+	if findMappingValue(nil, "x") != nil {
+		t.Fatal("expected nil for nil node")
+	}
+	if findMappingValue(node, "missing") != nil {
+		t.Fatal("expected nil for missing key")
+	}
 }
 

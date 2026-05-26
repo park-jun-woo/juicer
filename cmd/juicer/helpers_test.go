@@ -14,6 +14,8 @@ func setupMinimalGoProject(t *testing.T) string {
 	goMod := `module example.com/test
 
 go 1.21
+
+require github.com/gin-gonic/gin v1.9.1
 `
 	os.WriteFile(filepath.Join(dir, "go.mod"), []byte(goMod), 0o644)
 	mainGo := `package main

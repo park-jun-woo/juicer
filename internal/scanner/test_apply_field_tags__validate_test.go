@@ -6,7 +6,7 @@ import "testing"
 
 func TestApplyFieldTags_Validate(t *testing.T) {
 	f := &Field{Name: "Age"}
-	applyFieldTags(f, `validate:"required,min=1"`)
+	ApplyFieldTags(f, `validate:"required,min=1"`)
 	if f.Validate != "required,min=1" {
 		t.Fatalf("expected validate tag, got %s", f.Validate)
 	}

@@ -14,4 +14,24 @@ func TestApplyCreateTable_Basic(t *testing.T) {
 	if len(tbl.Columns) != 2 {
 		t.Fatalf("expected 2 columns, got %d", len(tbl.Columns))
 	}
+
+	// empty body
+	applyCreateTable(tables, "empty", "CREATE TABLE empty")
+	if tables["empty"] == nil {
+		t.Fatal("expected empty table")
+	}
+
+	// constraint line
+	tables2 := make(map[string]*Table)
+	applyCreateTable(tables2, "orders", "CREATE TABLE orders (id INT, total INT, CONSTRAINT pk PRIMARY KEY (id))")
+	if len(tables2["orders"].Constraints) != 1 {
+		t.Fatalf("expected 1 constraint, got %d", len(tables2["orders"].Constraints))
+	}
+
+	// empty line and extractColumnName returns ""
+	tables3 := make(map[string]*Table)
+	applyCreateTable(tables3, "t", "CREATE TABLE t (id INT, , )")
+	if tables3["t"] == nil {
+		t.Fatal("expected table t")
+	}
 }

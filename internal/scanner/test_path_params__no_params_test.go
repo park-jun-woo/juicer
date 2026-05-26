@@ -5,7 +5,7 @@ package scanner
 import "testing"
 
 func TestPathParams_NoParams(t *testing.T) {
-	params := pathParams("/api/users")
+	params := PathParams("/api/users")
 	if len(params) != 0 {
 		t.Fatalf("expected 0, got %d", len(params))
 	}

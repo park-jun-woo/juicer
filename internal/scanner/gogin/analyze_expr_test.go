@@ -1,0 +1,46 @@
+//ff:func feature=scan type=test control=sequence
+//ff:what TestAnalyzeExpr_FuncLit 테스트
+package gogin
+
+import (
+	"go/ast"
+	"go/token"
+	"go/types"
+	"testing"
+	"github.com/park-jun-woo/juicer/internal/scanner"
+)
+
+func TestAnalyzeExpr_FuncLit(t *testing.T) {
+	ep := &scanner.Endpoint{}
+	fn := &ast.FuncLit{
+		Type: &ast.FuncType{Params: &ast.FieldList{}},
+		Body: &ast.BlockStmt{},
+	}
+	info := &types.Info{Uses: make(map[*ast.Ident]types.Object)}
+	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
+	analyzeExpr(ep, fn, info, idx)
+
+	// SelectorExpr - no selection
+	sel := &ast.SelectorExpr{X: &ast.Ident{Name: "h"}, Sel: &ast.Ident{Name: "Method"}}
+	info2 := &types.Info{
+		Selections: make(map[*ast.SelectorExpr]*types.Selection),
+		Uses:       make(map[*ast.Ident]types.Object),
+	}
+	analyzeExpr(ep, sel, info2, idx)
+
+	// Ident - no uses
+	ident := &ast.Ident{Name: "handler"}
+	info3 := &types.Info{
+		Uses: make(map[*ast.Ident]types.Object),
+	}
+	analyzeExpr(ep, ident, info3, idx)
+
+	// CallExpr
+	call := &ast.CallExpr{
+		Fun: &ast.Ident{Name: "getHandler"},
+	}
+	analyzeExpr(ep, call, info3, idx)
+
+	// nil/unsupported expr
+	analyzeExpr(ep, &ast.BasicLit{}, info, idx)
+}

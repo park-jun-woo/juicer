@@ -6,7 +6,7 @@ import "testing"
 
 func TestApplyFieldTags_ValidateAndBinding(t *testing.T) {
 	f := &Field{Name: "Email"}
-	excluded := applyFieldTags(f, `json:"email" validate:"required,email"`)
+	excluded := ApplyFieldTags(f, `json:"email" validate:"required,email"`)
 	if excluded {
 		t.Fatal("should not be excluded")
 	}
@@ -15,7 +15,7 @@ func TestApplyFieldTags_ValidateAndBinding(t *testing.T) {
 	}
 
 	f2 := &Field{Name: "Age"}
-	excluded = applyFieldTags(f2, `json:"age" binding:"required"`)
+	excluded = ApplyFieldTags(f2, `json:"age" binding:"required"`)
 	if excluded {
 		t.Fatal("should not be excluded")
 	}

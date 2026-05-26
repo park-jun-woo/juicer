@@ -6,7 +6,7 @@ import "testing"
 
 func TestApplyFieldTags_JSONDash(t *testing.T) {
 	f := &Field{Name: "Secret"}
-	excluded := applyFieldTags(f, `json:"-"`)
+	excluded := ApplyFieldTags(f, `json:"-"`)
 	if !excluded {
 		t.Fatal("should be excluded")
 	}
