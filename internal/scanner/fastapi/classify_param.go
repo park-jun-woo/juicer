@@ -19,7 +19,7 @@ func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[
 
 	switch {
 	case defaultCall != "" && specialDefaults[defaultCall] != "":
-		classifyByDefault(defaultCall, name, typeName, defaultVal, ri)
+		classifyByDefault(defaultCall, name, typeName, defaultVal, param, src, ri)
 	case isAnnotatedDepends(typeName, aliasMap):
 		classifyAsMiddleware(typeName, aliasMap, ri)
 	case uploadFileTypes[typeName]:
@@ -28,6 +28,7 @@ func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[
 		ri.params = append(ri.params, scanner.Param{Name: name, Type: mapTypeToOpenAPI(typeName)})
 	case isPydanticModelType(typeName):
 		ri.bodyType = typeName
+		ri.bodyVarName = name
 	case defaultVal != "":
 		ri.query = append(ri.query, scanner.Param{Name: name, Type: mapTypeToOpenAPI(typeName), Default: defaultVal})
 	case typeName != "":

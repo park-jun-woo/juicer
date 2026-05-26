@@ -17,6 +17,9 @@ type routeInfo struct {
 	params        []scanner.Param
 	query         []scanner.Param
 	bodyType      string // Pydantic model type name
+	bodyVarName   string // parameter variable name (e.g. "new_article")
+	bodyAlias     string // Body(alias="article")
+	bodyEmbed     bool   // Body(embed=True)
 	files         []scanner.Param
 	middleware    []string // Depends function names
 }

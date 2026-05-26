@@ -7,5 +7,7 @@ type Body struct {
 	VarName  string  `yaml:"var_name"          json:"var_name"`
 	Method   string  `yaml:"method"            json:"method"`
 	TypeName string  `yaml:"type,omitempty"    json:"type,omitempty"`
+	Alias    string  `yaml:"alias,omitempty"   json:"alias,omitempty"`
+	Embed    bool    `yaml:"embed,omitempty"   json:"embed,omitempty"`
 	Fields   []Field `yaml:"fields,omitempty"  json:"fields,omitempty"`
 }

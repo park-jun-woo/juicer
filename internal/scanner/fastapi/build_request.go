@@ -15,8 +15,11 @@ func buildRequest(ri routeInfo) *scanner.Request {
 	}
 	if ri.bodyType != "" {
 		req.Body = &scanner.Body{
+			VarName:  ri.bodyVarName,
 			Method:   "Body",
 			TypeName: ri.bodyType,
+			Alias:    ri.bodyAlias,
+			Embed:    ri.bodyEmbed,
 		}
 	}
 	if !hasContent(req) {
