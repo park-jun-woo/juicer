@@ -17,13 +17,13 @@ func TestFindRouteDecorator(t *testing.T) {
 	if len(decs) == 0 {
 		t.Fatal("no decorators")
 	}
-	method, path, routerVar, _, _ := findRouteDecorator(decs, src)
+	method, path, routerVar, _, _, _ := findRouteDecorator(decs, src)
 	if method != "GET" || path != "/users" || routerVar != "router" {
 		t.Fatalf("got method=%q path=%q var=%q", method, path, routerVar)
 	}
 
 	// empty list
-	m2, _, _, _, _ := findRouteDecorator(nil, src)
+	m2, _, _, _, _, _ := findRouteDecorator(nil, src)
 	if m2 != "" {
 		t.Fatal("expected empty for nil decorators")
 	}

@@ -14,7 +14,7 @@ func extractOneRoute(def *sitter.Node, src []byte, prefixes map[string]string, r
 		return nil
 	}
 
-	method, path, routerVar, statusCode, responseModel := findRouteDecorator(decorators, src)
+	method, path, routerVar, statusCode, responseModel, responseClass := findRouteDecorator(decorators, src)
 	if method == "" {
 		return nil
 	}
@@ -42,6 +42,7 @@ func extractOneRoute(def *sitter.Node, src []byte, prefixes map[string]string, r
 		line:          line,
 		statusCode:    statusCode,
 		responseModel: responseModel,
+		responseClass: responseClass,
 	}
 
 	if rDeps := routerDeps[routerVar]; len(rDeps) > 0 {

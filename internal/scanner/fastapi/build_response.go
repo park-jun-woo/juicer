@@ -11,6 +11,9 @@ import (
 // buildResponse creates a scanner.Response from route info.
 func buildResponse(ri routeInfo, respType string) scanner.Response {
 	resp := scanner.Response{Kind: "json"}
+	if ri.responseClass == "HTMLResponse" {
+		resp.Kind = "html"
+	}
 	if ri.statusCode > 0 {
 		resp.Status = strconv.Itoa(ri.statusCode)
 	} else {

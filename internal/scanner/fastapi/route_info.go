@@ -13,6 +13,7 @@ type routeInfo struct {
 	line          int    // line number (1-based)
 	statusCode    int    // from status_code= in decorator
 	responseModel string // from response_model= in decorator
+	responseClass string // from response_class= in decorator (e.g. "HTMLResponse")
 	returnType    string // from -> annotation
 	params        []scanner.Param
 	query         []scanner.Param

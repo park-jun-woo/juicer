@@ -22,10 +22,13 @@ func TestClassifyParam_InlineAnnotatedDepends(t *testing.T) {
 		}
 	}
 
-	if len(ri.middleware) != 1 {
-		t.Fatalf("expected 1 middleware, got %d", len(ri.middleware))
+	if len(ri.middleware) != 0 {
+		t.Fatalf("expected 0 middleware, got %d", len(ri.middleware))
 	}
-	if ri.bodyType != "" {
-		t.Errorf("body type should be empty, got %s", ri.bodyType)
+	if ri.bodyType != "OAuth2PasswordRequestForm" {
+		t.Errorf("body type should be OAuth2PasswordRequestForm, got %q", ri.bodyType)
+	}
+	if ri.bodyVarName != "form_data" {
+		t.Errorf("body var name should be form_data, got %q", ri.bodyVarName)
 	}
 }

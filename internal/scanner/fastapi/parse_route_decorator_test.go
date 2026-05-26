@@ -14,7 +14,7 @@ func TestParseRouteDecorator(t *testing.T) {
 	if len(decs) == 0 {
 		t.Fatal("no decorator")
 	}
-	method, path, routerVar, status, _ := parseRouteDecorator(decs[0], src)
+	method, path, routerVar, status, _, _ := parseRouteDecorator(decs[0], src)
 	if method != "POST" {
 		t.Fatalf("method: got %q", method)
 	}

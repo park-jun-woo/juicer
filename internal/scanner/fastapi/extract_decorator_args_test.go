@@ -15,7 +15,7 @@ func TestExtractDecoratorArgs(t *testing.T) {
 		t.Fatal("no decorator")
 	}
 	callNode := findChildByType(decs[0], "call")
-	path, status, respModel := extractDecoratorArgs(callNode, src)
+	path, status, respModel, respClass := extractDecoratorArgs(callNode, src)
 	if path != "/users" {
 		t.Fatalf("path: got %q", path)
 	}
@@ -25,10 +25,13 @@ func TestExtractDecoratorArgs(t *testing.T) {
 	if respModel != "UserOut" {
 		t.Fatalf("respModel: got %q", respModel)
 	}
+	if respClass != "" {
+		t.Fatalf("respClass: got %q", respClass)
+	}
 
 	// nil callNode
-	p, s, r := extractDecoratorArgs(nil, src)
-	if p != "" || s != 0 || r != "" {
+	p, s, r, rc := extractDecoratorArgs(nil, src)
+	if p != "" || s != 0 || r != "" || rc != "" {
 		t.Fatal("expected empty for nil")
 	}
 
@@ -44,8 +47,8 @@ func TestExtractDecoratorArgs(t *testing.T) {
 	}
 	// The decorator's child is an attribute, not a call node; pass it directly
 	attr := findChildByType(decs2[0], "attribute")
-	p2, s2, r2 := extractDecoratorArgs(attr, src2)
-	if p2 != "" || s2 != 0 || r2 != "" {
+	p2, s2, r2, rc2 := extractDecoratorArgs(attr, src2)
+	if p2 != "" || s2 != 0 || r2 != "" || rc2 != "" {
 		t.Fatal("expected empty for non-call decorator")
 	}
 }

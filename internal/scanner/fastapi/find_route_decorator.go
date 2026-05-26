@@ -5,12 +5,12 @@ package fastapi
 import sitter "github.com/smacker/go-tree-sitter"
 
 // findRouteDecorator iterates decorators and returns the first HTTP route match.
-func findRouteDecorator(decorators []*sitter.Node, src []byte) (string, string, string, int, string) {
+func findRouteDecorator(decorators []*sitter.Node, src []byte) (string, string, string, int, string, string) {
 	for _, dec := range decorators {
-		m, p, rv, sc, rm := parseRouteDecorator(dec, src)
+		m, p, rv, sc, rm, rc := parseRouteDecorator(dec, src)
 		if m != "" {
-			return m, p, rv, sc, rm
+			return m, p, rv, sc, rm, rc
 		}
 	}
-	return "", "", "", 0, ""
+	return "", "", "", 0, "", ""
 }

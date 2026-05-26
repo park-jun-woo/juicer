@@ -21,7 +21,7 @@ func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[
 	case defaultCall != "" && specialDefaults[defaultCall] != "":
 		classifyByDefault(defaultCall, name, typeName, defaultVal, param, src, ri)
 	case isAnnotatedDepends(typeName, aliasMap):
-		classifyAsMiddleware(typeName, aliasMap, ri)
+		classifyAnnotatedDepends(name, typeName, aliasMap, ri)
 	case uploadFileTypes[typeName]:
 		ri.files = append(ri.files, scanner.Param{Name: name, Type: "file"})
 	case pathNames[name]:

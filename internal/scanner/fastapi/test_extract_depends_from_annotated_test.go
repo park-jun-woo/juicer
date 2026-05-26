@@ -12,7 +12,7 @@ func TestExtractDependsFromAnnotated(t *testing.T) {
 		{"Annotated[Session, Depends(get_db)]", "get_db"},
 		{"Annotated[User, Depends(get_current_user)]", "get_current_user"},
 		{"Annotated[str, Depends(reusable_oauth2)]", "reusable_oauth2"},
-		{"Annotated[OAuth2PasswordRequestForm, Depends()]", "Depends"},
+		{"Annotated[OAuth2PasswordRequestForm, Depends()]", "OAuth2PasswordRequestForm"},
 		{"SomeOtherType", ""},
 		{"Annotated[str, Header()]", ""},
 	}
