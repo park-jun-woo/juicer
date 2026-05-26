@@ -9,10 +9,9 @@ func buildRegisteredSet(scanResult *ScanResult) map[string]bool {
 	for _, ep := range scanResult.Endpoints {
 		oaPath := ginPathToOpenAPI(ep.Path)
 		method := strings.ToLower(ep.Method)
-		if method == "any" {
-			method = "get"
+		for _, m := range expandAnyMethod(method) {
+			registered[m+"\t"+oaPath] = true
 		}
-		registered[method+"\t"+oaPath] = true
 	}
 	return registered
 }

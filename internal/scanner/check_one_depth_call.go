@@ -35,7 +35,7 @@ func checkOneDepthCall(ep *Endpoint, call *ast.CallExpr, ctxName string, info *t
 		return
 	}
 
-	targetCtxName := ginCtxParamName(fnDecl.Type)
+	targetCtxName := ginCtxParamNameInfo(fnDecl.Type, fnInfo)
 	if targetCtxName == "" {
 		return
 	}

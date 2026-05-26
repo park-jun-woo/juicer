@@ -24,6 +24,28 @@ func walkStmts(stmts []ast.Stmt, ginAlias, filePath string, fset *token.FileSet,
 			}
 		case *ast.BlockStmt:
 			walkStmts(s.List, ginAlias, filePath, fset, routers, out)
+		case *ast.IfStmt:
+			if s.Init != nil {
+				walkStmts([]ast.Stmt{s.Init}, ginAlias, filePath, fset, routers, out)
+			}
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+			if s.Else != nil {
+				walkStmts([]ast.Stmt{s.Else}, ginAlias, filePath, fset, routers, out)
+			}
+		case *ast.ForStmt:
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+		case *ast.RangeStmt:
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+		case *ast.SwitchStmt:
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+		case *ast.TypeSwitchStmt:
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+		case *ast.SelectStmt:
+			walkStmts(s.Body.List, ginAlias, filePath, fset, routers, out)
+		case *ast.CaseClause:
+			walkStmts(s.Body, ginAlias, filePath, fset, routers, out)
+		case *ast.CommClause:
+			walkStmts(s.Body, ginAlias, filePath, fset, routers, out)
 		}
 	}
 }

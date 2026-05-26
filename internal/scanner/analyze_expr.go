@@ -11,7 +11,7 @@ func analyzeExpr(ep *Endpoint, expr ast.Expr, info *types.Info, idx *funcIndex) 
 	switch e := expr.(type) {
 	case *ast.FuncLit:
 		// 인라인 함수 — body 직접 분석
-		ctxName := ginCtxParamName(e.Type)
+		ctxName := ginCtxParamNameInfo(e.Type, info)
 		if ctxName == "" {
 			return
 		}
@@ -31,7 +31,7 @@ func analyzeExpr(ep *Endpoint, expr ast.Expr, info *types.Info, idx *funcIndex) 
 		if fnDecl == nil {
 			return
 		}
-		ctxName := ginCtxParamName(fnDecl.Type)
+		ctxName := ginCtxParamNameInfo(fnDecl.Type, fnInfo)
 		if ctxName == "" {
 			return
 		}
@@ -47,7 +47,7 @@ func analyzeExpr(ep *Endpoint, expr ast.Expr, info *types.Info, idx *funcIndex) 
 		if fnDecl == nil {
 			return
 		}
-		ctxName := ginCtxParamName(fnDecl.Type)
+		ctxName := ginCtxParamNameInfo(fnDecl.Type, fnInfo)
 		if ctxName == "" {
 			return
 		}

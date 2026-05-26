@@ -21,13 +21,10 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 		}
 
 		method := strings.ToLower(ep.Method)
-		// Gin "Any" → OpenAPI에 해당하는 단일 메서드 없음, get으로 대표
-		if method == "any" {
-			method = "get"
-		}
-
 		op := buildOperation(ep, schemas)
-		paths[oaPath][method] = op
+		for _, m := range expandAnyMethod(method) {
+			paths[oaPath][m] = op
+		}
 	}
 
 	// 키 순서: openapi → info → paths → components
