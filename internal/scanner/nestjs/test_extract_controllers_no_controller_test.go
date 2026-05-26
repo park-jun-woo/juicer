@@ -10,7 +10,7 @@ func TestExtractControllers_NoController(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	controllers := extractControllers(root, src, "test.ts")
+	controllers := extractControllers(root, src, "test.ts", "test.ts")
 	if len(controllers) != 0 {
 		t.Fatalf("expected 0, got %d", len(controllers))
 	}

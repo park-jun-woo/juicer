@@ -5,7 +5,9 @@ package nestjs
 import sitter "github.com/smacker/go-tree-sitter"
 
 // extractControllers finds all @Controller-decorated classes and their routes.
-func extractControllers(root *sitter.Node, src []byte, file string) []controllerInfo {
+// absFile is the absolute path of the source file (used to resolve cross-file
+// imports for factory-pattern base controllers).
+func extractControllers(root *sitter.Node, src []byte, file string, absFile string) []controllerInfo {
 	var result []controllerInfo
 	imports := extractImports(root, src)
 	classes := findAllByType(root, "class_declaration")
@@ -19,7 +21,9 @@ func extractControllers(root *sitter.Node, src []byte, file string) []controller
 			version: controllerVersion(cls, src),
 			imports: imports,
 		}
-		ci.endpoints = extractMethods(cls, src, file)
+		direct := extractMethods(cls, src, file)
+		inherited := resolveBaseController(cls, src, absFile, imports, file)
+		ci.endpoints = mergeEndpoints(inherited, direct)
 		result = append(result, ci)
 	}
 	return result

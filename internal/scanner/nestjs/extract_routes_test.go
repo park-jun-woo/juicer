@@ -17,7 +17,7 @@ export class UsersController {
 	if err != nil {
 		t.Fatal(err)
 	}
-	controllers := extractControllers(root, src, "test.ts")
+	controllers := extractControllers(root, src, "test.ts", "test.ts")
 	if len(controllers) != 1 {
 		t.Fatalf("expected 1, got %d", len(controllers))
 	}
