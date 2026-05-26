@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence
+//ff:func feature=scan type=test control=sequence
 //ff:what TestResolveUsesConst_NotFound 테스트
 package scanner
 

@@ -1,4 +1,4 @@
-//ff:func feature=ddl type=render control=sequence
+//ff:func feature=ddl type=test control=sequence
 //ff:what TestRenderTable_Basic 테스트
 package ddl
 

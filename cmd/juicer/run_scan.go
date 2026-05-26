@@ -14,6 +14,7 @@ func runScan(args []string) {
 	fs := flag.NewFlagSet("scan", flag.ExitOnError)
 	jsonOut := fs.Bool("json", false, "output JSON")
 	openapiOut := fs.Bool("openapi", false, "output OpenAPI 3.0 YAML")
+	baseFile := fs.String("base", "", "base OpenAPI spec to merge with")
 	outFile := fs.String("o", "", "output file path")
 	fs.Parse(args)
 
@@ -28,14 +29,19 @@ func runScan(args []string) {
 		os.Exit(1)
 	}
 
-	format := scanner.FormatYAML
+	var output []byte
+
 	if *openapiOut {
-		format = scanner.FormatOpenAPI
-	} else if *jsonOut {
-		format = scanner.FormatJSON
+		baseNode := resolveBaseNode(*baseFile, root)
+		output, err = scanner.ToOpenAPI(result, baseNode)
+	} else {
+		format := scanner.FormatYAML
+		if *jsonOut {
+			format = scanner.FormatJSON
+		}
+		output, err = scanner.Render(result, format)
 	}
 
-	output, err := scanner.Render(result, format)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)

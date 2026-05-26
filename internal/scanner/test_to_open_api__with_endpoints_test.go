@@ -10,7 +10,7 @@ func TestToOpenAPI_WithEndpoints(t *testing.T) {
 			{Method: "GET", Path: "/api/users", Handler: "h.ListUsers"},
 		},
 	}
-	data, err := ToOpenAPI(result)
+	data, err := ToOpenAPI(result, nil)
 	if err != nil {
 		t.Fatal(err)
 	}

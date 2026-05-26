@@ -13,3 +13,4 @@ required:
     render: "output formatting and serialization"
     session: "ratchet session state management"
     convert: "data transformation between formats"
+    test: "unit test"

@@ -1,5 +1,5 @@
-//ff:func feature=ddl type=command control=sequence
-//ff:what TestRunDDL_Cov 테스트
+//ff:func feature=ddl type=test control=sequence
+//ff:what TestRunDDL_StdoutCov 테스트
 package main
 
 import (

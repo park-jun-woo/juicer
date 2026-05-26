@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence
+//ff:func feature=scan type=test control=sequence
 //ff:what TestTryUseCall_ValidUse 테스트
 package scanner
 

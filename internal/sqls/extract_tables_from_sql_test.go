@@ -1,4 +1,4 @@
-//ff:func feature=sql type=parse control=iteration dimension=1
+//ff:func feature=sql type=test control=iteration dimension=1
 //ff:what TestExtractTablesFromSQL_Select 테스트
 package sqls
 

@@ -16,7 +16,7 @@ func Render(result *ScanResult, format Format) ([]byte, error) {
 	case FormatJSON:
 		return json.MarshalIndent(result, "", "  ")
 	case FormatOpenAPI:
-		return ToOpenAPI(result)
+		return ToOpenAPI(result, nil)
 	default:
 		return nil, fmt.Errorf("unknown format: %d", format)
 	}

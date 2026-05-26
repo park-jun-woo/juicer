@@ -18,7 +18,7 @@ func TestToOpenAPI(t *testing.T) {
 		},
 	}
 
-	out, err := ToOpenAPI(result)
+	out, err := ToOpenAPI(result, nil)
 	if err != nil {
 		t.Fatalf("ToOpenAPI() error: %v", err)
 	}

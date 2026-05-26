@@ -1,0 +1,25 @@
+//ff:func feature=sql type=test control=sequence
+//ff:what setupSQLSession 헬퍼 함수
+package main
+
+import (
+	"os"
+	"path/filepath"
+	"testing"
+)
+
+func setupSQLSession(t *testing.T) (string, func()) {
+	t.Helper()
+	dir := t.TempDir()
+	repoDir := filepath.Join(dir, "repo")
+	queriesDir := filepath.Join(dir, "queries")
+	os.MkdirAll(repoDir, 0o755)
+	os.MkdirAll(queriesDir, 0o755)
+	sessionDir := filepath.Join(dir, ".juicer")
+	os.MkdirAll(sessionDir, 0o755)
+	sessionJSON := `{"repo_dir":"` + repoDir + `","queries_dir":"` + queriesDir + `","methods":[]}`
+	os.WriteFile(filepath.Join(sessionDir, "sql-session.json"), []byte(sessionJSON), 0o644)
+	oldWd, _ := os.Getwd()
+	os.Chdir(dir)
+	return dir, func() { os.Chdir(oldWd) }
+}

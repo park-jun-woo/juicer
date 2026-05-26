@@ -1,5 +1,5 @@
-//ff:func feature=ratchet type=command control=sequence
-//ff:what TestRunSQLNext 테스트
+//ff:func feature=ratchet type=test control=sequence
+//ff:what TestRunSQLNext_EmptySession 테스트
 package main
 
 import (

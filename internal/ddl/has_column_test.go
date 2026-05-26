@@ -1,4 +1,4 @@
-//ff:func feature=ddl type=extract control=sequence
+//ff:func feature=ddl type=test control=sequence
 //ff:what TestHasColumn_Found 테스트
 package ddl
 

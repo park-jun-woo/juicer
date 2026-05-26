@@ -1,4 +1,4 @@
-//ff:func feature=ddl type=command control=sequence
+//ff:func feature=ddl type=test control=sequence
 //ff:what TestRun_Basic 테스트
 package ddl
 

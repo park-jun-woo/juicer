@@ -1,5 +1,5 @@
-//ff:func feature=sql type=command control=sequence
-//ff:what TestRunSQL_Cov 테스트
+//ff:func feature=sql type=test control=sequence
+//ff:what TestRunSQL_DefaultDirCov 테스트
 package main
 
 import (

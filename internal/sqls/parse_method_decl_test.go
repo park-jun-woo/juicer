@@ -1,9 +1,15 @@
-//ff:func feature=sql type=parse control=sequence
-//ff:what TestParseMethodDecl_Placeholder 테스트
+//ff:func feature=sql type=test control=sequence
+//ff:what TestParseMethodDecl_NoReceiver 테스트
 package sqls
 
-import "testing"
+import (
+	"go/ast"
+	"testing"
+)
 
-func TestParseMethodDecl_Placeholder(t *testing.T) {
-	_ = t
+func TestParseMethodDecl_NoReceiver(t *testing.T) {
+	fn := &ast.FuncDecl{Name: &ast.Ident{Name: "Foo"}, Type: &ast.FuncType{}}
+	if parseMethodDecl(fn) != nil {
+		t.Fatal("expected nil")
+	}
 }

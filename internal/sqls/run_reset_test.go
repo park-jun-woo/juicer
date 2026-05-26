@@ -1,9 +1,22 @@
 //ff:func feature=sql type=parse control=sequence
-//ff:what TestRunReset_Placeholder 테스트
+//ff:what TestRunReset 테스트
 package sqls
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
-func TestRunReset_Placeholder(t *testing.T) {
-	_ = t
+func TestRunReset_Cov(t *testing.T) {
+	dir := t.TempDir()
+	sessionDir := dir + "/.juicer"
+	os.MkdirAll(sessionDir, 0o755)
+	os.WriteFile(sessionDir+"/sql-session.json", []byte(`{}`), 0o644)
+	oldWd, _ := os.Getwd()
+	os.Chdir(dir)
+	defer os.Chdir(oldWd)
+	err := RunReset()
+	if err != nil {
+		t.Fatal(err)
+	}
 }

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence
+//ff:func feature=scan type=test control=sequence
 //ff:what TestBindVarName_UnaryAnd 테스트
 package scanner
 

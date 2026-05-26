@@ -1,4 +1,4 @@
-//ff:func feature=sql type=parse control=sequence
+//ff:func feature=sql type=test control=sequence
 //ff:what TestSaveSession_Basic 테스트
 package sqls
 
