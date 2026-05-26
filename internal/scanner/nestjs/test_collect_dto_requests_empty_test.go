@@ -6,7 +6,7 @@ import "testing"
 
 func TestCollectDTORequests_Empty(t *testing.T) {
 	ep := endpointInfo{}
-	reqs := collectDTORequests(ep, nil, "/src/controller.ts", 0)
+	reqs := collectDTORequests(ep, nil, "/src/controller.ts", "", 0)
 	if len(reqs) != 0 {
 		t.Fatalf("expected 0, got %d", len(reqs))
 	}

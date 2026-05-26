@@ -4,9 +4,10 @@ package nestjs
 
 // dtoRequest tracks a DTO type that needs resolution.
 type dtoRequest struct {
-	typeName string
-	imports  map[string]string
-	referrer string // absolute file path of the referencing file
-	epIdx    int    // index into endpoints slice
-	isBody   bool   // true=request body, false=response
+	typeName    string
+	imports     map[string]string
+	referrer    string // absolute file path of the referencing file
+	projectRoot string // project root for non-relative import resolution
+	epIdx       int    // index into endpoints slice
+	isBody      bool   // true=request body, false=response
 }

@@ -27,7 +27,7 @@ func Scan(root string) (*scanner.ScanResult, error) {
 	globalPrefix := detectGlobalPrefix(absRoot)
 	uriVersioning := detectURIVersioning(absRoot)
 	allControllers := collectControllers(tsFiles, absRoot)
-	endpoints, dtoReqs := buildAllEndpoints(globalPrefix, uriVersioning, allControllers)
+	endpoints, dtoReqs := buildAllEndpoints(globalPrefix, uriVersioning, allControllers, absRoot)
 	resolveAllDTOs(dtoReqs, endpoints)
 	return &scanner.ScanResult{Endpoints: endpoints}, nil
 }

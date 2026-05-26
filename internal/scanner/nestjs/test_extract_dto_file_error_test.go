@@ -5,7 +5,7 @@ package nestjs
 import "testing"
 
 func TestExtractDTO_FileError(t *testing.T) {
-	_, err := extractDTO("/nonexistent/file.ts", "Dto")
+	_, err := extractDTO("/nonexistent/file.ts", "Dto", nil, "", nil)
 	if err == nil {
 		t.Fatal("expected error for missing file")
 	}

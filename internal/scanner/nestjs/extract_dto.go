@@ -9,7 +9,12 @@ import (
 )
 
 // extractDTO parses a DTO source file and extracts the class with the given name.
-func extractDTO(filePath, className string) ([]scanner.Field, error) {
+// imports and projectRoot are used for resolving parent DTO references from extends clauses.
+// cache prevents infinite recursion for circular references.
+func extractDTO(filePath, className string, imports map[string]string, projectRoot string, cache map[string][]scanner.Field) ([]scanner.Field, error) {
+	if cached, ok := cache[className]; ok {
+		return cached, nil
+	}
 	src, err := os.ReadFile(filePath)
 	if err != nil {
 		return nil, err
@@ -18,6 +23,9 @@ func extractDTO(filePath, className string) ([]scanner.Field, error) {
 	if err != nil {
 		return nil, err
 	}
+	fileImports := extractImports(root, src)
+	merged := mergeImports(imports, fileImports)
+
 	classes := findAllByType(root, "class_declaration")
 	for _, cls := range classes {
 		nameNode := findChildByType(cls, "type_identifier")
@@ -27,8 +35,13 @@ func extractDTO(filePath, className string) ([]scanner.Field, error) {
 		if nodeText(nameNode, src) != className {
 			continue
 		}
-		fields := extractClassProperties(cls, src)
-		return dtoFieldsToScannerFields(fields), nil
+		cache[className] = nil
+		directFields := extractClassProperties(cls, src)
+		parentFields := resolveDTOExtends(cls, src, filePath, merged, projectRoot, cache)
+		combined := mergeFields(parentFields, directFields)
+		result := dtoFieldsToScannerFields(combined)
+		cache[className] = result
+		return result, nil
 	}
 	return nil, nil
 }

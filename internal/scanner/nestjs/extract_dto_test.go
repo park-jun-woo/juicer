@@ -2,7 +2,11 @@
 //ff:what TestExtractDTO_Found 테스트
 package nestjs
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/park-jun-woo/juicer/internal/scanner"
+)
 
 func TestExtractDTO_Found(t *testing.T) {
 	dir := t.TempDir()
@@ -13,7 +17,8 @@ export class CreateUserDto {
 }
 `
 	writeFile(t, dir, "create-user.dto.ts", dto)
-	fields, err := extractDTO(dir+"/create-user.dto.ts", "CreateUserDto")
+	cache := make(map[string][]scanner.Field)
+	fields, err := extractDTO(dir+"/create-user.dto.ts", "CreateUserDto", nil, "", cache)
 	if err != nil {
 		t.Fatal(err)
 	}

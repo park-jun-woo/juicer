@@ -3,36 +3,19 @@
 package nestjs
 
 import (
-	"os"
 	"path/filepath"
 	"strings"
 )
 
 // resolveImportPath resolves a relative import path to an absolute .ts file path.
 // referrerDir is the directory of the file containing the import statement.
-func resolveImportPath(referrerDir, importPath string) string {
-	if !strings.HasPrefix(importPath, ".") {
-		return "" // non-relative imports not supported
+// projectRoot is used for non-relative project-internal imports (e.g. 'src/users/dto/create-user.dto').
+func resolveImportPath(referrerDir, importPath string, projectRoot ...string) string {
+	if strings.HasPrefix(importPath, ".") {
+		return tryResolveTS(filepath.Join(referrerDir, importPath))
 	}
-
-	base := filepath.Join(referrerDir, importPath)
-
-	// Try with .ts extension
-	if !strings.HasSuffix(base, ".ts") {
-		candidate := base + ".ts"
-		if _, err := os.Stat(candidate); err == nil {
-			return candidate
-		}
-		// Try index.ts
-		candidate = filepath.Join(base, "index.ts")
-		if _, err := os.Stat(candidate); err == nil {
-			return candidate
-		}
+	if len(projectRoot) > 0 && projectRoot[0] != "" {
+		return resolveNonRelativeImport(projectRoot[0], importPath)
 	}
-
-	if _, err := os.Stat(base); err == nil {
-		return base
-	}
-
 	return ""
 }

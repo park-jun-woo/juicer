@@ -5,11 +5,11 @@ package nestjs
 import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // buildAllEndpoints iterates over all controllers and builds endpoint + DTO request lists.
-func buildAllEndpoints(globalPrefix string, uriVersioning bool, controllers []controllerWithFile) ([]scanner.Endpoint, []dtoRequest) {
+func buildAllEndpoints(globalPrefix string, uriVersioning bool, controllers []controllerWithFile, projectRoot string) ([]scanner.Endpoint, []dtoRequest) {
 	var endpoints []scanner.Endpoint
 	var dtoReqs []dtoRequest
 	for _, cwf := range controllers {
-		eps, reqs := buildControllerEndpoints(globalPrefix, uriVersioning, cwf, len(endpoints))
+		eps, reqs := buildControllerEndpoints(globalPrefix, uriVersioning, cwf, projectRoot, len(endpoints))
 		endpoints = append(endpoints, eps...)
 		dtoReqs = append(dtoReqs, reqs...)
 	}

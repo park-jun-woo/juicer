@@ -7,7 +7,7 @@ import "testing"
 func TestCollectDTORequests_BodyAndReturn(t *testing.T) {
 	ep := endpointInfo{bodyType: "CreateUserDto", returnType: "UserDto"}
 	imports := map[string]string{"CreateUserDto": "./dto/create-user.dto"}
-	reqs := collectDTORequests(ep, imports, "/src/controller.ts", 0)
+	reqs := collectDTORequests(ep, imports, "/src/controller.ts", "", 0)
 	if len(reqs) != 2 {
 		t.Fatalf("expected 2, got %d", len(reqs))
 	}

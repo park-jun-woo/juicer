@@ -18,11 +18,11 @@ func resolveDTOFields(dr dtoRequest, cache map[string][]scanner.Field) ([]scanne
 		return nil, nil
 	}
 	referrerDir := filepath.Dir(dr.referrer)
-	absPath := resolveImportPath(referrerDir, importPath)
+	absPath := resolveImportPath(referrerDir, importPath, dr.projectRoot)
 	if absPath == "" {
 		return nil, nil
 	}
-	fields, err := extractDTO(absPath, dr.typeName)
+	fields, err := extractDTO(absPath, dr.typeName, dr.imports, dr.projectRoot, cache)
 	if err != nil {
 		return nil, err
 	}
