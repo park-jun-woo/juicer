@@ -4,8 +4,5 @@ package fastapi
 
 // defaultStatusForMethod returns the default HTTP status code for a method.
 func defaultStatusForMethod(method string) string {
-	if method == "POST" {
-		return "201"
-	}
 	return "200"
 }
