@@ -19,11 +19,6 @@ Usage:
   juicer sql list
   juicer sql skip
   juicer sql reset
-  juicer hurl next [--host URL --tests DIR --repo DIR]
-  juicer hurl status
-  juicer hurl list
-  juicer hurl skip
-  juicer hurl reset
   juicer version
 
 scan flags:
@@ -42,9 +37,5 @@ sql next flags:
   --repo string      repository directory (required on first run)
   --queries string   sqlc queries directory (required on first run)
 
-hurl next flags:
-  --host string    target host URL (required on first run)
-  --tests string   hurl tests directory (required on first run)
-  --repo string    Go source repository directory (required on first run)
 `)
 }

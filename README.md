@@ -64,13 +64,6 @@ juicer sql next --repo ./repository --queries ./db/query
 juicer sql status
 ```
 
-### Hurl API test session
-
-```bash
-juicer hurl next --host http://localhost:8080 --tests ./tests --repo ./repository
-juicer hurl status
-```
-
 ## What it extracts
 
 | Layer | Output |

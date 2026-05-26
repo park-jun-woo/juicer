@@ -1,6 +1,6 @@
 ---
 name: juicer
-description: Static analysis tool that extracts OpenAPI specs, DDL schemas, and SQL skeletons from web framework projects (Go+Gin, NestJS, FastAPI). Use when you need to generate or update API specs, extract endpoint metadata, manage DDL migrations, scaffold sqlc queries, or run hurl-based API tests from source code.
+description: Static analysis tool that extracts OpenAPI specs, DDL schemas, and SQL skeletons from web framework projects (Go+Gin, NestJS, FastAPI). Use when you need to generate or update API specs, extract endpoint metadata, manage DDL migrations, or scaffold sqlc queries from source code.
 license: MIT
 metadata:
   author: park-jun-woo
@@ -15,7 +15,7 @@ metadata:
 - Generate endpoint index (routes, request/response types, middleware) as YAML/JSON
 - Parse and merge DDL migration files into per-table snapshots
 - Extract SQL queries from Go repository patterns and scaffold sqlc query files
-- Run hurl-based API test sessions with ratchet workflow (next/skip/pass/fail)
+
 
 ## When NOT to Use This Skill
 
@@ -43,11 +43,6 @@ go install github.com/park-jun-woo/juicer/cmd/juicer@latest
 | `juicer sql list` | List all queries in session |
 | `juicer sql skip` | Skip current query |
 | `juicer sql reset` | Reset sqlc session |
-| `juicer hurl next` | Run next hurl test (ratchet workflow) |
-| `juicer hurl status` | Show hurl session progress |
-| `juicer hurl list` | List all endpoints in session |
-| `juicer hurl skip` | Skip current endpoint |
-| `juicer hurl reset` | Reset hurl session |
 
 ## Workflow
 
@@ -71,17 +66,10 @@ juicer sql ./repository
 juicer sql next --repo ./repository --queries ./db/query
 ```
 
-### 4. Run hurl API tests
-
-```bash
-juicer hurl next --host http://localhost:8080 --tests ./tests --repo ./repository
-juicer hurl status
-```
-
 ## Key Concepts
 
 - **Static analysis only** — Uses `go/ast` and `go/types`. No runtime, no reflection, no instrumentation.
-- **Ratchet workflow** — `sql next` and `hurl next` iterate through items one by one. Each item is todo/done/skipped. Progress is saved in `.juicer/` session files.
+- **Ratchet workflow** — `sql next` iterates through items one by one. Each item is todo/done/skipped. Progress is saved in `.juicer/` session files.
 - **1-depth call tracking** — Follows handler wrapper functions that pass `*gin.Context` to recover actual status codes and response types.
 - **`gin.H` partial confidence** — `map[string]any` responses have keys extracted but value types are best-effort. Marked with `x-schema-confidence: partial`.
 

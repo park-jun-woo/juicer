@@ -20,8 +20,6 @@ func main() {
 		runDDL(os.Args[2:])
 	case "sql":
 		runSQL(os.Args[2:])
-	case "hurl":
-		runHurl(os.Args[2:])
 	case "version":
 		fmt.Printf("juicer %s\n", Version)
 	default:
