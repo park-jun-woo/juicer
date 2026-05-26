@@ -18,5 +18,9 @@ func collectStringParts(expr ast.Expr, parts *[]string) {
 			collectStringParts(e.X, parts)
 			collectStringParts(e.Y, parts)
 		}
+	case *ast.SelectorExpr:
+		// Runtime field access like options.BaseURL — skip, collect other parts
+	case *ast.Ident:
+		// Variable reference like baseURL — skip, collect other parts
 	}
 }

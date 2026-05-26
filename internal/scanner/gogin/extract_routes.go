@@ -6,7 +6,6 @@ import (
 	"go/ast"
 	"path/filepath"
 	"sort"
-	"strings"
 
 	"golang.org/x/tools/go/packages"
 	"github.com/park-jun-woo/juicer/internal/scanner"
@@ -22,9 +21,6 @@ func extractRoutes(pkgs []*packages.Package, root string) ([]scanner.Endpoint, m
 				continue
 			}
 			rel, _ := filepath.Rel(root, pkg.CompiledGoFiles[i])
-			if strings.HasSuffix(rel, ".gen.go") {
-				continue
-			}
 			eps, hmap := scanFile(file, rel, pkg.Fset)
 			// hmap 인덱스를 전역 오프셋으로 변환
 			offset := len(endpoints)

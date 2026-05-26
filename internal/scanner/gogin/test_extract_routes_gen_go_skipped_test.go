@@ -1,5 +1,5 @@
-//ff:func feature=scan type=extract control=sequence
-//ff:what TestExtractRoutes_GenGoSkipped 테스트
+//ff:func feature=scan type=test control=sequence
+//ff:what TestExtractRoutes_GenGoIncluded 테스트
 package gogin
 
 import (
@@ -11,7 +11,7 @@ import (
 	"golang.org/x/tools/go/packages"
 )
 
-func TestExtractRoutes_GenGoSkipped(t *testing.T) {
+func TestExtractRoutes_GenGoIncluded(t *testing.T) {
 	src := `package main
 
 import "github.com/gin-gonic/gin"
@@ -33,7 +33,7 @@ func handler(c *gin.Context) {}
 	}
 
 	eps, _ := extractRoutes([]*packages.Package{pkg}, ".")
-	if len(eps) != 0 {
-		t.Errorf("expected 0 for .gen.go, got %d", len(eps))
+	if len(eps) != 1 {
+		t.Errorf("expected 1 route from .gen.go, got %d", len(eps))
 	}
 }
