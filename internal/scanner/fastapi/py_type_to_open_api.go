@@ -37,6 +37,8 @@ func pyTypeToOpenAPI(py string) openAPIType {
 		return openAPIType{Type: "string", Format: "email"}
 	case "uuid.UUID", "UUID":
 		return openAPIType{Type: "string", Format: "uuid"}
+	case "ObjectId", "PydanticObjectId", "bson.ObjectId", "odmantic.bson.ObjectId":
+		return openAPIType{Type: "string"}
 	case "Any":
 		return openAPIType{Type: "object"}
 	case "":

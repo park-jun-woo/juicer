@@ -20,6 +20,8 @@ func tsTypeToOpenAPI(ts string) openAPIType {
 		return openAPIType{Type: "string", Format: "date-time"}
 	case "Uuid":
 		return openAPIType{Type: "string", Format: "uuid"}
+	case "ObjectId":
+		return openAPIType{Type: "string"}
 	case "any":
 		return openAPIType{Type: "object"}
 	case "void", "":

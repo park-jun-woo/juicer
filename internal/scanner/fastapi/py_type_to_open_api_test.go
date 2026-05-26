@@ -20,6 +20,10 @@ func TestPyTypeToOpenAPI_Builtin(t *testing.T) {
 		{"EmailStr", "string", "email"},
 		{"uuid.UUID", "string", "uuid"},
 		{"UUID", "string", "uuid"},
+		{"ObjectId", "string", ""},
+		{"PydanticObjectId", "string", ""},
+		{"bson.ObjectId", "string", ""},
+		{"odmantic.bson.ObjectId", "string", ""},
 		{"Any", "object", ""},
 	}
 	for _, tc := range tests {
