@@ -12,7 +12,11 @@ func mergeSingleInclude(fi *fileInfo, inc includeCall, importMap map[string]stri
 		return
 	}
 
-	srcFile := importMap[childVar]
+	lookupKey := childVar
+	if inc.childModule != "" {
+		lookupKey = inc.childModule + "." + inc.childVar
+	}
+	srcFile := importMap[lookupKey]
 	if srcFile == "" {
 		return
 	}

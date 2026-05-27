@@ -14,7 +14,7 @@ func tryImportedName(child *sitter.Node, stmt *sitter.Node, idx int, src []byte)
 
 	switch child.Type() {
 	case "dotted_name":
-		if prevText == "import" {
+		if prevText == "import" || prevText == "," {
 			return nodeText(child, src)
 		}
 	case "identifier":

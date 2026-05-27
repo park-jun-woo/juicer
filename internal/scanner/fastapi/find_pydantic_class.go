@@ -22,8 +22,9 @@ func findPydanticClass(root *sitter.Node, src []byte, className string) []scanne
 		if !isBaseModelSubclass(cls, root, src) {
 			continue
 		}
-		fields := extractPydanticFields(cls, src)
-		return pydanticFieldsToScannerFields(fields)
+		visited := map[string]bool{}
+		merged := resolveFieldsWithInheritance(cls, root, src, visited)
+		return pydanticFieldsToScannerFields(merged)
 	}
 	return nil
 }

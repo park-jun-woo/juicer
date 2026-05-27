@@ -14,7 +14,7 @@ func convertOnePydanticField(f pydanticField) scanner.Field {
 	if oa.Format != "" {
 		oaType = oaType + ":" + oa.Format
 	}
-	return scanner.Field{
+	sf := scanner.Field{
 		Name:      f.name,
 		Type:      oaType,
 		JSON:      f.name,
@@ -24,4 +24,8 @@ func convertOnePydanticField(f pydanticField) scanner.Field {
 		MinLength: f.minLength,
 		MaxLength: f.maxLength,
 	}
+	if !f.hasDefault {
+		sf.Validate = "required"
+	}
+	return sf
 }

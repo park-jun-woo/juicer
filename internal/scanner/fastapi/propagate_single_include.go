@@ -8,7 +8,11 @@ package fastapi
 func propagateSingleInclude(fi *fileInfo, inc includeCall, importMap map[string]string,
 	fileByPath map[string]*fileInfo, origSnapshot map[string]map[string]string) bool {
 
-	srcFile := importMap[inc.childVar]
+	lookupKey := inc.childVar
+	if inc.childModule != "" {
+		lookupKey = inc.childModule + "." + inc.childVar
+	}
+	srcFile := importMap[lookupKey]
 	if srcFile == "" {
 		return false
 	}

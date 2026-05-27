@@ -5,6 +5,8 @@ package fastapi
 // applyFieldConstraint sets a constraint value on pydanticField based on the keyword name.
 func applyFieldConstraint(key, valStr string, f *pydanticField) {
 	switch key {
+	case "default", "default_factory":
+		f.hasDefault = true
 	case "ge":
 		v := parseIntDefault(valStr, -1)
 		if v >= 0 {

@@ -34,6 +34,10 @@ func extractFieldFromAssignment(assign *sitter.Node, src []byte) *pydanticField 
 	}
 
 	// Extract Field(...) constraints: ge, le, min_length, max_length
+	// Field(...) 호출이 있으면 hasDefault를 false로 리셋 후 default 키워드 여부로 재결정
+	if hasFieldCall(assign, src) {
+		f.hasDefault = false
+	}
 	extractFieldCallConstraints(assign, src, f)
 
 	return f

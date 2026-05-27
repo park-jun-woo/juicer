@@ -4,6 +4,7 @@ package nestjs
 
 import (
 	"os"
+	"strings"
 
 	"github.com/park-jun-woo/juicer/internal/scanner"
 )
@@ -43,6 +44,13 @@ func extractDTO(filePath, className string, imports map[string]string, projectRo
 		result := dtoFieldsToScannerFields(combined)
 		cache[className] = result
 		return result, nil
+	}
+	// class not found: follow barrel re-exports when the file is index.ts
+	if strings.HasSuffix(filePath, "index.ts") {
+		realPath := resolveBarrelExport(filePath, className)
+		if realPath != "" {
+			return extractDTO(realPath, className, imports, projectRoot, cache)
+		}
 	}
 	return nil, nil
 }

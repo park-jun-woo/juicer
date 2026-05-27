@@ -18,7 +18,8 @@ func tryInheritClass(cls *sitter.Node, fi *fileInfo, globalModels map[string]*fi
 	parents := collectParentNames(cls, fi.src)
 	for _, p := range parents {
 		if _, known := globalModels[p]; known {
-			fi.models[name] = extractPydanticFields(cls, fi.src)
+			visited := map[string]bool{}
+			fi.models[name] = resolveFieldsWithInheritance(cls, fi.root, fi.src, visited)
 			globalModels[name] = fi
 			return true
 		}

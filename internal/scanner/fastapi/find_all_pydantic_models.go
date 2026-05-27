@@ -16,7 +16,8 @@ func findAllPydanticModels(root *sitter.Node, src []byte) map[string][]pydanticF
 		if nameNode == nil {
 			continue
 		}
-		models[nodeText(nameNode, src)] = extractPydanticFields(cls, src)
+		visited := map[string]bool{}
+		models[nodeText(nameNode, src)] = resolveFieldsWithInheritance(cls, root, src, visited)
 	}
 	return models
 }

@@ -28,12 +28,13 @@ func buildRouterImportMap(absRoot string, fi *fileInfo, includes []includeCall) 
 		if inc.childModule == "" {
 			continue
 		}
-		if _, exists := importMap[inc.childVar]; exists {
+		qualifiedKey := inc.childModule + "." + inc.childVar
+		if _, exists := importMap[qualifiedKey]; exists {
 			continue
 		}
 		resolved := resolveChildModuleImport(absRoot, referrerDir, inc.childModule, fi.imports)
 		if resolved != "" {
-			importMap[inc.childVar] = resolved
+			importMap[qualifiedKey] = resolved
 		}
 	}
 	return importMap
