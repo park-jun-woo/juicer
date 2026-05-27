@@ -7,21 +7,19 @@ package fastapi
 // prefix. The route decorators are in views.py but the prefix is only known
 // in __init__.py. This function traces include_router chains and propagates the
 // accumulated prefix back to the file where routes are defined.
-func propagatePrefixToRouteFiles(absRoot string, files []fileInfo, globalPrefixes map[string]map[string]string) {
+func propagatePrefixToRouteFiles(absRoot string, files []fileInfo) {
 	fileByPath := make(map[string]*fileInfo, len(files))
 	for i := range files {
 		fileByPath[files[i].absPath] = &files[i]
 	}
 
-	for i := range files {
-		fi := &files[i]
-		includes := findIncludeRouterCalls(fi.root, fi.src)
-		if len(includes) == 0 {
-			continue
-		}
-		importMap := buildRouterImportMap(absRoot, fi)
-		for _, inc := range includes {
-			propagateSingleInclude(fi, inc, importMap, fileByPath)
+	// 전파 시작 전 스냅샷: merge + resolveDotted 완료 후의 정확한 prefix
+	// globalPrefixes와 달리 이 시점의 fi.prefixes는 dotted resolution 완료 상태
+	origSnapshot := buildGlobalPrefixMap(files)
+
+	for pass := 0; pass < 10; pass++ {
+		if !propagatePrefixPass(absRoot, files, fileByPath, origSnapshot) {
+			break
 		}
 	}
 }

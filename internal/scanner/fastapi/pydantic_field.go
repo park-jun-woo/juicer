@@ -8,4 +8,8 @@ type pydanticField struct {
 	typeName   string
 	hasDefault bool
 	nullable   bool
+	ge         *int
+	le         *int
+	minLength  *int
+	maxLength  *int
 }

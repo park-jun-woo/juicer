@@ -20,5 +20,12 @@ func mergeSpec(scanNode *yaml.Node, baseNode *yaml.Node, scanResult *ScanResult)
 		setComponentSchemas(merged, ms)
 	}
 
+	scanSecSchemes := findComponentSecuritySchemes(scanNode)
+	baseSecSchemes := findComponentSecuritySchemes(baseNode)
+	if scanSecSchemes != nil || baseSecSchemes != nil {
+		ms := mergeSchemas(scanSecSchemes, baseSecSchemes)
+		setComponentSecuritySchemes(merged, ms)
+	}
+
 	return merged
 }

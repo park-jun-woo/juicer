@@ -12,7 +12,7 @@ func TestParseParamNode(t *testing.T) {
 	params := findChildByType(funcDef, "parameters")
 	tp := findChildByType(params, "typed_parameter")
 	if tp != nil {
-		name, typeName, _, _ := parseParamNode(tp, src)
+		name, typeName, _, _, _ := parseParamNode(tp, src)
 		if name != "x" || typeName != "int" {
 			t.Fatalf("typed: name=%q type=%q", name, typeName)
 		}
@@ -25,7 +25,7 @@ func TestParseParamNode(t *testing.T) {
 	params2 := findChildByType(funcDef2, "parameters")
 	dp := findChildByType(params2, "default_parameter")
 	if dp != nil {
-		name, _, defVal, _ := parseParamNode(dp, src2)
+		name, _, defVal, _, _ := parseParamNode(dp, src2)
 		if name != "x" || defVal != "5" {
 			t.Fatalf("default: name=%q default=%q", name, defVal)
 		}

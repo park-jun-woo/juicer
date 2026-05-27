@@ -24,13 +24,23 @@ func tryParseIncludeRouter(call *sitter.Node, src []byte) *includeCall {
 	if args == nil {
 		return nil
 	}
-	childVar := firstIdentArg(args, src)
-	if childVar == "" {
+	raw := firstIdentArg(args, src)
+	if raw == "" {
 		return nil
 	}
+
+	var childVar, childModule string
+	if dot := strings.LastIndex(raw, "."); dot >= 0 {
+		childModule = raw[:dot]
+		childVar = raw[dot+1:]
+	} else {
+		childVar = raw
+	}
+
 	return &includeCall{
 		parentVar:   parentVar,
 		childVar:    childVar,
+		childModule: childModule,
 		extraPrefix: extractKeywordArg(args, "prefix", src),
 	}
 }

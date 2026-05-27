@@ -15,11 +15,7 @@ func applyPickType(fields []scanner.Field, pickNames []string) []dtoField {
 		if _, picked := pickSet[f.Name]; !picked {
 			continue
 		}
-		df := dtoField{name: f.Name, tsType: f.Type}
-		if df.tsType == "" {
-			df.tsType = "string"
-		}
-		result = append(result, df)
+		result = append(result, fieldToDTOField(f))
 	}
 	return result
 }

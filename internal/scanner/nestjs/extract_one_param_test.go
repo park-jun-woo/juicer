@@ -19,7 +19,7 @@ class C {
 		t.Fatal("no params")
 	}
 	result := &methodParams{}
-	extractOneParam(params[0], src, result)
+	extractOneParam(params[0], src, "", result)
 	if result.bodyType != "CreateUserDto" {
 		t.Fatalf("expected CreateUserDto, got %q", result.bodyType)
 	}

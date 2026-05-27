@@ -20,7 +20,7 @@ func TestTryExtractDefault(t *testing.T) {
 	foundCall := false
 	for i := 0; i < int(param.ChildCount()); i++ {
 		child := param.Child(i)
-		val, call := tryExtractDefault(child, src)
+		val, call, _ := tryExtractDefault(child, src)
 		if call == "" {
 			continue
 		}

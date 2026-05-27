@@ -12,7 +12,7 @@ func TestApplyParamDecorators_All(t *testing.T) {
 		{name: DecBody, arg: ""},
 		{name: DecUploadedFile, arg: "file"},
 	}
-	applyParamDecorators(decorators, "default", "string", result)
+	applyParamDecorators(decorators, "default", "string", "", result)
 	if len(result.pathParams) != 1 || result.pathParams[0].Name != "id" {
 		t.Fatal("expected path param id")
 	}

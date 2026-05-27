@@ -12,7 +12,7 @@ func mergeImportedRouterPrefixes(absRoot string, files []fileInfo, globalPrefixe
 		if len(includes) == 0 {
 			continue
 		}
-		importMap := buildRouterImportMap(absRoot, fi)
+		importMap := buildRouterImportMap(absRoot, fi, includes)
 		for _, inc := range includes {
 			mergeSingleInclude(fi, inc, importMap, globalPrefixes)
 		}

@@ -1,5 +1,5 @@
 //ff:func feature=scan type=test control=sequence topic=fastapi
-//ff:what isBaseModelSubclass 테스트
+//ff:what TestIsBaseModelSubclass 테스트
 package fastapi
 
 import "testing"
@@ -14,10 +14,10 @@ func TestIsBaseModelSubclass(t *testing.T) {
 	if len(classes) < 2 {
 		t.Fatalf("expected 2 classes, got %d", len(classes))
 	}
-	if !isBaseModelSubclass(classes[0], src) {
+	if !isBaseModelSubclass(classes[0], root, src) {
 		t.Fatal("User should be BaseModel subclass")
 	}
-	if isBaseModelSubclass(classes[1], src) {
+	if isBaseModelSubclass(classes[1], root, src) {
 		t.Fatal("Other should not be BaseModel subclass")
 	}
 }

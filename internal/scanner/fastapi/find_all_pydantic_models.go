@@ -9,7 +9,7 @@ func findAllPydanticModels(root *sitter.Node, src []byte) map[string][]pydanticF
 	models := make(map[string][]pydanticField)
 	classes := findAllByType(root, "class_definition")
 	for _, cls := range classes {
-		if !isBaseModelSubclass(cls, src) {
+		if !isBaseModelSubclass(cls, root, src) {
 			continue
 		}
 		nameNode := findChildByType(cls, "identifier")

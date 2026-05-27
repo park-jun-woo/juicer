@@ -56,6 +56,25 @@ func fieldToProperty(f Field) map[string]any {
 		prop["format"] = format
 	}
 
+	// enum 값
+	if len(f.Enum) > 0 {
+		prop["enum"] = f.Enum
+	}
+
+	// 제약조건
+	if f.Minimum != nil {
+		prop["minimum"] = *f.Minimum
+	}
+	if f.Maximum != nil {
+		prop["maximum"] = *f.Maximum
+	}
+	if f.MinLength != nil {
+		prop["minLength"] = *f.MinLength
+	}
+	if f.MaxLength != nil {
+		prop["maxLength"] = *f.MaxLength
+	}
+
 	return prop
 }
 

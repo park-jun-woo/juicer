@@ -9,7 +9,7 @@ func TestApplyParamDecorators_DefaultName(t *testing.T) {
 	decorators := []decoratorInfo{
 		{name: DecParam, arg: ""},
 	}
-	applyParamDecorators(decorators, "myParam", "number", result)
+	applyParamDecorators(decorators, "myParam", "number", "", result)
 	if result.pathParams[0].Name != "myParam" {
 		t.Fatalf("expected myParam, got %s", result.pathParams[0].Name)
 	}

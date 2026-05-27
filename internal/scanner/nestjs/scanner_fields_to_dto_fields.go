@@ -8,11 +8,7 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 func scannerFieldsToDTOFields(fields []scanner.Field) []dtoField {
 	var result []dtoField
 	for _, f := range fields {
-		df := dtoField{name: f.Name, tsType: f.Type}
-		if f.Type == "" {
-			df.tsType = "string"
-		}
-		result = append(result, df)
+		result = append(result, fieldToDTOField(f))
 	}
 	return result
 }

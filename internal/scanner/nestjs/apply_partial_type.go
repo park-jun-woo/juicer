@@ -8,10 +8,10 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 func applyPartialType(fields []scanner.Field) []dtoField {
 	var result []dtoField
 	for _, f := range fields {
-		df := dtoField{name: f.Name, tsType: f.Type, optional: true}
-		if df.tsType == "" {
-			df.tsType = "string"
-		}
+		df := fieldToDTOField(f)
+		df.optional = true
+		// validate에서 "required" 제거 → optional로 전환
+		df.validate = removeRequired(df.validate)
 		result = append(result, df)
 	}
 	return result

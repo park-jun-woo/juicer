@@ -5,16 +5,13 @@ package nestjs
 import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // applyParamDecorators dispatches each decorator into the appropriate result bucket.
-func applyParamDecorators(decorators []decoratorInfo, paramName, paramType string, result *methodParams) {
+func applyParamDecorators(decorators []decoratorInfo, paramName, paramType, routePath string, result *methodParams) {
 	for _, d := range decorators {
 		if d.name == DecQuery && isQueryDTO(d.arg, paramType) {
 			result.queryDTOType = paramType
 			continue
 		}
-		name := d.arg
-		if name == "" {
-			name = paramName
-		}
+		name := resolveParamName(d.name, d.arg, paramName, routePath)
 		switch d.name {
 		case DecParam:
 			result.pathParams = append(result.pathParams, scanner.Param{

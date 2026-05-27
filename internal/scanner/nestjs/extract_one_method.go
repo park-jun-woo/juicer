@@ -40,7 +40,7 @@ func extractOneMethod(m *sitter.Node, src []byte, file string) (endpointInfo, bo
 		ep.handler = nodeText(nameNode, src)
 	}
 
-	params := extractMethodParams(m, src)
+	params := extractMethodParams(m, src, ep.path)
 	ep.params = params.pathParams
 	ep.query = params.queryParams
 	ep.bodyType = params.bodyType

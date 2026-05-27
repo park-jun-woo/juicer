@@ -11,20 +11,7 @@ func pydanticFieldsToScannerFields(fields []pydanticField) []scanner.Field {
 	}
 	result := make([]scanner.Field, len(fields))
 	for i, f := range fields {
-		oa := pyTypeToOpenAPI(f.typeName)
-		oaType := oa.Type
-		if oaType == "" {
-			oaType = "string"
-		}
-		if oa.Format != "" {
-			oaType = oaType + ":" + oa.Format
-		}
-		result[i] = scanner.Field{
-			Name:     f.name,
-			Type:     oaType,
-			JSON:     f.name,
-			Nullable: f.nullable || oa.Nullable,
-		}
+		result[i] = convertOnePydanticField(f)
 	}
 	return result
 }

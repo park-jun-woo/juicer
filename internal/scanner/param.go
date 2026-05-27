@@ -4,7 +4,8 @@ package scanner
 
 // Param — 요청 파라미터
 type Param struct {
-	Name    string `yaml:"name"              json:"name"`
-	Type    string `yaml:"type"              json:"type"`
-	Default string `yaml:"default,omitempty" json:"default,omitempty"`
+	Name          string `yaml:"name"                        json:"name"`
+	Type          string `yaml:"type"                        json:"type"`
+	Default       string `yaml:"default,omitempty"           json:"default,omitempty"`
+	DefaultIsNull bool   `yaml:"default_is_null,omitempty"   json:"default_is_null,omitempty"`
 }

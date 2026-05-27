@@ -19,7 +19,7 @@ func TestExtractDefault(t *testing.T) {
 	if param == nil {
 		t.Fatal("no default parameter")
 	}
-	val, call := extractDefault(param, src)
+	val, call, _ := extractDefault(param, src)
 	if val != "5" {
 		t.Fatalf("expected '5', got %q", val)
 	}

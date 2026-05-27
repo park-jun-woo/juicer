@@ -5,8 +5,8 @@ package nestjs
 import sitter "github.com/smacker/go-tree-sitter"
 
 // extractOneParam processes a single formal parameter with decorators.
-func extractOneParam(param *sitter.Node, src []byte, result *methodParams) {
+func extractOneParam(param *sitter.Node, src []byte, routePath string, result *methodParams) {
 	decorators := paramDecorators(param, src)
 	paramName, paramType := paramNameAndType(param, src)
-	applyParamDecorators(decorators, paramName, paramType, result)
+	applyParamDecorators(decorators, paramName, paramType, routePath, result)
 }

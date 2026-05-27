@@ -18,7 +18,7 @@ class C {
 	if len(methods) == 0 {
 		t.Fatal("no methods")
 	}
-	result := extractMethodParams(methods[0], src)
+	result := extractMethodParams(methods[0], src, "")
 	if len(result.pathParams) != 1 {
 		t.Fatalf("expected 1 path param, got %d", len(result.pathParams))
 	}

@@ -13,8 +13,9 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 	paths := map[string]map[string]any{}
 
 	deduplicated := deduplicateEndpoints(result.Endpoints)
+	confirmedIDs := deduplicateOperationIDs(deduplicated)
 
-	for _, ep := range deduplicated {
+	for i, ep := range deduplicated {
 		oaPath := ep.Path
 		if paths[oaPath] == nil {
 			paths[oaPath] = map[string]any{}
@@ -22,6 +23,9 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 
 		method := strings.ToLower(ep.Method)
 		op := buildOperation(ep, schemas)
+		if cid, ok := confirmedIDs[i]; ok {
+			op["operationId"] = cid
+		}
 		for _, m := range expandAnyMethod(method) {
 			paths[oaPath][m] = op
 		}
@@ -54,12 +58,35 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 		)
 	}
 
-	if len(schemas) > 0 {
+	hasSecurity := false
+	for _, ep := range deduplicated {
+		if isAuthEndpoint(ep) {
+			hasSecurity = true
+			break
+		}
+	}
+
+	if len(schemas) > 0 || hasSecurity {
 		compNode := &yaml.Node{Kind: yaml.MappingNode}
-		compNode.Content = append(compNode.Content,
-			&yaml.Node{Kind: yaml.ScalarNode, Value: "schemas"},
-			toYAMLNode(schemas),
-		)
+		if len(schemas) > 0 {
+			compNode.Content = append(compNode.Content,
+				&yaml.Node{Kind: yaml.ScalarNode, Value: "schemas"},
+				toYAMLNode(schemas),
+			)
+		}
+		if hasSecurity {
+			secSchemes := map[string]any{
+				"bearerAuth": map[string]any{
+					"type":         "http",
+					"scheme":       "bearer",
+					"bearerFormat": "JWT",
+				},
+			}
+			compNode.Content = append(compNode.Content,
+				&yaml.Node{Kind: yaml.ScalarNode, Value: "securitySchemes"},
+				toYAMLNode(secSchemes),
+			)
+		}
 		root.Content = append(root.Content,
 			&yaml.Node{Kind: yaml.ScalarNode, Value: "components"},
 			compNode,

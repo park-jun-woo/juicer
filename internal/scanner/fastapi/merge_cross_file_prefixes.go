@@ -12,5 +12,6 @@ package fastapi
 func mergeCrossFilePrefixes(absRoot string, files []fileInfo) {
 	globalPrefixes := buildGlobalPrefixMap(files)
 	mergeImportedRouterPrefixes(absRoot, files, globalPrefixes)
-	propagatePrefixToRouteFiles(absRoot, files, globalPrefixes)
+	resolveDottedPrefixes(absRoot, files)
+	propagatePrefixToRouteFiles(absRoot, files)
 }

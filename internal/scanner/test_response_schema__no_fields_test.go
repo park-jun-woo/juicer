@@ -8,7 +8,10 @@ func TestResponseSchema_NoFields(t *testing.T) {
 	resp := Response{TypeName: "SomeType"}
 	schemas := map[string]any{}
 	result := responseSchema(resp, schemas)
-	if result["type"] != "object" {
-		t.Fatal("expected object")
+	if result["$ref"] != "#/components/schemas/someType" {
+		t.Fatalf("expected $ref to someType, got %v", result)
+	}
+	if schemas["someType"] == nil {
+		t.Fatal("expected placeholder schema registered")
 	}
 }

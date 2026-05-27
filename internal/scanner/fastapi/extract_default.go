@@ -5,11 +5,12 @@ package fastapi
 import sitter "github.com/smacker/go-tree-sitter"
 
 // extractDefault extracts the default value and call function name from a parameter.
-func extractDefault(param *sitter.Node, src []byte) (defaultVal, defaultCall string) {
+// isNone is true when the default value is Python's None literal.
+func extractDefault(param *sitter.Node, src []byte) (defaultVal, defaultCall string, isNone bool) {
 	for i := 0; i < int(param.ChildCount()); i++ {
 		child := param.Child(i)
-		defaultVal, defaultCall = tryExtractDefault(child, src)
-		if defaultVal != "" {
+		defaultVal, defaultCall, isNone = tryExtractDefault(child, src)
+		if defaultVal != "" || isNone {
 			return
 		}
 	}

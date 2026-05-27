@@ -7,17 +7,21 @@ import sitter "github.com/smacker/go-tree-sitter"
 // extractFactoryStringArray extracts the second argument string array from factory calls.
 // e.g. OmitType(Base, ['field1', 'field2']) returns ["field1", "field2"].
 func extractFactoryStringArray(args *sitter.Node, src []byte) []string {
-	var arrays []*sitter.Node
+	var arr *sitter.Node
 	for i := 0; i < int(args.ChildCount()); i++ {
 		child := args.Child(i)
-		if child.Type() == "array" {
-			arrays = append(arrays, child)
+		// [values] as const → as_expression > array
+		if child.Type() == "as_expression" {
+			child = findChildByType(child, "array")
+		}
+		if child != nil && child.Type() == "array" {
+			arr = child
+			break
 		}
 	}
-	if len(arrays) == 0 {
+	if arr == nil {
 		return nil
 	}
-	arr := arrays[0]
 	var result []string
 	for i := 0; i < int(arr.ChildCount()); i++ {
 		child := arr.Child(i)

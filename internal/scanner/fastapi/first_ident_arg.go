@@ -5,10 +5,14 @@ package fastapi
 import sitter "github.com/smacker/go-tree-sitter"
 
 // firstIdentArg returns the first positional identifier argument text.
+// For attribute nodes (e.g., items.router), the full dotted text is returned.
 func firstIdentArg(args *sitter.Node, src []byte) string {
 	for i := 0; i < int(args.ChildCount()); i++ {
 		child := args.Child(i)
 		if child.Type() == "identifier" {
+			return nodeText(child, src)
+		}
+		if child.Type() == "attribute" {
 			return nodeText(child, src)
 		}
 	}

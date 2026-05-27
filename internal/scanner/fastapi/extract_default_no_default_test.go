@@ -18,7 +18,7 @@ func TestExtractDefault_NoDefault(t *testing.T) {
 	if param == nil {
 		t.Skip("no typed_parameter found")
 	}
-	val, call := extractDefault(param, src)
+	val, call, _ := extractDefault(param, src)
 	if val != "" {
 		t.Fatalf("expected empty val, got %q", val)
 	}

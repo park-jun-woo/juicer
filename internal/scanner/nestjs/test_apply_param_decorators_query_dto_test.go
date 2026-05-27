@@ -9,7 +9,7 @@ func TestApplyParamDecorators_QueryDTO(t *testing.T) {
 	decorators := []decoratorInfo{
 		{name: DecQuery, arg: ""},
 	}
-	applyParamDecorators(decorators, "dto", "ListUserReqDto", result)
+	applyParamDecorators(decorators, "dto", "ListUserReqDto", "", result)
 	if result.queryDTOType != "ListUserReqDto" {
 		t.Fatalf("expected queryDTOType=ListUserReqDto, got %q", result.queryDTOType)
 	}

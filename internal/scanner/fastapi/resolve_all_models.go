@@ -8,6 +8,7 @@ import "github.com/park-jun-woo/juicer/internal/scanner"
 func resolveAllModels(reqs []modelRequest, endpoints []scanner.Endpoint, files []fileInfo) {
 	cache := make(map[string][]scanner.Field)
 	globalModels := buildGlobalModelMap(files)
+	enrichModelsWithInheritance(files, globalModels)
 
 	for _, req := range reqs {
 		fields := resolveModelFields(req, cache, globalModels)

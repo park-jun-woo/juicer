@@ -26,10 +26,15 @@ func extractFieldFromAssignment(assign *sitter.Node, src []byte) *pydanticField 
 		typeName = nodeText(typeNode, src)
 	}
 
-	return &pydanticField{
+	f := &pydanticField{
 		name:       name,
 		typeName:   unwrapNullable(typeName),
 		hasDefault: true,
 		nullable:   isNullableType(typeName),
 	}
+
+	// Extract Field(...) constraints: ge, le, min_length, max_length
+	extractFieldCallConstraints(assign, src, f)
+
+	return f
 }

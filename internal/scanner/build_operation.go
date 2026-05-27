@@ -19,5 +19,9 @@ func buildOperation(ep Endpoint, schemas map[string]any) map[string]any {
 
 	op["responses"] = buildResponses(ep.Responses, schemas)
 
+	if isAuthEndpoint(ep) {
+		op["security"] = []any{map[string]any{"bearerAuth": []any{}}}
+	}
+
 	return op
 }

@@ -22,7 +22,10 @@ func buildOperationParams(req *Request) []map[string]any {
 			"in":     "query",
 			"schema": buildParamSchema(q.Type),
 		}
-		if q.Default != "" {
+		if q.DefaultIsNull {
+			qp["schema"].(map[string]any)["default"] = nil
+			qp["schema"].(map[string]any)["nullable"] = true
+		} else if q.Default != "" {
 			qp["schema"].(map[string]any)["default"] = q.Default
 		}
 		params = append(params, qp)

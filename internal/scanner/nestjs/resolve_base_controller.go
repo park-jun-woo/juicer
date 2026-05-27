@@ -47,5 +47,22 @@ func resolveBaseController(cls *sitter.Node, src []byte, absFile string, imports
 	if relBase == "" {
 		relBase = resolved
 	}
-	return extractMethods(innerCls, baseSrc, relBase)
+	endpoints := extractMethods(innerCls, baseSrc, relBase)
+
+	// 제네릭 치환: 자식 extends 절의 타입 인자 → 내부 클래스의 타입 파라미터 매핑
+	typeArgs := extractTypeArgs(cls, src)
+	typeParams := extractTypeParams(innerCls, baseSrc)
+	if len(typeArgs) > 0 && len(typeParams) > 0 {
+		n := len(typeParams)
+		if len(typeArgs) < n {
+			n = len(typeArgs)
+		}
+		typeMap := make(map[string]string, n)
+		for i := 0; i < n; i++ {
+			typeMap[typeParams[i]] = typeArgs[i]
+		}
+		substituteTypes(endpoints, typeMap)
+	}
+
+	return endpoints
 }

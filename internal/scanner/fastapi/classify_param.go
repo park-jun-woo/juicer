@@ -12,7 +12,7 @@ import (
 // aliasMap maps type alias names (e.g. "SessionDep") to their Depends function
 // names, built by resolveTypeAliases.
 func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[string]bool, aliasMap map[string]string) {
-	name, typeName, defaultVal, defaultCall := parseParamNode(param, src)
+	name, typeName, defaultVal, defaultCall, isNone := parseParamNode(param, src)
 	if name == "" || name == "self" || name == "cls" {
 		return
 	}
@@ -31,6 +31,8 @@ func classifyParam(param *sitter.Node, src []byte, ri *routeInfo, pathNames map[
 		ri.bodyVarName = name
 	case defaultVal != "":
 		ri.query = append(ri.query, scanner.Param{Name: name, Type: mapTypeToOpenAPI(typeName), Default: defaultVal})
+	case isNone:
+		ri.query = append(ri.query, scanner.Param{Name: name, Type: mapTypeToOpenAPI(typeName), DefaultIsNull: true})
 	case typeName != "":
 		ri.query = append(ri.query, scanner.Param{Name: name, Type: mapTypeToOpenAPI(typeName)})
 	}

@@ -5,7 +5,7 @@ package nestjs
 import sitter "github.com/smacker/go-tree-sitter"
 
 // extractMethodParams parses formal parameters of a method_definition.
-func extractMethodParams(m *sitter.Node, src []byte) methodParams {
+func extractMethodParams(m *sitter.Node, src []byte, routePath string) methodParams {
 	var result methodParams
 	params := findChildByType(m, "formal_parameters")
 	if params == nil {
@@ -15,7 +15,7 @@ func extractMethodParams(m *sitter.Node, src []byte) methodParams {
 		child := params.Child(i)
 		switch child.Type() {
 		case "required_parameter", "optional_parameter":
-			extractOneParam(child, src, &result)
+			extractOneParam(child, src, routePath, &result)
 		}
 	}
 	return result

@@ -9,10 +9,7 @@ func extractOneProperty(prop *sitter.Node, src []byte) dtoField {
 	var f dtoField
 	decorators := propertyDecorators(prop, src)
 	for _, d := range decorators {
-		f.validators = append(f.validators, d.name)
-		if d.name == "IsOptional" {
-			f.optional = true
-		}
+		applyDecoratorToField(d, prop, src, &f)
 	}
 	for i := 0; i < int(prop.ChildCount()); i++ {
 		child := prop.Child(i)

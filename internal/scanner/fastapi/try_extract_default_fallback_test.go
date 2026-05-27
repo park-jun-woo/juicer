@@ -16,7 +16,7 @@ func tryExtractDefaultFallback(t *testing.T) bool {
 	}
 	for i := 0; i < int(dp.ChildCount()); i++ {
 		child := dp.Child(i)
-		val, _ := tryExtractDefault(child, src2)
+		val, _, _ := tryExtractDefault(child, src2)
 		if val == "5" {
 			return true
 		}

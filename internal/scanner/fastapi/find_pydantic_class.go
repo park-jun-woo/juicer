@@ -19,7 +19,7 @@ func findPydanticClass(root *sitter.Node, src []byte, className string) []scanne
 		if nodeText(nameNode, src) != className {
 			continue
 		}
-		if !isBaseModelSubclass(cls, src) {
+		if !isBaseModelSubclass(cls, root, src) {
 			continue
 		}
 		fields := extractPydanticFields(cls, src)

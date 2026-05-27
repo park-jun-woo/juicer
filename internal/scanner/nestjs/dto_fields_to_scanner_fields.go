@@ -2,24 +2,13 @@
 //ff:what DTO 필드 목록을 scanner.Field 목록으로 변환한다
 package nestjs
 
-import (
-	"strings"
-
-	"github.com/park-jun-woo/juicer/internal/scanner"
-)
+import "github.com/park-jun-woo/juicer/internal/scanner"
 
 // dtoFieldsToScannerFields converts extracted DTO fields to scanner.Field.
 func dtoFieldsToScannerFields(fields []dtoField) []scanner.Field {
 	var result []scanner.Field
 	for _, f := range fields {
-		sf := tsTypeToField(f.name, f.tsType, f.optional)
-		if len(f.validators) > 0 {
-			sf.Validate = strings.Join(f.validators, ",")
-		}
-		if hasIsEnum(f.validators) {
-			sf.Type = "string"
-		}
-		result = append(result, sf)
+		result = append(result, convertOneDtoField(f))
 	}
 	return result
 }

@@ -37,6 +37,7 @@ func extractDTO(filePath, className string, imports map[string]string, projectRo
 		}
 		cache[className] = nil
 		directFields := extractClassProperties(cls, src)
+		resolveEnumTypeNames(directFields, root, src, filePath, merged, projectRoot)
 		parentFields := resolveDTOExtends(cls, src, filePath, merged, projectRoot, cache)
 		combined := mergeFields(parentFields, directFields)
 		result := dtoFieldsToScannerFields(combined)
