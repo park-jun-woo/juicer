@@ -4,7 +4,7 @@ package gogin
 
 import (
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // buildField creates a Field from a struct field and tag. Returns nil if the field should be excluded (json:"-").

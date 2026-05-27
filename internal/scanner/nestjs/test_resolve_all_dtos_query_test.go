@@ -5,7 +5,7 @@ package nestjs
 import (
 	"testing"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestResolveAllDTOs_Query(t *testing.T) {

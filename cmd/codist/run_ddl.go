@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/internal/ddl"
+	"github.com/park-jun-woo/codistill/internal/ddl"
 )
 
 func runDDL(args []string) {

@@ -2,7 +2,7 @@
 //ff:what 모든 파일에서 엔드포인트와 모델 요청을 수집한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // collectEndpoints extracts endpoints and model requests from all parsed files.
 func collectEndpoints(files []fileInfo) ([]scanner.Endpoint, []modelRequest) {

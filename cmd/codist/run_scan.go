@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
-	"github.com/park-jun-woo/juicer/internal/scanner/fastapi"
-	"github.com/park-jun-woo/juicer/internal/scanner/gogin"
-	"github.com/park-jun-woo/juicer/internal/scanner/nestjs"
+	"github.com/park-jun-woo/codistill/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner/fastapi"
+	"github.com/park-jun-woo/codistill/internal/scanner/gogin"
+	"github.com/park-jun-woo/codistill/internal/scanner/nestjs"
 )
 
 func runScan(args []string) {

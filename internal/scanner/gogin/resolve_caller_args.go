@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func resolveCallerArgs(fnDecl *ast.FuncDecl, call *ast.CallExpr, callerInfo *types.Info, calleeInfo *types.Info) (status string, typeName string, fields []scanner.Field, confidence string) {

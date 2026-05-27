@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func scanBody(ep *scanner.Endpoint, body *ast.BlockStmt, ctxName string, info *types.Info, idx *funcIndex, source string) {

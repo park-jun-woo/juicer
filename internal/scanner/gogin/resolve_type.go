@@ -4,7 +4,7 @@ package gogin
 
 import (
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func resolveType(t types.Type) (typeName string, fields []scanner.Field) {

@@ -2,7 +2,7 @@
 //ff:what routeInfo로 scanner.Request를 생성한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // buildRequest creates a scanner.Request from route info.
 func buildRequest(ri routeInfo) *scanner.Request {

@@ -8,7 +8,7 @@ import (
 	"sort"
 
 	"golang.org/x/tools/go/packages"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func extractRoutes(pkgs []*packages.Package, root string) ([]scanner.Endpoint, map[int][]ast.Expr) {

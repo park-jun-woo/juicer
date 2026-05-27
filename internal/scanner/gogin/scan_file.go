@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/token"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func scanFile(file *ast.File, filePath string, fset *token.FileSet) ([]scanner.Endpoint, map[int][]ast.Expr) {

@@ -7,7 +7,7 @@ import (
 	"go/token"
 	"go/types"
 	"testing"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestScanBody_NilBody(t *testing.T) {

@@ -4,7 +4,7 @@ package gogin
 
 import (
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func resolveNestedFields(t types.Type, visited map[string]bool) []scanner.Field {

@@ -2,7 +2,7 @@
 //ff:what 데코레이터 목록을 해석하여 파라미터 종류별로 결과에 추가한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // applyParamDecorators dispatches each decorator into the appropriate result bucket.
 func applyParamDecorators(decorators []decoratorInfo, paramName, paramType, routePath string, result *methodParams) {

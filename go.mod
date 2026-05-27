@@ -1,4 +1,4 @@
-module github.com/park-jun-woo/juicer
+module github.com/park-jun-woo/codistill
 
 go 1.25.0
 

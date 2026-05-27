@@ -6,7 +6,7 @@ import (
 	"go/ast"
 	"go/token"
 	"testing"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestHandlePathParam_Duplicate(t *testing.T) {

@@ -9,7 +9,7 @@ import (
 
 func TestRunSkip_WithSessionCov(t *testing.T) {
 	dir := t.TempDir()
-	sessionDir := dir + "/.juicer"
+	sessionDir := dir + "/.codist"
 	os.MkdirAll(sessionDir, 0o755)
 	os.WriteFile(sessionDir+"/sql-session.json", []byte(`{"repo_dir":"/tmp","queries_dir":"/tmp","methods":[{"id":"R.M","status":"TODO"}]}`), 0o644)
 	oldWd, _ := os.Getwd()

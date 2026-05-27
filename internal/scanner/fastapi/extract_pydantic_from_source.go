@@ -2,7 +2,7 @@
 //ff:what 소스 바이트에서 Pydantic 모델 필드를 추출한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // extractPydanticModelFromSource extracts Pydantic model fields from source bytes.
 func extractPydanticModelFromSource(src []byte, className string) ([]scanner.Field, error) {

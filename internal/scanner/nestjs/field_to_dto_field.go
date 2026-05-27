@@ -5,7 +5,7 @@ package nestjs
 import (
 	"strings"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // fieldToDTOField converts a scanner.Field to a dtoField, preserving all metadata.

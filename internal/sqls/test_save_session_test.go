@@ -28,7 +28,7 @@ func TestSaveSession(t *testing.T) {
 	}
 
 	// Verify file exists
-	if _, err := os.Stat(filepath.Join(".juicer", "sql-session.json")); err != nil {
+	if _, err := os.Stat(filepath.Join(".codist", "sql-session.json")); err != nil {
 		t.Errorf("session file not found: %v", err)
 	}
 

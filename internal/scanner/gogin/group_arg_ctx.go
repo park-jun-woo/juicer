@@ -8,7 +8,7 @@ import (
 	"go/types"
 
 	"golang.org/x/tools/go/packages"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // groupArgCtx holds context for resolving inline Group() arguments in function calls.

@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/token"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func walkStmts(stmts []ast.Stmt, ginAlias, filePath string, fset *token.FileSet, routers map[string]*routerInfo, out *[]scanner.Endpoint, hmap map[int][]ast.Expr) {

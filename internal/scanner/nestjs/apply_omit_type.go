@@ -2,7 +2,7 @@
 //ff:what OmitType 변환을 적용하여 지정 필드를 제외한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // applyOmitType excludes specified fields.
 func applyOmitType(fields []scanner.Field, omitNames []string) []dtoField {

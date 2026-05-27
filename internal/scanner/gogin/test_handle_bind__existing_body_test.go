@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"testing"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestHandleBind_ExistingBody(t *testing.T) {

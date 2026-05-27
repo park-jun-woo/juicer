@@ -5,7 +5,7 @@ package fastapi
 import (
 	"path/filepath"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // resolveModelFields resolves a single model type to its fields.

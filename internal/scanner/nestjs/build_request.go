@@ -2,7 +2,7 @@
 //ff:what endpointInfo로 scanner.Request를 생성한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // buildRequest creates a scanner.Request from endpoint info.
 func buildRequest(ep endpointInfo) *scanner.Request {

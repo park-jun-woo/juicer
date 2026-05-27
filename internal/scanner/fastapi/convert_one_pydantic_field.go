@@ -2,7 +2,7 @@
 //ff:what 단일 pydanticField를 scanner.Field로 변환한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // convertOnePydanticField converts a single pydanticField to scanner.Field.
 func convertOnePydanticField(f pydanticField) scanner.Field {

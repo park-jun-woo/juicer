@@ -2,7 +2,7 @@
 //ff:what PartialType 변환을 적용하여 모든 필드를 optional로 만든다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // applyPartialType makes all fields optional.
 func applyPartialType(fields []scanner.Field) []dtoField {

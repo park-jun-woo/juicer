@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func rescanCalleeWithPrefixDepth(call *ast.CallExpr, argIdx int, prefix string, parent *routerInfo, ctx *groupArgCtx, depth int) {

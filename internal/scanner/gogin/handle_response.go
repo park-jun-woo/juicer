@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func handleResponse(ep *scanner.Endpoint, call *ast.CallExpr, kind string, info *types.Info, source string) {

@@ -2,7 +2,7 @@
 //ff:what TypeScript 타입을 scanner.Field로 변환한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // tsTypeToField converts a TypeScript type to a scanner.Field.
 func tsTypeToField(name, tsType string, optional bool) scanner.Field {

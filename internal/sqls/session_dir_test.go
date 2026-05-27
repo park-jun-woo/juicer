@@ -6,7 +6,7 @@ import "testing"
 
 func TestSessionDir_ReturnsDir(t *testing.T) {
 	got := SessionDir()
-	if got != ".juicer" {
-		t.Fatalf("expected .juicer, got %s", got)
+	if got != ".codist" {
+		t.Fatalf("expected .codist, got %s", got)
 	}
 }

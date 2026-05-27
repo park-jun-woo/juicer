@@ -5,7 +5,7 @@ package nestjs
 import (
 	"strconv"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // buildResponse creates a scanner.Response from endpoint info.

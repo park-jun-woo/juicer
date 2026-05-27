@@ -10,8 +10,8 @@ import (
 
 func TestRunStatus_LoadError(t *testing.T) {
 	dir := setupSessionDir(t)
-	os.MkdirAll(filepath.Join(dir, ".juicer"), 0o755)
-	os.WriteFile(filepath.Join(dir, ".juicer", "sql-session.json"), []byte("bad"), 0o644)
+	os.MkdirAll(filepath.Join(dir, ".codist"), 0o755)
+	os.WriteFile(filepath.Join(dir, ".codist", "sql-session.json"), []byte("bad"), 0o644)
 
 	err := RunStatus()
 	if err == nil {

@@ -2,7 +2,7 @@
 //ff:what pydanticField 슬라이스를 scanner.Field 슬라이스로 변환한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // pydanticFieldsToScannerFields converts pydantic fields to scanner.Field.
 func pydanticFieldsToScannerFields(fields []pydanticField) []scanner.Field {

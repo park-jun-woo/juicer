@@ -2,7 +2,7 @@
 //ff:what 단일 컨트롤러에서 엔드포인트와 DTO 요청 목록을 생성한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // buildControllerEndpoints builds endpoints for a single controller.
 // baseIdx is the current length of the global endpoints slice for correct DTO indexing.

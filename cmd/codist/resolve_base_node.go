@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 	"gopkg.in/yaml.v3"
 )
 

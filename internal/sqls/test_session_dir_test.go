@@ -8,7 +8,7 @@ import (
 
 func TestSessionDir(t *testing.T) {
 	got := SessionDir()
-	if got != ".juicer" {
-		t.Errorf("expected '.juicer', got %q", got)
+	if got != ".codist" {
+		t.Errorf("expected '.codist', got %q", got)
 	}
 }

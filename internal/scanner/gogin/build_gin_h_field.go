@@ -6,7 +6,7 @@ import (
 	"go/ast"
 	"go/token"
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // buildGinHField creates a Field from a gin.H key-value pair. Returns nil if the element is not a KV or has no key.

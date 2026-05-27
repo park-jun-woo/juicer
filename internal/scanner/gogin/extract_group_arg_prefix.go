@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func extractGroupArgPrefix(arg ast.Expr, ctx *groupArgCtx) (string, *routerInfo, bool) {

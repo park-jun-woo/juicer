@@ -3,7 +3,7 @@
 package gogin
 
 import (
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func buildEndpointIndex(endpoints []scanner.Endpoint) map[struct{ file string; line int }]int {

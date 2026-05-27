@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // extractDTO parses a DTO source file and extracts the class with the given name.

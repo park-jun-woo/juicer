@@ -5,7 +5,7 @@ package nestjs
 import (
 	"path/filepath"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // resolveDTOFields resolves a DTO type to its fields.

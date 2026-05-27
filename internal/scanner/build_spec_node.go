@@ -42,7 +42,7 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 	infoNode := &yaml.Node{Kind: yaml.MappingNode}
 	infoNode.Content = append(infoNode.Content,
 		&yaml.Node{Kind: yaml.ScalarNode, Value: "title"},
-		&yaml.Node{Kind: yaml.ScalarNode, Value: "API (extracted by juicer)", Style: yaml.DoubleQuotedStyle},
+		&yaml.Node{Kind: yaml.ScalarNode, Value: "API (extracted by codist)", Style: yaml.DoubleQuotedStyle},
 		&yaml.Node{Kind: yaml.ScalarNode, Value: "version"},
 		&yaml.Node{Kind: yaml.ScalarNode, Value: "0.0.0", Style: yaml.DoubleQuotedStyle},
 	)

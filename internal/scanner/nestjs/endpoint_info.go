@@ -2,7 +2,7 @@
 //ff:what 엔드포인트 추출 중간 결과 구조체
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // endpointInfo holds a single extracted endpoint before DTO resolution.
 type endpointInfo struct {

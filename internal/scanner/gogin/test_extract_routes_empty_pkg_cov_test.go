@@ -7,7 +7,7 @@ import (
 	"go/token"
 	"testing"
 	"golang.org/x/tools/go/packages"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestExtractRoutes_EmptyPkgCov(t *testing.T) {

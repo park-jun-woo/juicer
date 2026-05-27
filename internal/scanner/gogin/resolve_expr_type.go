@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/ast"
 	"go/types"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func resolveExprType(expr ast.Expr, info *types.Info) (typeName string, fields []scanner.Field) {

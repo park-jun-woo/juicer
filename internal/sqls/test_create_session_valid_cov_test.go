@@ -13,7 +13,7 @@ func TestCreateSession_ValidCov(t *testing.T) {
 	queriesDir := dir + "/queries"
 	os.MkdirAll(repoDir, 0o755)
 	os.MkdirAll(queriesDir, 0o755)
-	sessionDir := dir + "/.juicer"
+	sessionDir := dir + "/.codist"
 	os.MkdirAll(sessionDir, 0o755)
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)

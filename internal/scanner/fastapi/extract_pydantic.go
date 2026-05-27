@@ -5,7 +5,7 @@ package fastapi
 import (
 	"os"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // extractPydanticModel parses a source file and extracts fields from a Pydantic

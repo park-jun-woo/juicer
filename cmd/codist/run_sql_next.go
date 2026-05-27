@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/park-jun-woo/juicer/internal/sqls"
+	"github.com/park-jun-woo/codistill/internal/sqls"
 )
 
 func runSQLNext(args []string) {

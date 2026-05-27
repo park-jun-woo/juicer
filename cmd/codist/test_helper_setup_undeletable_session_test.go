@@ -13,7 +13,7 @@ import (
 func helperSetupUndeletableSession(t *testing.T) (string, func()) {
 	t.Helper()
 	dir := t.TempDir()
-	sessionDir := filepath.Join(dir, ".juicer")
+	sessionDir := filepath.Join(dir, ".codist")
 	os.MkdirAll(sessionDir, 0o755)
 	os.WriteFile(filepath.Join(sessionDir, "sql-session.json"), []byte(`{"repo_dir":".","queries_dir":".","methods":[]}`), 0o644)
 	// Make the directory read-only so file removal fails

@@ -21,7 +21,7 @@ func main() {
 	case "sql":
 		runSQL(os.Args[2:])
 	case "version":
-		fmt.Printf("juicer %s\n", Version)
+		fmt.Printf("codist %s\n", Version)
 	default:
 		printUsage()
 		os.Exit(1)

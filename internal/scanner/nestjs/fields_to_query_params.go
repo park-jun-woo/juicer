@@ -2,7 +2,7 @@
 //ff:what scanner.Field 목록을 쿼리 파라미터 목록으로 변환한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // fieldsToQueryParams converts scanner.Field slice to scanner.Param slice for query parameters.
 func fieldsToQueryParams(fields []scanner.Field) []scanner.Param {

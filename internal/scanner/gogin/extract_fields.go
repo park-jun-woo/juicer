@@ -5,7 +5,7 @@ package gogin
 import (
 	"go/types"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func extractFields(st *types.Struct, visited map[string]bool) []scanner.Field {

@@ -76,7 +76,7 @@ func RunNext(repoDir, queriesDir string) error {
 		if stderr != "" {
 			fmt.Printf("  %s\n", stderr)
 		}
-		fmt.Printf("  ▶ Fix the query. Next \"juicer sql next\" will re-verify.\n")
+		fmt.Printf("  ▶ Fix the query. Next \"codist sql next\" will re-verify.\n")
 	}
 	return nil
 }

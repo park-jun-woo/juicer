@@ -2,7 +2,7 @@
 //ff:what 추출된 라우트 정보 구조체
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // routeInfo holds information extracted from a decorated route function.
 type routeInfo struct {

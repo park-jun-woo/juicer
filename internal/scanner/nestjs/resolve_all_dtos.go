@@ -2,7 +2,7 @@
 //ff:what 수집된 DTO 요청 목록을 해석하여 엔드포인트에 필드를 채운다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // resolveAllDTOs resolves all DTO types and fills fields into endpoints.
 func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) {

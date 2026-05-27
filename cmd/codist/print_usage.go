@@ -8,18 +8,18 @@ import (
 )
 
 func printUsage() {
-	fmt.Fprintf(os.Stderr, `juicer - Go Gin Endpoint Finder
+	fmt.Fprintf(os.Stderr, `codist - Extract structured specs from web framework source code
 
 Usage:
-  juicer scan [project-root] [flags]
-  juicer ddl [migrations-dir] [flags]
-  juicer sql [repository-dir] [flags]
-  juicer sql next [--repo DIR --queries DIR]
-  juicer sql status
-  juicer sql list
-  juicer sql skip
-  juicer sql reset
-  juicer version
+  codist scan [project-root] [flags]
+  codist ddl [migrations-dir] [flags]
+  codist sql [repository-dir] [flags]
+  codist sql next [--repo DIR --queries DIR]
+  codist sql status
+  codist sql list
+  codist sql skip
+  codist sql reset
+  codist version
 
 scan flags:
   --json      output JSON

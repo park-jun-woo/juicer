@@ -11,8 +11,8 @@ import (
 func TestRunNext_LoadSessionError(t *testing.T) {
 	dir := setupSessionDir(t)
 	// Create session file with invalid JSON
-	os.MkdirAll(filepath.Join(dir, ".juicer"), 0o755)
-	os.WriteFile(filepath.Join(dir, ".juicer", "sql-session.json"), []byte("invalid json"), 0o644)
+	os.MkdirAll(filepath.Join(dir, ".codist"), 0o755)
+	os.WriteFile(filepath.Join(dir, ".codist", "sql-session.json"), []byte("invalid json"), 0o644)
 
 	err := RunNext("", "")
 	if err == nil {

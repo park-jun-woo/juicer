@@ -2,7 +2,7 @@
 //ff:what routeInfo로 scanner.Endpoint를 생성한다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // buildEndpoint creates a scanner.Endpoint from a routeInfo.
 func buildEndpoint(ri routeInfo) scanner.Endpoint {

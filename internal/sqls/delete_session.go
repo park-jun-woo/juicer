@@ -1,5 +1,5 @@
 //ff:func feature=sql type=parse control=sequence
-//ff:what .juicer 세션 파일 삭제
+//ff:what .codist 세션 파일 삭제
 package sqls
 
 import (

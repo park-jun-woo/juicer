@@ -6,7 +6,7 @@ import (
 	"go/ast"
 	"testing"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestAnalyzeHandlers_Empty(t *testing.T) {

@@ -2,7 +2,7 @@
 //ff:what 수집된 모델 요청 목록을 해석하여 엔드포인트에 필드를 채운다
 package fastapi
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // resolveAllModels resolves Pydantic model types and fills fields into endpoints.
 func resolveAllModels(reqs []modelRequest, endpoints []scanner.Endpoint, files []fileInfo) {

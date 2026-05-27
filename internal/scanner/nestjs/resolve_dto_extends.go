@@ -3,7 +3,7 @@
 package nestjs
 
 import (
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 	sitter "github.com/smacker/go-tree-sitter"
 )
 

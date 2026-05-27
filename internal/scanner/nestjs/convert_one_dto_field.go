@@ -2,7 +2,7 @@
 //ff:what 단일 dtoField를 scanner.Field로 변환한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // convertOneDtoField converts a single dtoField to scanner.Field.
 func convertOneDtoField(f dtoField) scanner.Field {

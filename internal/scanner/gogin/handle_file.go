@@ -4,7 +4,7 @@ package gogin
 
 import (
 	"go/ast"
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func handleFile(ep *scanner.Endpoint, call *ast.CallExpr) {

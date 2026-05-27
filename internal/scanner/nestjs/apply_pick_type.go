@@ -2,7 +2,7 @@
 //ff:what PickType 변환을 적용하여 지정 필드만 포함한다
 package nestjs
 
-import "github.com/park-jun-woo/juicer/internal/scanner"
+import "github.com/park-jun-woo/codistill/internal/scanner"
 
 // applyPickType includes only specified fields.
 func applyPickType(fields []scanner.Field, pickNames []string) []dtoField {

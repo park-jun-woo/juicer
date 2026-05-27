@@ -18,8 +18,8 @@ func TestSessionExists(t *testing.T) {
 		t.Error("expected false for non-existent session")
 	}
 
-	os.MkdirAll(".juicer", 0o755)
-	os.WriteFile(filepath.Join(".juicer", "sql-session.json"), []byte("{}"), 0o644)
+	os.MkdirAll(".codist", 0o755)
+	os.WriteFile(filepath.Join(".codist", "sql-session.json"), []byte("{}"), 0o644)
 
 	if !SessionExists() {
 		t.Error("expected true for existing session")

@@ -5,7 +5,7 @@ package nestjs
 import (
 	"path/filepath"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // resolveParentDTOFields resolves a parent DTO by name and returns scanner.Field slice.

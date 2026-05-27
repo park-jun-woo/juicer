@@ -5,7 +5,7 @@ package fastapi
 import (
 	"testing"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func TestHasContent(t *testing.T) {

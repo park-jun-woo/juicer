@@ -12,7 +12,7 @@ import (
 func TestRunSQLNext_RunNextError(t *testing.T) {
 	if os.Getenv("TEST_SUBPROCESS_SQLNEXT_ERR") == "1" {
 		dir := t.TempDir()
-		sessionDir := filepath.Join(dir, ".juicer")
+		sessionDir := filepath.Join(dir, ".codist")
 		os.MkdirAll(sessionDir, 0o755)
 		os.WriteFile(filepath.Join(sessionDir, "sql-session.json"), []byte("INVALID"), 0o644)
 		oldWd, _ := os.Getwd()

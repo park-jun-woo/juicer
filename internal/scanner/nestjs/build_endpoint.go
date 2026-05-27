@@ -5,7 +5,7 @@ package nestjs
 import (
 	"strings"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // buildEndpoint creates a scanner.Endpoint from controller + endpoint info.

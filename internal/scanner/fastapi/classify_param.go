@@ -5,7 +5,7 @@ package fastapi
 import (
 	sitter "github.com/smacker/go-tree-sitter"
 
-	"github.com/park-jun-woo/juicer/internal/scanner"
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 // classifyParam classifies a single function parameter.
