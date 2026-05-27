@@ -4,7 +4,7 @@ description: Static analysis tool that extracts OpenAPI specs, DDL schemas, and 
 license: MIT
 metadata:
   author: park-jun-woo
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # juicer — Extract structured specs from web framework source code

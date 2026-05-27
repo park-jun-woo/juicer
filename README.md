@@ -4,7 +4,7 @@
   <img src="juicer.webp" alt="juicer — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.0-blue.svg)](https://github.com/park-jun-woo/juicer/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.1-blue.svg)](https://github.com/park-jun-woo/juicer/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/juicer)](https://skills.sh/park-jun-woo/juicer)
 
@@ -120,6 +120,37 @@ juicer sql [flags] [repository-dir]
   --json      Output JSON (default YAML)
   -o string   Output file path
 ```
+
+## Changelog
+
+### v0.1.1
+
+- OpenAPI `$ref` schema generation for named types (placeholder when fields unavailable)
+- Unique `operationId` for inherited controllers (path prefix dedup)
+- `required`/`enum`/`minLength`/`maxLength`/`minimum`/`maximum` constraints in OpenAPI
+- `default: None` → `null` conversion for FastAPI query params
+- NestJS generic type substitution in BaseController factory pattern
+- OpenAPI `securitySchemes` + per-endpoint `security` from Guard/Depends
+- `OmitType([...] as const)` array extraction fix
+- `setGlobalPrefix` detection in non-main.ts files
+- FastAPI `include_router(module.router)` attribute childVar support
+- Primitive type inline schema (`bool` → `type: boolean`, not `$ref`)
+- Pydantic/SQLModel inheritance field merging (parent → child)
+- Multi-hop `include_router` prefix propagation with convergence loop
+- DTO factory (`OmitType`/`PartialType`) optional/validate preservation
+- `@Param()` keyless pattern → path template variable name extraction
+- `@IsEnum(TaskStatus)` → cross-file enum member value extraction
+- FastAPI `required` array from `hasDefault` + `Field(default=...)` analysis
+- NestJS barrel `export * from` re-export DTO resolution
+- Comma-separated `from ... import a, b, c` dotted_name parsing fix
+
+### v0.1.0
+
+- Initial release
+- Go+Gin, NestJS, FastAPI endpoint extraction
+- OpenAPI 3.0 spec generation with base spec merging
+- DDL migration parsing (CREATE/ALTER/DROP TABLE)
+- SQL query scaffolding with ratchet workflow
 
 ## License
 
