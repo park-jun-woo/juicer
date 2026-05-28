@@ -22,7 +22,7 @@ Usage:
   codist version
 
 scan flags:
-  --framework string  framework to scan (gogin, nestjs, fastapi, spring)
+  --framework string  framework to scan (gogin, nestjs, fastapi, express, spring)
   --json              output JSON
   --openapi           output OpenAPI 3.0 YAML
   -o string           output file path

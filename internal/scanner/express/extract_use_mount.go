@@ -1,0 +1,31 @@
+//ff:func feature=scan type=extract control=sequence topic=express
+//ff:what 단일 call_expression에서 app.use("/prefix", routerVar) 패턴을 감지하고 마운트 정보를 반환한다
+package express
+
+import sitter "github.com/smacker/go-tree-sitter"
+
+func extractUseMount(call *sitter.Node, src []byte, routers map[string]bool, imports map[string]string) *useMount {
+	mem := findChildByType(call, "member_expression")
+	if mem == nil {
+		return nil
+	}
+	obj := findChildByType(mem, "identifier")
+	if obj == nil {
+		return nil
+	}
+	if !routers[nodeText(obj, src)] {
+		return nil
+	}
+	prop := mem.ChildByFieldName("property")
+	if prop == nil {
+		return nil
+	}
+	if nodeText(prop, src) != "use" {
+		return nil
+	}
+	args := findChildByType(call, "arguments")
+	if args == nil {
+		return nil
+	}
+	return parseUseMountArgs(args, src, imports)
+}
