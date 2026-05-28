@@ -22,7 +22,7 @@ defaultRoutes.forEach((r) => {
 });
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	imports := map[string]string{
 		"authRoute": "/abs/routes/auth.ts",
 		"userRoute": "/abs/routes/users.ts",

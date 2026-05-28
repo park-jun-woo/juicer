@@ -12,7 +12,7 @@ export default (router) => {
 };
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	if !routers["router"] {
 		t.Errorf("expected 'router' in routers via usage fallback, got %v", routers)
 	}

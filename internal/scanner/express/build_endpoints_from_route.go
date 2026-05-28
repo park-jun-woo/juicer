@@ -4,14 +4,14 @@ package express
 
 import "github.com/park-jun-woo/codistill/internal/scanner"
 
-func buildEndpointsFromRoute(r routeInfo, prefix, relPath string) []scanner.Endpoint {
+func buildEndpointsFromRoute(r routeInfo, prefix, relPath string, ctx *scanContext, fi *fileInfo) []scanner.Endpoint {
 	methods := expandAllMethod(r.Method)
 	fullPath := joinExpressPath(prefix, r.Path)
 	oaPath := expressPathToOpenAPI(fullPath)
 	pathParams := extractPathParams(fullPath)
 	var endpoints []scanner.Endpoint
 	for _, method := range methods {
-		ep := buildOneEndpoint(method, oaPath, r, relPath, pathParams)
+		ep := buildOneEndpoint(method, oaPath, r, relPath, pathParams, ctx, fi)
 		endpoints = append(endpoints, ep)
 	}
 	return endpoints

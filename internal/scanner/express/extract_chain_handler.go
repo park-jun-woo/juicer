@@ -4,16 +4,17 @@ package express
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-func extractChainHandlerAndMiddleware(call *sitter.Node, src []byte) (string, []string) {
+func extractChainHandlerAndMiddleware(call *sitter.Node, src []byte) (string, []string, *sitter.Node, string, []string) {
 	args := findChildByType(call, "arguments")
 	if args == nil {
-		return "", nil
+		return "", nil, nil, "public", nil
 	}
 	argNodes := collectArgNodes(args)
 	if len(argNodes) == 0 {
-		return "", nil
+		return "", nil, nil, "public", nil
 	}
-	handler := extractHandlerName(argNodes[len(argNodes)-1], src)
+	lastArg := argNodes[len(argNodes)-1]
+	handler := extractHandlerName(lastArg, src)
 	var middleware []string
 	for i := 0; i < len(argNodes)-1; i++ {
 		mw := extractMiddlewareName(argNodes[i], src)
@@ -21,5 +22,6 @@ func extractChainHandlerAndMiddleware(call *sitter.Node, src []byte) (string, []
 			middleware = append(middleware, mw)
 		}
 	}
-	return handler, middleware
+	authLevel, roles := extractAuthFromMiddlewareNodes(argNodes[:len(argNodes)-1], src)
+	return handler, middleware, lastArg, authLevel, roles
 }

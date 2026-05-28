@@ -1,0 +1,26 @@
+//ff:func feature=scan type=test control=iteration dimension=1 topic=django
+//ff:what Django URL 패턴을 OpenAPI 형식으로 변환한다
+package django
+
+import "testing"
+
+func TestDjangoURLToOpenAPI(t *testing.T) {
+	tests := []struct {
+		input string
+		want  string
+	}{
+		{"users/<int:pk>/", "users/{pk}/"},
+		{"users/<int:pk>/posts/<int:post_id>/", "users/{pk}/posts/{post_id}/"},
+		{"users/<str:slug>/", "users/{slug}/"},
+		{"users/<uuid:id>/", "users/{id}/"},
+		{"health/", "health/"},
+		{"", ""},
+	}
+
+	for _, tt := range tests {
+		got := djangoURLToOpenAPI(tt.input)
+		if got != tt.want {
+			t.Errorf("djangoURLToOpenAPI(%q) = %q, want %q", tt.input, got, tt.want)
+		}
+	}
+}

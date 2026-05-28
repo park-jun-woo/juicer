@@ -3,7 +3,8 @@
 package express
 
 type useMount struct {
-	Prefix   string
-	VarName  string
-	FilePath string
+	Prefix       string
+	VarName      string
+	FilePath     string
+	SourceRouter string
 }

@@ -13,6 +13,6 @@ func unwrapChainBase(routeCall, outerCall *sitter.Node, propName string, src []b
 	if !ok {
 		return "", nil
 	}
-	handler, mw := extractChainHandlerAndMiddleware(outerCall, src)
-	return path, []chainMethod{{method: upperMethod, handler: handler, middleware: mw, line: int(outerCall.StartPoint().Row) + 1}}
+	handler, mw, hNode, authLevel, roles := extractChainHandlerAndMiddleware(outerCall, src)
+	return path, []chainMethod{{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles}}
 }

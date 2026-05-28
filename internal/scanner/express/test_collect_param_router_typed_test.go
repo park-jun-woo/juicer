@@ -12,7 +12,7 @@ export default (router: express.Router) => {
 };
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	if !routers["router"] {
 		t.Errorf("expected 'router' in routers, got %v", routers)
 	}

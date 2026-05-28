@@ -10,7 +10,7 @@ const app = express();
 app.get("/admin", authMiddleware, validateRole, adminHandler);
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	routes := extractRoutes(fi, routers)
 	if len(routes) != 1 {
 		t.Fatalf("expected 1 route, got %d", len(routes))

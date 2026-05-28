@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.3-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.4-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -40,21 +40,41 @@ codist scan --openapi ./my-project
 | Framework | Language | Status |
 |---|---|---|
 | **Go + Gin** | Go | Stable — `go/ast` + `go/types`, oapi-codegen `.gen.go` supported |
+| **Fiber** | Go | Stable — tree-sitter, `fiber.New()` + `app.Get()` routing |
+| **Echo** | Go | Stable — tree-sitter, `echo.New()` + `e.GET()` routing |
 | **NestJS** | TypeScript | Stable — tree-sitter, decorator-based extraction |
+| **Fastify** | TypeScript | Stable — tree-sitter, `fastify.get()` + schema-based validation |
+| **Hono** | TypeScript | Stable — tree-sitter, `app.get()` routing with middleware |
 | **FastAPI** | Python | Stable — tree-sitter, Pydantic model extraction |
-| **Spring Boot** | Java | Stable — tree-sitter, annotation-based extraction |
+| **Flask** | Python | Stable — tree-sitter, `@app.route()` decorator extraction |
+| **Django** | Python | Stable — tree-sitter, `urlpatterns` + `ViewSet` extraction |
 | **Express** | TypeScript | Stable — tree-sitter, function-call routing, cross-file router mount |
+| **Spring Boot** | Java | Stable — tree-sitter, annotation-based extraction |
+| **Quarkus** | Java | Stable — tree-sitter, JAX-RS annotation extraction |
+| **ASP.NET Core** | C# | Stable — tree-sitter, `[HttpGet]`/`[Route]` attribute extraction |
 | **Supabase Edge Functions** | Deno TypeScript | Stable — file-system routing, `serve()`/`Deno.serve()` extraction |
+| **Actix Web** | Rust | Stable — tree-sitter, `#[get]`/`web::resource()` macro extraction |
+| **Laravel** | PHP | Stable — tree-sitter, `Route::get()` + resource controller extraction |
 
-Framework is auto-detected from `go.mod`, `package.json`, `requirements.txt`, `pom.xml`/`build.gradle`, or `supabase/functions/`. Override with `--framework`:
+Framework is auto-detected from `go.mod`, `package.json`, `requirements.txt`, `pom.xml`/`build.gradle`, `*.csproj`, `Cargo.toml`, `composer.json`, or `supabase/functions/`. Override with `--framework`:
 
 ```bash
 codist scan --framework gogin ./project
+codist scan --framework fiber ./project
+codist scan --framework echo ./project
 codist scan --framework nestjs ./project
+codist scan --framework fastify ./project
+codist scan --framework hono ./project
 codist scan --framework fastapi ./project
-codist scan --framework spring ./project
+codist scan --framework flask ./project
+codist scan --framework django ./project
 codist scan --framework express ./project
+codist scan --framework spring ./project
+codist scan --framework quarkus ./project
+codist scan --framework dotnet ./project
 codist scan --framework supafunc ./project
+codist scan --framework actix ./project
+codist scan --framework laravel ./project
 ```
 
 ## Usage
@@ -113,7 +133,7 @@ codist scan [flags] [project-root]
 
   --openapi       Output OpenAPI 3.0 YAML
   --json          Output JSON
-  --framework     Framework override (gogin, nestjs, fastapi, spring, express, supafunc)
+  --framework     Framework override (gogin, fiber, echo, nestjs, fastify, hono, fastapi, flask, django, express, spring, quarkus, dotnet, supafunc, actix, laravel)
   --base string   Base OpenAPI spec to merge with
   -o string       Write to file instead of stdout
 
@@ -128,6 +148,23 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.4
+
+- **10 new framework scanners** — Flask, Fiber, Echo, Fastify, Hono, Quarkus, Django, ASP.NET Core, Laravel, Actix Web (total 16 frameworks)
+- Flask (Python) — `@app.route()` decorator extraction, Blueprint support
+- Fiber (Go) — `fiber.New()` + `app.Get()` routing, group prefix propagation
+- Echo (Go) — `echo.New()` + `e.GET()` routing, group middleware
+- Fastify (TypeScript) — `fastify.get()` routing, JSON Schema validation extraction
+- Hono (TypeScript) — `app.get()` routing with middleware chain
+- Quarkus (Java) — JAX-RS `@Path`/`@GET`/`@POST` annotation extraction
+- Django (Python) — `urlpatterns` + `ViewSet` + `@api_view` extraction
+- ASP.NET Core (C#) — `[HttpGet]`/`[Route]` attribute extraction, controller routing
+- Laravel (PHP) — `Route::get()` + resource controller + Form Request validation
+- Actix Web (Rust) — `#[get]`/`#[post]` macro routes + `web::resource().route()` builder pattern
+- Express Zod body extraction — `validateRequest({ body: Schema })` middleware → request body schema
+- Express response extraction — `res.status(N).json()` / `res.sendStatus(N)` → response status + kind
+- Express security middleware mapping — `authenticate`/`authorize('admin')` → OpenAPI `security` + roles
 
 ### v0.1.3
 

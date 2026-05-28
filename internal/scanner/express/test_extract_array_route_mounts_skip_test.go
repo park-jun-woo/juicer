@@ -15,7 +15,7 @@ importedRoutes.forEach((r) => {
 });
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	imports := map[string]string{}
 
 	entries := extractArrayRouteMounts(fi, routers, imports, "test.ts")

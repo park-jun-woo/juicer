@@ -4,7 +4,7 @@ package express
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-func collectRouterFromDecl(decl *sitter.Node, fi *fileInfo, routers map[string]bool) {
+func collectRouterFromDecl(decl *sitter.Node, fi *fileInfo, routers map[string]bool, aliases map[string]bool) {
 	for _, declarator := range findAllByType(decl, "variable_declarator") {
 		nameNode := findChildByType(declarator, "identifier")
 		if nameNode == nil {
@@ -15,7 +15,7 @@ func collectRouterFromDecl(decl *sitter.Node, fi *fileInfo, routers map[string]b
 		if valueNode == nil {
 			continue
 		}
-		if isExpressCall(valueNode, fi.Src) || isExpressRouterCall(valueNode, fi.Src) {
+		if isExpressCall(valueNode, fi.Src) || isExpressRouterCall(valueNode, fi.Src) || isRouterStandaloneCall(valueNode, fi.Src, aliases) {
 			routers[varName] = true
 		}
 	}

@@ -20,7 +20,7 @@ func scanPass2(ctx *scanContext, absRoot string) []scanner.Endpoint {
 		if rel, err := filepath.Rel(absRoot, path); err == nil {
 			relPath = rel
 		}
-		eps := buildEndpointsFromFile(fi, routers, prefix, relPath)
+		eps := buildEndpointsFromFile(fi, routers, prefix, relPath, ctx)
 		endpoints = append(endpoints, eps...)
 	}
 	return endpoints

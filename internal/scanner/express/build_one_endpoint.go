@@ -4,7 +4,7 @@ package express
 
 import "github.com/park-jun-woo/codistill/internal/scanner"
 
-func buildOneEndpoint(method, oaPath string, r routeInfo, relPath string, pathParams []string) scanner.Endpoint {
+func buildOneEndpoint(method, oaPath string, r routeInfo, relPath string, pathParams []string, ctx *scanContext, fi *fileInfo) scanner.Endpoint {
 	ep := scanner.Endpoint{
 		Method:     method,
 		Path:       oaPath,
@@ -12,13 +12,13 @@ func buildOneEndpoint(method, oaPath string, r routeInfo, relPath string, pathPa
 		File:       relPath,
 		Line:       r.Line,
 		Middleware: r.Middleware,
+		AuthLevel:  r.AuthLevel,
+		Roles:      r.Roles,
 	}
-	if len(pathParams) > 0 {
-		var params []scanner.Param
-		for _, p := range pathParams {
-			params = append(params, scanner.Param{Name: p, Type: "string"})
-		}
-		ep.Request = &scanner.Request{PathParams: params}
+	req := buildRequest(r, pathParams, ctx, fi)
+	if req != nil {
+		ep.Request = req
 	}
+	ep.Responses = extractResponses(fi, r)
 	return ep
 }

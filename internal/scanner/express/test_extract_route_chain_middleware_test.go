@@ -10,7 +10,7 @@ const router = express.Router();
 router.route("/:id").get(auth, validate, getUser).put(updateUser);
 `)
 	fi := mustParse(t, src)
-	routers := collectRouters(fi)
+	routers := collectRouters(fi, nil)
 	routes := extractRoutes(fi, routers)
 	if len(routes) != 2 {
 		t.Fatalf("expected 2 routes, got %d", len(routes))

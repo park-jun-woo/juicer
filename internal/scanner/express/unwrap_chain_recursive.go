@@ -13,6 +13,6 @@ func unwrapChainRecursive(innerCall, outerCall *sitter.Node, propName string, sr
 	if !ok {
 		return innerPath, innerMethods
 	}
-	handler, mw := extractChainHandlerAndMiddleware(outerCall, src)
-	return innerPath, append(innerMethods, chainMethod{method: upperMethod, handler: handler, middleware: mw, line: int(outerCall.StartPoint().Row) + 1})
+	handler, mw, hNode, authLevel, roles := extractChainHandlerAndMiddleware(outerCall, src)
+	return innerPath, append(innerMethods, chainMethod{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles})
 }

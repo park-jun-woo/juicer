@@ -13,7 +13,8 @@ func extractUseMount(call *sitter.Node, src []byte, routers map[string]bool, imp
 	if obj == nil {
 		return nil
 	}
-	if !routers[nodeText(obj, src)] {
+	objName := nodeText(obj, src)
+	if !routers[objName] {
 		return nil
 	}
 	prop := mem.ChildByFieldName("property")
@@ -27,5 +28,9 @@ func extractUseMount(call *sitter.Node, src []byte, routers map[string]bool, imp
 	if args == nil {
 		return nil
 	}
-	return parseUseMountArgs(args, src, imports)
+	m := parseUseMountArgs(args, src, imports)
+	if m != nil {
+		m.SourceRouter = objName
+	}
+	return m
 }

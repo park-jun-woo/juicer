@@ -3,8 +3,9 @@
 package express
 
 type mountEntry struct {
-	prefix     string
-	varName    string
-	filePath   string
-	sourceFile string
+	prefix       string
+	varName      string
+	filePath     string
+	sourceFile   string
+	sourceRouter string
 }

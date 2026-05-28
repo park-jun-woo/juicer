@@ -1,5 +1,5 @@
 //ff:func feature=scan type=extract control=sequence topic=express
-//ff:what arguments 노드에서 경로, 핸들러, 미들웨어를 파싱하여 routeInfo를 생성한다
+//ff:what arguments 노드에서 경로, 핸들러, 미들웨어, validateRequest를 파싱하여 routeInfo를 생성한다
 package express
 
 import sitter "github.com/smacker/go-tree-sitter"
@@ -15,11 +15,19 @@ func buildRouteFromArgs(args *sitter.Node, src []byte, method string, line int) 
 	}
 	path := unquoteTS(nodeText(pathNode, src))
 	handler, middleware := extractHandlerAndMiddleware(argNodes, src)
+	validators := extractZodValidatorsFromArgs(argNodes, src)
+	authLevel, roles := extractAuthFromArgs(argNodes, src)
+	lastArg := argNodes[len(argNodes)-1]
 	return &routeInfo{
-		Method:     method,
-		Path:       path,
-		Handler:    handler,
-		Middleware: middleware,
-		Line:       line,
+		Method:        method,
+		Path:          path,
+		Handler:       handler,
+		HandlerNode:   lastArg,
+		Middleware:    middleware,
+		Line:          line,
+		ZodValidators: validators,
+		AuthLevel:     authLevel,
+		Roles:         roles,
 	}
 }
+
