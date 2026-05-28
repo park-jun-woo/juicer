@@ -8,24 +8,24 @@ import "strings"
 func applyStatement(tables map[string]*Table, stmt string) {
 	clean := stripLeadingComments(stmt)
 	if m := reCreateTable.FindStringSubmatch(clean); m != nil {
-		applyCreateTable(tables, m[1], clean)
+		applyCreateTable(tables, cleanTableName(m[1]), clean)
 		return
 	}
 	if m := reCreateIndex.FindStringSubmatch(clean); m != nil {
-		applyCreateIndex(tables, m[2], clean)
+		applyCreateIndex(tables, cleanTableName(m[1]), clean)
 		return
 	}
 	if m := reDropIndex.FindStringSubmatch(clean); m != nil {
-		applyDropIndex(tables, m[1])
+		applyDropIndex(tables, cleanTableName(m[1]))
 		return
 	}
 	if m := reDropTable.FindStringSubmatch(clean); m != nil {
-		tableName := strings.ToLower(m[1])
+		tableName := strings.ToLower(cleanTableName(m[1]))
 		delete(tables, tableName)
 		return
 	}
 	if m := reAlterTable.FindStringSubmatch(clean); m != nil {
-		applyAlterTable(tables, m[1], m[2])
+		applyAlterTable(tables, cleanTableName(m[1]), m[2])
 		return
 	}
 }
