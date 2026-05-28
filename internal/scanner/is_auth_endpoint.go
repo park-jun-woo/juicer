@@ -6,6 +6,9 @@ func isAuthEndpoint(ep Endpoint) bool {
 	if ep.AuthLevel == "auth_required" {
 		return true
 	}
+	if len(ep.Roles) > 0 {
+		return true
+	}
 	if ep.AuthLevel == "public" {
 		return false
 	}

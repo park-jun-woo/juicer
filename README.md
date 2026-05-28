@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.1-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.2-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -42,13 +42,15 @@ codist scan --openapi ./my-project
 | **Go + Gin** | Go | Stable — `go/ast` + `go/types`, oapi-codegen `.gen.go` supported |
 | **NestJS** | TypeScript | Stable — tree-sitter, decorator-based extraction |
 | **FastAPI** | Python | Stable — tree-sitter, Pydantic model extraction |
+| **Spring Boot** | Java | Stable — tree-sitter, annotation-based extraction |
 
-Framework is auto-detected from `go.mod`, `package.json`, or `requirements.txt`. Override with `--framework`:
+Framework is auto-detected from `go.mod`, `package.json`, `requirements.txt`, or `pom.xml`/`build.gradle`. Override with `--framework`:
 
 ```bash
 codist scan --framework gogin ./project
 codist scan --framework nestjs ./project
 codist scan --framework fastapi ./project
+codist scan --framework spring ./project
 ```
 
 ## Usage
@@ -107,7 +109,7 @@ codist scan [flags] [project-root]
 
   --openapi       Output OpenAPI 3.0 YAML
   --json          Output JSON
-  --framework     Framework override (gogin, nestjs, fastapi)
+  --framework     Framework override (gogin, nestjs, fastapi, spring)
   --base string   Base OpenAPI spec to merge with
   -o string       Write to file instead of stdout
 
@@ -122,6 +124,23 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.2
+
+- Spring Boot (Java) scanner — `@RestController`, `@GetMapping`/`@PostMapping`, `@RequestBody`, `@PathVariable`, `@RequestParam` extraction
+- Spring DTO field extraction with Bean Validation (`@NotNull`, `@NotBlank`, `@Size`, `@Min`, `@Max`, `@Email`, `@JsonProperty`)
+- Spring security annotation support (`@PreAuthorize`, `@Secured`, `@RolesAllowed`) → OpenAPI `security`
+- Spring interface inheritance (API-First pattern) — `implements XxxApi` endpoint extraction
+- `ResponseEntity.ok()`/`.status(N)` body analysis for accurate status codes
+- Generic wrapper class field extraction (`PagedResponse<T>` → actual type substitution)
+- Cross-package parent class inheritance for DTO fields
+- Same-file inner class DTO resolution
+- `static final` fields excluded from schemas (`serialVersionUID` etc.)
+- `hasRole('A') or hasRole('B')` multi-role extraction
+- Constant `defaultValue` resolution (`AppConstants.DEFAULT_PAGE_NUMBER` → `"0"`)
+- `@RequestHeader` support (common model `Request.Headers` field added)
+- Array `items` definition in DTO schemas (`List<T>` → proper `items` with `$ref`)
+- `Endpoint.Roles` recognized as authenticated by `isAuthEndpoint()`
 
 ### v0.1.1
 

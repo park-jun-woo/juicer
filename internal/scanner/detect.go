@@ -12,5 +12,8 @@ func DetectFramework(root string) string {
 	if detectFastAPI(root) {
 		return "fastapi"
 	}
+	if detectSpring(root) {
+		return "spring"
+	}
 	return ""
 }

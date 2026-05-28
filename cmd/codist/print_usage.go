@@ -22,9 +22,10 @@ Usage:
   codist version
 
 scan flags:
-  --json      output JSON
-  --openapi   output OpenAPI 3.0 YAML
-  -o string   output file path
+  --framework string  framework to scan (gogin, nestjs, fastapi, spring)
+  --json              output JSON
+  --openapi           output OpenAPI 3.0 YAML
+  -o string           output file path
 
 ddl flags:
   -o string   output directory (one .sql file per table)

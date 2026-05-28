@@ -11,6 +11,7 @@ import (
 	"github.com/park-jun-woo/codistill/internal/scanner/fastapi"
 	"github.com/park-jun-woo/codistill/internal/scanner/gogin"
 	"github.com/park-jun-woo/codistill/internal/scanner/nestjs"
+	"github.com/park-jun-woo/codistill/internal/scanner/spring"
 )
 
 func runScan(args []string) {
@@ -19,7 +20,7 @@ func runScan(args []string) {
 	openapiOut := fs.Bool("openapi", false, "output OpenAPI 3.0 YAML")
 	baseFile := fs.String("base", "", "base OpenAPI spec to merge with")
 	outFile := fs.String("o", "", "output file path")
-	framework := fs.String("framework", "", "framework to scan (gogin, nestjs, fastapi)")
+	framework := fs.String("framework", "", "framework to scan (gogin, nestjs, fastapi, spring)")
 	fs.Parse(args)
 
 	root := "."
@@ -46,6 +47,8 @@ func runScan(args []string) {
 		result, err = nestjs.Scan(root)
 	case "fastapi":
 		result, err = fastapi.Scan(root)
+	case "spring":
+		result, err = spring.Scan(root)
 	default:
 		err = fmt.Errorf("unknown framework: %s", fw)
 	}

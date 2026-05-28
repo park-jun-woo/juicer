@@ -32,7 +32,12 @@ func fieldToProperty(f Field) map[string]any {
 	if strings.HasPrefix(goType, "[]") {
 		elemType := goType[2:]
 		prop["type"] = "array"
-		prop["items"] = map[string]any{"type": goTypeToOpenAPI(elemType)}
+		oaElem := goTypeToOpenAPI(elemType)
+		if oaElem == "object" {
+			prop["items"] = map[string]any{"$ref": "#/components/schemas/" + lcFirst(elemType)}
+		} else {
+			prop["items"] = map[string]any{"type": oaElem}
+		}
 		return prop
 	}
 

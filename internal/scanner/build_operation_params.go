@@ -30,5 +30,12 @@ func buildOperationParams(req *Request) []map[string]any {
 		}
 		params = append(params, qp)
 	}
+	for _, h := range req.Headers {
+		params = append(params, map[string]any{
+			"name":   h.Name,
+			"in":     "header",
+			"schema": buildParamSchema(h.Type),
+		})
+	}
 	return params
 }
