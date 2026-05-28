@@ -9,5 +9,6 @@ func buildPrefixMap(mounts []mountEntry) map[string]string {
 			prefixMap[m.filePath] = m.prefix
 		}
 	}
+	propagateParentPrefixes(mounts, prefixMap)
 	return prefixMap
 }

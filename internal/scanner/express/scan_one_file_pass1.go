@@ -21,5 +21,6 @@ func scanOneFilePass1(path string, parsed map[string]*fileInfo, allRouters map[s
 			sourceFile: path,
 		})
 	}
+	entries = append(entries, extractArrayRouteMounts(fi, routers, imports, path)...)
 	return entries
 }

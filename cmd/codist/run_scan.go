@@ -13,6 +13,7 @@ import (
 	"github.com/park-jun-woo/codistill/internal/scanner/gogin"
 	"github.com/park-jun-woo/codistill/internal/scanner/nestjs"
 	"github.com/park-jun-woo/codistill/internal/scanner/spring"
+	"github.com/park-jun-woo/codistill/internal/scanner/supafunc"
 )
 
 func runScan(args []string) {
@@ -21,7 +22,7 @@ func runScan(args []string) {
 	openapiOut := fs.Bool("openapi", false, "output OpenAPI 3.0 YAML")
 	baseFile := fs.String("base", "", "base OpenAPI spec to merge with")
 	outFile := fs.String("o", "", "output file path")
-	framework := fs.String("framework", "", "framework to scan (gogin, nestjs, fastapi, express, spring)")
+	framework := fs.String("framework", "", "framework to scan (gogin, nestjs, fastapi, express, spring, supafunc)")
 	fs.Parse(args)
 
 	root := "."
@@ -52,6 +53,8 @@ func runScan(args []string) {
 		result, err = express.Scan(root)
 	case "spring":
 		result, err = spring.Scan(root)
+	case "supafunc":
+		result, err = supafunc.Scan(root)
 	default:
 		err = fmt.Errorf("unknown framework: %s", fw)
 	}

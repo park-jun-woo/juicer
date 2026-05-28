@@ -9,6 +9,9 @@ func DetectFramework(root string) string {
 	if detectNestJS(root) {
 		return "nestjs"
 	}
+	if detectSupaFunc(root) {
+		return "supafunc"
+	}
 	if detectFastAPI(root) {
 		return "fastapi"
 	}

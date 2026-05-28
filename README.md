@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.2-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.3-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -43,14 +43,18 @@ codist scan --openapi ./my-project
 | **NestJS** | TypeScript | Stable — tree-sitter, decorator-based extraction |
 | **FastAPI** | Python | Stable — tree-sitter, Pydantic model extraction |
 | **Spring Boot** | Java | Stable — tree-sitter, annotation-based extraction |
+| **Express** | TypeScript | Stable — tree-sitter, function-call routing, cross-file router mount |
+| **Supabase Edge Functions** | Deno TypeScript | Stable — file-system routing, `serve()`/`Deno.serve()` extraction |
 
-Framework is auto-detected from `go.mod`, `package.json`, `requirements.txt`, or `pom.xml`/`build.gradle`. Override with `--framework`:
+Framework is auto-detected from `go.mod`, `package.json`, `requirements.txt`, `pom.xml`/`build.gradle`, or `supabase/functions/`. Override with `--framework`:
 
 ```bash
 codist scan --framework gogin ./project
 codist scan --framework nestjs ./project
 codist scan --framework fastapi ./project
 codist scan --framework spring ./project
+codist scan --framework express ./project
+codist scan --framework supafunc ./project
 ```
 
 ## Usage
@@ -109,7 +113,7 @@ codist scan [flags] [project-root]
 
   --openapi       Output OpenAPI 3.0 YAML
   --json          Output JSON
-  --framework     Framework override (gogin, nestjs, fastapi, spring)
+  --framework     Framework override (gogin, nestjs, fastapi, spring, express, supafunc)
   --base string   Base OpenAPI spec to merge with
   -o string       Write to file instead of stdout
 
@@ -124,6 +128,24 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.3
+
+- Express (TypeScript) scanner — `app.get()`/`router.post()` function-call routing extraction
+- Cross-file router mounting with `app.use("/prefix", importedRouter)` prefix propagation
+- Multi-level prefix chaining (convergence loop) for nested router mounts
+- `router.route("/:id").get().put()` chain pattern with middleware extraction
+- Named import `{ x }` / alias `{ x as y }` variable name extraction
+- tsconfig `@/*` path alias resolution
+- Function parameter router `(router: express.Router) => {}` recognition
+- forEach dynamic router mount `routes.forEach(r => router.use(r.path, r.route))` extraction
+- Supabase Edge Functions scanner — file-system routing from `supabase/functions/*/index.ts`
+- `serve()`/`Deno.serve()` callback analysis with `req.method` branching
+- Per-method body/response separation for multi-method Edge Functions
+- `const { x } = await req.json()` destructuring + `body.field` dot-access extraction
+- `searchParams.get("x")` query parameter extraction
+- `new Response(..., { status: N })` status code extraction
+- DDL Supabase compatibility — `*.sql` files, `/* */` block comments, `$$` dollar quoting, schema-qualified table names
 
 ### v0.1.2
 
