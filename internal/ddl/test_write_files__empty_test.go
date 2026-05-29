@@ -6,7 +6,7 @@ import "testing"
 
 func TestWriteFiles_Empty(t *testing.T) {
 	dir := t.TempDir()
-	if err := WriteFiles(map[string]*Table{}, dir); err != nil {
+	if err := WriteFiles(nil, map[string]*Table{}, dir); err != nil {
 		t.Fatal(err)
 	}
 }

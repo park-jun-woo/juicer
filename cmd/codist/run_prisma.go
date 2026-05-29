@@ -10,14 +10,14 @@ import (
 )
 
 func runPrisma(path string, outDir string) error {
-	tables, err := prisma.Parse(path)
+	tables, enums, err := prisma.Parse(path)
 	if err != nil {
 		return err
 	}
 
 	if outDir != "" {
-		return ddl.WriteFiles(tables, outDir)
+		return ddl.WriteFiles(enums, tables, outDir)
 	}
-	fmt.Print(ddl.Render(tables))
+	fmt.Print(ddl.Render(enums, tables))
 	return nil
 }

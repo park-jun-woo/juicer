@@ -31,7 +31,7 @@ model Post {
 		t.Fatal(err)
 	}
 
-	tables, err := Parse(path)
+	tables, _, err := Parse(path)
 	if err != nil {
 		t.Fatalf("Parse: %v", err)
 	}

@@ -12,7 +12,7 @@ func buildTable(m model, s schema) *ddl.Table {
 		if isRelationField(f, s.models) {
 			continue
 		}
-		t.Columns = append(t.Columns, buildColumn(f))
+		t.Columns = append(t.Columns, buildColumn(f, s))
 	}
 	t.Constraints = buildConstraints(m, s)
 	t.Indexes = buildIndexes(m, s)

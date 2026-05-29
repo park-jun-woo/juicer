@@ -13,7 +13,7 @@ func TestWriteFiles_Basic(t *testing.T) {
 	tables := map[string]*Table{
 		"users": {Name: "users", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	if err := WriteFiles(tables, dir); err != nil {
+	if err := WriteFiles(nil, tables, dir); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := os.Stat(filepath.Join(dir, "users.sql")); err != nil {
@@ -21,7 +21,7 @@ func TestWriteFiles_Basic(t *testing.T) {
 	}
 
 	// MkdirAll error
-	err := WriteFiles(tables, "/dev/null/impossible")
+	err := WriteFiles(nil, tables, "/dev/null/impossible")
 	if err == nil {
 		t.Fatal("expected mkdir error")
 	}
@@ -30,7 +30,7 @@ func TestWriteFiles_Basic(t *testing.T) {
 	roDir := t.TempDir()
 	os.Chmod(roDir, 0o555)
 	defer os.Chmod(roDir, 0o755)
-	err = WriteFiles(tables, filepath.Join(roDir, "sub"))
+	err = WriteFiles(nil, tables, filepath.Join(roDir, "sub"))
 	if err == nil {
 		t.Fatal("expected write error")
 	}
@@ -39,7 +39,7 @@ func TestWriteFiles_Basic(t *testing.T) {
 	roDir2 := t.TempDir()
 	os.Chmod(roDir2, 0o555)
 	defer os.Chmod(roDir2, 0o755)
-	err = WriteFiles(tables, roDir2)
+	err = WriteFiles(nil, tables, roDir2)
 	if err == nil {
 		t.Fatal("expected WriteFile error on read-only dir")
 	}

@@ -8,5 +8,5 @@ func Run(dir string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return Render(tables), nil
+	return Render(nil, tables), nil
 }

@@ -5,6 +5,7 @@ package prisma
 // schema holds cross-model lookups needed to resolve constraints.
 type schema struct {
 	models     map[string]bool              // declared model names
+	enums      map[string]bool              // declared enum names
 	tableNames map[string]string            // model name -> table name
 	columns    map[string]map[string]string // model name -> field name -> column name
 }

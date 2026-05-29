@@ -14,7 +14,7 @@ func TestWriteFiles_MkdirErr(t *testing.T) {
 	blocker := filepath.Join(dir, "block")
 	os.WriteFile(blocker, []byte("x"), 0o644)
 	tables := map[string]*Table{"a": {Name: "a"}}
-	err := WriteFiles(tables, filepath.Join(blocker, "sub"))
+	err := WriteFiles(nil, tables, filepath.Join(blocker, "sub"))
 	if err == nil {
 		t.Fatal("expected error")
 	}

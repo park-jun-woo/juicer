@@ -15,7 +15,7 @@ func TestWriteFiles_MkdirErrorCov(t *testing.T) {
 	tables := map[string]*Table{
 		"users": {Name: "users", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	err := WriteFiles(tables, filepath.Join(blockPath, "sub"))
+	err := WriteFiles(nil, tables, filepath.Join(blockPath, "sub"))
 	if err == nil {
 		t.Fatal("expected error creating dir under file")
 	}

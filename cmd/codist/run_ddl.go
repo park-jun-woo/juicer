@@ -15,8 +15,8 @@ func runDDL(dir string, outDir string) error {
 	}
 
 	if outDir != "" {
-		return ddl.WriteFiles(tables, outDir)
+		return ddl.WriteFiles(nil, tables, outDir)
 	}
-	fmt.Print(ddl.Render(tables))
+	fmt.Print(ddl.Render(nil, tables))
 	return nil
 }

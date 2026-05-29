@@ -12,7 +12,7 @@ func TestRender_TwoTables(t *testing.T) {
 		"users":  {Name: "users", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		"orders": {Name: "orders", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	out := Render(tables)
+	out := Render(nil, tables)
 	if !strings.Contains(out, "orders") || !strings.Contains(out, "users") {
 		t.Fatalf("expected both tables, got %q", out)
 	}

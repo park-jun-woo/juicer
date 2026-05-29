@@ -9,10 +9,23 @@ import (
 	"strings"
 )
 
-// WriteFiles writes each table's DDL to a separate .sql file in outDir.
-func WriteFiles(tables map[string]*Table, outDir string) error {
+// WriteFiles writes enum types and each table's DDL into outDir. Enum types are
+// collected into a single file (sorted before table files) so dependent tables
+// are applied after their types exist.
+func WriteFiles(enums []EnumType, tables map[string]*Table, outDir string) error {
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		return fmt.Errorf("mkdir %s: %w", outDir, err)
+	}
+
+	if len(enums) > 0 {
+		var sb strings.Builder
+		for _, e := range sortedEnums(enums) {
+			renderEnum(&sb, e)
+		}
+		path := filepath.Join(outDir, "0_enums.sql")
+		if err := os.WriteFile(path, []byte(sb.String()), 0o644); err != nil {
+			return fmt.Errorf("write %s: %w", path, err)
+		}
 	}
 
 	for _, t := range tables {

@@ -8,7 +8,7 @@ import (
 
 func TestRender(t *testing.T) {
 	t.Run("empty tables", func(t *testing.T) {
-		got := Render(map[string]*Table{})
+		got := Render(nil, map[string]*Table{})
 		if got != "" {
 			t.Errorf("expected empty string, got: %q", got)
 		}
@@ -21,7 +21,7 @@ func TestRender(t *testing.T) {
 				Columns: []Column{{Name: "id", Raw: "id BIGINT PRIMARY KEY"}},
 			},
 		}
-		got := Render(tables)
+		got := Render(nil, tables)
 		if !containsStr(got, "CREATE TABLE users") {
 			t.Errorf("expected CREATE TABLE users in output, got:\n%s", got)
 		}
@@ -32,7 +32,7 @@ func TestRender(t *testing.T) {
 			"zebra": {Name: "zebra", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 			"alpha": {Name: "alpha", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		}
-		got := Render(tables)
+		got := Render(nil, tables)
 		alphaIdx := indexOfStr(got, "alpha")
 		zebraIdx := indexOfStr(got, "zebra")
 		if alphaIdx >= zebraIdx {
@@ -48,7 +48,7 @@ func TestRender(t *testing.T) {
 				Indexes: []string{"CREATE INDEX idx_users_id ON users (id)"},
 			},
 		}
-		got := Render(tables)
+		got := Render(nil, tables)
 		if !containsStr(got, "CREATE INDEX") {
 			t.Errorf("expected CREATE INDEX in output, got:\n%s", got)
 		}
@@ -62,7 +62,7 @@ func TestRender(t *testing.T) {
 				Constraints: []string{"FOREIGN KEY (user_id) REFERENCES users(id)"},
 			},
 		}
-		got := Render(tables)
+		got := Render(nil, tables)
 		if !containsStr(got, "FOREIGN KEY") {
 			t.Errorf("expected FOREIGN KEY in output, got:\n%s", got)
 		}

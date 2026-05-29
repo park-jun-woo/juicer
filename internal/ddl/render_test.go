@@ -12,7 +12,7 @@ func TestRender_Basic(t *testing.T) {
 		"users":  {Name: "users", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		"orders": {Name: "orders", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	out := Render(tables)
+	out := Render(nil, tables)
 	if !strings.Contains(out, "CREATE TABLE users") {
 		t.Fatalf("expected CREATE TABLE users, got %q", out)
 	}

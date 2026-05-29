@@ -4,9 +4,10 @@ package prisma
 
 import "github.com/park-jun-woo/codistill/internal/ddl"
 
-// convertModels converts parsed models into a table-name -> *ddl.Table map.
-func convertModels(models []model) map[string]*ddl.Table {
-	s := buildSchema(models)
+// convertModels converts parsed models into a table-name -> *ddl.Table map,
+// using enum names for enum-typed default-value quoting.
+func convertModels(models []model, enums []ddl.EnumType) map[string]*ddl.Table {
+	s := buildSchema(models, enums)
 	tables := make(map[string]*ddl.Table, len(models))
 	for _, m := range models {
 		t := buildTable(m, s)

@@ -21,7 +21,7 @@ func TestWriteFiles(t *testing.T) {
 				Columns: []Column{{Name: "id", Raw: "id BIGINT"}},
 			},
 		}
-		if err := WriteFiles(tables, dir); err != nil {
+		if err := WriteFiles(nil, tables, dir); err != nil {
 			t.Fatalf("WriteFiles() error: %v", err)
 		}
 
@@ -45,7 +45,7 @@ func TestWriteFiles(t *testing.T) {
 		tables := map[string]*Table{
 			"t": {Name: "t", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		}
-		if err := WriteFiles(tables, dir); err != nil {
+		if err := WriteFiles(nil, tables, dir); err != nil {
 			t.Fatalf("WriteFiles() error: %v", err)
 		}
 		if _, err := os.Stat(filepath.Join(dir, "t.sql")); err != nil {
@@ -55,7 +55,7 @@ func TestWriteFiles(t *testing.T) {
 
 	t.Run("mkdir error", func(t *testing.T) {
 		// Use a path that cannot be created
-		err := WriteFiles(map[string]*Table{
+		err := WriteFiles(nil, map[string]*Table{
 			"t": {Name: "t"},
 		}, "/dev/null/impossible")
 		if err == nil {
@@ -72,7 +72,7 @@ func TestWriteFiles(t *testing.T) {
 		os.Chmod(outDir, 0o555)
 		t.Cleanup(func() { os.Chmod(outDir, 0o755) })
 
-		err := WriteFiles(map[string]*Table{
+		err := WriteFiles(nil, map[string]*Table{
 			"t": {Name: "t", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		}, outDir)
 		if err == nil {

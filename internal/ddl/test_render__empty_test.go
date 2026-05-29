@@ -5,7 +5,7 @@ package ddl
 import "testing"
 
 func TestRender_Empty(t *testing.T) {
-	out := Render(map[string]*Table{})
+	out := Render(nil, map[string]*Table{})
 	if out != "" {
 		t.Fatalf("expected empty, got %q", out)
 	}

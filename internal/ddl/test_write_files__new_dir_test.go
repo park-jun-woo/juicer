@@ -12,7 +12,7 @@ func TestWriteFiles_NewDir(t *testing.T) {
 	tables := map[string]*Table{
 		"items": {Name: "items", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	if err := WriteFiles(tables, dir); err != nil {
+	if err := WriteFiles(nil, tables, dir); err != nil {
 		t.Fatal(err)
 	}
 }

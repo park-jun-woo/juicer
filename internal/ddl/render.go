@@ -7,9 +7,10 @@ import (
 	"strings"
 )
 
-// Render produces the final DDL output from the table state map.
-// Tables are sorted alphabetically.
-func Render(tables map[string]*Table) string {
+// Render produces the final DDL output from enum types and the table state map.
+// Enum types are emitted (sorted) before all tables; tables are sorted
+// alphabetically.
+func Render(enums []EnumType, tables map[string]*Table) string {
 	names := make([]string, 0, len(tables))
 	for name := range tables {
 		names = append(names, name)
@@ -17,6 +18,15 @@ func Render(tables map[string]*Table) string {
 	sort.Strings(names)
 
 	var sb strings.Builder
+
+	sorted := sortedEnums(enums)
+	for _, e := range sorted {
+		renderEnum(&sb, e)
+	}
+	if len(sorted) > 0 && len(names) > 0 {
+		sb.WriteByte('\n')
+	}
+
 	for i, name := range names {
 		if i > 0 {
 			sb.WriteByte('\n')

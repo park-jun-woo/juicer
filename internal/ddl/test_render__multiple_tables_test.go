@@ -12,7 +12,7 @@ func TestRender_MultipleTables(t *testing.T) {
 		"a": {Name: "a", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 		"b": {Name: "b", Columns: []Column{{Name: "id", Raw: "id INT"}}},
 	}
-	out := Render(tables)
+	out := Render(nil, tables)
 	if !strings.Contains(out, "CREATE TABLE a") || !strings.Contains(out, "CREATE TABLE b") {
 		t.Fatalf("expected both tables, got %q", out)
 	}

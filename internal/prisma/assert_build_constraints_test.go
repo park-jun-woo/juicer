@@ -11,7 +11,7 @@ import (
 // buildConstraints returns want.
 func assertBuildConstraints(t *testing.T, models []model, target string, want []string) {
 	t.Helper()
-	s := buildSchema(models)
+	s := buildSchema(models, nil)
 	var tm model
 	for _, m := range models {
 		if m.name == target {
