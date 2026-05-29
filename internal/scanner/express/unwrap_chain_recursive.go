@@ -15,5 +15,6 @@ func unwrapChainRecursive(innerCall, outerCall *sitter.Node, propName string, sr
 	}
 	handler, mw, hNode, authLevel, roles := extractChainHandlerAndMiddleware(outerCall, src)
 	joiRefs := chainJoiRefs(outerCall, src)
-	return innerPath, routerVar, append(innerMethods, chainMethod{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles, joiRefs: joiRefs})
+	zodValidators := chainZodValidators(outerCall, src)
+	return innerPath, routerVar, append(innerMethods, chainMethod{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles, joiRefs: joiRefs, zodValidators: zodValidators})
 }

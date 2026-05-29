@@ -15,5 +15,6 @@ func unwrapChainBase(routeCall, outerCall *sitter.Node, propName string, src []b
 	}
 	handler, mw, hNode, authLevel, roles := extractChainHandlerAndMiddleware(outerCall, src)
 	joiRefs := chainJoiRefs(outerCall, src)
-	return path, []chainMethod{{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles, joiRefs: joiRefs}}
+	zodValidators := chainZodValidators(outerCall, src)
+	return path, []chainMethod{{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles, joiRefs: joiRefs, zodValidators: zodValidators}}
 }
