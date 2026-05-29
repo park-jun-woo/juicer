@@ -11,6 +11,7 @@ import (
 type routeInfo struct {
 	Method        string
 	Path          string
+	Router        string // 이 라우트가 등록된 라우터 변수명 (prefix 해석용)
 	Handler       string
 	HandlerNode   *sitter.Node
 	Middleware    []string

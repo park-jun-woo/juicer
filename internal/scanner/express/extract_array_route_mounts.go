@@ -13,13 +13,15 @@ func extractArrayRouteMounts(fi *fileInfo, routers map[string]bool, imports map[
 		if arr == nil {
 			continue
 		}
+		parentRouter := forEachParentRouter(call, fi.Src, routers)
 		for _, pe := range extractObjectEntries(arr, fi.Src) {
 			filePath := imports[pe.routeVar]
 			entries = append(entries, mountEntry{
-				prefix:     pe.path,
-				varName:    pe.routeVar,
-				filePath:   filePath,
-				sourceFile: sourcePath,
+				prefix:       pe.path,
+				varName:      pe.routeVar,
+				filePath:     filePath,
+				sourceFile:   sourcePath,
+				sourceRouter: parentRouter,
 			})
 		}
 	}

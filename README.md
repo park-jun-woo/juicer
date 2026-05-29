@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.4-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.5-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,17 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.5
+
+- **Express prefix resolution rewrite** — router instances are now keyed by `(file, varName)` instead of by file, so the same router mounted at multiple prefixes keeps every prefix and multiple routers in one file no longer collapse onto each other. Convergence loop bounded (no runaway).
+- Deterministic scan output — `scanPass2` iterates parsed files in sorted order, `operationId` deduplication walks endpoints by index (not map order), and same method+path collisions resolve by a stable `(File, Line)` tie-break. Identical input now yields byte-identical specs across runs.
+- Duplicate operation warning — `buildSpecNode` emits a stderr warning instead of silently overwriting when two endpoints collapse to the same path+method.
+- **Bug fixes (from `go test ./...`)**:
+  - Actix builder routes (`web::scope().service()...`) no longer recurse infinitely — chain traversal walks down the receiver chain instead of up through ancestors (previously hung/OOM'd).
+  - Laravel `Route::middleware([...])->group()` routes are no longer double-collected by the flat collector, so group middleware (e.g. `auth:sanctum`) is preserved on the endpoint.
+  - Laravel singularization keeps `-us` words intact (`status` no longer becomes `statu`).
+- `go.sum` completeness — transitive test-dependency hashes (testify et al.) added so a fresh clone passes `go test`.
 
 ### v0.1.4
 

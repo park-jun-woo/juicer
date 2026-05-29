@@ -31,6 +31,8 @@ func scanOneFilePass1(path string, parsed map[string]*fileInfo, allRouters map[s
 			sourceRouter: m.SourceRouter,
 		})
 	}
+	// 인라인 마운트(filePath="")와 크로스파일 마운트를 raw 그대로 반환한다.
+	// prefix 합성은 전역 라우터 그래프(resolveRouterPrefixes)에서 (file,var) 단위로 수행한다.
 	entries = append(entries, extractArrayRouteMounts(fi, routers, imports, path)...)
-	return resolveLocalRouterPrefixes(entries)
+	return entries
 }

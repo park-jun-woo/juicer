@@ -13,7 +13,8 @@ func extractOneRoute(call *sitter.Node, src []byte, routers map[string]bool) *ro
 	if obj == nil {
 		return nil
 	}
-	if !routers[nodeText(obj, src)] {
+	routerVar := nodeText(obj, src)
+	if !routers[routerVar] {
 		return nil
 	}
 	prop := mem.ChildByFieldName("property")
@@ -28,5 +29,9 @@ func extractOneRoute(call *sitter.Node, src []byte, routers map[string]bool) *ro
 	if args == nil {
 		return nil
 	}
-	return buildRouteFromArgs(args, src, upperMethod, int(call.StartPoint().Row)+1)
+	ri := buildRouteFromArgs(args, src, upperMethod, int(call.StartPoint().Row)+1)
+	if ri != nil {
+		ri.Router = routerVar
+	}
+	return ri
 }

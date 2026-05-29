@@ -10,12 +10,21 @@ func deduplicateOperationIDs(endpoints []Endpoint) map[int]string {
 	}
 	result := map[int]string{}
 	seen := map[string]bool{}
-	for id, indices := range ids {
+	processed := map[string]bool{}
+	// ids는 map이므로 직접 range하면 비결정적이다.
+	// endpoint 인덱스 순서로 순회하고, 중복 그룹은 첫 등장 시점에 한 번만 처리한다.
+	for i, ep := range endpoints {
+		id := generateOperationID(ep)
+		indices := ids[id]
 		if len(indices) == 1 {
-			result[indices[0]] = id
+			result[i] = id
 			seen[id] = true
 			continue
 		}
+		if processed[id] {
+			continue
+		}
+		processed[id] = true
 		processDuplicateGroup(id, indices, endpoints, result, seen)
 	}
 	return result

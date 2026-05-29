@@ -10,7 +10,7 @@ func deduplicateEndpoints(endpoints []Endpoint) []Endpoint {
 	for _, ep := range endpoints {
 		k := key{ep.Method, ep.Path}
 		if existing, ok := best[k]; ok {
-			if richness(ep) > richness(existing) {
+			if preferEndpoint(ep, existing) {
 				best[k] = ep
 			}
 		} else {
@@ -25,4 +25,3 @@ func deduplicateEndpoints(endpoints []Endpoint) []Endpoint {
 	}
 	return result
 }
-

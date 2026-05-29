@@ -15,15 +15,15 @@ func scanPass1(tsFiles []string, absRoot string) *scanContext {
 		mounts := scanOneFilePass1(path, parsed, allRouters, absRoot, aliases, schemas, schemaSrc)
 		allMounts = append(allMounts, mounts...)
 	}
-	prefixMap := buildPrefixMap(allMounts)
+	routerPrefixes := resolveRouterPrefixes(allMounts, allRouters)
 	ctx := &scanContext{
-		parsed:      parsed,
-		allRouters:  allRouters,
-		prefixMap:   prefixMap,
-		absRoot:     absRoot,
-		pathAliases: aliases,
-		schemas:     schemas,
-		schemaSrc:   schemaSrc,
+		parsed:         parsed,
+		allRouters:     allRouters,
+		routerPrefixes: routerPrefixes,
+		absRoot:        absRoot,
+		pathAliases:    aliases,
+		schemas:        schemas,
+		schemaSrc:      schemaSrc,
 	}
 	// 미해결 스키마 import 추적 (최대 1회)
 	resolveSchemaImports(ctx)

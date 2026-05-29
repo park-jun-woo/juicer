@@ -5,16 +5,22 @@ package express
 import sitter "github.com/smacker/go-tree-sitter"
 
 func resolveOneImport(stmt *sitter.Node, src []byte, dir string, imports map[string]string, absRoot string, aliases map[string]string) {
-	varName := extractImportVarName(stmt, src)
 	importPath := extractImportPath(stmt, src)
-	if varName == "" || importPath == "" {
+	if importPath == "" {
 		return
 	}
 	resolved := resolveRelativePath(dir, importPath)
 	if resolved == "" {
 		resolved = resolvePathAlias(absRoot, importPath, aliases)
 	}
-	if resolved != "" {
-		imports[varName] = resolved
+	if resolved == "" {
+		return
+	}
+	// default + named import의 로컬 바인딩명을 모두 같은 파일로 매핑한다.
+	// (import { aRouter, bRouter } from "..." 처럼 한 구문에 여러 라우터가 있어도 누락 없음)
+	for _, name := range collectImportedNames(stmt, src) {
+		if name != "" {
+			imports[name] = resolved
+		}
 	}
 }

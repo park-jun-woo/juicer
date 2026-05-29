@@ -4,15 +4,15 @@ package express
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-func unwrapChainRecursive(innerCall, outerCall *sitter.Node, propName string, src []byte, routers map[string]bool) (string, []chainMethod) {
-	innerPath, innerMethods := unwrapChain(innerCall, src, routers)
+func unwrapChainRecursive(innerCall, outerCall *sitter.Node, propName string, src []byte, routers map[string]bool) (string, string, []chainMethod) {
+	innerPath, routerVar, innerMethods := unwrapChain(innerCall, src, routers)
 	if innerPath == "" {
-		return "", nil
+		return "", "", nil
 	}
 	upperMethod, ok := httpMethods[propName]
 	if !ok {
-		return innerPath, innerMethods
+		return innerPath, routerVar, innerMethods
 	}
 	handler, mw, hNode, authLevel, roles := extractChainHandlerAndMiddleware(outerCall, src)
-	return innerPath, append(innerMethods, chainMethod{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles})
+	return innerPath, routerVar, append(innerMethods, chainMethod{method: upperMethod, handler: handler, handlerNode: hNode, middleware: mw, line: int(outerCall.StartPoint().Row) + 1, authLevel: authLevel, roles: roles})
 }

@@ -4,23 +4,30 @@ package express
 
 import (
 	"path/filepath"
+	"sort"
 
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func scanPass2(ctx *scanContext, absRoot string) []scanner.Endpoint {
 	var endpoints []scanner.Endpoint
-	for path, fi := range ctx.parsed {
+	// ctx.parsed는 map이므로 키를 정렬해 결정적 순서로 순회한다.
+	paths := make([]string, 0, len(ctx.parsed))
+	for path := range ctx.parsed {
+		paths = append(paths, path)
+	}
+	sort.Strings(paths)
+	for _, path := range paths {
+		fi := ctx.parsed[path]
 		routers := ctx.allRouters[path]
 		if len(routers) == 0 {
 			continue
 		}
-		prefix := ctx.prefixMap[path]
 		relPath := path
 		if rel, err := filepath.Rel(absRoot, path); err == nil {
 			relPath = rel
 		}
-		eps := buildEndpointsFromFile(fi, routers, prefix, relPath, ctx)
+		eps := buildEndpointsFromFile(fi, routers, path, relPath, ctx)
 		endpoints = append(endpoints, eps...)
 	}
 	return endpoints

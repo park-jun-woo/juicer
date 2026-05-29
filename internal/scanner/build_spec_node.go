@@ -3,6 +3,8 @@
 package scanner
 
 import (
+	"fmt"
+	"os"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -27,6 +29,11 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 			op["operationId"] = cid
 		}
 		for _, m := range expandAnyMethod(method) {
+			if _, dup := paths[oaPath][m]; dup {
+				// 같은 path+method로 붕괴한 충돌. 조용히 덮어쓰지 않고 경고한다.
+				fmt.Fprintf(os.Stderr, "warning: duplicate operation %s %s (handler %q at %s:%d) overwrites a previous one — check route prefix composition\n",
+					strings.ToUpper(m), oaPath, ep.Handler, ep.File, ep.Line)
+			}
 			paths[oaPath][m] = op
 		}
 	}
@@ -95,4 +102,3 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 
 	return root
 }
-

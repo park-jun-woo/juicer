@@ -5,7 +5,7 @@ package express
 import sitter "github.com/smacker/go-tree-sitter"
 
 func extractRouteChain(call *sitter.Node, src []byte, routers map[string]bool) []routeInfo {
-	routePath, methods := unwrapChain(call, src, routers)
+	routePath, routerVar, methods := unwrapChain(call, src, routers)
 	if routePath == "" || len(methods) == 0 {
 		return nil
 	}
@@ -14,6 +14,7 @@ func extractRouteChain(call *sitter.Node, src []byte, routers map[string]bool) [
 		routes = append(routes, routeInfo{
 			Method:      m.method,
 			Path:        routePath,
+			Router:      routerVar,
 			Handler:     m.handler,
 			HandlerNode: m.handlerNode,
 			Middleware:  m.middleware,
