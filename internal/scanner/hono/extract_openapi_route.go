@@ -26,10 +26,11 @@ func extractOpenAPIRoute(call *sitter.Node, src []byte, ownerVar string) *routeI
 		}
 	}
 	return &routeInfo{
-		Method:   method,
-		Path:     path,
-		Handler:  handler,
-		OwnerVar: ownerVar,
-		Line:     int(call.StartPoint().Row) + 1,
+		Method:        method,
+		Path:          path,
+		Handler:       handler,
+		OwnerVar:      ownerVar,
+		Line:          int(call.StartPoint().Row) + 1,
+		ZodValidators: extractOpenAPIRequest(obj, src),
 	}
 }
