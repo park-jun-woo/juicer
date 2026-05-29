@@ -17,12 +17,3 @@ func buildEndpointsFromFile(fi *fileInfo, routers map[string]bool, file, relPath
 	}
 	return endpoints
 }
-
-// routePrefixes는 (file, routerVar) 라우터 인스턴스의 prefix 목록을 반환한다.
-// 마운트가 없으면(루트 라우터/미해석) prefix "" 하나로 처리한다.
-func routePrefixes(ctx *scanContext, file, routerVar string) []string {
-	if ps := ctx.routerPrefixes[routerKey{file, routerVar}]; len(ps) > 0 {
-		return ps
-	}
-	return []string{""}
-}

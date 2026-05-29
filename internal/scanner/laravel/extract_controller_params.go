@@ -9,15 +9,7 @@ func applyControllerParamTypes(pathParams []scanner.Param, cm *controllerMethod)
 	if cm == nil {
 		return pathParams
 	}
-	typeMap := make(map[string]string)
-	for _, p := range cm.params {
-		if p.typeName != "" && p.name != "request" {
-			oaType := phpTypeToOpenAPI(p.typeName)
-			if oaType != "" {
-				typeMap[p.name] = oaType
-			}
-		}
-	}
+	typeMap := buildParamTypeMap(cm)
 	for i := range pathParams {
 		if t, ok := typeMap[pathParams[i].Name]; ok {
 			pathParams[i].Type = t

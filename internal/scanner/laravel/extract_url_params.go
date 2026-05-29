@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=laravel
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=laravel
 //ff:what URL 경로에서 {param} 변수를 추출한다
 package laravel
 

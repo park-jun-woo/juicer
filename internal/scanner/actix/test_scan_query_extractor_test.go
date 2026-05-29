@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what TestScan_QueryExtractor — Query extractor 스캔 테스트
 package actix
 

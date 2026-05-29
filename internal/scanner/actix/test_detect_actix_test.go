@@ -24,18 +24,3 @@ serde = { version = "1", features = ["derive"] }
 		t.Errorf("want actix, got %s", fw)
 	}
 }
-
-func TestDetectActix_NotFound(t *testing.T) {
-	dir := t.TempDir()
-	writeFile(t, dir, "Cargo.toml", `[package]
-name = "my-app"
-
-[dependencies]
-rocket = "0.5"
-`)
-
-	fw := scanner.DetectFramework(dir)
-	if fw == "actix" {
-		t.Errorf("should not detect actix")
-	}
-}

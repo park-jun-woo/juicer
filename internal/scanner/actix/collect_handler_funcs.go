@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=actix
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=actix
 //ff:what Rust 파일에서 모든 함수 정의를 수집하여 핸들러 인덱스에 등록한다
 package actix
 

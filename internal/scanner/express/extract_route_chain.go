@@ -11,17 +11,7 @@ func extractRouteChain(call *sitter.Node, src []byte, routers map[string]bool) [
 	}
 	var routes []routeInfo
 	for _, m := range methods {
-		routes = append(routes, routeInfo{
-			Method:      m.method,
-			Path:        routePath,
-			Router:      routerVar,
-			Handler:     m.handler,
-			HandlerNode: m.handlerNode,
-			Middleware:  m.middleware,
-			Line:        m.line,
-			AuthLevel:   m.authLevel,
-			Roles:       m.roles,
-		})
+		routes = append(routes, chainMethodToRoute(m, routePath, routerVar))
 	}
 	return routes
 }

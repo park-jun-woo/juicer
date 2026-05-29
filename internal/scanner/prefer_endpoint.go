@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=selection
+//ff:func feature=scan type=extract control=sequence
 //ff:what 같은 method+path의 두 후보 중 우선할 쪽을 결정한다 (richness 우선, 동점 시 File→Line 안정적 tie-break)
 package scanner
 

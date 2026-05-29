@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=express
+//ff:func feature=scan type=extract control=iteration dimension=1 topic=express
 //ff:what 단일 import 구문에서 변수명과 파일 경로를 추출하여 매핑에 추가한다
 package express
 

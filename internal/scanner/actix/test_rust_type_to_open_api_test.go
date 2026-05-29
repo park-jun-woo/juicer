@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what TestRustTypeToOpenAPI — Rust 타입 → OpenAPI 변환 테스트
 package actix
 
@@ -30,17 +30,9 @@ func TestRustTypeToOpenAPI(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.input, func(t *testing.T) {
-			got := rustTypeToOpenAPI(tt.input)
-			if got.Type != tt.wantType {
-				t.Errorf("type: want %s, got %s", tt.wantType, got.Type)
-			}
-			if got.Format != tt.wantFormat {
-				t.Errorf("format: want %s, got %s", tt.wantFormat, got.Format)
-			}
-			if got.Items != tt.wantItems {
-				t.Errorf("items: want %s, got %s", tt.wantItems, got.Items)
-			}
+		input, wantType, wantFormat, wantItems := tt.input, tt.wantType, tt.wantFormat, tt.wantItems
+		t.Run(input, func(t *testing.T) {
+			assertRustType(t, input, wantType, wantFormat, wantItems)
 		})
 	}
 }

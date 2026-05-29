@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=sequence topic=laravel
+//ff:func feature=scan type=convert control=selection topic=laravel
 //ff:what PHP 타입을 OpenAPI 타입으로 변환한다
 package laravel
 

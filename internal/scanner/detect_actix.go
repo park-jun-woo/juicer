@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=iteration dimension=1
+//ff:func feature=scan type=extract control=sequence
 //ff:what Cargo.toml에서 actix-web 의존을 확인한다
 package scanner
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=iteration dimension=1 topic=laravel
+//ff:func feature=scan type=test control=sequence topic=laravel
 //ff:what URL 경로에서 path parameter 추출 테스트
 package laravel
 
@@ -14,12 +14,5 @@ func TestExtractURLParams(t *testing.T) {
 	}
 	if params[1].Name != "post" {
 		t.Errorf("second param name = %q, want %q", params[1].Name, "post")
-	}
-}
-
-func TestExtractURLParams_None(t *testing.T) {
-	params := extractURLParams("/users")
-	if len(params) != 0 {
-		t.Errorf("expected 0 params, got %d", len(params))
 	}
 }

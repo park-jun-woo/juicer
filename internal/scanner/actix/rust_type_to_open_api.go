@@ -4,12 +4,6 @@ package actix
 
 import "strings"
 
-type openAPIType struct {
-	Type   string
-	Format string
-	Items  string
-}
-
 func rustTypeToOpenAPI(rtype string) openAPIType {
 	rtype = strings.TrimSpace(rtype)
 
@@ -38,35 +32,5 @@ func rustTypeToOpenAPI(rtype string) openAPIType {
 		return openAPIType{Type: "string", Format: "date"}
 	}
 
-	if strings.HasPrefix(rtype, "Vec<") {
-		inner := extractGenericInner(rtype)
-		return openAPIType{Type: "array", Items: inner}
-	}
-
-	if strings.HasPrefix(rtype, "HashMap<") || strings.HasPrefix(rtype, "BTreeMap<") {
-		return openAPIType{Type: "object"}
-	}
-
-	if strings.HasPrefix(rtype, "Option<") {
-		inner := extractGenericInner(rtype)
-		return rustTypeToOpenAPI(inner)
-	}
-
-	return openAPIType{Type: "object"}
-}
-
-func extractGenericInner(t string) string {
-	idx := strings.Index(t, "<")
-	if idx < 0 {
-		return t
-	}
-	inner := t[idx+1:]
-	if len(inner) > 0 && inner[len(inner)-1] == '>' {
-		inner = inner[:len(inner)-1]
-	}
-	return strings.TrimSpace(inner)
-}
-
-func isOptionType(t string) bool {
-	return strings.HasPrefix(t, "Option<")
+	return rustComplexTypeToOpenAPI(rtype)
 }

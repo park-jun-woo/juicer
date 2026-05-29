@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=iteration dimension=1 topic=laravel
+//ff:func feature=scan type=test control=sequence topic=laravel
 //ff:what Route::get/post 개별 라우트 수집 테스트
 package laravel
 

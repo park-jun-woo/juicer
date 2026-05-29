@@ -1,4 +1,4 @@
-//ff:func feature=scan type=extract control=selection topic=express
+//ff:func feature=scan type=extract control=sequence topic=express
 //ff:what 크로스파일 마운트에서 자식 파일의 어느 라우터 변수에 prefix를 붙일지 결정한다
 package express
 
