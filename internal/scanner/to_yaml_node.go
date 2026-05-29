@@ -20,7 +20,7 @@ func toYAMLNode(v any) *yaml.Node {
 		}
 		sort.Strings(keys)
 		for _, k := range keys {
-			keyNode := &yaml.Node{Kind: yaml.ScalarNode, Value: k}
+			keyNode := &yaml.Node{Kind: yaml.ScalarNode, Value: k, Tag: "!!str"}
 			valNode := toYAMLNode(val[k])
 			node.Content = append(node.Content, keyNode, valNode)
 		}
