@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func findJavaFiles(root string) ([]string, error) {
@@ -16,9 +18,12 @@ func findJavaFiles(root string) ([]string, error) {
 		}
 		name := info.Name()
 		if info.IsDir() {
-			if skipDirs[name] {
+			if skipDirs[name] || scanner.IsTestDir(name) {
 				return filepath.SkipDir
 			}
+			return nil
+		}
+		if scanner.IsTestFile(name) {
 			return nil
 		}
 		if strings.HasSuffix(name, ".java") {

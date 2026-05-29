@@ -93,6 +93,9 @@ func runScan(args []string) {
 		os.Exit(1)
 	}
 
+	// 출력 포맷과 무관하게 (method, path) 기준 중복 엔드포인트를 한 번만 제거한다.
+	result.Endpoints = scanner.DeduplicateEndpoints(result.Endpoints)
+
 	var output []byte
 
 	if *openapiOut {

@@ -10,7 +10,7 @@ func buildSpecNode(result *ScanResult) *yaml.Node {
 	schemas := map[string]any{}
 	paths := map[string]map[string]any{}
 
-	deduplicated := deduplicateEndpoints(result.Endpoints)
+	deduplicated := DeduplicateEndpoints(result.Endpoints)
 	confirmedIDs := deduplicateOperationIDs(deduplicated)
 
 	for i, ep := range deduplicated {

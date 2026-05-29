@@ -2,7 +2,7 @@
 //ff:what method+path 기준으로 중복 엔드포인트를 제거한다 (타입 정보가 풍부한 쪽 우선)
 package scanner
 
-func deduplicateEndpoints(endpoints []Endpoint) []Endpoint {
+func DeduplicateEndpoints(endpoints []Endpoint) []Endpoint {
 	type key struct{ method, path string }
 	best := map[key]Endpoint{}
 	order := []key{}

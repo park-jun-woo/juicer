@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
 func findPHPFiles(root string) ([]string, error) {
@@ -14,13 +16,17 @@ func findPHPFiles(root string) ([]string, error) {
 		if err != nil {
 			return err
 		}
+		name := info.Name()
 		if info.IsDir() {
-			if skipDirs[info.Name()] {
+			if skipDirs[name] || scanner.IsTestDir(name) {
 				return filepath.SkipDir
 			}
 			return nil
 		}
-		if strings.HasSuffix(info.Name(), ".php") {
+		if scanner.IsTestFile(name) {
+			return nil
+		}
+		if strings.HasSuffix(name, ".php") {
 			files = append(files, path)
 		}
 		return nil

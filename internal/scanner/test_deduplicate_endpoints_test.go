@@ -12,7 +12,7 @@ func TestDeduplicateEndpoints(t *testing.T) {
 			{Method: "GET", Path: "/a"},
 			{Method: "POST", Path: "/b"},
 		}
-		got := deduplicateEndpoints(eps)
+		got := DeduplicateEndpoints(eps)
 		if len(got) != 2 {
 			t.Errorf("expected 2, got %d", len(got))
 		}
@@ -23,7 +23,7 @@ func TestDeduplicateEndpoints(t *testing.T) {
 			{Method: "GET", Path: "/a"},
 			{Method: "GET", Path: "/a", Responses: []Response{{TypeName: "User", Fields: []Field{{Name: "id"}}}}},
 		}
-		got := deduplicateEndpoints(eps)
+		got := DeduplicateEndpoints(eps)
 		if len(got) != 1 {
 			t.Errorf("expected 1, got %d", len(got))
 		}

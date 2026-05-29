@@ -9,7 +9,7 @@ func TestDeduplicateEndpoints_WithDuplicate(t *testing.T) {
 		{Method: "GET", Path: "/a"},
 		{Method: "GET", Path: "/a", Responses: []Response{{Status: "200"}}},
 	}
-	result := deduplicateEndpoints(eps)
+	result := DeduplicateEndpoints(eps)
 	if len(result) != 1 {
 		t.Fatalf("expected 1, got %d", len(result))
 	}

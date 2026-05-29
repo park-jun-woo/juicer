@@ -5,7 +5,7 @@ package scanner
 import "testing"
 
 func TestDeduplicateEndpoints_Empty(t *testing.T) {
-	result := deduplicateEndpoints(nil)
+	result := DeduplicateEndpoints(nil)
 	if len(result) != 0 {
 		t.Fatal("expected empty")
 	}
@@ -16,7 +16,7 @@ func TestDeduplicateEndpoints_Empty(t *testing.T) {
 		{Method: "GET", Path: "/api/users", Responses: []Response{{Status: "200", Kind: "json", Fields: []Field{{Name: "id"}}}}},
 		{Method: "POST", Path: "/api/users"},
 	}
-	result = deduplicateEndpoints(eps)
+	result = DeduplicateEndpoints(eps)
 	if len(result) != 2 {
 		t.Fatalf("expected 2 deduplicated, got %d", len(result))
 	}

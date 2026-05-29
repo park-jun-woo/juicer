@@ -10,7 +10,7 @@ func TestDeduplicateEndpoints_WithDuplicatesCov(t *testing.T) {
 		{Method: "GET", Path: "/api/users", Responses: []Response{{Status: "200", Kind: "json", Fields: []Field{{Name: "id"}}}}},
 		{Method: "POST", Path: "/api/users"},
 	}
-	result := deduplicateEndpoints(eps)
+	result := DeduplicateEndpoints(eps)
 	if len(result) != 2 {
 		t.Fatalf("expected 2, got %d", len(result))
 	}

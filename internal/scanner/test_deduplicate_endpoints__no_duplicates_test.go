@@ -9,7 +9,7 @@ func TestDeduplicateEndpoints_NoDuplicates(t *testing.T) {
 		{Method: "GET", Path: "/a"},
 		{Method: "POST", Path: "/b"},
 	}
-	result := deduplicateEndpoints(eps)
+	result := DeduplicateEndpoints(eps)
 	if len(result) != 2 {
 		t.Fatalf("expected 2, got %d", len(result))
 	}
