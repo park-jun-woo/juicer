@@ -12,7 +12,7 @@ func applyHandlerSignature(ep *scanner.Endpoint, funcNode *sitter.Node, src []by
 	exts := extractExtractors(funcNode, src)
 	applyExtractors(ep, exts, sIdx, cache)
 
-	responses := extractResponses(funcNode, src)
+	responses := extractResponses(funcNode, src, sIdx, cache)
 	if len(responses) > 0 {
 		ep.Responses = responses
 	}

@@ -21,6 +21,7 @@ func analyzeHandlers(pkgs []*packages.Package, endpoints []scanner.Endpoint, roo
 		for _, expr := range exprs {
 			info := findInfoForExpr(expr, pkgs)
 			if info == nil {
+				analyzeExprFallback(ep, expr, idx)
 				continue
 			}
 			analyzeExpr(ep, expr, info, idx)

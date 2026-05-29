@@ -8,16 +8,15 @@ import (
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
-func extractResponses(funcNode *sitter.Node, src []byte) []scanner.Response {
+func extractResponses(funcNode *sitter.Node, src []byte, sIdx structIndex, cache map[string][]scanner.Field) []scanner.Response {
 	block := findChildByType(funcNode, "block")
 	if block == nil {
 		return nil
 	}
 
-	seen := map[string]bool{}
-	var responses []scanner.Response
+	ctx := &responseCtx{block: block, src: src, sIdx: sIdx, cache: cache, seen: map[string]bool{}}
 	walkNodes(block, func(n *sitter.Node) {
-		captureResponse(n, src, seen, &responses)
+		captureResponse(n, ctx)
 	})
-	return responses
+	return ctx.responses
 }

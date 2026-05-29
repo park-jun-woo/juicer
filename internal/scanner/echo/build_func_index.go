@@ -12,22 +12,14 @@ import (
 
 func buildFuncIndex(pkgs []*packages.Package) *funcIndex {
 	idx := &funcIndex{
-		byPos: make(map[token.Pos]*ast.FuncDecl),
-		info:  make(map[token.Pos]*types.Info),
+		byPos:      make(map[token.Pos]*ast.FuncDecl),
+		info:       make(map[token.Pos]*types.Info),
+		byName:     make(map[string]*ast.FuncDecl),
+		astStructs: make(map[string]*ast.StructType),
 	}
 	for _, pkg := range pkgs {
-		if pkg.TypesInfo == nil {
-			continue
-		}
 		for _, file := range pkg.Syntax {
-			for _, decl := range file.Decls {
-				fn, ok := decl.(*ast.FuncDecl)
-				if !ok || fn.Body == nil {
-					continue
-				}
-				idx.byPos[fn.Name.Pos()] = fn
-				idx.info[fn.Name.Pos()] = pkg.TypesInfo
-			}
+			indexFileDecls(file, pkg.TypesInfo, idx)
 		}
 	}
 	return idx

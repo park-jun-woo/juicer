@@ -10,6 +10,8 @@ import (
 
 // funcIndex — 프로젝트 내 모든 함수/메서드 선언을 pos로 인덱싱
 type funcIndex struct {
-	byPos map[token.Pos]*ast.FuncDecl // 선언 위치 → FuncDecl
-	info  map[token.Pos]*types.Info   // 선언 위치 → 해당 패키지의 TypesInfo
+	byPos      map[token.Pos]*ast.FuncDecl // 선언 위치 → FuncDecl
+	info       map[token.Pos]*types.Info   // 선언 위치 → 해당 패키지의 TypesInfo
+	byName     map[string]*ast.FuncDecl    // 함수명 → FuncDecl (타입정보 무관 AST 폴백용)
+	astStructs map[string]*ast.StructType  // struct 타입명 → StructType (AST 폴백용)
 }
