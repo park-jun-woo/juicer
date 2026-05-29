@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.8-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.9-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,22 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.9
+
+**Generated DDL is now executable** (verified against a live PostgreSQL 16 + pgvector). Driven by reproducing a real Prisma-backed stack (Express + TypeScript + Prisma, multi-tenant composite FKs, pgvector embeddings, enums).
+
+- **Prisma enums** → `CREATE TYPE … AS ENUM (…)` emitted before the tables that use them; enum-valued defaults are quoted (`DEFAULT 'USER'`).
+- **Identifier quoting** — every table/column/enum-type/FK identifier is double-quoted like Prisma does, so reserved-word models (`User`, `Order`) no longer fail with a syntax error and mixed-case names (`orgId`) are preserved instead of folded to lowercase.
+- **FK-aware table ordering** — tables are topologically sorted (referenced tables first) and per-table files get fixed-width numeric prefixes (`00_enums.sql`, `01_…`), so applying them in order satisfies foreign keys. Cycles fall back to a deterministic order with a warning.
+
+**Richer OpenAPI from Express scans:**
+
+- **Response status codes** are emitted as strings (`"200"`) per the OpenAPI 3.0 spec.
+- **requestBody from validation schemas** — cross-file Joi schemas (`validate(authValidation.register)`), barrel re-exports (`export { default as x } from './x'`), and validators on chained routes (`router.route().post(validate(...), …)`) are now resolved into `requestBody`/parameters. Works whether the validator is the first argument or follows other middleware, for both Joi and zod.
+- **Security** — `auth(...)` middleware is recognized so protected routes emit `security: [{ bearerAuth: [] }]` with a `bearerAuth` security scheme; public routes stay open.
+
+Internal: new `internal/scanner/joi` parser; `internal/prisma`/`internal/ddl` extended; one-file-one-function convention (`filefunc validate` clean); full `go test ./...` green.
 
 ### v0.1.8
 
