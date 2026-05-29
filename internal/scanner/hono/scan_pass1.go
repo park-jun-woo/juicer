@@ -9,13 +9,14 @@ func scanPass1(tsFiles []string, absRoot string) *scanContext {
 	honoVars := make(map[string]map[string]bool)
 	basePaths := make(map[string]string)
 	schemas := make(map[string]*sitter.Node)
+	imports := make(map[string]map[string]string)
 	var allGroups []routeGroup
 
 	for _, path := range tsFiles {
-		mergePass1Result(path, parsed, honoVars, basePaths, schemas, &allGroups)
+		mergePass1Result(path, absRoot, parsed, honoVars, basePaths, schemas, &allGroups, imports)
 	}
 
-	prefixMap := resolveRoutePrefixes(allGroups, basePaths)
+	prefixMap := resolveRoutePrefixes(allGroups, basePaths, honoVars, imports)
 	return &scanContext{
 		parsed:    parsed,
 		honoVars:  honoVars,
@@ -23,6 +24,7 @@ func scanPass1(tsFiles []string, absRoot string) *scanContext {
 		groups:    allGroups,
 		schemas:   schemas,
 		prefixMap: prefixMap,
+		imports:   imports,
 		absRoot:   absRoot,
 	}
 }

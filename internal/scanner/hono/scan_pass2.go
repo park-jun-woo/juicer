@@ -21,7 +21,7 @@ func scanPass2(ctx *scanContext) []scanner.Endpoint {
 		}
 		routes := collectRoutes(fi, vars)
 		for _, r := range routes {
-			eps := buildEndpointsFromRoute(r, vars, ctx, fi, relPath)
+			eps := buildEndpointsFromRoute(r, vars, ctx, fi, relPath, path)
 			endpoints = append(endpoints, eps...)
 		}
 	}

@@ -4,9 +4,9 @@ package hono
 
 import "github.com/park-jun-woo/codistill/internal/scanner"
 
-func buildEndpointsFromRoute(r routeInfo, vars map[string]bool, ctx *scanContext, fi *fileInfo, relPath string) []scanner.Endpoint {
+func buildEndpointsFromRoute(r routeInfo, vars map[string]bool, ctx *scanContext, fi *fileInfo, relPath, absPath string) []scanner.Endpoint {
 	methods := expandAllMethod(r.Method)
-	prefix := resolveRouteOwnerPrefix(r, ctx)
+	prefix := resolveRouteOwnerPrefix(r, ctx, absPath)
 	fullPath := joinHonoPath(prefix, r.Path)
 	oaPath := honoPathToOpenAPI(fullPath)
 	pathParams := extractPathParams(fullPath)

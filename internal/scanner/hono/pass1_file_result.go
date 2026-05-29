@@ -10,4 +10,5 @@ type pass1FileResult struct {
 	bp      map[string]string
 	schemas map[string]*sitter.Node
 	groups  []routeGroup
+	imports map[string]string
 }

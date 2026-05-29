@@ -21,7 +21,11 @@ func extractOneRoute(call *sitter.Node, src []byte, honoVars map[string]bool) *r
 	if prop == nil {
 		return nil
 	}
-	upperMethod, ok := httpMethods[nodeText(prop, src)]
+	propName := nodeText(prop, src)
+	if propName == "openapi" {
+		return extractOpenAPIRoute(call, src, ownerVar)
+	}
+	upperMethod, ok := httpMethods[propName]
 	if !ok {
 		return nil
 	}

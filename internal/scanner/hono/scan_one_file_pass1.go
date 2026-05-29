@@ -4,7 +4,7 @@ package hono
 
 import "github.com/park-jun-woo/codistill/internal/scanner/zod"
 
-func scanOneFilePass1(path string) *pass1FileResult {
+func scanOneFilePass1(path, absRoot string) *pass1FileResult {
 	fi, err := parseFile(path)
 	if err != nil {
 		return nil
@@ -16,5 +16,6 @@ func scanOneFilePass1(path string) *pass1FileResult {
 	for i := range groups {
 		groups[i].SourceFile = path
 	}
-	return &pass1FileResult{fi: fi, vars: vars, bp: bp, schemas: schemas, groups: groups}
+	imports := resolveImports(fi, absRoot)
+	return &pass1FileResult{fi: fi, vars: vars, bp: bp, schemas: schemas, groups: groups, imports: imports}
 }

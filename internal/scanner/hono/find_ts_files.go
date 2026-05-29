@@ -1,5 +1,5 @@
 //ff:func feature=scan type=extract control=sequence topic=hono
-//ff:what 프로젝트 전체에서 .ts 파일 경로를 수집한다 (node_modules, dist, build, .git, test, __tests__, spec 제외)
+//ff:what 프로젝트 전체에서 .ts/.tsx 파일 경로를 수집한다 (node_modules, dist, build, .git, test, __tests__, spec, .d.ts 제외)
 package hono
 
 import (
@@ -22,7 +22,10 @@ func findTSFiles(root string) ([]string, error) {
 			return nil
 		}
 		name := info.Name()
-		if strings.HasSuffix(name, ".ts") && !strings.HasSuffix(name, ".d.ts") {
+		if strings.HasSuffix(name, ".d.ts") {
+			return nil
+		}
+		if strings.HasSuffix(name, ".ts") || strings.HasSuffix(name, ".tsx") {
 			files = append(files, path)
 		}
 		return nil

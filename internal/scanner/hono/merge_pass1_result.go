@@ -4,8 +4,8 @@ package hono
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-func mergePass1Result(path string, parsed map[string]*fileInfo, honoVars map[string]map[string]bool, basePaths map[string]string, schemas map[string]*sitter.Node, allGroups *[]routeGroup) {
-	r := scanOneFilePass1(path)
+func mergePass1Result(path, absRoot string, parsed map[string]*fileInfo, honoVars map[string]map[string]bool, basePaths map[string]string, schemas map[string]*sitter.Node, allGroups *[]routeGroup, imports map[string]map[string]string) {
+	r := scanOneFilePass1(path, absRoot)
 	if r == nil {
 		return
 	}
@@ -14,10 +14,13 @@ func mergePass1Result(path string, parsed map[string]*fileInfo, honoVars map[str
 		honoVars[path] = r.vars
 	}
 	for k, v := range r.bp {
-		basePaths[k] = v
+		basePaths[prefixKey(path, k)] = v
 	}
 	for k, v := range r.schemas {
 		schemas[k] = v
 	}
 	*allGroups = append(*allGroups, r.groups...)
+	if len(r.imports) > 0 {
+		imports[path] = r.imports
+	}
 }
