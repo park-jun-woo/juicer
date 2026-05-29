@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.5-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.6-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,26 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.6
+
+**Path/route accuracy across frameworks** (the big one — paths were the #1 correctness problem). Validated by re-scanning real-world apps; e.g. Flask `flasky` now emits `/auth/login`, `/api/v1/posts/{id}/comments/` instead of the bare, prefix-stripped `/login`, `/posts/`.
+
+- **Django** — pure `urlpatterns` support: `path()`/`re_path()`, `include()` recursive mounting with prefix composition, function/CBV (`as_view()`) views, `i18n_patterns()` unwrapping. Previously only DRF routers were recognized (router-less apps scanned to 0 endpoints).
+- **Flask** — cross-file `register_blueprint(bp, url_prefix=...)` composition, including import-alias resolution. Blueprint-prefixed paths are no longer dropped.
+- **Hono** — `.tsx` files scanned; `OpenAPIHono` + `app.openapi(createRoute({method,path}))` recognized; cross-file `app.route('/prefix', subApp)` mounts composed via per-`(file, var)` prefix keys.
+- **Echo** — non-literal path args (`e.GET(config.X, h)`) resolved via `go/types`; group-prefix const args resolved; echo v4 **and** v5 import paths recognized; `*` wildcard normalized to `{wildcard}`.
+- **Fastify** — `register(plugin, {prefix})` (incl. async wrapper) and `@fastify/autoload` directory prefixes composed.
+- **Laravel** — fixed malformed `apiResource` path params (`{/product}` → `{product}`), group `prefix` now applied to nested `apiResource`, `routes/api.php` `/api` prefix, chained route handling.
+- **ASP.NET Core** — method-level `[Route("seg")]`/`[HttpGet("seg")]` segments composed onto the controller base path (actions no longer collapse to one path); `{version:apiVersion}` token normalized.
+- **Actix** — multi-line `web::resource().route()` chains, inline-closure handlers, and method-less `.to()` (ANY) resources now detected.
+- Scan hygiene — `tests/`/`__tests__`/`*.test.*` fixtures excluded; duplicate endpoints de-duplicated. Path templates/wildcards normalized; `operationId` doubling removed.
+
+**Request body schemas** — fiber `c.Bind().Body()`, Flask `request.form`/`request.json` fields, Fastify TypeBox, ASP.NET `[FromBody]` → `requestBody`.
+
+**Response schemas** — a status-code + body-type model was added (Go `c.JSON`/`c.Status`, ASP.NET/Laravel envelopes). Still limited for frameworks that expose little declarative response info (e.g. Flask); richer response extraction is an ongoing follow-up.
+
+Internal: scanner code refactored to the project's one-file-one-function convention (`filefunc validate` clean); full `go test ./...` green.
 
 ### v0.1.5
 
