@@ -5,6 +5,7 @@ required:
     sql: "SQL skeleton extraction from repository code"
     hurl: "Hurl endpoint test ratchet loop"
     ratchet: "sequential verification loop for sqlc query writing"
+    prisma: "Prisma schema parsing to DDL tables"
   type:
     command: "CLI entrypoint and subcommand dispatch"
     extract: "static analysis extraction logic"

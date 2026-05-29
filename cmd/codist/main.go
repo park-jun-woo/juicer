@@ -18,6 +18,8 @@ func main() {
 		runScan(os.Args[2:])
 	case "ddl":
 		runDDL(os.Args[2:])
+	case "prisma":
+		runPrisma(os.Args[2:])
 	case "sql":
 		runSQL(os.Args[2:])
 	case "version":

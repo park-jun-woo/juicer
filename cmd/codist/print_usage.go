@@ -13,6 +13,7 @@ func printUsage() {
 Usage:
   codist scan [project-root] [flags]
   codist ddl [migrations-dir] [flags]
+  codist prisma [schema.prisma|prisma-dir] [flags]
   codist sql [repository-dir] [flags]
   codist sql next [--repo DIR --queries DIR]
   codist sql status
@@ -28,6 +29,9 @@ scan flags:
   -o string           output file path
 
 ddl flags:
+  -o string   output directory (one .sql file per table)
+
+prisma flags:
   -o string   output directory (one .sql file per table)
 
 sql flags:
