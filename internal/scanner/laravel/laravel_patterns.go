@@ -19,6 +19,7 @@ var apiResourceActions = []apiResourceAction{
 	{method: "POST", suffix: "", action: "store", hasParam: false},
 	{method: "GET", suffix: "/{%s}", action: "show", hasParam: true},
 	{method: "PUT", suffix: "/{%s}", action: "update", hasParam: true},
+	{method: "PATCH", suffix: "/{%s}", action: "update", hasParam: true},
 	{method: "DELETE", suffix: "/{%s}", action: "destroy", hasParam: true},
 }
 

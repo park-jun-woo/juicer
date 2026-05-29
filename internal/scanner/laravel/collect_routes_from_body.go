@@ -19,7 +19,8 @@ func collectRoutesFromBody(body *sitter.Node, fi fileInfo, prefix string, middle
 	routes = append(routes, collectAPIResource(bodyFI, prefix, middleware)...)
 
 	for _, mc := range findAllByType(body, "member_call_expression") {
-		routes = append(routes, extractOneGroup(mc, bodyFI, prefix, middleware)...)
+		routes = append(routes, extractMemberCallRoutes(mc, bodyFI, prefix, middleware)...)
 	}
+	routes = append(routes, collectScopedGroups(bodyFI, prefix, middleware)...)
 	return routes
 }

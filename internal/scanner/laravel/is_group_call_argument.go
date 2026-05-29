@@ -7,8 +7,10 @@ import (
 )
 
 // isGroupCallArgument reports whether closure is passed as the argument of a
-// ->group(...) call. The closure sits inside argument/arguments wrappers whose
-// enclosing member_call_expression names the "group" method.
+// group(...) call, covering both the chained Route::prefix()->group(fn) form
+// (member_call_expression) and the array form Route::group([...], fn)
+// (scoped_call_expression). The closure sits inside argument/arguments wrappers
+// whose enclosing call names the "group" method.
 func isGroupCallArgument(closure *sitter.Node, fi fileInfo) bool {
 	for a := closure.Parent(); a != nil; a = a.Parent() {
 		switch a.Type() {
@@ -16,6 +18,8 @@ func isGroupCallArgument(closure *sitter.Node, fi fileInfo) bool {
 			continue
 		case "member_call_expression":
 			return memberCallName(a, fi.src) == "group"
+		case "scoped_call_expression":
+			return secondScopedName(a, fi.src) == "group"
 		default:
 			return false
 		}

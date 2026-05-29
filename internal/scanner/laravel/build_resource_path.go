@@ -8,9 +8,10 @@ import "strings"
 // "users" -> ("users", "user")
 // "users.posts" -> ("users/{user}/posts", "post")
 func buildResourcePath(name string) (string, string) {
+	name = strings.Trim(name, "/")
 	parts := strings.Split(name, ".")
 	if len(parts) == 1 {
-		return parts[0], singularize(parts[0])
+		return parts[0], lastSegmentSingular(parts[0])
 	}
 	var path string
 	for i, part := range parts {
@@ -23,5 +24,5 @@ func buildResourcePath(name string) (string, string) {
 			path += "/{" + singularize(part) + "}"
 		}
 	}
-	return path, singularize(parts[len(parts)-1])
+	return path, lastSegmentSingular(parts[len(parts)-1])
 }

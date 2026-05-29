@@ -17,8 +17,8 @@ Route::apiResource('users.posts', PostController::class);
 		t.Fatal(err)
 	}
 	routes := collectAPIResource(*fi, "api", nil)
-	if len(routes) != 5 {
-		t.Fatalf("expected 5 routes, got %d", len(routes))
+	if len(routes) != 6 {
+		t.Fatalf("expected 6 routes, got %d", len(routes))
 	}
 	if routes[0].path != "/api/users/{user}/posts" {
 		t.Errorf("route[0].path = %q, want %q", routes[0].path, "/api/users/{user}/posts")

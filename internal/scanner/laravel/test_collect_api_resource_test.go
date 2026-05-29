@@ -17,11 +17,11 @@ Route::apiResource('posts', PostController::class);
 		t.Fatal(err)
 	}
 	routes := collectAPIResource(*fi, "api", nil)
-	if len(routes) != 5 {
+	if len(routes) != 6 {
 		for _, r := range routes {
 			t.Logf("  %s %s (%s@%s)", r.method, r.path, r.controller, r.action)
 		}
-		t.Fatalf("expected 5 routes, got %d", len(routes))
+		t.Fatalf("expected 6 routes, got %d", len(routes))
 	}
 
 	expected := []struct {
@@ -33,6 +33,7 @@ Route::apiResource('posts', PostController::class);
 		{"POST", "/api/posts", "store"},
 		{"GET", "/api/posts/{post}", "show"},
 		{"PUT", "/api/posts/{post}", "update"},
+		{"PATCH", "/api/posts/{post}", "update"},
 		{"DELETE", "/api/posts/{post}", "destroy"},
 	}
 	for i, exp := range expected {

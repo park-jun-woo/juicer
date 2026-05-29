@@ -13,6 +13,10 @@ import (
 // Pass 1: collect route structure from routes/api.php and routes/web.php.
 // Pass 2: resolve controller methods — extract parameter types and return info.
 // Pass 3: resolve FormRequest rules and Resource response fields.
+//
+// Known limitation: dynamic route macros such as Auth::routes() are not
+// expanded. They register routes at runtime via framework internals, which is
+// outside the reach of static analysis, so the routes they emit are omitted.
 func Scan(root string) (*scanner.ScanResult, error) {
 	absRoot, err := filepath.Abs(root)
 	if err != nil {
