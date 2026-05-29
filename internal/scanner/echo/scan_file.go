@@ -5,10 +5,11 @@ package echo
 import (
 	"go/ast"
 	"go/token"
+	"go/types"
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
-func scanFile(file *ast.File, filePath string, fset *token.FileSet) ([]scanner.Endpoint, map[int][]ast.Expr) {
+func scanFile(info *types.Info, file *ast.File, filePath string, fset *token.FileSet) ([]scanner.Endpoint, map[int][]ast.Expr) {
 	echoAlias := echoPkgName(file)
 	if echoAlias == "" {
 		return nil, nil
@@ -25,7 +26,7 @@ func scanFile(file *ast.File, filePath string, fset *token.FileSet) ([]scanner.E
 		registerParams(fn, echoAlias, routers)
 		var eps []scanner.Endpoint
 		localMap := map[int][]ast.Expr{}
-		walkStmts(fn.Body.List, echoAlias, filePath, fset, routers, &eps, localMap)
+		walkStmts(info, fn.Body.List, echoAlias, filePath, fset, routers, &eps, localMap)
 		// localMap 인덱스를 전역 오프셋으로 변환
 		offset := len(endpoints)
 		for k, v := range localMap {

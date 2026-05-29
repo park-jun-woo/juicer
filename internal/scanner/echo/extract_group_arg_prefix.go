@@ -32,7 +32,7 @@ func extractGroupArgPrefix(arg ast.Expr, ctx *groupArgCtx) (string, *routerInfo,
 
 	prefix := parent.prefix
 	if len(groupCall.Args) > 0 {
-		if s, ok := extractPathString(groupCall.Args[0]); ok {
+		if s, ok := extractPathString(ctx.info, groupCall.Args[0]); ok {
 			prefix = scanner.JoinPath(prefix, s)
 		}
 	}

@@ -4,10 +4,11 @@ package echo
 
 import (
 	"go/ast"
+	"go/types"
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
-func processAssign(stmt *ast.AssignStmt, echoAlias string, routers map[string]*routerInfo) {
+func processAssign(info *types.Info, stmt *ast.AssignStmt, echoAlias string, routers map[string]*routerInfo) {
 	for i, rhs := range stmt.Rhs {
 		if i >= len(stmt.Lhs) {
 			break
@@ -38,7 +39,7 @@ func processAssign(stmt *ast.AssignStmt, echoAlias string, routers map[string]*r
 			}
 			prefix := parent.prefix
 			if len(call.Args) > 0 {
-				if s, ok := extractPathString(call.Args[0]); ok {
+				if s, ok := extractPathString(info, call.Args[0]); ok {
 					prefix = scanner.JoinPath(prefix, s)
 				}
 			}

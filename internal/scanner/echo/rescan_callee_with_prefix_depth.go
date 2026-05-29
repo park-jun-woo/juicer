@@ -38,7 +38,7 @@ func rescanCalleeWithPrefixDepth(call *ast.CallExpr, argIdx int, prefix string, 
 	}
 	var eps []scanner.Endpoint
 	localMap := map[int][]ast.Expr{}
-	walkStmts(fnDecl.Body.List, targetEchoAlias, targetFile, ctx.fset, targetRouters, &eps, localMap)
+	walkStmts(fnInfo, fnDecl.Body.List, targetEchoAlias, targetFile, ctx.fset, targetRouters, &eps, localMap)
 
 	applyRescanResults(eps, ctx)
 

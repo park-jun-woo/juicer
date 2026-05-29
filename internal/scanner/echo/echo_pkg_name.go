@@ -10,7 +10,7 @@ import (
 func echoPkgName(file *ast.File) string {
 	for _, imp := range file.Imports {
 		p := strings.Trim(imp.Path.Value, `"`)
-		if p == echoPkgPath {
+		if isEchoPkgPath(p) {
 			if imp.Name != nil {
 				return imp.Name.Name
 			}

@@ -4,7 +4,6 @@ package echo
 
 import (
 	"go/types"
-	"strings"
 )
 
 func isEchoRouterTypeInfo(t types.Type) bool {
@@ -25,5 +24,5 @@ func isEchoRouterTypeInfo(t types.Type) bool {
 	if pkg == nil {
 		return false
 	}
-	return strings.HasSuffix(pkg.Path(), "labstack/echo/v4")
+	return hasEchoPkgSuffix(pkg.Path())
 }

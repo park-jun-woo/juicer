@@ -2,8 +2,11 @@
 //ff:what Echo 패키지 경로, HTTP 메서드명, 라우터 타입명 상수
 package echo
 
-// echoPkgPath is the import path of Echo v4.
-const echoPkgPath = "github.com/labstack/echo/v4"
+// echoPkgPaths lists the import paths of Echo (v4 and v5).
+var echoPkgPaths = []string{
+	"github.com/labstack/echo/v4",
+	"github.com/labstack/echo/v5",
+}
 
 // echoMethods maps HTTP method registration names to true.
 var echoMethods = map[string]bool{

@@ -9,11 +9,7 @@ import (
 func echoPathToOpenAPI(path string) string {
 	segments := strings.Split(path, "/")
 	for i, seg := range segments {
-		if strings.HasPrefix(seg, ":") {
-			segments[i] = "{" + seg[1:] + "}"
-		} else if strings.HasPrefix(seg, "*") {
-			segments[i] = "{" + seg[1:] + "}"
-		}
+		segments[i] = echoSegmentToOpenAPI(seg)
 	}
 	return strings.Join(segments, "/")
 }

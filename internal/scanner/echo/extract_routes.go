@@ -21,7 +21,7 @@ func extractRoutes(pkgs []*packages.Package, root string) ([]scanner.Endpoint, m
 				continue
 			}
 			rel, _ := filepath.Rel(root, pkg.CompiledGoFiles[i])
-			eps, hmap := scanFile(file, rel, pkg.Fset)
+			eps, hmap := scanFile(pkg.TypesInfo, file, rel, pkg.Fset)
 			// hmap 인덱스를 전역 오프셋으로 변환
 			offset := len(endpoints)
 			for k, v := range hmap {

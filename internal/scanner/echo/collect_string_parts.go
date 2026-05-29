@@ -5,9 +5,10 @@ package echo
 import (
 	"go/ast"
 	"go/token"
+	"go/types"
 )
 
-func collectStringParts(expr ast.Expr, parts *[]string) {
+func collectStringParts(info *types.Info, expr ast.Expr, parts *[]string) {
 	switch e := expr.(type) {
 	case *ast.BasicLit:
 		if e.Kind == token.STRING {
@@ -15,12 +16,13 @@ func collectStringParts(expr ast.Expr, parts *[]string) {
 		}
 	case *ast.BinaryExpr:
 		if e.Op == token.ADD {
-			collectStringParts(e.X, parts)
-			collectStringParts(e.Y, parts)
+			collectStringParts(info, e.X, parts)
+			collectStringParts(info, e.Y, parts)
 		}
-	case *ast.SelectorExpr:
-		// Runtime field access like options.BaseURL — skip, collect other parts
-	case *ast.Ident:
-		// Variable reference like baseURL — skip, collect other parts
+	case *ast.SelectorExpr, *ast.Ident:
+		// const reference like config.APIBooks — resolve via types.Info
+		if v := resolveExprConst(info, e); v != "" {
+			*parts = append(*parts, v)
+		}
 	}
 }

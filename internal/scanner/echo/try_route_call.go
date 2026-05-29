@@ -5,10 +5,11 @@ package echo
 import (
 	"go/ast"
 	"go/token"
+	"go/types"
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
 
-func tryRouteCall(call *ast.CallExpr, routers map[string]*routerInfo, filePath string, fset *token.FileSet) (scanner.Endpoint, []ast.Expr, bool) {
+func tryRouteCall(info *types.Info, call *ast.CallExpr, routers map[string]*routerInfo, filePath string, fset *token.FileSet) (scanner.Endpoint, []ast.Expr, bool) {
 	sel, ok := call.Fun.(*ast.SelectorExpr)
 	if !ok {
 		return scanner.Endpoint{}, nil, false
@@ -24,7 +25,7 @@ func tryRouteCall(call *ast.CallExpr, routers map[string]*routerInfo, filePath s
 	if len(call.Args) < 2 {
 		return scanner.Endpoint{}, nil, false
 	}
-	pathStr, ok := extractPathString(call.Args[0])
+	pathStr, ok := extractPathString(info, call.Args[0])
 	if !ok {
 		return scanner.Endpoint{}, nil, false
 	}

@@ -5,16 +5,17 @@ package echo
 import (
 	"go/ast"
 	"go/token"
+	"go/types"
 	"strings"
 )
 
 // extractBinaryPath extracts a path from a string concatenation BinaryExpr.
-func extractBinaryPath(e *ast.BinaryExpr) (string, bool) {
+func extractBinaryPath(info *types.Info, e *ast.BinaryExpr) (string, bool) {
 	if e.Op != token.ADD {
 		return "", false
 	}
 	var parts []string
-	collectStringParts(e, &parts)
+	collectStringParts(info, e, &parts)
 	if len(parts) > 0 {
 		return strings.Join(parts, ""), true
 	}

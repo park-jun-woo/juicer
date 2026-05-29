@@ -10,7 +10,7 @@ func walkForGroupArgs(stmts []ast.Stmt, ctx *groupArgCtx) {
 	for _, stmt := range stmts {
 		switch s := stmt.(type) {
 		case *ast.AssignStmt:
-			processAssign(s, ctx.echoAlias, ctx.routers)
+			processAssign(ctx.info, s, ctx.echoAlias, ctx.routers)
 		case *ast.ExprStmt:
 			call, ok := s.X.(*ast.CallExpr)
 			if !ok {
