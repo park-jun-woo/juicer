@@ -9,5 +9,5 @@ import (
 func TestRunSQL_YAML_Stdout(t *testing.T) {
 	// Empty dir — no *_repo.go files, returns empty result
 	dir := t.TempDir()
-	runSQL([]string{dir})
+	execSQL([]string{dir})
 }

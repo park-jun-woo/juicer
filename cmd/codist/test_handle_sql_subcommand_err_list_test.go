@@ -12,7 +12,7 @@ func TestHandleSQLSubcommand_ErrList(t *testing.T) {
 	if os.Getenv("TEST_HSSC_LIST") == "1" {
 		_, cleanup := helperSetupBrokenSession(t)
 		defer cleanup()
-		handleSQLSubcommand([]string{"list"})
+		execSQLSub([]string{"list"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHandleSQLSubcommand_ErrList$")

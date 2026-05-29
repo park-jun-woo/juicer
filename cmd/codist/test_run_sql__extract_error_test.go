@@ -17,7 +17,7 @@ func TestRunSQL_ExtractError(t *testing.T) {
 		os.WriteFile(f, []byte("package main"), 0o644)
 		os.Chmod(f, 0o000)
 		defer os.Chmod(f, 0o644)
-		runSQL([]string{dir})
+		execSQL([]string{dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQL_ExtractError$")

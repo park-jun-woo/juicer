@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_FrameworkFlag(t *testing.T) {
 	dir := setupMinimalGoProject(t)
-	runScan([]string{"-framework", "gogin", dir})
+	execScan([]string{"--framework", "gogin", dir})
 }

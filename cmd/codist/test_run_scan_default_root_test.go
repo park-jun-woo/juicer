@@ -18,5 +18,5 @@ func TestRunScan_DefaultRoot(t *testing.T) {
 	defer os.Chdir(oldWd)
 
 	outFile := filepath.Join(dir, "out.yaml")
-	runScan([]string{"-o", outFile})
+	execScan([]string{"-o", outFile})
 }

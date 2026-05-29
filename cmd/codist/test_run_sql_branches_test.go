@@ -12,18 +12,18 @@ func TestRunSQL_Branches(t *testing.T) {
 	dir := t.TempDir()
 
 	// yaml stdout (default, empty dir)
-	runSQL([]string{dir})
+	execSQL([]string{dir})
 
 	// json stdout
-	runSQL([]string{"-json", dir})
+	execSQL([]string{"--json", dir})
 
 	// output to file
 	outFile := filepath.Join(t.TempDir(), "out.yaml")
-	runSQL([]string{"-o", outFile, dir})
+	execSQL([]string{"-o", outFile, dir})
 
 	// default dir = "."
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runSQL([]string{})
+	execSQL([]string{})
 }

@@ -20,5 +20,5 @@ export class AppController {
   getHello(): string { return 'hello'; }
 }
 `), 0o644)
-	runScan([]string{"--framework", "nestjs", dir})
+	execScan([]string{"--framework", "nestjs", dir})
 }

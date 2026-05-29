@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_OpenAPIFlag(t *testing.T) {
 	dir := setupMinimalGoProject(t)
-	runScan([]string{"-openapi", dir})
+	execScan([]string{"--openapi", dir})
 }

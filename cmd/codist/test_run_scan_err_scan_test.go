@@ -10,7 +10,7 @@ import (
 
 func TestRunScan_ErrScan(t *testing.T) {
 	if os.Getenv("TEST_SCAN_ERR") == "1" {
-		runScan([]string{"/nonexistent/path/no/gomod"})
+		execScan([]string{"/nonexistent/path/no/gomod"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ErrScan$")

@@ -11,7 +11,7 @@ import (
 func TestRunScan_ErrUnknownFramework(t *testing.T) {
 	if os.Getenv("TEST_SCAN_UNKNOWN_FW") == "1" {
 		dir := setupMinimalGoProject(t)
-		runScan([]string{"-framework", "unknown", dir})
+		execScan([]string{"--framework", "unknown", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ErrUnknownFramework$")

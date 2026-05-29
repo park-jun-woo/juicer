@@ -16,11 +16,11 @@ func TestRunDDL_StdoutBranch(t *testing.T) {
 	}
 
 	// stdout branch: no -o flag, dir passed as positional arg
-	runDDL([]string{dir})
+	execDDL([]string{dir})
 
 	// output-dir branch: -o writes one .sql file per table
 	outDir := filepath.Join(t.TempDir(), "out")
-	runDDL([]string{"-o", outDir, dir})
+	execDDL([]string{"-o", outDir, dir})
 
 	entries, err := os.ReadDir(outDir)
 	if err != nil {

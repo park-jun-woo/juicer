@@ -19,5 +19,5 @@ func TestRunSQLNext_FlagsBranch(t *testing.T) {
 	defer os.Chdir(oldWd)
 	// success path; the err != nil branch on line 19 calls os.Exit and
 	// cannot be covered in-process.
-	runSQLNext([]string{"-repo", repoDir, "-queries", queriesDir})
+	execSQLNext([]string{"--repo", repoDir, "--queries", queriesDir})
 }

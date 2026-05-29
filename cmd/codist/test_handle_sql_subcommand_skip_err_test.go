@@ -12,7 +12,7 @@ func TestHandleSQLSubcommand_SkipErr(t *testing.T) {
 	if os.Getenv("HSSC_ERR_SKIP") == "1" {
 		_, cleanup := helperSetupBrokenSession(t)
 		defer cleanup()
-		handleSQLSubcommand([]string{"skip"})
+		execSQLSub([]string{"skip"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHandleSQLSubcommand_SkipErr$")

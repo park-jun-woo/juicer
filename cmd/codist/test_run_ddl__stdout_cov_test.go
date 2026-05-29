@@ -12,5 +12,5 @@ func TestRunDDL_StdoutCov(t *testing.T) {
 	dir := t.TempDir()
 	sql := "CREATE TABLE users (id INT PRIMARY KEY, name TEXT);\n"
 	os.WriteFile(filepath.Join(dir, "001.sql"), []byte(sql), 0o644)
-	runDDL([]string{dir})
+	execDDL([]string{dir})
 }

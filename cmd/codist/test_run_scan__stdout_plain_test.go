@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_StdoutPlain(t *testing.T) {
 	dir := setupMinimalGoProject(t)
-	runScan([]string{dir})
+	execScan([]string{dir})
 }

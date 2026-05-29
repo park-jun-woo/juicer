@@ -11,7 +11,7 @@ import (
 func TestRunScan_JSON(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "output.json")
-	runScan([]string{"-json", "-o", outFile, dir})
+	execScan([]string{"--json", "-o", outFile, dir})
 
 	if _, err := os.Stat(outFile); err != nil {
 		t.Fatalf("expected output file: %v", err)

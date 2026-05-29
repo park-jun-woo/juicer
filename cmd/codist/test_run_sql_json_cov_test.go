@@ -10,5 +10,5 @@ import (
 func TestRunSQL_JSONCov(t *testing.T) {
 	dir := t.TempDir()
 	outFile := filepath.Join(dir, "out.json")
-	runSQL([]string{dir, "--json", "-o", outFile})
+	execSQL([]string{dir, "--json", "-o", outFile})
 }

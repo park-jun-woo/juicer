@@ -11,7 +11,7 @@ import (
 func TestRunSQL_ToFile(t *testing.T) {
 	dir := t.TempDir()
 	out := filepath.Join(t.TempDir(), "out.yaml")
-	runSQL([]string{"-o", out, dir})
+	execSQL([]string{"-o", out, dir})
 	if _, err := os.Stat(out); err != nil {
 		t.Fatalf("output file not created: %v", err)
 	}

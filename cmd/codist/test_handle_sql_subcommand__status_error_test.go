@@ -13,7 +13,7 @@ func TestHandleSQLSubcommand_StatusError(t *testing.T) {
 	if os.Getenv("TEST_SUBPROCESS_STATUS") == "1" {
 		_, cleanup := helperSetupBrokenSession(t)
 		defer cleanup()
-		handleSQLSubcommand([]string{"status"})
+		execSQLSub([]string{"status"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHandleSQLSubcommand_StatusError$")

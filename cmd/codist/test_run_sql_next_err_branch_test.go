@@ -12,7 +12,7 @@ func TestRunSQLNext_ErrBranch(t *testing.T) {
 	if os.Getenv("RSN_ERR") == "1" {
 		_, cleanup := helperSetupBrokenSession(t)
 		defer cleanup()
-		runSQLNext([]string{})
+		execSQLNext([]string{})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQLNext_ErrBranch$")

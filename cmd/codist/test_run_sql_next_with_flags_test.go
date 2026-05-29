@@ -17,5 +17,5 @@ func TestRunSQLNext_WithFlags(t *testing.T) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runSQLNext([]string{"--repo", repoDir, "--queries", queriesDir})
+	execSQLNext([]string{"--repo", repoDir, "--queries", queriesDir})
 }

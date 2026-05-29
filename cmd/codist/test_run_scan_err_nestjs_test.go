@@ -11,7 +11,7 @@ import (
 func TestRunScan_NestJSEmpty(t *testing.T) {
 	if os.Getenv("TEST_SCAN_NESTJS") == "1" {
 		dir := t.TempDir()
-		runScan([]string{"-framework", "nestjs", dir})
+		execScan([]string{"--framework", "nestjs", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_NestJSEmpty$")

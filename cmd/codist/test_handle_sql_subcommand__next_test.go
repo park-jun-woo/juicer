@@ -7,7 +7,7 @@ import "testing"
 func TestHandleSQLSubcommand_Next(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	got := handleSQLSubcommand([]string{"next"})
+	got := execSQLSub([]string{"next"})
 	if !got {
 		t.Fatal("expected true")
 	}

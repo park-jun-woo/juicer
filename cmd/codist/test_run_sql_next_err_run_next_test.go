@@ -12,7 +12,7 @@ func TestRunSQLNext_ErrRunNext(t *testing.T) {
 	if os.Getenv("TEST_SQLNEXT_ERR") == "1" {
 		_, cleanup := helperSetupBrokenSession(t)
 		defer cleanup()
-		runSQLNext([]string{})
+		execSQLNext([]string{})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQLNext_ErrRunNext$")

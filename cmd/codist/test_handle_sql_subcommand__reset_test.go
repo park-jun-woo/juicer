@@ -7,7 +7,7 @@ import "testing"
 func TestHandleSQLSubcommand_Reset(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	got := handleSQLSubcommand([]string{"reset"})
+	got := execSQLSub([]string{"reset"})
 	if !got {
 		t.Fatal("expected true")
 	}

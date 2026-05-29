@@ -10,5 +10,5 @@ import (
 func TestRunScan_WithRootCov(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "out.yaml")
-	runScan([]string{"-o", outFile, dir})
+	execScan([]string{"-o", outFile, dir})
 }

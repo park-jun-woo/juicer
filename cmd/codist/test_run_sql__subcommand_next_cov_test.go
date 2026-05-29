@@ -21,5 +21,5 @@ func TestRunSQL_SubcommandNextCov(t *testing.T) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runSQL([]string{"next"})
+	execSQL([]string{"next"})
 }

@@ -11,7 +11,7 @@ import (
 func TestRunScan_ErrDetect(t *testing.T) {
 	if os.Getenv("RS_ERR_DETECT") == "1" {
 		dir := t.TempDir()
-		runScan([]string{dir})
+		execScan([]string{dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ErrDetect$")

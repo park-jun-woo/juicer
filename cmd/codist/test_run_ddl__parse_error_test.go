@@ -17,7 +17,7 @@ func TestRunDDL_ParseError(t *testing.T) {
 		os.WriteFile(f, []byte("x"), 0o644)
 		os.Chmod(f, 0o000)
 		defer os.Chmod(f, 0o644)
-		runDDL([]string{dir})
+		execDDL([]string{dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunDDL_ParseError$")

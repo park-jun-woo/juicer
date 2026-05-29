@@ -9,5 +9,5 @@ import (
 func TestRunScan_YAML_Stdout(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	// Without -o flag, writes to stdout
-	runScan([]string{dir})
+	execScan([]string{dir})
 }

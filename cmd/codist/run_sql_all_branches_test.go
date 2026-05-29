@@ -11,17 +11,17 @@ func TestRunSQL_AllBranches(t *testing.T) {
 	dir := t.TempDir()
 
 	// JSON output branch
-	runSQL([]string{"-json", dir})
+	execSQL([]string{"--json", dir})
 
 	// Output to file branch
 	out := filepath.Join(t.TempDir(), "out.yaml")
-	runSQL([]string{"-o", out, dir})
+	execSQL([]string{"-o", out, dir})
 
 	// Subcommand dispatch (status via setupSQLSession)
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	runSQL([]string{"status"})
+	execSQL([]string{"status"})
 
 	// Default dir branch (no args beyond flags)
-	runSQL([]string{})
+	execSQL([]string{})
 }

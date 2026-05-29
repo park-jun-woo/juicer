@@ -11,7 +11,7 @@ import (
 func TestRunScan_ToOutFile(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	out := filepath.Join(t.TempDir(), "out.yaml")
-	runScan([]string{"-o", out, dir})
+	execScan([]string{"-o", out, dir})
 	if _, err := os.Stat(out); err != nil {
 		t.Fatalf("output file not created: %v", err)
 	}

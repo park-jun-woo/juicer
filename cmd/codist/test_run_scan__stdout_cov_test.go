@@ -12,5 +12,5 @@ func TestRunScan_StdoutCov(t *testing.T) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runScan([]string{})
+	execScan([]string{})
 }

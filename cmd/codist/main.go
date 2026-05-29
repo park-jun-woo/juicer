@@ -1,5 +1,5 @@
-//ff:func feature=scan type=command control=selection
-//ff:what CLI 진입점 — 서브커맨드 디스패치
+//ff:func feature=scan type=command control=sequence
+//ff:what CLI 진입점 — 루트 cobra 커맨드를 실행하고 에러 시 비0 종료한다
 package main
 
 import (
@@ -8,24 +8,8 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 2 {
-		printUsage()
-		os.Exit(1)
-	}
-
-	switch os.Args[1] {
-	case "scan":
-		runScan(os.Args[2:])
-	case "ddl":
-		runDDL(os.Args[2:])
-	case "prisma":
-		runPrisma(os.Args[2:])
-	case "sql":
-		runSQL(os.Args[2:])
-	case "version":
-		fmt.Printf("codist %s\n", Version)
-	default:
-		printUsage()
+	if err := newRootCmd().Execute(); err != nil {
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
 }

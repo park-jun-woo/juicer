@@ -11,7 +11,7 @@ import (
 func TestRunScan_FastAPIBranch(t *testing.T) {
 	if os.Getenv("RS_ERR_FASTAPI") == "1" {
 		dir := setupMinimalGoProject(t)
-		runScan([]string{"-framework", "fastapi", dir})
+		execScan([]string{"--framework", "fastapi", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_FastAPIBranch$")

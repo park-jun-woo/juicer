@@ -12,5 +12,5 @@ func TestRunSQL_DefaultDirCov(t *testing.T) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runSQL([]string{})
+	execSQL([]string{})
 }

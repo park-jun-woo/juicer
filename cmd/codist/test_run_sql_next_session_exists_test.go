@@ -7,5 +7,5 @@ import "testing"
 func TestRunSQLNext_SessionExists(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	runSQLNext([]string{})
+	execSQLNext([]string{})
 }

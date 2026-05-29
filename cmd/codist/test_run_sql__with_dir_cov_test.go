@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunSQL_WithDirCov(t *testing.T) {
 	dir := t.TempDir()
-	runSQL([]string{dir})
+	execSQL([]string{dir})
 }

@@ -1,37 +1,22 @@
 //ff:func feature=ddl type=command control=sequence
-//ff:what ddl 서브커맨드 실행
+//ff:what ddl 실행 — migration 디렉터리를 파싱해 canonical DDL을 렌더링한다
 package main
 
 import (
-	"flag"
 	"fmt"
-	"os"
 
 	"github.com/park-jun-woo/codistill/internal/ddl"
 )
 
-func runDDL(args []string) {
-	fs := flag.NewFlagSet("ddl", flag.ExitOnError)
-	outDir := fs.String("o", "", "output directory (one .sql file per table)")
-	fs.Parse(args)
-
-	dir := "."
-	if fs.NArg() > 0 {
-		dir = fs.Arg(0)
-	}
-
+func runDDL(dir string, outDir string) error {
 	tables, err := ddl.Parse(dir)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
+		return err
 	}
 
-	if *outDir != "" {
-		if err := ddl.WriteFiles(tables, *outDir); err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
-		}
-	} else {
-		fmt.Print(ddl.Render(tables))
+	if outDir != "" {
+		return ddl.WriteFiles(tables, outDir)
 	}
+	fmt.Print(ddl.Render(tables))
+	return nil
 }

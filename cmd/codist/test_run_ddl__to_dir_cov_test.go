@@ -13,5 +13,5 @@ func TestRunDDL_ToDirCov(t *testing.T) {
 	outDir := filepath.Join(dir, "out")
 	sql := "CREATE TABLE users (id INT PRIMARY KEY, name TEXT);\n"
 	os.WriteFile(filepath.Join(dir, "001.sql"), []byte(sql), 0o644)
-	runDDL([]string{dir, "-o", outDir})
+	execDDL([]string{dir, "-o", outDir})
 }

@@ -7,7 +7,7 @@ import "testing"
 func TestHandleSQLSubcommand_Skip(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	got := handleSQLSubcommand([]string{"skip"})
+	got := execSQLSub([]string{"skip"})
 	if !got {
 		t.Fatal("expected true")
 	}

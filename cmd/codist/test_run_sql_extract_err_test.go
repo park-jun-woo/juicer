@@ -10,7 +10,7 @@ import (
 
 func TestRunSQL_ExtractErr(t *testing.T) {
 	if os.Getenv("RSQL_ERR_EXT") == "1" {
-		runSQL([]string{"/nonexistent/dir/sql"})
+		execSQL([]string{"/nonexistent/dir/sql"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQL_ExtractErr$")

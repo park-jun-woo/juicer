@@ -10,5 +10,5 @@ import (
 func TestRunScan_OpenAPIToFileCov2(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "out.yaml")
-	runScan([]string{"--openapi", "-o", outFile, dir})
+	execScan([]string{"--openapi", "-o", outFile, dir})
 }

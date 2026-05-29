@@ -7,5 +7,5 @@ import "testing"
 func TestRunSQL_SubcmdDispatch(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	runSQL([]string{"status"})
+	execSQL([]string{"status"})
 }

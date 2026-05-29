@@ -18,7 +18,7 @@ func TestRunDDL_WriteFilesError(t *testing.T) {
 		roDir := t.TempDir()
 		os.Chmod(roDir, 0o555)
 		defer os.Chmod(roDir, 0o755)
-		runDDL([]string{"-o", filepath.Join(roDir, "sub"), dir})
+		execDDL([]string{"-o", filepath.Join(roDir, "sub"), dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunDDL_WriteFilesError$")

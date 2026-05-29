@@ -11,7 +11,7 @@ import (
 func TestRunSQL_WriteErr(t *testing.T) {
 	if os.Getenv("RSQL_ERR_WRITE") == "1" {
 		dir := t.TempDir()
-		runSQL([]string{"-o", "/dev/null/impossible", dir})
+		execSQL([]string{"-o", "/dev/null/impossible", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQL_WriteErr$")

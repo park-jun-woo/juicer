@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunSQL_DirArgJSON(t *testing.T) {
 	dir := t.TempDir()
-	runSQL([]string{"-json", dir})
+	execSQL([]string{"--json", dir})
 }

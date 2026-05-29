@@ -14,15 +14,15 @@ func TestRunDDL_Branches(t *testing.T) {
 	oldWd, _ := os.Getwd()
 	os.Chdir(dir)
 	defer os.Chdir(oldWd)
-	runDDL([]string{})
+	execDDL([]string{})
 
 	// explicit dir with render to stdout
 	srcDir := t.TempDir()
 	sql := "CREATE TABLE items (id INT PRIMARY KEY, name TEXT);\n"
 	os.WriteFile(filepath.Join(srcDir, "001.sql"), []byte(sql), 0o644)
-	runDDL([]string{srcDir})
+	execDDL([]string{srcDir})
 
 	// explicit dir with -o output dir
 	outDir := filepath.Join(t.TempDir(), "out")
-	runDDL([]string{"-o", outDir, srcDir})
+	execDDL([]string{"-o", outDir, srcDir})
 }

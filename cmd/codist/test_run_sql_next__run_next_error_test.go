@@ -18,7 +18,7 @@ func TestRunSQLNext_RunNextError(t *testing.T) {
 		oldWd, _ := os.Getwd()
 		os.Chdir(dir)
 		defer os.Chdir(oldWd)
-		runSQLNext([]string{})
+		execSQLNext([]string{})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQLNext_RunNextError$")

@@ -11,7 +11,7 @@ import (
 func TestRunSQL_JSON_ToFile(t *testing.T) {
 	dir := t.TempDir()
 	outFile := filepath.Join(dir, "output.json")
-	runSQL([]string{"-json", "-o", outFile, dir})
+	execSQL([]string{"--json", "-o", outFile, dir})
 
 	if _, err := os.Stat(outFile); err != nil {
 		t.Errorf("expected output file: %v", err)

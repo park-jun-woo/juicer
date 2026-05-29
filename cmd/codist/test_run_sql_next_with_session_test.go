@@ -32,5 +32,5 @@ func TestRunSQLNext_WithSession(t *testing.T) {
 	defer os.Chdir(oldWd)
 
 	// RunNext with empty methods should print "All queries complete!"
-	runSQLNext([]string{})
+	execSQLNext([]string{})
 }

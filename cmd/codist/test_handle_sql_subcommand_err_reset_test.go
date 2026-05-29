@@ -12,7 +12,7 @@ func TestHandleSQLSubcommand_ErrReset(t *testing.T) {
 	if os.Getenv("TEST_HSSC_RESET") == "1" {
 		_, cleanup := helperSetupUndeletableSession(t)
 		defer cleanup()
-		handleSQLSubcommand([]string{"reset"})
+		execSQLSub([]string{"reset"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHandleSQLSubcommand_ErrReset$")

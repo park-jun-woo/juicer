@@ -16,7 +16,7 @@ func TestRunScan_YAMLDefault(t *testing.T) {
 	}
 
 	// default: framework auto-detected (gogin) -> YAML to stdout
-	runScan([]string{dir})
+	execScan([]string{dir})
 
 	// each explicit framework branch in the switch
 	frameworks := []string{
@@ -25,18 +25,18 @@ func TestRunScan_YAMLDefault(t *testing.T) {
 		"quarkus", "dotnet", "supafunc", "actix", "laravel",
 	}
 	for _, fw := range frameworks {
-		runScan([]string{"--framework", fw, dir})
+		execScan([]string{"--framework", fw, dir})
 	}
 
 	// json output branch
-	runScan([]string{"--framework", "gogin", "--json", dir})
+	execScan([]string{"--framework", "gogin", "--json", dir})
 
 	// openapi output branch
-	runScan([]string{"--framework", "gogin", "--openapi", dir})
+	execScan([]string{"--framework", "gogin", "--openapi", dir})
 
 	// output-file branch
 	out := filepath.Join(t.TempDir(), "spec.yaml")
-	runScan([]string{"--framework", "gogin", "-o", out, dir})
+	execScan([]string{"--framework", "gogin", "-o", out, dir})
 	if _, err := os.Stat(out); err != nil {
 		t.Fatalf("expected output file written: %v", err)
 	}

@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_JSONBranch(t *testing.T) {
 	dir := setupMinimalGoProject(t)
-	runScan([]string{"-json", dir})
+	execScan([]string{"--json", dir})
 }

@@ -8,28 +8,28 @@ func TestHandleSQLSubcommand(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
 
-	if !handleSQLSubcommand([]string{"status"}) {
+	if !execSQLSub([]string{"status"}) {
 		t.Fatal("expected true for status")
 	}
-	if handleSQLSubcommand([]string{"bogus"}) {
+	if execSQLSub([]string{"bogus"}) {
 		t.Fatal("expected false for unknown subcommand")
 	}
 
 	// Cover next, list, skip, reset happy paths
-	if !handleSQLSubcommand([]string{"next"}) {
+	if !execSQLSub([]string{"next"}) {
 		t.Fatal("expected true for next")
 	}
 
 	// Re-create session after reset for list/skip
 	_, cleanup2 := setupSQLSession(t)
 	defer cleanup2()
-	if !handleSQLSubcommand([]string{"list"}) {
+	if !execSQLSub([]string{"list"}) {
 		t.Fatal("expected true for list")
 	}
-	if !handleSQLSubcommand([]string{"skip"}) {
+	if !execSQLSub([]string{"skip"}) {
 		t.Fatal("expected true for skip")
 	}
-	if !handleSQLSubcommand([]string{"reset"}) {
+	if !execSQLSub([]string{"reset"}) {
 		t.Fatal("expected true for reset")
 	}
 }

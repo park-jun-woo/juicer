@@ -17,5 +17,5 @@ app = FastAPI()
 def root():
     return {"msg": "ok"}
 `), 0o644)
-	runScan([]string{"--framework", "fastapi", dir})
+	execScan([]string{"--framework", "fastapi", dir})
 }

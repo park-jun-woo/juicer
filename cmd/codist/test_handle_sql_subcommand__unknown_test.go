@@ -5,7 +5,7 @@ package main
 import "testing"
 
 func TestHandleSQLSubcommand_Unknown(t *testing.T) {
-	got := handleSQLSubcommand([]string{"unknown"})
+	got := execSQLSub([]string{"unknown"})
 	if got {
 		t.Fatal("expected false for unknown subcommand")
 	}

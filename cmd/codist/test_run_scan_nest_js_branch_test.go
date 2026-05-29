@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_NestJSBranch(t *testing.T) {
 	dir := t.TempDir()
-	runScan([]string{"-framework", "nestjs", dir})
+	execScan([]string{"--framework", "nestjs", dir})
 }

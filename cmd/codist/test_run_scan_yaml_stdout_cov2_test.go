@@ -6,5 +6,5 @@ import "testing"
 
 func TestRunScan_YAMLStdoutCov2(t *testing.T) {
 	dir := setupMinimalGoProject(t)
-	runScan([]string{dir})
+	execScan([]string{dir})
 }

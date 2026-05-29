@@ -11,7 +11,7 @@ import (
 func TestRunSQL_ErrExtract(t *testing.T) {
 	if os.Getenv("TEST_SQL_EXTRACT") == "1" {
 		// Use a non-existent directory that causes Extract to fail
-		runSQL([]string{"/nonexistent/dir/sql"})
+		execSQL([]string{"/nonexistent/dir/sql"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunSQL_ErrExtract$")

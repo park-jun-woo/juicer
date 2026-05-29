@@ -1,23 +1,11 @@
 //ff:func feature=ratchet type=command control=sequence
-//ff:what sql next 서브커맨드의 플래그 파싱 및 실행
+//ff:what sql next 실행 — ratchet 세션의 다음 메서드로 진행한다
 package main
 
 import (
-	"flag"
-	"fmt"
-	"os"
-
 	"github.com/park-jun-woo/codistill/internal/sqls"
 )
 
-func runSQLNext(args []string) {
-	fs := flag.NewFlagSet("sql next", flag.ExitOnError)
-	repoDir := fs.String("repo", "", "repository directory")
-	queriesDir := fs.String("queries", "", "sqlc queries directory")
-	fs.Parse(args)
-
-	if err := sqls.RunNext(*repoDir, *queriesDir); err != nil {
-		fmt.Fprintf(os.Stderr, "error: %v\n", err)
-		os.Exit(1)
-	}
+func runSQLNext(repoDir string, queriesDir string) error {
+	return sqls.RunNext(repoDir, queriesDir)
 }

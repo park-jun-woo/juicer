@@ -10,5 +10,5 @@ import (
 func TestRunScan_OpenAPIBranch(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "openapi.yaml")
-	runScan([]string{"-openapi", "-o", outFile, dir})
+	execScan([]string{"--openapi", "-o", outFile, dir})
 }

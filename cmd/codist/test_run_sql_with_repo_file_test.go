@@ -28,5 +28,5 @@ func (r *UserRepo) GetAll(ctx context.Context) error {
 	os.WriteFile(filepath.Join(dir, "user_repo.go"), []byte(repoGo), 0o644)
 
 	outFile := filepath.Join(dir, "output.yaml")
-	runSQL([]string{"-o", outFile, dir})
+	execSQL([]string{"-o", outFile, dir})
 }

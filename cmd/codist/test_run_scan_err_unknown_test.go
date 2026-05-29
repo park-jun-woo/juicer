@@ -11,7 +11,7 @@ import (
 func TestRunScan_ErrUnknown(t *testing.T) {
 	if os.Getenv("RS_ERR_UNKNOWN") == "1" {
 		dir := setupMinimalGoProject(t)
-		runScan([]string{"-framework", "nope", dir})
+		execScan([]string{"--framework", "nope", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ErrUnknown$")

@@ -17,7 +17,7 @@ func TestRunDDL_ToDir(t *testing.T) {
 `
 	os.WriteFile(filepath.Join(dir, "001_init.up.sql"), []byte(sql), 0o644)
 	outDir := filepath.Join(dir, "output")
-	runDDL([]string{"-o", outDir, dir})
+	execDDL([]string{"-o", outDir, dir})
 
 	if _, err := os.Stat(filepath.Join(outDir, "users.sql")); err != nil {
 		t.Errorf("expected users.sql to exist: %v", err)

@@ -13,5 +13,5 @@ func TestRunDDL_OutDirBranch(t *testing.T) {
 	sql := "CREATE TABLE users (id INT PRIMARY KEY, name TEXT);\n"
 	os.WriteFile(filepath.Join(dir, "001.sql"), []byte(sql), 0o644)
 	outDir := filepath.Join(t.TempDir(), "out")
-	runDDL([]string{"-o", outDir, dir})
+	execDDL([]string{"-o", outDir, dir})
 }

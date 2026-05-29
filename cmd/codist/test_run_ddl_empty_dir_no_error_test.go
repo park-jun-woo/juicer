@@ -10,5 +10,5 @@ import (
 func TestRunDDL_EmptyDirNoError(t *testing.T) {
 	// Empty dir with no SQL files — Parse returns empty map, no error
 	dir := t.TempDir()
-	runDDL([]string{"-o", filepath.Join(dir, "out"), dir})
+	execDDL([]string{"-o", filepath.Join(dir, "out"), dir})
 }

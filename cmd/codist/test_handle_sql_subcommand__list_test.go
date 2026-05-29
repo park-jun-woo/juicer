@@ -7,7 +7,7 @@ import "testing"
 func TestHandleSQLSubcommand_List(t *testing.T) {
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	got := handleSQLSubcommand([]string{"list"})
+	got := execSQLSub([]string{"list"})
 	if !got {
 		t.Fatal("expected true")
 	}

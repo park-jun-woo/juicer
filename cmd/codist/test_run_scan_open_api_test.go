@@ -11,7 +11,7 @@ import (
 func TestRunScan_OpenAPI(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "output.openapi.yaml")
-	runScan([]string{"-openapi", "-o", outFile, dir})
+	execScan([]string{"--openapi", "-o", outFile, dir})
 
 	if _, err := os.Stat(outFile); err != nil {
 		t.Fatalf("expected output file: %v", err)

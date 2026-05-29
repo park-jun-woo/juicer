@@ -11,14 +11,14 @@ import (
 func TestRunSQL_YAMLStdoutBranch(t *testing.T) {
 	// YAML to stdout (skeleton mode, dir positional arg)
 	dir := t.TempDir()
-	runSQL([]string{dir})
+	execSQL([]string{dir})
 
 	// JSON to stdout
-	runSQL([]string{"--json", dir})
+	execSQL([]string{"--json", dir})
 
 	// output-file branch
 	out := filepath.Join(t.TempDir(), "queries.yaml")
-	runSQL([]string{"-o", out, dir})
+	execSQL([]string{"-o", out, dir})
 	if _, err := os.Stat(out); err != nil {
 		t.Fatalf("expected output file written: %v", err)
 	}
@@ -28,5 +28,5 @@ func TestRunSQL_YAMLStdoutBranch(t *testing.T) {
 	// cannot be triggered in-process without aborting the test binary.
 	_, cleanup := setupSQLSession(t)
 	defer cleanup()
-	runSQL([]string{"status"})
+	execSQL([]string{"status"})
 }

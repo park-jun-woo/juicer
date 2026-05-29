@@ -11,7 +11,7 @@ import (
 func TestRunScan_ErrWrite(t *testing.T) {
 	if os.Getenv("RS_ERR_WRITE") == "1" {
 		dir := setupMinimalGoProject(t)
-		runScan([]string{"-o", "/dev/null/impossible/path", dir})
+		execScan([]string{"-o", "/dev/null/impossible/path", dir})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ErrWrite$")

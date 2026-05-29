@@ -11,7 +11,7 @@ import (
 func TestRunScan_ScanError(t *testing.T) {
 	if os.Getenv("TEST_SUBPROCESS_SCAN_ERR") == "1" {
 		// Use a non-existent path that packages.Load cannot resolve
-		runScan([]string{"/nonexistent/path/no/gomod"})
+		execScan([]string{"/nonexistent/path/no/gomod"})
 		return
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestRunScan_ScanError$")

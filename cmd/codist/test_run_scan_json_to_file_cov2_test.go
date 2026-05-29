@@ -10,5 +10,5 @@ import (
 func TestRunScan_JSONToFileCov2(t *testing.T) {
 	dir := setupMinimalGoProject(t)
 	outFile := filepath.Join(dir, "out.json")
-	runScan([]string{"--json", "-o", outFile, dir})
+	execScan([]string{"--json", "-o", outFile, dir})
 }

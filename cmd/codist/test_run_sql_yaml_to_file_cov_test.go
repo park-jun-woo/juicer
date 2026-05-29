@@ -10,5 +10,5 @@ import (
 func TestRunSQL_YAMLToFileCov(t *testing.T) {
 	dir := t.TempDir()
 	outFile := filepath.Join(dir, "out.yaml")
-	runSQL([]string{dir, "-o", outFile})
+	execSQL([]string{dir, "-o", outFile})
 }
