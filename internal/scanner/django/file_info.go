@@ -8,6 +8,7 @@ import sitter "github.com/smacker/go-tree-sitter"
 type fileInfo struct {
 	absPath string
 	relPath string
+	module  string // dotted module path derived from relPath, e.g. "blog.urls"
 	src     []byte
 	root    *sitter.Node
 }

@@ -1,13 +1,16 @@
 //ff:func feature=scan type=extract control=iteration dimension=1 topic=django
-//ff:what urls.py에서 urlpatterns를 수집한다
+//ff:what urls.py에서 모듈별 urlpatterns 맵을 수집한다
 package django
 
-// collectURLs extracts urlpatterns from all parsed files.
-func collectURLs(files []fileInfo) []urlEntry {
-	var allEntries []urlEntry
+// collectURLs extracts urlpatterns from all parsed files, keyed by dotted module path.
+func collectURLs(files []fileInfo) map[string][]urlEntry {
+	byModule := make(map[string][]urlEntry)
 	for _, fi := range files {
 		entries := collectURLsFromFile(fi)
-		allEntries = append(allEntries, entries...)
+		if len(entries) == 0 {
+			continue
+		}
+		byModule[fi.module] = append(byModule[fi.module], entries...)
 	}
-	return allEntries
+	return byModule
 }

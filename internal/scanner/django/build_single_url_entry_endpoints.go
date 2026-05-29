@@ -19,5 +19,5 @@ func buildSingleURLEntryEndpoints(entry urlEntry, viewsets []viewsetInfo, apivie
 	if fv := findFuncView(funcViews, viewName); fv != nil {
 		return buildFuncViewEndpoints(entry, fv)
 	}
-	return nil
+	return buildPlainViewEndpoints(entry, viewName)
 }

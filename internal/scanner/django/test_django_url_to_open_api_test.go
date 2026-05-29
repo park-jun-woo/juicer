@@ -15,6 +15,8 @@ func TestDjangoURLToOpenAPI(t *testing.T) {
 		{"users/<uuid:id>/", "users/{id}/"},
 		{"health/", "health/"},
 		{"", ""},
+		{"^articles/(?P<year>[0-9]{4})/$", "articles/{year}/"},
+		{"^users/(?P<slug>[-\\w]+)/$", "users/{slug}/"},
 	}
 
 	for _, tt := range tests {

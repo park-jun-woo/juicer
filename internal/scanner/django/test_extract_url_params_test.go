@@ -15,4 +15,9 @@ func TestExtractURLParams(t *testing.T) {
 	if params[1].name != "slug" || params[1].converter != "slug" {
 		t.Errorf("param 1: expected slug (slug), got %s (%s)", params[1].name, params[1].converter)
 	}
+
+	rePathParams := extractURLParams("^articles/(?P<year>[0-9]{4})/$")
+	if len(rePathParams) != 1 || rePathParams[0].name != "year" {
+		t.Fatalf("expected re_path named group year, got %+v", rePathParams)
+	}
 }

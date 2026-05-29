@@ -21,6 +21,7 @@ func parseFile(absRoot, absPath string) (*fileInfo, error) {
 	return &fileInfo{
 		absPath: absPath,
 		relPath: relPath,
+		module:  relPathToModule(relPath),
 		src:     src,
 		root:    root,
 	}, nil
