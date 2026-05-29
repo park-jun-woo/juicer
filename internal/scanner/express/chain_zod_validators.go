@@ -15,5 +15,5 @@ func chainZodValidators(call *sitter.Node, src []byte) []zod.ValidatorInfo {
 	if args == nil {
 		return nil
 	}
-	return extractZodValidatorsFromArgs(collectArgNodes(args), src)
+	return extractZodValidatorsFromArgs(collectArgNodes(args), src, 0)
 }

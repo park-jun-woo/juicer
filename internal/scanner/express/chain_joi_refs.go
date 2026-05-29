@@ -11,5 +11,5 @@ func chainJoiRefs(call *sitter.Node, src []byte) []joiValidatorRef {
 	if args == nil {
 		return nil
 	}
-	return extractJoiRefsFromArgs(collectArgNodes(args), src)
+	return extractJoiRefsFromArgs(collectArgNodes(args), src, 0)
 }
