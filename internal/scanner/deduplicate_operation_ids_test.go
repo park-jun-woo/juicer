@@ -65,6 +65,28 @@ func TestDeduplicateOperationIDs(t *testing.T) {
 		}
 	})
 
+	t.Run("same path GET POST same handler uses method prefix", func(t *testing.T) {
+		// 동일 path의 GET/POST가 같은 핸들러를 공유 → path 세그먼트가 login으로 동일하여
+		// doubling(loginLogin/loginLogin2)이 발생하던 케이스. method 접두로 구분한다.
+		eps := []Endpoint{
+			{Method: "GET", Path: "/login", Handler: "h.login"},
+			{Method: "POST", Path: "/login", Handler: "h.login"},
+		}
+		got := deduplicateOperationIDs(eps)
+		if got[0] != "getLogin" {
+			t.Errorf("got[0] = %q, want %q", got[0], "getLogin")
+		}
+		if got[1] != "postLogin" {
+			t.Errorf("got[1] = %q, want %q", got[1], "postLogin")
+		}
+		// doubling/무의미 접미가 발생하지 않아야 한다
+		for i := 0; i < 2; i++ {
+			if got[i] == "loginLogin" || got[i] == "loginLogin2" {
+				t.Errorf("got[%d] = %q, doubling/suffix must not occur", i, got[i])
+			}
+		}
+	})
+
 	t.Run("empty input", func(t *testing.T) {
 		got := deduplicateOperationIDs(nil)
 		if len(got) != 0 {
