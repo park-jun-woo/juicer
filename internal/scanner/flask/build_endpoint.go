@@ -16,11 +16,12 @@ func buildEndpoint(ri routeInfo) scanner.Endpoint {
 
 	pathParams := urlParamsToScannerParams(ri.params)
 	if len(pathParams) > 0 {
-		if ep.Request == nil {
-			ep.Request = &scanner.Request{}
-		}
+		scanner.EnsureRequest(&ep)
 		ep.Request.PathParams = pathParams
 	}
+
+	applyFormFields(&ep, ri.formFields)
+	applyJSONBody(&ep, ri)
 
 	return ep
 }

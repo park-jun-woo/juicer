@@ -25,10 +25,12 @@ func extractOneRoute(def *sitter.Node, src []byte, bpPrefixes blueprintPrefix, f
 	}
 	line := int(funcDef.StartPoint().Row) + 1
 
+	bf := extractBodyFields(funcDef, src)
+
 	for _, dec := range decorators {
 		routes := parseFlaskDecorator(dec, src, bpPrefixes, handler, file, line)
 		if len(routes) > 0 {
-			return routes
+			return applyBodyFields(routes, bf)
 		}
 	}
 

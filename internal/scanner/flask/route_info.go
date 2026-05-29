@@ -10,4 +10,8 @@ type routeInfo struct {
 	file    string // relative file path
 	line    int    // line number (1-based)
 	params  []urlParam
+
+	formFields  []string // request.form access keys (multipart/form-data)
+	jsonFields  []string // request.json / get_json access keys (application/json)
+	hasJSONBody bool     // request.json / request.get_json() referenced at all
 }
