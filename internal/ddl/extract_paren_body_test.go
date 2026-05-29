@@ -20,4 +20,10 @@ func TestExtractParenBody_Basic(t *testing.T) {
 	if got != "id INT, name TEXT" {
 		t.Fatalf("unclosed: got %q", got)
 	}
+
+	// nested parentheses: only the first top-level pair is matched
+	got = extractParenBody("CREATE TABLE t (id INT, total NUMERIC(10,2)) extra")
+	if got != "id INT, total NUMERIC(10,2)" {
+		t.Fatalf("nested: got %q", got)
+	}
 }

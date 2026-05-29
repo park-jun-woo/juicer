@@ -9,4 +9,9 @@ func TestExtractFKColumn(t *testing.T) {
 	if got != "owner_id" {
 		t.Fatalf("extractFKColumn = %q, want %q", got, "owner_id")
 	}
+
+	// No FOREIGN KEY clause -> empty string
+	if got := extractFKColumn("CONSTRAINT uq_email UNIQUE (email)"); got != "" {
+		t.Fatalf("expected empty for non-FK constraint, got %q", got)
+	}
 }

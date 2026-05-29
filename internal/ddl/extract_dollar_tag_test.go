@@ -18,6 +18,7 @@ func TestExtractDollarTag(t *testing.T) {
 		{name: "not a tag - no closing $", in: "$abc", pos: 0, want: ""},
 		{name: "single $", in: "$", pos: 0, want: ""},
 		{name: "dollar in middle", in: "foo $$bar$$", pos: 4, want: "$$"},
+		{name: "pos past end", in: "$$", pos: 5, want: ""},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

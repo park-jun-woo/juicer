@@ -35,7 +35,10 @@ func TestApplyCreateTable_Basic(t *testing.T) {
 		t.Fatal("expected table t")
 	}
 
-	// line that is only a comment => extractColumnName returns ""
+	// line that is only a comment => removed by stripInlineComments.
+	// Note: the colName=="" guard (line 33) is unreachable because
+	// stripInlineComments strips all "--" comments before splitting, so any
+	// surviving non-empty sub-clause always yields a column name.
 	tables4 := make(map[string]*Table)
 	applyCreateTable(tables4, "t2", "CREATE TABLE t2 (id INT, -- just a comment)")
 	if tables4["t2"] == nil {
