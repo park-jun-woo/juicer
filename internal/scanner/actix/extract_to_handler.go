@@ -12,9 +12,8 @@ func extractToHandler(callExpr *sitter.Node, src []byte) string {
 		return ""
 	}
 	for i := 0; i < int(args.ChildCount()); i++ {
-		child := args.Child(i)
-		if child.Type() == "identifier" {
-			return nodeText(child, src)
+		if name := handlerNameFromArg(args.Child(i), src); name != "" {
+			return name
 		}
 	}
 	return ""

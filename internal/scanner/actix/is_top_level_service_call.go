@@ -22,7 +22,7 @@ func isTopLevelServiceCall(n *sitter.Node, src []byte) bool {
 		return false
 	}
 	receiver := findFieldReceiver(fe)
-	if receiver != nil && isWebScopeOrResource(receiver, src) {
+	if receiver != nil && receiverIsWebScopeOrResource(receiver, src) {
 		return false
 	}
 	return true

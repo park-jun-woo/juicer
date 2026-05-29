@@ -14,6 +14,6 @@ func appendRouteFromArgs(args *sitter.Node, src []byte, resourcePath string, rou
 	*routes = append(*routes, builderRoute{
 		method:  method,
 		path:    resourcePath,
-		handler: handler,
+		handler: handlerOrAnon(handler, method, resourcePath),
 	})
 }
