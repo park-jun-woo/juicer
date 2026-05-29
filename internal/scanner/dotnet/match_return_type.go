@@ -11,13 +11,13 @@ func matchReturnType(child *sitter.Node, src []byte, ep *endpointInfo) bool {
 			return true
 		}
 	case "identifier":
-		if nodeText(child, src) == "IActionResult" {
+		if actionResultInterfaces[nodeText(child, src)] {
 			return true
 		}
 	case "generic_name":
 		raw := nodeText(child, src)
 		typeName, isArray := unwrapReturnType(raw)
-		if typeName != "" {
+		if typeName != "" && !actionResultInterfaces[typeName] {
 			ep.returnType = typeName
 			ep.returnIsArray = isArray
 		}

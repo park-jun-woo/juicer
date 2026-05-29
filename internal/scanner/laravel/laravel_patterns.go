@@ -55,3 +55,30 @@ var laravelValidationFormatMap = map[string]string{
 	"file":  "binary",
 	"image": "binary",
 }
+
+// httpStatusConstants maps Symfony/Laravel Response::HTTP_* constant names to status codes.
+var httpStatusConstants = map[string]string{
+	"HTTP_OK":                    "200",
+	"HTTP_CREATED":               "201",
+	"HTTP_ACCEPTED":              "202",
+	"HTTP_NO_CONTENT":            "204",
+	"HTTP_MOVED_PERMANENTLY":     "301",
+	"HTTP_FOUND":                 "302",
+	"HTTP_NOT_MODIFIED":          "304",
+	"HTTP_BAD_REQUEST":           "400",
+	"HTTP_UNAUTHORIZED":          "401",
+	"HTTP_FORBIDDEN":             "403",
+	"HTTP_NOT_FOUND":             "404",
+	"HTTP_METHOD_NOT_ALLOWED":    "405",
+	"HTTP_CONFLICT":              "409",
+	"HTTP_UNPROCESSABLE_ENTITY":  "422",
+	"HTTP_TOO_MANY_REQUESTS":     "429",
+	"HTTP_INTERNAL_SERVER_ERROR": "500",
+}
+
+// abortFunctions maps Laravel abort helper names to the argument index holding the status code.
+var abortFunctions = map[string]int{
+	"abort":        0,
+	"abort_if":     1,
+	"abort_unless": 1,
+}

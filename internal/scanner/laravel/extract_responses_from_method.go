@@ -15,5 +15,5 @@ func extractResponsesFromMethod(absRoot string, cm *controllerMethod, parsedFile
 			responses = append(responses, *resp)
 		}
 	}
-	return responses
+	return appendAbortResponses(cm, responses)
 }

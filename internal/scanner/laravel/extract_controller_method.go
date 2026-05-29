@@ -17,5 +17,6 @@ func extractControllerMethod(fi *fileInfo, methodName string) *controllerMethod 
 		cm.formRequestRef = findFormRequestParam(cm.params)
 	}
 	cm.returnNodes = findAllByType(method, "return_statement")
+	cm.methodNode = method
 	return cm
 }

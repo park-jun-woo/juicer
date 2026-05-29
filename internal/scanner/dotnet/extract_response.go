@@ -6,9 +6,11 @@ import sitter "github.com/smacker/go-tree-sitter"
 
 func extractReturnInfo(m *sitter.Node, src []byte, ep *endpointInfo) {
 	for i := 0; i < int(m.ChildCount()); i++ {
-		child := m.Child(i)
-		if matchReturnType(child, src, ep) {
-			return
+		if matchReturnType(m.Child(i), src, ep) {
+			break
 		}
+	}
+	if ep.returnType == "" {
+		applyBodyResponse(m, src, ep)
 	}
 }

@@ -12,5 +12,6 @@ type controllerMethod struct {
 	params         []methodParam
 	formRequestRef string         // FormRequest type hint if any
 	returnNodes    []*sitter.Node // return statement nodes
+	methodNode     *sitter.Node   // method_declaration node for body-level scans
 	src            []byte
 }

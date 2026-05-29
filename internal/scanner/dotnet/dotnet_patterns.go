@@ -67,15 +67,28 @@ var diTypes = map[string]bool{
 	"LinkGenerator":       true,
 }
 
+var actionResultInterfaces = map[string]bool{
+	"IActionResult":        true,
+	"ActionResult":         true,
+	"IResult":              true,
+	"IHttpActionResult":    true,
+	"Task":                 true,
+}
+
 var resultsStatusMethods = map[string]string{
-	"Ok":           "200",
-	"Created":      "201",
-	"Accepted":     "202",
-	"NoContent":    "204",
-	"BadRequest":   "400",
-	"Unauthorized": "401",
-	"Forbid":       "403",
-	"NotFound":     "404",
-	"Conflict":     "409",
-	"Problem":      "500",
+	"Ok":                  "200",
+	"Created":             "201",
+	"CreatedAtAction":     "201",
+	"CreatedAtRoute":      "201",
+	"Accepted":            "202",
+	"AcceptedAtAction":    "202",
+	"AcceptedAtRoute":     "202",
+	"NoContent":           "204",
+	"BadRequest":          "400",
+	"Unauthorized":        "401",
+	"Forbid":              "403",
+	"NotFound":            "404",
+	"Conflict":            "409",
+	"UnprocessableEntity": "422",
+	"Problem":             "500",
 }

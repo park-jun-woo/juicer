@@ -3,8 +3,6 @@
 package laravel
 
 import (
-	"strings"
-
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
@@ -20,5 +18,5 @@ func jsonCallStatusCode(mc *sitter.Node, src []byte) string {
 	if len(argList) < 2 {
 		return ""
 	}
-	return strings.TrimSpace(nodeText(argList[1], src))
+	return resolveStatusArg(argList[1], src)
 }
