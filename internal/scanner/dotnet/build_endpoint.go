@@ -5,7 +5,8 @@ package dotnet
 import "github.com/park-jun-woo/codistill/internal/scanner"
 
 func buildEndpoint(ci controllerInfo, ep endpointInfo) scanner.Endpoint {
-	fullPath := joinPath(ci.prefix, ep.path)
+	actionPath := expandRouteTokens(ep.path, ci.className, ep.handler)
+	fullPath := joinPath(ci.prefix, actionPath)
 
 	roles := mergeRoles(ci.roles, ep.roles)
 

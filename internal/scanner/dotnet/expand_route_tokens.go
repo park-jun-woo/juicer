@@ -7,5 +7,5 @@ import "strings"
 func expandRouteTokens(route, controllerName, actionName string) string {
 	route = strings.ReplaceAll(route, "[controller]", resolveControllerName(controllerName))
 	route = strings.ReplaceAll(route, "[action]", strings.ToLower(actionName))
-	return route
+	return stripRouteConstraints(route)
 }

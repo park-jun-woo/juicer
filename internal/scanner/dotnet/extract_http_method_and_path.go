@@ -7,9 +7,13 @@ import sitter "github.com/smacker/go-tree-sitter"
 func extractHTTPMethodAndPath(m *sitter.Node, src []byte) (string, string, bool) {
 	for _, attrList := range childrenOfType(m, "attribute_list") {
 		method, path, ok := matchHTTPAttribute(attrList, src)
-		if ok {
-			return method, path, true
+		if !ok {
+			continue
 		}
+		if path == "" {
+			path = methodLevelRoute(m, src)
+		}
+		return method, path, true
 	}
 	return "", "", false
 }
