@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.6-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.7-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,20 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.7
+
+**Prisma schema support** (`codist prisma`) — a new subcommand parses `schema.prisma` directly into DDL tables, reusing the `ddl` renderer. For Prisma-backed projects whose DB source-of-truth is the schema file (not raw SQL migrations), the full data model is now extractable.
+
+- `model` → `CREATE TABLE` (with `@@map`/`@map` table & column name overrides).
+- Scalar vs relation field detection — navigation fields are excluded; `@relation(fields:[...], references:[...])` becomes a `FOREIGN KEY`, including **composite FKs** (e.g. multi-tenant `(entity_id, org_id)` isolation).
+- Type mapping — Prisma scalars → SQL (`DateTime`→`timestamp(3)`, `Json`→`jsonb`, …), `@db.*` native types take precedence, and `Unsupported("vector(768)")` is preserved verbatim (**pgvector**/PostGIS).
+- Constraints — field `@id`/`@@id` (composite PK), `@unique`/`@@unique` (composite UNIQUE), `@@index`, `@default(autoincrement())`→`serial`, `onDelete`/`onUpdate`.
+- Single `schema.prisma` or a `prisma/schema/` directory (multi-file) accepted.
+
+**Express JavaScript support** — the Express scanner now collects `.js`/`.jsx`/`.mjs`/`.cjs` (not just `.ts`). Pure-JS Express projects that previously scanned to 0 endpoints (e.g. `node-express-boilerplate`) now extract correctly, with CommonJS `require()` mount-prefix resolution restored. Extension assumptions unified into a single source list.
+
+Internal: new `internal/prisma` package and refactored Express resolver follow the one-file-one-function convention (`filefunc validate` clean); full `go test ./...` green.
 
 ### v0.1.6
 
