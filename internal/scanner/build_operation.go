@@ -7,7 +7,7 @@ func buildOperation(ep Endpoint, schemas map[string]any) map[string]any {
 		"operationId": generateOperationID(ep),
 	}
 
-	if params := buildOperationParams(ep.Request); len(params) > 0 {
+	if params := ensurePathParams(buildOperationParams(ep.Request), ep.Path); len(params) > 0 {
 		op["parameters"] = params
 	}
 

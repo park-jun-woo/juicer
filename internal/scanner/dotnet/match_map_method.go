@@ -28,7 +28,7 @@ func matchMapMethod(inv *sitter.Node, fi *fileInfo, groups map[string]string) (s
 	if pathLit == nil {
 		return scanner.Endpoint{}, false
 	}
-	path := unquoteCSharp(nodeText(pathLit, fi.src))
+	path := stripRouteConstraints(unquoteCSharp(nodeText(pathLit, fi.src)))
 
 	prefix := ""
 	if p, ok := groups[receiver]; ok {

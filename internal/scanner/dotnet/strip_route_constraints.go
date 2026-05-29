@@ -4,7 +4,7 @@ package dotnet
 
 import "regexp"
 
-var routeConstraintRe = regexp.MustCompile(`\{([^}:=?*]+)[^}]*\}`)
+var routeConstraintRe = regexp.MustCompile(`\{\*{0,2}([^}:=?*]+)[^}]*\}`)
 
 func stripRouteConstraints(route string) string {
 	return routeConstraintRe.ReplaceAllString(route, "{$1}")

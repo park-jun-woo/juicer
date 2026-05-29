@@ -14,6 +14,8 @@ func TestStripRouteConstraints(t *testing.T) {
 		{"items/{id:int:min(1)}", "items/{id}"},
 		{"users/{name?}", "users/{name}"},
 		{"posts/{slug=home}", "posts/{slug}"},
+		{"files/{*slug}", "files/{slug}"},
+		{"files/{**slug}", "files/{slug}"},
 		{"plain/{id}", "plain/{id}"},
 		{"no/tokens/here", "no/tokens/here"},
 	}

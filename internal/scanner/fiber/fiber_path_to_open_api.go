@@ -9,11 +9,7 @@ import (
 func fiberPathToOpenAPI(path string) string {
 	segments := strings.Split(path, "/")
 	for i, seg := range segments {
-		if strings.HasPrefix(seg, ":") {
-			segments[i] = "{" + seg[1:] + "}"
-		} else if strings.HasPrefix(seg, "*") {
-			segments[i] = "{" + seg[1:] + "}"
-		}
+		segments[i] = fiberSegmentToOpenAPI(seg)
 	}
 	return strings.Join(segments, "/")
 }
