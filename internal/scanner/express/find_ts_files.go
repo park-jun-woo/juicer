@@ -1,11 +1,10 @@
 //ff:func feature=scan type=extract control=sequence topic=express
-//ff:what 프로젝트 전체에서 .ts 파일 경로를 수집한다 (node_modules/dist/build/.git 및 공통 테스트 디렉터리·테스트 파일 제외)
+//ff:what 프로젝트 전체에서 TS/JS 소스 파일(.ts/.tsx/.js/.jsx/.mjs/.cjs) 경로를 수집한다 (node_modules/dist/build/.git 및 공통 테스트 디렉터리·테스트 파일·.d.ts 제외)
 package express
 
 import (
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/park-jun-woo/codistill/internal/scanner"
 )
@@ -30,7 +29,7 @@ func findTSFiles(root string) ([]string, error) {
 		if scanner.IsTestFile(name) {
 			return nil
 		}
-		if strings.HasSuffix(name, ".ts") && !strings.HasSuffix(name, ".d.ts") {
+		if isCollectableSource(name) {
 			files = append(files, path)
 		}
 		return nil
