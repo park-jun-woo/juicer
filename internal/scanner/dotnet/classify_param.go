@@ -40,11 +40,6 @@ func classifyParam(param *sitter.Node, src []byte, ep *endpointInfo) {
 	case hasAttribute(param, src, AttrFromForm):
 		classifyFormParam(ep, typeName, paramName)
 	default:
-		if isPathParam(paramName, ep.path) {
-			ep.params = append(ep.params, scanner.Param{
-				Name: paramName,
-				Type: csharpTypeToOpenAPIType(typeName),
-			})
-		}
+		classifyImplicitParam(typeName, paramName, ep)
 	}
 }

@@ -15,10 +15,11 @@ func scanFileEndpoints(ctx *scanContext, path string, fi *fileInfo, instances ma
 	}
 	filePfx := ctx.prefixMap[path]
 	scopes := ctx.wrappers[path]
+	typeBoxVars := extractTypeBoxVars(fi)
 	var endpoints []scanner.Endpoint
 	for _, r := range extractRoutes(fi, instances) {
 		for _, prefix := range routePrefixes(r, filePfx, scopes) {
-			endpoints = append(endpoints, buildEndpointsFromRoute(r, prefix, relPath, fi.Src)...)
+			endpoints = append(endpoints, buildEndpointsFromRoute(r, prefix, relPath, fi.Src, typeBoxVars)...)
 		}
 	}
 	return endpoints

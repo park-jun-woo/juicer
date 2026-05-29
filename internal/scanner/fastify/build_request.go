@@ -2,9 +2,12 @@
 //ff:what 라우트에서 request 정보를 구성한다 (path params + schema 기반)
 package fastify
 
-import "github.com/park-jun-woo/codistill/internal/scanner"
+import (
+	"github.com/park-jun-woo/codistill/internal/scanner"
+	sitter "github.com/smacker/go-tree-sitter"
+)
 
-func buildRequest(r routeInfo, pathParams []string, src []byte) (scanner.Request, bool) {
+func buildRequest(r routeInfo, pathParams []string, src []byte, vars map[string]*sitter.Node) (scanner.Request, bool) {
 	var req scanner.Request
 	hasRequest := false
 	if len(pathParams) > 0 {
@@ -18,6 +21,6 @@ func buildRequest(r routeInfo, pathParams []string, src []byte) (scanner.Request
 	if si == nil {
 		return req, hasRequest
 	}
-	applySchemaToRequest(si, src, &req, &hasRequest)
+	applySchemaToRequest(si, src, &req, &hasRequest, vars)
 	return req, hasRequest
 }
