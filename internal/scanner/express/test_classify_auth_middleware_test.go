@@ -9,6 +9,7 @@ func TestExtractAuthMiddleware_ClassifyAuthMiddleware(t *testing.T) {
 		name string
 		want string
 	}{
+		{"auth", "auth"},
 		{"authenticate", "auth"},
 		{"requireAuth", "auth"},
 		{"ensureAuthenticated", "auth"},

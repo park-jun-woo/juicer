@@ -5,6 +5,7 @@ package express
 import "strings"
 
 var authMiddlewareNames = map[string]bool{
+	"auth":                true,
 	"authenticate":        true,
 	"requireauth":         true,
 	"ensureauthenticated": true,
