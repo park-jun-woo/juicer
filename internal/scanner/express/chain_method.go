@@ -12,4 +12,5 @@ type chainMethod struct {
 	line        int
 	authLevel   string
 	roles       []string
+	joiRefs     []joiValidatorRef
 }

@@ -13,5 +13,6 @@ func chainMethodToRoute(m chainMethod, routePath, routerVar string) routeInfo {
 		Line:        m.line,
 		AuthLevel:   m.authLevel,
 		Roles:       m.roles,
+		JoiRefs:     m.joiRefs,
 	}
 }
