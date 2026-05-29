@@ -15,6 +15,8 @@ func scanPass1(tsFiles []string, absRoot string) *scanContext {
 		allInstances[path] = r.instances
 		allMounts = append(allMounts, r.mounts...)
 	}
+	allMounts = append(allMounts, collectAutoloadMounts(parsed, absRoot)...)
 	prefixMap := resolvePluginPrefixes(allMounts)
-	return &scanContext{parsed: parsed, instances: allInstances, prefixMap: prefixMap, absRoot: absRoot}
+	wrappers := resolveWrapperScopes(allMounts)
+	return &scanContext{parsed: parsed, instances: allInstances, prefixMap: prefixMap, wrappers: wrappers, absRoot: absRoot}
 }

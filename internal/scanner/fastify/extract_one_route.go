@@ -34,9 +34,10 @@ func extractOneRoute(call *sitter.Node, src []byte, instances map[string]bool) *
 		return nil
 	}
 	ri := &routeInfo{
-		Method: method,
-		Path:   unquoteTS(nodeText(pathNode, src)),
-		Line:   int(call.StartPoint().Row) + 1,
+		Method:    method,
+		Path:      unquoteTS(nodeText(pathNode, src)),
+		Line:      int(call.StartPoint().Row) + 1,
+		StartByte: call.StartByte(),
 	}
 	assignSchemaAndHandler(ri, argNodes, src)
 	return ri

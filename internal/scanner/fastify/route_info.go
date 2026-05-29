@@ -5,9 +5,10 @@ package fastify
 import sitter "github.com/smacker/go-tree-sitter"
 
 type routeInfo struct {
-	Method  string
-	Path    string
-	Handler string
-	Line    int
-	Schema  *sitter.Node
+	Method    string
+	Path      string
+	Handler   string
+	Line      int
+	StartByte uint32
+	Schema    *sitter.Node
 }

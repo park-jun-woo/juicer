@@ -3,8 +3,11 @@
 package fastify
 
 type pluginMount struct {
-	PluginRef  string
-	Prefix     string
-	FilePath   string
-	SourceFile string
+	PluginRef    string
+	Prefix       string
+	FilePath     string
+	SourceFile   string
+	Inline       bool
+	WrapperStart uint32
+	WrapperEnd   uint32
 }

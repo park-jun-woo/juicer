@@ -4,6 +4,8 @@ package fastify
 
 import sitter "github.com/smacker/go-tree-sitter"
 
+const inlineRef = "(inline)"
+
 func extractPluginRef(node *sitter.Node, src []byte) string {
 	switch node.Type() {
 	case "identifier":
@@ -11,7 +13,7 @@ func extractPluginRef(node *sitter.Node, src []byte) string {
 	case "call_expression":
 		return extractCallStringArg(node, src)
 	case "arrow_function", "function_expression", "function":
-		return "(inline)"
+		return inlineRef
 	}
 	return ""
 }

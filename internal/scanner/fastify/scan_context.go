@@ -5,6 +5,7 @@ package fastify
 type scanContext struct {
 	parsed    map[string]*fileInfo
 	instances map[string]map[string]bool
-	prefixMap map[string]string
+	prefixMap map[string][]string
+	wrappers  map[string][]wrapperScope
 	absRoot   string
 }

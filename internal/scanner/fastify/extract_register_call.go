@@ -29,5 +29,10 @@ func extractRegisterCall(call *sitter.Node, src []byte, instances map[string]boo
 	if len(argNodes) >= 2 && argNodes[1].Type() == "object" {
 		pm.Prefix = extractPrefixFromOpts(argNodes[1], src)
 	}
+	if pm.PluginRef == inlineRef {
+		pm.Inline = true
+		pm.WrapperStart = argNodes[0].StartByte()
+		pm.WrapperEnd = argNodes[0].EndByte()
+	}
 	return pm
 }

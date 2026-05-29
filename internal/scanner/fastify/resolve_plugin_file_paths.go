@@ -5,7 +5,7 @@ package fastify
 func resolvePluginFilePaths(mounts []pluginMount, imports map[string]string, absRoot string) {
 	for i := range mounts {
 		ref := mounts[i].PluginRef
-		if ref == "" || ref == "(inline)" {
+		if ref == "" || ref == inlineRef {
 			continue
 		}
 		if resolved, ok := imports[ref]; ok {
