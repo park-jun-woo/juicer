@@ -40,6 +40,11 @@ func scanBody(ep *scanner.Endpoint, body *ast.BlockStmt, ctxName string, info *t
 							handleChainedResponse(ep, innerCall, call, sel.Sel.Name, info, source)
 							return true
 						}
+						if innerSel.Sel.Name == "Bind" && sel.Sel.Name == "Body" {
+							// c.Bind().Body(req) 체이닝 바인딩 패턴
+							handleChainedBind(ep, call, "Bind", info)
+							return true
+						}
 					}
 				}
 			}
