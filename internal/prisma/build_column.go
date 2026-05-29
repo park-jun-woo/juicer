@@ -13,6 +13,9 @@ import (
 func buildColumn(f field, s schema) ddl.Column {
 	name := columnName(f)
 	sqlType := mapType(f)
+	if s.enums[f.baseType] {
+		sqlType = quoteIdent(sqlType)
+	}
 
 	def, hasDefault := defaultClause(f)
 	if def != "" && s.enums[f.baseType] {
@@ -21,7 +24,7 @@ func buildColumn(f field, s schema) ddl.Column {
 	sqlType = promoteSerial(sqlType, def, hasDefault)
 
 	var sb strings.Builder
-	sb.WriteString(name)
+	sb.WriteString(quoteIdent(name))
 	sb.WriteByte(' ')
 	sb.WriteString(sqlType)
 	if !f.nullable {

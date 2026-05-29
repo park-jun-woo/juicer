@@ -14,7 +14,8 @@ func TestRunDDL_WithOutputDir(t *testing.T) {
 	os.WriteFile(filepath.Join(dir, "001.up.sql"), []byte(sql), 0o644)
 	outDir := filepath.Join(dir, "out")
 	execDDL([]string{"-o", outDir, dir})
-	if _, err := os.Stat(filepath.Join(outDir, "orders.sql")); err != nil {
-		t.Fatalf("expected orders.sql to exist: %v", err)
+	matches, _ := filepath.Glob(filepath.Join(outDir, "*_orders.sql"))
+	if len(matches) == 0 {
+		t.Fatalf("expected a *_orders.sql file to exist in %s", outDir)
 	}
 }

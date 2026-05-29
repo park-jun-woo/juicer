@@ -37,15 +37,15 @@ model Post {
 	}
 
 	t.Run("@@map renames table key", func(t *testing.T) {
-		if _, ok := tables["users"]; !ok {
-			t.Errorf("expected table %q from @@map, got tables %v", "users", tableKeys(tables))
+		if _, ok := tables[`"users"`]; !ok {
+			t.Errorf("expected table %q from @@map, got tables %v", `"users"`, tableKeys(tables))
 		}
-		if _, ok := tables["User"]; ok {
-			t.Errorf("model name %q must not survive as a table key after @@map", "User")
+		if _, ok := tables[`"User"`]; ok {
+			t.Errorf("model name %q must not survive as a table key after @@map", `"User"`)
 		}
 	})
 
-	post := tables["posts"]
+	post := tables[`"posts"`]
 	if post == nil {
 		t.Fatalf("expected table %q from @@map, got tables %v", "posts", tableKeys(tables))
 	}
@@ -55,8 +55,8 @@ model Post {
 		if col == nil {
 			t.Fatalf("expected column %q from @map; columns: %v", "author_id", columnNames(post.Columns))
 		}
-		if !strings.HasPrefix(col.Raw, "author_id ") {
-			t.Errorf("column Raw should start with mapped name, got %q", col.Raw)
+		if !strings.HasPrefix(col.Raw, `"author_id" `) {
+			t.Errorf("column Raw should start with quoted mapped name, got %q", col.Raw)
 		}
 		if findColumn(post.Columns, "authorId") != nil {
 			t.Errorf("original field name %q must be replaced by @map", "authorId")
@@ -65,7 +65,7 @@ model Post {
 
 	t.Run("FK uses mapped table and column names", func(t *testing.T) {
 		fk := strings.Join(post.Constraints, " | ")
-		for _, want := range []string{"FOREIGN KEY (author_id)", "REFERENCES users (id)"} {
+		for _, want := range []string{`FOREIGN KEY ("author_id")`, `REFERENCES "users" ("id")`} {
 			if !strings.Contains(fk, want) {
 				t.Errorf("expected FK to contain %q, got %q", want, fk)
 			}

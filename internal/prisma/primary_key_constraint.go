@@ -12,7 +12,7 @@ func primaryKeyConstraint(m model, s schema) string {
 	}
 	for _, f := range m.fields {
 		if hasAttr(f.attrs, "@id") {
-			return "PRIMARY KEY (" + columnName(f) + ")"
+			return "PRIMARY KEY (" + quoteIdent(columnName(f)) + ")"
 		}
 	}
 	return ""

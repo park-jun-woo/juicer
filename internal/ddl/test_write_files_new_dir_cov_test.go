@@ -3,7 +3,6 @@
 package ddl
 
 import (
-	"os"
 	"path/filepath"
 	"testing"
 )
@@ -17,7 +16,8 @@ func TestWriteFiles_NewDirCov(t *testing.T) {
 	if err := WriteFiles(nil, tables, outDir); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := os.Stat(filepath.Join(outDir, "orders.sql")); err != nil {
-		t.Fatalf("expected orders.sql: %v", err)
+	matches, _ := filepath.Glob(filepath.Join(outDir, "*_orders.sql"))
+	if len(matches) == 0 {
+		t.Fatalf("expected a *_orders.sql file in %s", outDir)
 	}
 }

@@ -22,7 +22,7 @@ func TestBuildConstraints(t *testing.T) {
 				}},
 			},
 			target: "User",
-			want:   []string{"PRIMARY KEY (id)"},
+			want:   []string{`PRIMARY KEY ("id")`},
 		},
 		{
 			name: "composite @@id primary key",
@@ -35,7 +35,7 @@ func TestBuildConstraints(t *testing.T) {
 					blockAttrs: []string{"@@id([orgId, userId])"}},
 			},
 			target: "Membership",
-			want:   []string{"PRIMARY KEY (orgId, userId)"},
+			want:   []string{`PRIMARY KEY ("orgId", "userId")`},
 		},
 		{
 			name: "composite @@unique (multitenancy orgId,email)",
@@ -49,7 +49,7 @@ func TestBuildConstraints(t *testing.T) {
 					blockAttrs: []string{"@@unique([orgId, email])"}},
 			},
 			target: "Account",
-			want:   []string{"PRIMARY KEY (id)", "UNIQUE (orgId, email)"},
+			want:   []string{`PRIMARY KEY ("id")`, `UNIQUE ("orgId", "email")`},
 		},
 		{
 			name: "composite FK with onDelete Cascade",
@@ -72,8 +72,8 @@ func TestBuildConstraints(t *testing.T) {
 			},
 			target: "Child",
 			want: []string{
-				"PRIMARY KEY (id)",
-				"FOREIGN KEY (entityId, orgId) REFERENCES Entity (id, orgId) ON DELETE CASCADE",
+				`PRIMARY KEY ("id")`,
+				`FOREIGN KEY ("entityId", "orgId") REFERENCES "Entity" ("id", "orgId") ON DELETE CASCADE`,
 			},
 		},
 	}

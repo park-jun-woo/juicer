@@ -10,7 +10,7 @@ func uniqueConstraints(m model, s schema) []string {
 	out := make([]string, 0, 2)
 	for _, f := range m.fields {
 		if hasAttr(f.attrs, "@unique") {
-			out = append(out, "UNIQUE ("+columnName(f)+")")
+			out = append(out, "UNIQUE ("+quoteIdent(columnName(f))+")")
 		}
 	}
 	for _, a := range m.blockAttrs {

@@ -28,5 +28,8 @@ func Parse(path string) (map[string]*ddl.Table, []ddl.EnumType, error) {
 		models = append(models, parseSource(src)...)
 		enums = append(enums, parseEnums(src)...)
 	}
-	return convertModels(models, enums), enums, nil
+	// convertModels consumes raw enum names for schema enum-set lookups; the
+	// returned enum list quotes names so CREATE TYPE matches the column type.
+	tables := convertModels(models, enums)
+	return tables, quoteEnumNames(enums), nil
 }

@@ -16,8 +16,9 @@ func TestWriteFiles_Basic(t *testing.T) {
 	if err := WriteFiles(nil, tables, dir); err != nil {
 		t.Fatal(err)
 	}
-	if _, err := os.Stat(filepath.Join(dir, "users.sql")); err != nil {
-		t.Fatalf("expected users.sql: %v", err)
+	matches, _ := filepath.Glob(filepath.Join(dir, "*_users.sql"))
+	if len(matches) == 0 {
+		t.Fatalf("expected a *_users.sql file in %s", dir)
 	}
 
 	// MkdirAll error

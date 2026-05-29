@@ -3,19 +3,14 @@
 package ddl
 
 import (
-	"sort"
 	"strings"
 )
 
 // Render produces the final DDL output from enum types and the table state map.
-// Enum types are emitted (sorted) before all tables; tables are sorted
-// alphabetically.
+// Enum types are emitted (sorted) before all tables; tables are emitted in
+// FK-dependency topological order so referenced tables precede their referrers.
 func Render(enums []EnumType, tables map[string]*Table) string {
-	names := make([]string, 0, len(tables))
-	for name := range tables {
-		names = append(names, name)
-	}
-	sort.Strings(names)
+	names := topoSortTables(tables)
 
 	var sb strings.Builder
 

@@ -12,12 +12,12 @@ func TestBuildColumnEnumDefault(t *testing.T) {
 		in   field
 		want string
 	}{
-		{"enum default quoted", field{name: "role", baseType: "Role", attrs: []string{"@default(USER)"}}, "role Role NOT NULL DEFAULT 'USER'"},
-		{"enum no default", field{name: "role", baseType: "Role"}, "role Role NOT NULL"},
-		{"now() unchanged", field{name: "createdAt", baseType: "DateTime", attrs: []string{"@default(now())"}}, "createdAt timestamp(3) NOT NULL DEFAULT now()"},
-		{"false unchanged", field{name: "active", baseType: "Boolean", attrs: []string{"@default(false)"}}, "active boolean NOT NULL DEFAULT false"},
-		{"numeric unchanged", field{name: "count", baseType: "Int", attrs: []string{"@default(0)"}}, "count integer NOT NULL DEFAULT 0"},
-		{"string literal unchanged", field{name: "label", baseType: "String", attrs: []string{`@default("x")`}}, "label text NOT NULL DEFAULT 'x'"},
+		{"enum default quoted", field{name: "role", baseType: "Role", attrs: []string{"@default(USER)"}}, `"role" "Role" NOT NULL DEFAULT 'USER'`},
+		{"enum no default", field{name: "role", baseType: "Role"}, `"role" "Role" NOT NULL`},
+		{"now() unchanged", field{name: "createdAt", baseType: "DateTime", attrs: []string{"@default(now())"}}, `"createdAt" timestamp(3) NOT NULL DEFAULT now()`},
+		{"false unchanged", field{name: "active", baseType: "Boolean", attrs: []string{"@default(false)"}}, `"active" boolean NOT NULL DEFAULT false`},
+		{"numeric unchanged", field{name: "count", baseType: "Int", attrs: []string{"@default(0)"}}, `"count" integer NOT NULL DEFAULT 0`},
+		{"string literal unchanged", field{name: "label", baseType: "String", attrs: []string{`@default("x")`}}, `"label" text NOT NULL DEFAULT 'x'`},
 	}
 
 	for _, c := range cases {

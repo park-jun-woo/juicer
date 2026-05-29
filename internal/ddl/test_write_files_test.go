@@ -25,16 +25,20 @@ func TestWriteFiles(t *testing.T) {
 			t.Fatalf("WriteFiles() error: %v", err)
 		}
 
-		// Check files exist
-		for _, name := range []string{"users.sql", "posts.sql"} {
-			path := filepath.Join(dir, name)
-			data, err := os.ReadFile(path)
+		// Check files exist (numeric prefix added by WriteFiles)
+		for _, suffix := range []string{"*_users.sql", "*_posts.sql"} {
+			matches, _ := filepath.Glob(filepath.Join(dir, suffix))
+			if len(matches) == 0 {
+				t.Errorf("expected a %s file in %s", suffix, dir)
+				continue
+			}
+			data, err := os.ReadFile(matches[0])
 			if err != nil {
-				t.Errorf("ReadFile(%s) error: %v", name, err)
+				t.Errorf("ReadFile(%s) error: %v", matches[0], err)
 				continue
 			}
 			if len(data) == 0 {
-				t.Errorf("file %s is empty", name)
+				t.Errorf("file %s is empty", matches[0])
 			}
 		}
 	})
@@ -48,8 +52,9 @@ func TestWriteFiles(t *testing.T) {
 		if err := WriteFiles(nil, tables, dir); err != nil {
 			t.Fatalf("WriteFiles() error: %v", err)
 		}
-		if _, err := os.Stat(filepath.Join(dir, "t.sql")); err != nil {
-			t.Errorf("expected t.sql to exist: %v", err)
+		matches, _ := filepath.Glob(filepath.Join(dir, "*_t.sql"))
+		if len(matches) == 0 {
+			t.Errorf("expected a *_t.sql file to exist in %s", dir)
 		}
 	})
 
