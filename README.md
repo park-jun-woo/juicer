@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.7-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.8-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,16 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.8
+
+**CLI migrated to cobra/pflag.** The command layer was rebuilt on `spf13/cobra`, replacing the hand-rolled `flag` dispatch.
+
+- **Flag position bug fixed** — the standard library `flag` package stops parsing at the first non-flag argument, so `codist scan <path> --openapi -o out.yaml` silently dropped the trailing flags (plain YAML went to stdout, no file written, no error). pflag parses flags and positionals interspersed, so flags now work in any position.
+- Subcommands (`scan`/`ddl`/`prisma`/`sql` + `sql next|status|list|skip|reset`/`version`) are a native cobra command tree with auto-generated help; the manual usage text and `sql` sub-dispatch were removed.
+- **CLI surface change** — single-dash long flags (`-framework`) are no longer accepted (pflag treats them as shorthand groups); use `--framework`. Short flags like `-o` are unchanged.
+
+Internal: command builders follow the one-file-one-function convention (`filefunc validate` clean); full `go test ./...` green.
 
 ### v0.1.7
 
