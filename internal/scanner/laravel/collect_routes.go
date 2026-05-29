@@ -24,12 +24,63 @@ func collectRoutes(fi fileInfo, prefix string, middleware []string) []routeInfo 
 	var routes []routeInfo
 	calls := findAllByType(fi.root, "scoped_call_expression")
 	for _, call := range calls {
+		// Routes nested inside a ->group(closure) are owned by
+		// extractRouteGroups (which supplies the group prefix/middleware).
+		// Skipping them here avoids duplicate, context-less endpoints.
+		if isInsideGroupClosure(call, fi.root, fi) {
+			continue
+		}
 		ri := extractOneRoute(call, fi, prefix, middleware)
 		if ri != nil {
 			routes = append(routes, *ri)
 		}
 	}
 	return routes
+}
+
+// isInsideGroupClosure reports whether node sits inside a ->group(closure)
+// located between node and root (exclusive). root marks the current scope:
+// at the file level it is the program node; inside a group body it is that
+// body, so routes directly in the body are kept while deeper-nested group
+// routes are deferred to the recursive group walk.
+func isInsideGroupClosure(node, root *sitter.Node, fi fileInfo) bool {
+	for n := node.Parent(); n != nil && !sameNode(n, root); n = n.Parent() {
+		if n.Type() != "anonymous_function_creation_expression" && n.Type() != "arrow_function" {
+			continue
+		}
+		if isGroupCallArgument(n, fi) {
+			return true
+		}
+	}
+	return false
+}
+
+// isGroupCallArgument reports whether closure is passed as the argument of a
+// ->group(...) call. The closure sits inside argument/arguments wrappers whose
+// enclosing member_call_expression names the "group" method.
+func isGroupCallArgument(closure *sitter.Node, fi fileInfo) bool {
+	for a := closure.Parent(); a != nil; a = a.Parent() {
+		switch a.Type() {
+		case "argument", "arguments":
+			continue
+		case "member_call_expression":
+			for i := 0; i < int(a.ChildCount()); i++ {
+				c := a.Child(i)
+				if c.Type() == "name" {
+					return nodeText(c, fi.src) == "group"
+				}
+			}
+			return false
+		default:
+			return false
+		}
+	}
+	return false
+}
+
+// sameNode reports whether two AST nodes refer to the same source span.
+func sameNode(a, b *sitter.Node) bool {
+	return a.StartByte() == b.StartByte() && a.EndByte() == b.EndByte() && a.Type() == b.Type()
 }
 
 // extractOneRoute extracts a single Route::method('/path', handler) call.

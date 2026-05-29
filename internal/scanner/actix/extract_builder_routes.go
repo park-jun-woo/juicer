@@ -102,50 +102,36 @@ func collectRouteCalls(node *sitter.Node, src []byte, resourcePath string, route
 }
 
 func findServiceCalls(node *sitter.Node, src []byte, fn func(*sitter.Node)) {
-	// Walk up the method chain from the deepest node
-	// Pattern: web::scope("...").service(X).service(Y)
-	// In the AST, the outermost call wraps the inner one:
-	// call_expression(.service(Y))
-	//   field_expression
-	//     call_expression(.service(X))
-	//       field_expression
-	//         call_expression(web::scope("..."))
-	//     .service
-	//   (Y)
-	parent := node.Parent()
-	for parent != nil {
-		if parent.Type() == "call_expression" {
-			fe := findChildByType(parent, "field_expression")
-			if fe != nil {
-				fid := findChildByType(fe, "field_identifier")
-				if fid != nil && nodeText(fid, src) == "service" {
-					args := findChildByType(parent, "arguments")
-					if args != nil {
-						fn(args)
-					}
-				}
-			}
-		}
-		parent = parent.Parent()
-	}
+	walkMethodChain(node, src, "service", fn)
 }
 
 func findRouteCalls(node *sitter.Node, src []byte, fn func(*sitter.Node)) {
-	parent := node.Parent()
-	for parent != nil {
-		if parent.Type() == "call_expression" {
-			fe := findChildByType(parent, "field_expression")
-			if fe != nil {
-				fid := findChildByType(fe, "field_identifier")
-				if fid != nil && nodeText(fid, src) == "route" {
-					args := findChildByType(parent, "arguments")
-					if args != nil {
-						fn(args)
-					}
-				}
+	walkMethodChain(node, src, "route", fn)
+}
+
+// walkMethodChain descends a method-call chain from its outermost call toward
+// the chain head, invoking fn(arguments) for each .<method>() call on the way.
+// Pattern: web::scope("...").service(X).service(Y) nests with the outermost
+// call (.service(Y)) wrapping its receiver (.service(X)), down to the head
+// (web::scope("...")). Walking DOWN the receiver chain — rather than up through
+// ancestors — keeps the traversal inside this chain and avoids re-entering the
+// enclosing .service() that wraps it (which caused unbounded recursion).
+func walkMethodChain(node *sitter.Node, src []byte, method string, fn func(*sitter.Node)) {
+	for n := node; n != nil && n.Type() == "call_expression"; {
+		fe := findChildByType(n, "field_expression")
+		if fe == nil {
+			// Reached the chain head, e.g. web::scope("...") whose callee is a
+			// scoped_identifier rather than a field_expression.
+			return
+		}
+		fid := findChildByType(fe, "field_identifier")
+		if fid != nil && nodeText(fid, src) == method {
+			if args := findChildByType(n, "arguments"); args != nil {
+				fn(args)
 			}
 		}
-		parent = parent.Parent()
+		// Descend into the receiver (first child of the field_expression).
+		n = fe.Child(0)
 	}
 }
 

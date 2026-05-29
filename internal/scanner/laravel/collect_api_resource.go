@@ -15,6 +15,11 @@ func collectAPIResource(fi fileInfo, prefix string, middleware []string) []route
 	var routes []routeInfo
 	calls := findAllByType(fi.root, "scoped_call_expression")
 	for _, call := range calls {
+		// Group-nested apiResource calls are handled by the recursive group
+		// walk; skipping them here prevents duplicate, context-less routes.
+		if isInsideGroupClosure(call, fi.root, fi) {
+			continue
+		}
 		rs := expandAPIResource(call, fi, prefix, middleware)
 		routes = append(routes, rs...)
 	}
@@ -141,7 +146,7 @@ func singularize(s string) string {
 	if strings.HasSuffix(s, "ses") || strings.HasSuffix(s, "xes") || strings.HasSuffix(s, "zes") {
 		return s[:len(s)-2]
 	}
-	if strings.HasSuffix(s, "s") && !strings.HasSuffix(s, "ss") {
+	if strings.HasSuffix(s, "s") && !strings.HasSuffix(s, "ss") && !strings.HasSuffix(s, "us") {
 		return s[:len(s)-1]
 	}
 	return s
