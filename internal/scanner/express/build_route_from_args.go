@@ -16,6 +16,7 @@ func buildRouteFromArgs(args *sitter.Node, src []byte, method string, line int) 
 	path := unquoteTS(nodeText(pathNode, src))
 	handler, middleware := extractHandlerAndMiddleware(argNodes, src)
 	validators := extractZodValidatorsFromArgs(argNodes, src)
+	joiRefs := extractJoiRefsFromArgs(argNodes, src)
 	authLevel, roles := extractAuthFromArgs(argNodes, src)
 	lastArg := argNodes[len(argNodes)-1]
 	return &routeInfo{
@@ -26,6 +27,7 @@ func buildRouteFromArgs(args *sitter.Node, src []byte, method string, line int) 
 		Middleware:    middleware,
 		Line:          line,
 		ZodValidators: validators,
+		JoiRefs:       joiRefs,
 		AuthLevel:     authLevel,
 		Roles:         roles,
 	}

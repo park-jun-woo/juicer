@@ -24,6 +24,12 @@ func buildRequest(r routeInfo, pathParams []string, ctx *scanContext, fi *fileIn
 		}
 	}
 
+	for _, ref := range r.JoiRefs {
+		if applyJoiSchema(&req, resolveJoiRef(ref, fi, ctx)) {
+			hasContent = true
+		}
+	}
+
 	if !hasContent {
 		return nil
 	}

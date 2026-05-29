@@ -17,6 +17,7 @@ type routeInfo struct {
 	Middleware    []string
 	Line          int
 	ZodValidators []zod.ValidatorInfo
+	JoiRefs       []joiValidatorRef
 	AuthLevel     string
 	Roles         []string
 }
