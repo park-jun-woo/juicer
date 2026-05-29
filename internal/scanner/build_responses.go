@@ -20,19 +20,9 @@ func buildResponses(responses []Response, schemas map[string]any) map[string]any
 		oaResp := map[string]any{
 			"description": statusDescription(status),
 		}
-
-		if resp.Kind == "json" && (len(resp.Fields) > 0 || resp.TypeName != "") {
-			schema := responseSchema(resp, schemas)
-			if resp.Confidence == "partial" {
-				schema["x-schema-confidence"] = "partial"
-			}
-			oaResp["content"] = map[string]any{
-				"application/json": map[string]any{
-					"schema": schema,
-				},
-			}
+		if content := responseContent(resp, schemas); content != nil {
+			oaResp["content"] = content
 		}
-
 		result[status] = oaResp
 	}
 
