@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what hasPrefix — 경로 prefix 판별의 분기를 검증
 package actix
 

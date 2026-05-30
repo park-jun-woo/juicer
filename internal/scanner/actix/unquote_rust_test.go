@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what unquoteRust — 문자열 리터럴 따옴표 제거 분기를 검증
 package actix
 

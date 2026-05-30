@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what sortedParents: file 우선, 동일 file이면 varName 기준 정렬
 package express
 

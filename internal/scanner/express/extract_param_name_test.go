@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what extractParamName: 콜론없음/일반파라미터/정규식파라미터 분기
 package express
 

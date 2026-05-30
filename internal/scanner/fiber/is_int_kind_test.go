@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=selection
+//ff:func feature=scan type=test control=iteration dimension=1
 //ff:what isIntKind — 정수 계열 BasicKind 판정 테스트
 package fiber
 

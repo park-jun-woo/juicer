@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what rustComplexTypeToOpenAPI — Vec/Map/Option/기타 변환 분기를 검증
 package actix
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=iteration dimension=1
+//ff:func feature=scan type=test control=sequence
 //ff:what findFileForPos — 위치 기반 파일 검색 테스트
 package fiber
 

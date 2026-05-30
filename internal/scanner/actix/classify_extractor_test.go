@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=selection topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what classifyExtractor — scoped 타입을 extractor 종류로 분류함을 검증
 package actix
 

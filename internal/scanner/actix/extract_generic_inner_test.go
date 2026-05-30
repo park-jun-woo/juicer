@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what extractGenericInner — 제네릭 안쪽 타입 추출의 분기를 검증
 package actix
 

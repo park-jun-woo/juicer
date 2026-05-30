@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=laravel
+//ff:func feature=scan type=test control=iteration dimension=1 topic=laravel
 //ff:what TestExtractOneGroup_Round5 (round5) — 중첩/체인 그룹 추출로 헬퍼 검증
 package laravel
 

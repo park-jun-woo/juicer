@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=django
+//ff:func feature=scan type=test control=iteration dimension=1 topic=django
 //ff:what isWriteMethod — 쓰기 메서드 판별을 검증
 package django
 

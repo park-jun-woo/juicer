@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=django
+//ff:func feature=scan type=test control=iteration dimension=1 topic=django
 //ff:what ensureLeadingSlash — 선행 슬래시 보장 분기를 검증
 package django
 

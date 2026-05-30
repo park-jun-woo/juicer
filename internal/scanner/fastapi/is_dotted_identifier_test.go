@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=fastapi
+//ff:func feature=scan type=test control=iteration dimension=1 topic=fastapi
 //ff:what isDottedIdentifier: ident.ident true / 점없음 / 무효 부분 false
 package fastapi
 

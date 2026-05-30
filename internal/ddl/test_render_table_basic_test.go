@@ -1,0 +1,47 @@
+//ff:func feature=ddl type=test control=sequence
+//ff:what TestRenderTable_Basic 테스트
+package ddl
+
+import (
+	"strings"
+	"testing"
+)
+
+func TestRenderTable_Basic(t *testing.T) {
+	tbl := &Table{
+		Name:        "users",
+		Columns:     []Column{{Name: "id", Raw: "id INT"}, {Name: "name", Raw: "name TEXT"}},
+		Constraints: []string{"CONSTRAINT pk PRIMARY KEY (id)"},
+		Indexes:     []string{"CREATE INDEX idx_name ON users (name)"},
+	}
+	var sb strings.Builder
+	renderTable(&sb, tbl)
+	out := sb.String()
+	if !strings.Contains(out, "CREATE TABLE users") {
+		t.Fatalf("unexpected output: %q", out)
+	}
+	if !strings.Contains(out, "id INT") {
+		t.Fatalf("missing column in output: %q", out)
+	}
+	if !strings.Contains(out, "CONSTRAINT pk") {
+		t.Fatalf("missing constraint in output: %q", out)
+	}
+	if !strings.Contains(out, "idx_name") {
+		t.Fatalf("missing index in output: %q", out)
+	}
+
+	tbl2 := &Table{
+		Name:        "orders",
+		Columns:     []Column{{Name: "id", Raw: "id INT"}},
+		Constraints: []string{"CONSTRAINT pk PRIMARY KEY (id)", "CONSTRAINT uq UNIQUE (id)"},
+	}
+	var sb2 strings.Builder
+	renderTable(&sb2, tbl2)
+	out2 := sb2.String()
+	if !strings.Contains(out2, "CONSTRAINT pk") {
+		t.Fatalf("missing first constraint: %q", out2)
+	}
+	if !strings.Contains(out2, "CONSTRAINT uq") {
+		t.Fatalf("missing second constraint: %q", out2)
+	}
+}

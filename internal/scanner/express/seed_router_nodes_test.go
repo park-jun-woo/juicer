@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what seedRouterNodes: 모든 (file,var)를 그래프 노드로 등록
 package express
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what joinExpressPath: 빈prefix / path루트or빈 / 슬래시 정규화 결합
 package express
 

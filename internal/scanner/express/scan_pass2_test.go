@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what scanPass2: 라우트→Endpoint 생성 / 라우터없는 파일 스킵
 package express
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=fastapi
+//ff:func feature=scan type=test control=iteration dimension=1 topic=fastapi
 //ff:what firstAnnotatedTypeArg: comma 구분 / 단일 닫힘 / 비Annotated / 미닫힘
 package fastapi
 

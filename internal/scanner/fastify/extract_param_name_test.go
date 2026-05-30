@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=fastify
+//ff:func feature=scan type=test control=iteration dimension=1 topic=fastify
 //ff:what extractParamName 테스트
 package fastify
 

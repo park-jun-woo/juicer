@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=nestjs
+//ff:func feature=scan type=test control=iteration dimension=1 topic=nestjs
 //ff:what buildValidateTag 테스트
 package nestjs
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence
+//ff:func feature=scan type=test control=iteration dimension=1
 //ff:what resolveGroupPrefixFunc — 함수 단위 그룹 prefix 처리 테스트
 package fiber
 

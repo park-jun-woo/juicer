@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=django
+//ff:func feature=scan type=test control=iteration dimension=1 topic=django
 //ff:what drfFieldToOpenAPI — 모든 DRF 필드 타입 변환 분기를 검증
 package django
 

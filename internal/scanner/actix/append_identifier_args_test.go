@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what appendIdentifierArgs — arguments 노드의 식별자 인자만 수집함을 검증
 package actix
 

@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=actix
+//ff:func feature=scan type=test control=iteration dimension=1 topic=actix
 //ff:what receiverIsWebScopeOrResource — 수신자 헤드 판별을 검증
 package actix
 

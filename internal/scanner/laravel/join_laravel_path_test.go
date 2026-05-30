@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=laravel
+//ff:func feature=scan type=test control=iteration dimension=1 topic=laravel
 //ff:what joinLaravelPath 테스트 (round5)
 package laravel
 

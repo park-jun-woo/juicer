@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=selection
+//ff:func feature=scan type=test control=iteration dimension=1
 //ff:what formatType — 타입 문자열화 테스트
 package fiber
 

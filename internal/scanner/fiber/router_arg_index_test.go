@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=iteration dimension=1
+//ff:func feature=scan type=test control=sequence
 //ff:what routerArgIndex — 라우터 인자 인덱스 테스트
 package fiber
 

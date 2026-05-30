@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=express
+//ff:func feature=scan type=test control=iteration dimension=1 topic=express
 //ff:what unquoteTS: 작은/큰/백틱 따옴표 제거 + 짧은문자열/비따옴표 분기
 package express
 

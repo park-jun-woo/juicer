@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=iteration dimension=1
+//ff:func feature=scan type=test control=sequence
 //ff:what applyRescanResults — 재스캔 결과 반영 테스트
 package fiber
 

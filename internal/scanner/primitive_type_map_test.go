@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=scanner
+//ff:func feature=scan type=test control=iteration dimension=1 topic=scanner
 //ff:what isPrimitiveTypeName 테스트 (round5)
 package scanner
 

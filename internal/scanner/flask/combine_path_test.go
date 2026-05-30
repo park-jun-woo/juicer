@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=flask
+//ff:func feature=scan type=test control=iteration dimension=1 topic=flask
 //ff:what combinePath 테스트
 package flask
 

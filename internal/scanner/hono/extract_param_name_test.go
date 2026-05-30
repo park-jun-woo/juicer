@@ -1,4 +1,4 @@
-//ff:func feature=scan type=test control=sequence topic=hono
+//ff:func feature=scan type=test control=iteration dimension=1 topic=hono
 //ff:what extractParamName 테스트
 package hono
 
