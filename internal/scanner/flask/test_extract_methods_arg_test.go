@@ -36,3 +36,35 @@ def users():
 		t.Errorf("expected /users for both routes, got %s and %s", routes[0].path, routes[1].path)
 	}
 }
+
+func TestExtractMethodsArg_Direct(t *testing.T) {
+	args, src := argListOf(t, `route('/x', methods=['GET', 'POST', 'PUT'])`+"\n")
+	got := extractMethodsArg(args, src)
+	if len(got) != 3 || got[0] != "GET" || got[2] != "PUT" {
+		t.Fatalf("methods = %v", got)
+	}
+}
+
+func TestExtractMethodsArg_NoMethods(t *testing.T) {
+	args, src := argListOf(t, `route('/x')`+"\n")
+	if got := extractMethodsArg(args, src); got != nil {
+		t.Fatalf("expected nil, got %v", got)
+	}
+}
+
+func TestExtractMethodsArg_OtherKwargBeforeMethods(t *testing.T) {
+	// a non-methods kwarg precedes methods -> exercises the key-mismatch continue
+	args, src := argListOf(t, `route('/x', strict_slashes=False, methods=['GET'])`+"\n")
+	got := extractMethodsArg(args, src)
+	if len(got) != 1 || got[0] != "GET" {
+		t.Fatalf("methods = %v", got)
+	}
+}
+
+func TestExtractMethodsArg_NotList(t *testing.T) {
+	// methods present but value is not a list literal -> nil
+	args, src := argListOf(t, `route('/x', methods=ALLOWED)`+"\n")
+	if got := extractMethodsArg(args, src); got != nil {
+		t.Fatalf("expected nil for non-list methods, got %v", got)
+	}
+}

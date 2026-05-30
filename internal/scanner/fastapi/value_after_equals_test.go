@@ -19,3 +19,16 @@ func TestValueAfterEquals(t *testing.T) {
 		t.Fatalf("expected '42', got %q", got)
 	}
 }
+
+func TestValueAfterEquals_NoEquals(t *testing.T) {
+	// a node with no "=" child -> ""
+	src := []byte("f(positional)\n")
+	root, _ := parsePython(src)
+	args := findAllByType(root, "argument_list")
+	if len(args) == 0 {
+		t.Fatal("no argument_list")
+	}
+	if got := valueAfterEquals(args[0], src); got != "" {
+		t.Fatalf("expected empty for node without '=', got %q", got)
+	}
+}

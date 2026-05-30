@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.9-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.10-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,13 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.10
+
+**Function-level test coverage sweep.** Drove every function in the codebase to a measured test status (TestMaster `tsma`): all 1729 functions resolved (PASS at 100% branch coverage, or best-effort DONE where branches are unreachable in isolated unit tests — e.g. `golang.org/x/tools/go/packages.Load` paths needing framework deps not in `go.mod`). Coverage average ~91%, `go test ./...` green.
+
+- **Tests only** — no production behavior changed; the sweep added/strengthened `*_test.go` across all scanner backends (actix, django, express, fastapi, fastify, flask, fiber, gogin, hono, nestjs, quarkus, spring, laravel, dotnet, echo, zod, supafunc) and `internal/ddl`.
+- **Bug fix (BUG-001 / Phase130)** — `internal/scanner/echo` `resolveCallTarget` now guards `info == nil` (returns `token.NoPos`), matching its sibling resolvers; closes a latent nil-pointer dereference surfaced by the coverage sweep.
 
 ### v0.1.9
 

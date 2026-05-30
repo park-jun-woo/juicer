@@ -27,3 +27,20 @@ func TestTryGroupArgCall_NoGroupArg(t *testing.T) {
 	}
 	tryGroupArgCall(call, ctx)
 }
+
+func TestTryGroupArgCall_GroupArgMatch(t *testing.T) {
+	// register(api) where api is a known router -> extractGroupArgPrefix matches,
+	// then rescanCalleeWithPrefix runs (empty info -> early return, no panic).
+	call := &ast.CallExpr{
+		Fun:  &ast.Ident{Name: "register"},
+		Args: []ast.Expr{&ast.Ident{Name: "api"}},
+	}
+	ctx := &groupArgCtx{
+		routers: map[string]*routerInfo{"api": {prefix: "/api"}},
+		idx:     &funcIndex{byPos: map[token.Pos]*ast.FuncDecl{}},
+		info:    goginEmptyInfo(),
+	}
+	tryGroupArgCall(call, ctx)
+}
+
+var _ = scanner.Endpoint{}

@@ -32,4 +32,11 @@ func TestBodySchema_Named(t *testing.T) {
 	if result["type"] != "object" {
 		t.Fatalf("expected object type, got %v", result)
 	}
+
+	// primitive TypeName -> inline primitive schema (no $ref)
+	primBody := &Body{TypeName: "string"}
+	result = bodySchema(primBody, schemas)
+	if result["type"] != "string" {
+		t.Fatalf("expected string type for primitive body, got %v", result)
+	}
 }

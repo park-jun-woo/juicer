@@ -46,3 +46,21 @@ func TestRenderTable_Basic(t *testing.T) {
 		t.Fatalf("missing second constraint: %q", out2)
 	}
 }
+
+func TestRenderTable_ColumnsOnly_LastNoComma(t *testing.T) {
+	// No constraints: the last column must NOT have a trailing comma
+	// (covers the idx < total false branch in the column loop).
+	tbl := &Table{
+		Name:    "users",
+		Columns: []Column{{Name: "id", Raw: "id INT"}, {Name: "name", Raw: "name TEXT"}},
+	}
+	var sb strings.Builder
+	renderTable(&sb, tbl)
+	out := sb.String()
+	if !strings.Contains(out, "name TEXT\n)") {
+		t.Fatalf("expected last column without trailing comma, got %q", out)
+	}
+	if strings.Contains(out, "name TEXT,") {
+		t.Fatalf("last column should not have trailing comma: %q", out)
+	}
+}

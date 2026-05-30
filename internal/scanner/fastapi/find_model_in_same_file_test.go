@@ -17,3 +17,11 @@ func TestFindModelInSameFile(t *testing.T) {
 		t.Fatal("should not find NonExistent")
 	}
 }
+
+func TestFindModelInSameFile_MultipleClasses(t *testing.T) {
+	src := []byte("class A(BaseModel):\n    x: int\nclass B(BaseModel):\n    y: int\n")
+	root, _ := parsePython(src)
+	if !findModelInSameFile(root, src, "B") {
+		t.Fatal("expected B (skips A first)")
+	}
+}

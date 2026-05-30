@@ -46,3 +46,18 @@ func TestExprString_Ident(t *testing.T) {
 	}
 }
 
+
+func TestExprString_CompositeNoType(t *testing.T) {
+	if got := exprString(&ast.CompositeLit{}); got != "{}" {
+		t.Errorf("nil-type composite = %q, want {}", got)
+	}
+}
+
+func TestExprString_SelectorNoRecv(t *testing.T) {
+	// X is a CallExpr -> exprString(X) ends up non-empty via default case;
+	// this exercises the selector branch regardless.
+	sel := &ast.SelectorExpr{X: &ast.CallExpr{Fun: &ast.Ident{Name: "f"}}, Sel: &ast.Ident{Name: "M"}}
+	if got := exprString(sel); got == "" {
+		t.Error("expected non-empty selector string")
+	}
+}

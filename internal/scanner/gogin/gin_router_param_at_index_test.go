@@ -4,8 +4,19 @@ package gogin
 
 import (
 	"go/ast"
+	"go/types"
 	"testing"
 )
+
+func TestGinRouterParamAtIndex_InfoNoMatch(t *testing.T) {
+	fn := &ast.FuncDecl{Type: &ast.FuncType{Params: &ast.FieldList{List: []*ast.Field{
+		{Names: []*ast.Ident{{Name: "r"}}, Type: &ast.Ident{Name: "int"}},
+	}}}}
+	// non-nil info but TypeOf returns nil -> "" (no router match)
+	if got := ginRouterParamAtIndex(fn, &types.Info{}, 0); got != "" {
+		t.Fatalf("expected empty, got %q", got)
+	}
+}
 
 func TestGinRouterParamAtIndex(t *testing.T) {
 	// nil params
@@ -34,3 +45,4 @@ func TestGinRouterParamAtIndex(t *testing.T) {
 		t.Fatal("expected empty for nil info")
 	}
 }
+

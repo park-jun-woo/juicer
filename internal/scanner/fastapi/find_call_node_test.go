@@ -30,3 +30,15 @@ func TestFindCallNode(t *testing.T) {
 	}
 	t.Fatal("no param node found")
 }
+
+func TestFindCallNode_NotFound(t *testing.T) {
+	src := []byte("x = 5\n")
+	root, _ := parsePython(src)
+	assigns := findAllByType(root, "assignment")
+	if len(assigns) == 0 {
+		t.Fatal("no assignment")
+	}
+	if findCallNode(assigns[0]) != nil {
+		t.Fatal("expected nil for no call child")
+	}
+}

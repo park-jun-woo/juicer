@@ -47,3 +47,50 @@ func TestFieldToProperty_String(t *testing.T) {
 	}
 }
 
+
+func TestFieldToProperty_Branches(t *testing.T) {
+	min, max := 1, 100
+	minL, maxL := 2, 50
+
+	// nullable scalar
+	if p := fieldToProperty(Field{Type: "string", Nullable: true}); p["nullable"] != true {
+		t.Errorf("nullable not set: %v", p)
+	}
+
+	// nullable nested struct
+	ns := Field{Type: "Addr", Nullable: true, Fields: []Field{{JSON: "c", Type: "string"}}}
+	if p := fieldToProperty(ns); p["nullable"] != true {
+		t.Errorf("nested nullable not set: %v", p)
+	}
+
+	// array of object -> items $ref
+	arrObj := Field{Type: "[]User"}
+	p := fieldToProperty(arrObj)
+	items, _ := p["items"].(map[string]any)
+	if items == nil || items["$ref"] == nil {
+		t.Errorf("array of object should have $ref items, got %v", p["items"])
+	}
+
+	// type:format rule
+	tf := fieldToProperty(Field{Type: "string:date-time"})
+	if tf["type"] != "string" || tf["format"] != "date-time" {
+		t.Errorf("type:format rule failed: %v", tf)
+	}
+
+	// enum + constraints
+	full := Field{
+		Type:      "integer",
+		Enum:      []string{"1", "2"},
+		Minimum:   &min,
+		Maximum:   &max,
+		MinLength: &minL,
+		MaxLength: &maxL,
+	}
+	fp := fieldToProperty(full)
+	if fp["enum"] == nil {
+		t.Errorf("enum not set")
+	}
+	if fp["minimum"] != 1 || fp["maximum"] != 100 || fp["minLength"] != 2 || fp["maxLength"] != 50 {
+		t.Errorf("constraints wrong: %v", fp)
+	}
+}

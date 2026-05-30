@@ -26,3 +26,30 @@ func TestTryExtractField(t *testing.T) {
 		t.Fatalf("expected 2 fields, got %d", count)
 	}
 }
+
+func TestTryExtractField_DefaultNil(t *testing.T) {
+	// a non field/assignment statement (pass) yields nil
+	src := []byte("class M(BaseModel):\n    pass\n")
+	root, _ := parsePython(src)
+	for _, ps := range findAllByType(root, "pass_statement") {
+		if f := tryExtractField(ps, src); f != nil {
+			t.Fatalf("pass should yield nil, got %v", f)
+		}
+		return
+	}
+	t.Skip("no pass_statement")
+}
+
+func TestTryExtractField_Assignment(t *testing.T) {
+	// raw assignment node
+	src := []byte("class M(BaseModel):\n    age: int = 25\n")
+	root, _ := parsePython(src)
+	as := findAllByType(root, "assignment")
+	if len(as) == 0 {
+		t.Skip("no assignment node")
+	}
+	f := tryExtractField(as[0], src)
+	if f == nil || f.name != "age" {
+		t.Fatalf("assignment field: got %v", f)
+	}
+}

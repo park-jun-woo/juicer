@@ -47,3 +47,37 @@ func TestGinCtxParamNameInfo_NilInfo(t *testing.T) {
 	}
 }
 
+
+func TestGinCtxParamNameInfo_InfoFallback(t *testing.T) {
+	// non-nil info but TypeOf returns nil for synthetic node -> AST fallback
+	ft := &ast.FuncType{
+		Params: &ast.FieldList{
+			List: []*ast.Field{
+				{
+					Names: []*ast.Ident{{Name: "c"}},
+					Type: &ast.StarExpr{X: &ast.SelectorExpr{
+						X:   &ast.Ident{Name: "gin"},
+						Sel: &ast.Ident{Name: "Context"},
+					}},
+				},
+			},
+		},
+	}
+	info := &types.Info{}
+	if got := ginCtxParamNameInfo(ft, info); got != "c" {
+		t.Fatalf("fallback: got %q, want c", got)
+	}
+}
+
+func TestGinCtxParamNameInfo_NonGinFallback(t *testing.T) {
+	ft := &ast.FuncType{
+		Params: &ast.FieldList{
+			List: []*ast.Field{
+				{Names: []*ast.Ident{{Name: "x"}}, Type: &ast.Ident{Name: "int"}},
+			},
+		},
+	}
+	if got := ginCtxParamNameInfo(ft, &types.Info{}); got != "" {
+		t.Fatalf("non-gin: got %q", got)
+	}
+}

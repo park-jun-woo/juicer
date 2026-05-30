@@ -29,4 +29,5 @@ func TestParseFile(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error for non-existent file")
 	}
+	// the parsePython error branch is unreachable: tree-sitter parses any bytes.
 }

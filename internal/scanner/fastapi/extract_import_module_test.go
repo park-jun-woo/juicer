@@ -34,6 +34,17 @@ func TestExtractImportModule(t *testing.T) {
 	stmts3 := findAllByType(root3, "import_from_statement")
 	if len(stmts3) > 0 {
 		got3 := extractImportModule(stmts3[0], src3)
-		_ = got3
+		if got3 != ".models" {
+			t.Fatalf("expected .models, got %q", got3)
+		}
+	}
+}
+
+func TestExtractImportModule_NoModule(t *testing.T) {
+	// a node lacking relative_import and dotted_name children -> ""
+	src := []byte("x = 1\n")
+	root, _ := parsePython(src)
+	if got := extractImportModule(root, src); got != "" {
+		t.Fatalf("expected empty, got %q", got)
 	}
 }

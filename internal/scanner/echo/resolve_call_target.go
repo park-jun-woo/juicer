@@ -10,6 +10,9 @@ import (
 
 // resolveCallTarget resolves the target function position from a call expression.
 func resolveCallTarget(call *ast.CallExpr, info *types.Info) token.Pos {
+	if info == nil {
+		return token.NoPos
+	}
 	switch fn := call.Fun.(type) {
 	case *ast.SelectorExpr:
 		if sel, ok := info.Selections[fn]; ok {

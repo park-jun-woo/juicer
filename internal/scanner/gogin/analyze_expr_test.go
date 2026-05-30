@@ -56,3 +56,40 @@ func TestAnalyzeExpr_FuncLit(t *testing.T) {
 	}
 	analyzeExpr(ep, ident2, info5, idx)
 }
+
+func ginCtxFuncLit(name string) *ast.FuncLit {
+	return &ast.FuncLit{
+		Type: &ast.FuncType{
+			Params: &ast.FieldList{
+				List: []*ast.Field{
+					{
+						Names: []*ast.Ident{{Name: name}},
+						Type: &ast.StarExpr{
+							X: &ast.SelectorExpr{
+								X:   &ast.Ident{Name: "gin"},
+								Sel: &ast.Ident{Name: "Context"},
+							},
+						},
+					},
+				},
+			},
+		},
+		Body: &ast.BlockStmt{},
+	}
+}
+
+func TestAnalyzeExpr_FuncLitWithCtx(t *testing.T) {
+	ep := &scanner.Endpoint{}
+	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
+	// nil info -> AST fallback resolves ctx name "c"; scanBody runs (empty body).
+	analyzeExpr(ep, ginCtxFuncLit("c"), nil, idx)
+}
+
+func TestAnalyzeExpr_DefaultBasicLit(t *testing.T) {
+	ep := &scanner.Endpoint{}
+	idx := &funcIndex{byPos: make(map[token.Pos]*ast.FuncDecl), info: make(map[token.Pos]*types.Info)}
+	analyzeExpr(ep, &ast.BasicLit{Kind: token.INT, Value: "1"}, nil, idx)
+	if ep.Request != nil {
+		t.Fatal("default case should be a no-op")
+	}
+}

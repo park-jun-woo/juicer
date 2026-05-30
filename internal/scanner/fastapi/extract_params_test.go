@@ -44,3 +44,18 @@ async def get_user(user_id: int, skip: int = 0, limit: int = Query(default=100))
 		t.Fatalf("expected limit, got %s", ri.query[1].Name)
 	}
 }
+
+func TestExtractParams_NoParameters(t *testing.T) {
+	// a function definition without a parameters node is not produced by valid
+	// Python (def always has parameters), so pass a node lacking it: the root.
+	src := []byte("x = 1\n")
+	root, err := parsePython(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ri := &routeInfo{path: "/x"}
+	extractParams(root, src, ri, nil)
+	if len(ri.params) != 0 || len(ri.query) != 0 {
+		t.Fatalf("expected no params, got %+v", ri)
+	}
+}

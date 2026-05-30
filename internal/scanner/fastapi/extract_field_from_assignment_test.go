@@ -33,3 +33,28 @@ func TestExtractFieldFromAssignment(t *testing.T) {
 		}
 	}
 }
+
+func TestExtractFieldFromAssignment_NoType(t *testing.T) {
+	// no type annotation -> typeNode absent
+	src := []byte("class M:\n    count = 5\n")
+	root, _ := parsePython(src)
+	assigns := findAllByType(root, "assignment")
+	f := extractFieldFromAssignment(assigns[0], src)
+	if f == nil || f.name != "count" || f.typeName != "" {
+		t.Fatalf("got %+v", f)
+	}
+}
+
+func TestExtractFieldFromAssignment_FieldCall(t *testing.T) {
+	// Field(...) without default kwarg -> hasDefault reset to false
+	src := []byte("class M:\n    age: int = Field(ge=0)\n")
+	root, _ := parsePython(src)
+	assigns := findAllByType(root, "assignment")
+	f := extractFieldFromAssignment(assigns[0], src)
+	if f == nil || f.hasDefault {
+		t.Fatalf("expected hasDefault=false, got %+v", f)
+	}
+	if f.ge == nil || *f.ge != 0 {
+		t.Fatalf("ge wrong: %+v", f)
+	}
+}

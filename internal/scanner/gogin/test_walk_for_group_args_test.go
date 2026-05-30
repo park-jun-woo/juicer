@@ -22,3 +22,17 @@ func TestWalkForGroupArgs_Empty(t *testing.T) {
 	// nil stmts should not panic
 	walkForGroupArgs(nil, ctx)
 }
+
+func TestWalkForGroupArgs_ExprStmtNonCall(t *testing.T) {
+	// ExprStmt whose X is not a CallExpr -> continue
+	stmts := []ast.Stmt{
+		&ast.ExprStmt{X: &ast.UnaryExpr{Op: token.ARROW, X: &ast.Ident{Name: "ch"}}},
+	}
+	ctx := &groupArgCtx{
+		ginAlias: "gin",
+		routers:    map[string]*routerInfo{},
+		idx:        &funcIndex{byPos: map[token.Pos]*ast.FuncDecl{}},
+	}
+	walkForGroupArgs(stmts, ctx)
+	_ = scanner.Endpoint{}
+}

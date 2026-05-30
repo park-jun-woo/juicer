@@ -16,6 +16,7 @@ func TestFlaskConverterToOpenAPI(t *testing.T) {
 		{"path", "string", ""},
 		{"string", "string", ""},
 		{"", "string", ""},
+		{"custom_converter", "string", ""}, // default branch
 	}
 	for _, tt := range tests {
 		got := flaskConverterToOpenAPI(tt.converter)

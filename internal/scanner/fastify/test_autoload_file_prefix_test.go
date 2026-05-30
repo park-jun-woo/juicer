@@ -12,4 +12,13 @@ func TestAutoloadFilePrefix(t *testing.T) {
 	if _, ok := autoloadFilePrefix("/base", "/base/auth/schema.d.ts", "/api"); ok {
 		t.Error("expected .d.ts rejected")
 	}
+	// non-.ts file rejected
+	if _, ok := autoloadFilePrefix("/base", "/base/readme.md", "/api"); ok {
+		t.Error("expected non-.ts rejected")
+	}
+	// non-index file contributes its name as a segment
+	got2, ok2 := autoloadFilePrefix("/base", "/base/users.ts", "/api")
+	if !ok2 || got2 != "/api/users" {
+		t.Fatalf("want /api/users, got %q ok=%v", got2, ok2)
+	}
 }

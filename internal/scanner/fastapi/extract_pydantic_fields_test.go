@@ -22,3 +22,12 @@ func TestExtractPydanticFields(t *testing.T) {
 		t.Fatalf("unexpected fields: %+v", fields)
 	}
 }
+
+func TestExtractPydanticFields_NoBlock(t *testing.T) {
+	// a node without a block child -> nil
+	src := []byte("x = 1\n")
+	root, _ := parsePython(src)
+	if fields := extractPydanticFields(root, src); fields != nil {
+		t.Fatalf("expected nil, got %+v", fields)
+	}
+}

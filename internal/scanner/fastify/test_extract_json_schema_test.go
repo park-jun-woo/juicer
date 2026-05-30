@@ -66,3 +66,24 @@ app.post("/users", {
 		t.Error("expected 200 response")
 	}
 }
+
+func TestExtractJSONSchema_NilOpts(t *testing.T) {
+	if si := extractJSONSchema(nil, []byte("")); si != nil {
+		t.Fatalf("expected nil for nil opts, got %v", si)
+	}
+}
+
+func TestExtractJSONSchema_NoSchemaKey(t *testing.T) {
+	obj, src := firstObject(t, `{ config: { x: 1 } }`)
+	if si := extractJSONSchema(obj, src); si != nil {
+		t.Fatalf("expected nil when no schema key, got %v", si)
+	}
+}
+
+func TestExtractJSONSchema_SchemaNotObject(t *testing.T) {
+	// schema value is not an object literal -> nil
+	obj, src := firstObject(t, `{ schema: true }`)
+	if si := extractJSONSchema(obj, src); si != nil {
+		t.Fatalf("expected nil when schema not object, got %v", si)
+	}
+}

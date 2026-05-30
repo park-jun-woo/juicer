@@ -30,3 +30,23 @@ app.post("/users", zValidator("json", createUserSchema), (c) => {
 		t.Errorf("expected schemaName createUserSchema, got %s", v.SchemaName)
 	}
 }
+
+func TestExtractZodValidators_MixedArgs(t *testing.T) {
+	// some args are zValidator calls, some are not (handler / non-validator)
+	fi := mustParse(t, []byte(`app.post("/x", zValidator("json", s), other(), handler);`+"\n"))
+	args := findAllByType(fi.Root, "arguments")[0]
+	nodes := collectArgNodes(args)
+	vs := extractZodValidators(nodes, fi.Src)
+	if len(vs) != 1 || vs[0].Target != "json" || vs[0].SchemaName != "s" {
+		t.Fatalf("got %+v", vs)
+	}
+}
+
+func TestExtractZodValidators_None(t *testing.T) {
+	fi := mustParse(t, []byte(`app.get("/x", handler);`+"\n"))
+	args := findAllByType(fi.Root, "arguments")[0]
+	nodes := collectArgNodes(args)
+	if vs := extractZodValidators(nodes, fi.Src); len(vs) != 0 {
+		t.Fatalf("expected none, got %+v", vs)
+	}
+}

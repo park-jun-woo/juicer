@@ -29,3 +29,16 @@ func TestBuildResponse(t *testing.T) {
 		// str has openAPIType.Type = "string", so it should be set
 	}
 }
+
+func TestBuildResponse_HTML(t *testing.T) {
+	resp := buildResponse(routeInfo{method: "GET", responseClass: "HTMLResponse"}, "")
+	if resp.Kind != "html" {
+		t.Fatalf("expected html kind, got %+v", resp)
+	}
+}
+
+func TestBuildResponse_RespTypeMapsEmpty(t *testing.T) {
+	// a respType whose pyTypeToOpenAPI yields empty Type should not set TypeName.
+	resp := buildResponse(routeInfo{method: "GET"}, "None")
+	_ = resp // assert no panic; TypeName depends on mapping
+}

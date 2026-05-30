@@ -31,3 +31,19 @@ func TestCheckOneDepthCall_NilInfoOld(t *testing.T) {
 	}
 	checkOneDepthCall(ep, call3, "c", info, idx)
 }
+
+
+func TestCheckOneDepthCall_HasCtxUnresolvedZ(t *testing.T) {
+	ep := &scanner.Endpoint{}
+	// passes "c" -> hasCtx true; empty info -> resolveCallTarget invalid -> return
+	call := &ast.CallExpr{
+		Fun:  &ast.Ident{Name: "respond"},
+		Args: []ast.Expr{&ast.Ident{Name: "c"}, &ast.BasicLit{Kind: token.INT, Value: "200"}},
+	}
+	idx := &funcIndex{byPos: map[token.Pos]*ast.FuncDecl{}}
+	info := &types.Info{Uses: map[*ast.Ident]types.Object{}, Selections: map[*ast.SelectorExpr]*types.Selection{}}
+	checkOneDepthCall(ep, call, "c", info, idx)
+	if len(ep.Responses) != 0 {
+		t.Fatalf("expected no responses, got %d", len(ep.Responses))
+	}
+}

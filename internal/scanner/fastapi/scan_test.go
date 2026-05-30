@@ -79,3 +79,16 @@ app.include_router(router)
 		t.Fatalf("expected 2 body fields, got %d", len(ep.Request.Body.Fields))
 	}
 }
+
+func TestScan_NoPyFiles(t *testing.T) {
+	dir := t.TempDir()
+	os.WriteFile(filepath.Join(dir, "readme.txt"), []byte("hi"), 0o644)
+	result, err := Scan(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(result.Endpoints) != 0 {
+		t.Fatalf("expected no endpoints, got %d", len(result.Endpoints))
+	}
+}
+

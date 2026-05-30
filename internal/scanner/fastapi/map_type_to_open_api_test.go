@@ -23,4 +23,8 @@ func TestMapTypeToOpenAPI(t *testing.T) {
 	if got := mapTypeToOpenAPI("datetime"); got != "string:date-time" {
 		t.Errorf("datetime: got %s, want string:date-time", got)
 	}
+	// empty type -> defaults to string
+	if got := mapTypeToOpenAPI(""); got != "string" {
+		t.Errorf("empty: got %s, want string", got)
+	}
 }

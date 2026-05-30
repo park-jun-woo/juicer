@@ -28,3 +28,24 @@ func TestParseRouteDecorator(t *testing.T) {
 		t.Fatalf("status: got %d", status)
 	}
 }
+
+func TestParseRouteDecorator_NotHTTP(t *testing.T) {
+	src := []byte("@app.middleware('http')\ndef h(): pass\n")
+	root, _ := parsePython(src)
+	decs := findAllByType(root, "decorator")
+	method, _, _, _, _, _ := parseRouteDecorator(decs[0], src)
+	if method != "" {
+		t.Fatalf("expected empty method, got %q", method)
+	}
+}
+
+func TestParseRouteDecorator_NoAttribute(t *testing.T) {
+	// bare-name decorator -> no attribute node
+	src := []byte("@staticmethod\ndef h(): pass\n")
+	root, _ := parsePython(src)
+	decs := findAllByType(root, "decorator")
+	method, _, _, _, _, _ := parseRouteDecorator(decs[0], src)
+	if method != "" {
+		t.Fatalf("expected empty, got %q", method)
+	}
+}

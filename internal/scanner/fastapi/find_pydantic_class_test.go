@@ -21,3 +21,11 @@ func TestFindPydanticClass(t *testing.T) {
 		t.Fatalf("expected 0, got %d", len(fields2))
 	}
 }
+
+func TestFindPydanticClass_NotBaseModel(t *testing.T) {
+	src := []byte("class Plain:\n    id: int\n")
+	root, _ := parsePython(src)
+	if fields := findPydanticClass(root, src, "Plain"); fields != nil {
+		t.Fatalf("expected nil for non-BaseModel, got %+v", fields)
+	}
+}

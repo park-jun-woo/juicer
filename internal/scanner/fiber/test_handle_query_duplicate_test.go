@@ -28,3 +28,20 @@ func TestHandleQuery_Duplicate(t *testing.T) {
 		t.Fatalf("expected 1 (no duplicate), got %d", len(ep.Request.Query))
 	}
 }
+
+func TestHandleQuery_NoArgs(t *testing.T) {
+	ep := scanner.Endpoint{}
+	handleQuery(&ep, &ast.CallExpr{}, "GET")
+	if ep.Request != nil {
+		t.Fatalf("expected no request, got %v", ep.Request)
+	}
+}
+
+func TestHandleQuery_EmptyName(t *testing.T) {
+	ep := scanner.Endpoint{}
+	handleQuery(&ep, &ast.CallExpr{Args: []ast.Expr{&ast.Ident{Name: "v"}}}, "GET")
+	if ep.Request != nil {
+		t.Fatalf("expected no request, got %v", ep.Request)
+	}
+	_ = token.STRING
+}

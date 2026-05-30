@@ -22,3 +22,21 @@ func TestParseAliasedImport(t *testing.T) {
 		t.Errorf("expected orig auth, got %q", orig)
 	}
 }
+
+func TestParseAliasedImport_UnexpectedShape(t *testing.T) {
+	// pass a node that lacks the expected children -> ("", "")
+	src := []byte("x = 1\n")
+	root, err := parsePython(src)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// the whole module node has no dotted_name+identifier pair at direct-child level
+	stmts := findAllByType(root, "integer")
+	if len(stmts) == 0 {
+		t.Skip("no integer node")
+	}
+	local, orig := parseAliasedImport(stmts[0], src)
+	if local != "" || orig != "" {
+		t.Fatalf("expected empty pair, got %q %q", local, orig)
+	}
+}

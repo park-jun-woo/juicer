@@ -23,4 +23,5 @@ async def root():
 	if root.Type() != "module" {
 		t.Fatalf("expected module, got %s", root.Type())
 	}
+	// the parse-error branch is unreachable: tree-sitter accepts any byte slice.
 }

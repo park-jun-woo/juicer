@@ -17,3 +17,21 @@ func TestWellKnownType_TimeTime(t *testing.T) {
 		t.Fatalf("expected (time.Time, true), got (%s, %v)", got, ok)
 	}
 }
+
+func TestWellKnownType_NilPkg(t *testing.T) {
+	// type name with nil package (universe scope) -> false
+	tn := types.NewTypeName(0, nil, "Ctx", nil)
+	named := types.NewNamed(tn, types.Typ[types.Int], nil)
+	if _, ok := wellKnownType(named); ok {
+		t.Fatal("nil-pkg type should not be well-known")
+	}
+}
+
+func TestWellKnownType_NotWellKnown(t *testing.T) {
+	pkg := types.NewPackage("mypkg", "mypkg")
+	tn := types.NewTypeName(0, pkg, "Custom", nil)
+	named := types.NewNamed(tn, types.Typ[types.Int], nil)
+	if _, ok := wellKnownType(named); ok {
+		t.Fatal("custom type should not be well-known")
+	}
+}

@@ -25,6 +25,12 @@ func TestTryAnnotated(t *testing.T) {
 	if !ok || oa4.Type != "string" || oa4.Format != "uuid" {
 		t.Fatalf("Annotated[uuid.UUID]: got %v, %v", oa4, ok)
 	}
+	// Single argument (no comma at depth 0)
+	oa5, ok := tryAnnotated("Annotated[int]")
+	if !ok || oa5.Type != "integer" {
+		t.Fatalf("Annotated[int] single: got %v, %v", oa5, ok)
+	}
+
 	// Not Annotated
 	_, ok = tryAnnotated("str")
 	if ok {

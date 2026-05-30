@@ -38,4 +38,9 @@ func TestResolveImportPath(t *testing.T) {
 	if got4 != filepath.Join(pkgDir, "__init__.py") {
 		t.Fatalf("expected __init__.py, got %s", got4)
 	}
+
+	// neither .py nor __init__.py exists -> ""
+	if got5 := resolveImportPath(dir, ".nonexistent"); got5 != "" {
+		t.Fatalf("expected empty for unresolved, got %s", got5)
+	}
 }

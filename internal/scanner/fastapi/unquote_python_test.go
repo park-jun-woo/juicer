@@ -14,6 +14,10 @@ func TestUnquotePython(t *testing.T) {
 		{`'''triple'''`, "triple"},
 		{"x", "x"},
 		{"", ""},
+		{"ab", "ab"},           // len>=2 but unquoted -> unchanged
+		{`f'/p'`, "/p"},        // f-string single quote
+		{`r'\w'`, `\w`},        // raw single quote
+		{`"unterminated`, `"unterminated`}, // mismatched quotes -> unchanged
 	}
 	for _, tt := range tests {
 		got := unquotePython(tt.in)

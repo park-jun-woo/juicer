@@ -19,3 +19,21 @@ func TestFirstIdentArg(t *testing.T) {
 		t.Fatalf("expected 'router', got %q", got)
 	}
 }
+
+func TestFirstIdentArg_Attribute(t *testing.T) {
+	src := []byte("f(items.router)\n")
+	root, _ := parsePython(src)
+	args := findAllByType(root, "argument_list")
+	if got := firstIdentArg(args[0], src); got != "items.router" {
+		t.Fatalf("got %q", got)
+	}
+}
+
+func TestFirstIdentArg_None(t *testing.T) {
+	src := []byte("f('literal')\n")
+	root, _ := parsePython(src)
+	args := findAllByType(root, "argument_list")
+	if got := firstIdentArg(args[0], src); got != "" {
+		t.Fatalf("got %q", got)
+	}
+}

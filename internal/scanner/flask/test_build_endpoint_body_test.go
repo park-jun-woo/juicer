@@ -58,3 +58,29 @@ def ping():
 		t.Errorf("ping body fields = %v, want empty", ping.Request.Body.Fields)
 	}
 }
+
+func TestBuildEndpoint_PathParams(t *testing.T) {
+	ri := routeInfo{
+		method:  "GET",
+		path:    "/users/{id}",
+		handler: "get_user",
+		file:    "app.py",
+		line:    5,
+		params:  []urlParam{{name: "id", converter: "int"}},
+	}
+	ep := buildEndpoint(ri)
+	if ep.Method != "GET" || ep.Path != "/users/{id}" {
+		t.Fatalf("ep = %+v", ep)
+	}
+	if ep.Request == nil || len(ep.Request.PathParams) != 1 || ep.Request.PathParams[0].Name != "id" {
+		t.Fatalf("path params = %+v", ep.Request)
+	}
+}
+
+func TestBuildEndpoint_NoRequest(t *testing.T) {
+	ri := routeInfo{method: "GET", path: "/health", handler: "health", file: "app.py", line: 1}
+	ep := buildEndpoint(ri)
+	if ep.Request != nil {
+		t.Fatalf("expected no request, got %+v", ep.Request)
+	}
+}
