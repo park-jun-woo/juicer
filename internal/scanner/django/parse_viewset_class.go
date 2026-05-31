@@ -4,14 +4,15 @@ package django
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-// parseViewSetClass parses a class node as a ViewSet if it is one.
-func parseViewSetClass(classNode *sitter.Node, fi fileInfo) *viewsetInfo {
+// parseViewSetClass parses a class node as a ViewSet if it is one. The class
+// index lets it resolve custom intermediate base classes transitively.
+func parseViewSetClass(classNode *sitter.Node, fi fileInfo, idx classIndex) *viewsetInfo {
 	nameNode := findChildByType(classNode, "identifier")
 	if nameNode == nil {
 		return nil
 	}
 	parents := extractParentClasses(classNode, fi.src)
-	if !isViewSetSubclass(parents) {
+	if !isViewSetSubclass(parents, idx) {
 		return nil
 	}
 	vs := &viewsetInfo{

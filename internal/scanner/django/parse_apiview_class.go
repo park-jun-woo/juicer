@@ -4,14 +4,15 @@ package django
 
 import sitter "github.com/smacker/go-tree-sitter"
 
-// parseAPIViewClass parses a class node as an APIView if it is one.
-func parseAPIViewClass(classNode *sitter.Node, fi fileInfo) *apiviewInfo {
+// parseAPIViewClass parses a class node as an APIView if it is one. The class
+// index lets it resolve custom intermediate base classes transitively.
+func parseAPIViewClass(classNode *sitter.Node, fi fileInfo, idx classIndex) *apiviewInfo {
 	nameNode := findChildByType(classNode, "identifier")
 	if nameNode == nil {
 		return nil
 	}
 	parents := extractParentClasses(classNode, fi.src)
-	if !isAPIViewSubclass(parents) || isViewSetSubclass(parents) {
+	if !isAPIViewSubclass(parents, idx) || isViewSetSubclass(parents, idx) {
 		return nil
 	}
 	view := &apiviewInfo{

@@ -10,7 +10,7 @@ func responseSchema(resp Response, schemas map[string]any) map[string]any {
 			return primSchema
 		}
 
-		schemaName := lcFirst(baseName)
+		schemaName := baseName // preserve original class casing (e.g. UpperCamel)
 		ensureSchema(schemaName, resp.Fields, schemas)
 		ref := map[string]any{"$ref": "#/components/schemas/" + schemaName}
 		if isSlice {

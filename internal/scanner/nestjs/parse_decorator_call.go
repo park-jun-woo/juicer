@@ -30,6 +30,9 @@ func parseDecoratorCall(call *sitter.Node, src []byte) decoratorInfo {
 			d.args = append(d.args, nodeText(arg, src))
 		case "member_expression":
 			d.args = append(d.args, nodeText(arg, src))
+		case "array":
+			// Multiple paths: @Get(['/a', '/b']).
+			d.args = append(d.args, collectArrayStringArgs(arg, src)...)
 		case "object":
 			d.objectProps = make(map[string]string)
 			parseObjectArg(arg, src, &d)

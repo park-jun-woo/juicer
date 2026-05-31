@@ -1,5 +1,5 @@
-//ff:func feature=scan type=extract control=iteration dimension=1 topic=django
-//ff:what 부모 클래스 목록에서 ViewSet 서브클래스 여부를 판별한다
+//ff:func feature=scan type=extract control=sequence topic=django
+//ff:what 상속체인을 전이적으로 walk하여 ViewSet 서브클래스 여부를 판별한다
 package django
 
 // viewsetParentNames is the set of known ViewSet base classes and mixins.
@@ -16,12 +16,9 @@ var viewsetParentNames = map[string]bool{
 	"DestroyModelMixin":    true,
 }
 
-// isViewSetSubclass checks if any parent is a known ViewSet class or mixin.
-func isViewSetSubclass(parents []string) bool {
-	for _, p := range parents {
-		if viewsetParentNames[p] {
-			return true
-		}
-	}
-	return false
+// isViewSetSubclass reports whether any ancestor (transitively, via the class
+// index) is a known DRF ViewSet base class or mixin. A nil index degrades to a
+// direct-parent check.
+func isViewSetSubclass(parents []string, idx classIndex) bool {
+	return hasAncestorIn(parents, viewsetParentNames, idx)
 }

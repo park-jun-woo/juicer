@@ -19,7 +19,7 @@ func TestProcessServiceCallArgs(t *testing.T) {
 		t.Fatal("no arguments")
 	}
 	var routes []builderRoute
-	processServiceCallArgs(args, src, "", &routes)
+	processServiceCallArgs(args, src, "", &routes, nil, map[string]bool{})
 	if len(routes) != 1 {
 		t.Fatalf("expected 1 route, got %d: %+v", len(routes), routes)
 	}

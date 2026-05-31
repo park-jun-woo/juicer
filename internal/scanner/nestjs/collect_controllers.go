@@ -20,7 +20,7 @@ func collectControllers(tsFiles []string, absRoot string) []controllerWithFile {
 			continue
 		}
 		relPath, _ := filepath.Rel(absRoot, file)
-		controllers := extractControllers(astRoot, src, relPath, file)
+		controllers := extractControllers(astRoot, src, relPath, file, absRoot)
 		for _, ci := range controllers {
 			result = append(result, controllerWithFile{info: ci, absFile: file})
 		}

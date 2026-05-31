@@ -9,7 +9,7 @@ func bodySchema(body *Body, schemas map[string]any) map[string]any {
 			return primSchema
 		}
 
-		schemaName := lcFirst(baseName)
+		schemaName := baseName // preserve original class casing (e.g. UpperCamel)
 		ensureSchema(schemaName, body.Fields, schemas)
 		ref := map[string]any{"$ref": "#/components/schemas/" + schemaName}
 		if isSlice {

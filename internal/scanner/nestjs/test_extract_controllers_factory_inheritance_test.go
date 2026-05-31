@@ -54,7 +54,7 @@ export class CategoryController extends BaseController<Category, CategoryDto>(Cr
 		t.Fatal(err)
 	}
 
-	controllers := extractControllers(root, []byte(childSrc), "src/category/category.controller.ts", childFile)
+	controllers := extractControllers(root, []byte(childSrc), "src/category/category.controller.ts", childFile, "/tmp")
 	if len(controllers) != 1 {
 		t.Fatalf("expected 1 controller, got %d", len(controllers))
 	}

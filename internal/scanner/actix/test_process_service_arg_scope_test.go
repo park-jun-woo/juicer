@@ -15,7 +15,7 @@ func TestProcessServiceArg_Scope(t *testing.T) {
 		t.Fatal("no scope chain call")
 	}
 	var routes []builderRoute
-	processServiceArg(call, src, "/api", &routes)
+	processServiceArg(call, src, "/api", &routes, nil, map[string]bool{})
 	if len(routes) != 1 {
 		t.Fatalf("expected 1 route, got %d: %+v", len(routes), routes)
 	}

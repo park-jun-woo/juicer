@@ -6,7 +6,7 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-func collectTopLevelServiceCall(n *sitter.Node, fi *fileInfo, routes *[]builderRoute) {
+func collectTopLevelServiceCall(n *sitter.Node, fi *fileInfo, routes *[]builderRoute, handlerFuncs map[string]*handlerInfo) {
 	if !isTopLevelServiceCall(n, fi.src) {
 		return
 	}
@@ -14,5 +14,5 @@ func collectTopLevelServiceCall(n *sitter.Node, fi *fileInfo, routes *[]builderR
 	if args == nil {
 		return
 	}
-	processServiceCallArgs(args, fi.src, "", routes)
+	processServiceCallArgs(args, fi.src, "", routes, handlerFuncs, map[string]bool{})
 }

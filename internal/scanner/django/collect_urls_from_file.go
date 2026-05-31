@@ -7,5 +7,6 @@ func collectURLsFromFile(fi fileInfo) []urlEntry {
 	var entries []urlEntry
 	entries = append(entries, collectFromAssignments(fi)...)
 	entries = append(entries, collectFromAugmentedAssignments(fi)...)
+	entries = append(entries, collectStarImportIncludes(fi)...)
 	return entries
 }

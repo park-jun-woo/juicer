@@ -16,7 +16,7 @@ func TestProcessServiceArg_Other(t *testing.T) {
 		t.Fatal("no call")
 	}
 	var routes []builderRoute
-	processServiceArg(call, src, "/api", &routes)
+	processServiceArg(call, src, "/api", &routes, nil, map[string]bool{})
 	if len(routes) != 0 {
 		t.Fatalf("expected no routes, got %+v", routes)
 	}

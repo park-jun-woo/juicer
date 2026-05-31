@@ -11,11 +11,22 @@ func buildControllerEndpoints(globalPrefix string, uriVersioning bool, cwf contr
 	var endpoints []scanner.Endpoint
 	var dtoReqs []dtoRequest
 	for _, ep := range ci.endpoints {
-		endpoint := buildEndpoint(globalPrefix, uriVersioning, ci, ep)
-		epIdx := baseIdx + len(endpoints)
-		reqs := collectDTORequests(ep, ci.imports, cwf.absFile, projectRoot, epIdx)
-		dtoReqs = append(dtoReqs, reqs...)
-		endpoints = append(endpoints, endpoint)
+		// Array-path decorators (@Get(['/a','/b'])) fan out into one endpoint
+		// per path. Single-path endpoints keep their original single path.
+		pathList := ep.paths
+		if len(pathList) <= 1 {
+			pathList = []string{ep.path}
+		}
+		for _, p := range pathList {
+			epCopy := ep
+			epCopy.path = p
+			endpoint := buildEndpoint(globalPrefix, uriVersioning, ci, epCopy)
+			// Recompute epIdx per cloned endpoint so DTO matching stays aligned.
+			epIdx := baseIdx + len(endpoints)
+			reqs := collectDTORequests(epCopy, ci.imports, cwf.absFile, projectRoot, epIdx)
+			dtoReqs = append(dtoReqs, reqs...)
+			endpoints = append(endpoints, endpoint)
+		}
 	}
 	return endpoints, dtoReqs
 }

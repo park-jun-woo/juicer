@@ -18,7 +18,7 @@ func TestFieldToProperty_ArrayObjectRef(t *testing.T) {
 	if !ok {
 		t.Fatal("expected $ref in items")
 	}
-	if ref != "#/components/schemas/photo" {
-		t.Errorf("expected $ref=#/components/schemas/photo, got %v", ref)
+	if ref != "#/components/schemas/Photo" {
+		t.Errorf("expected $ref=#/components/schemas/Photo, got %v", ref)
 	}
 }

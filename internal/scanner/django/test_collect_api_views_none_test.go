@@ -6,7 +6,7 @@ import "testing"
 
 func TestCollectAPIViews_None(t *testing.T) {
 	fi := newTestFileInfo(t, "x = 1\n")
-	if views := collectAPIViews([]fileInfo{fi}); len(views) != 0 {
+	if views := collectAPIViews([]fileInfo{fi}, nil); len(views) != 0 {
 		t.Fatalf("expected no views, got %d", len(views))
 	}
 }

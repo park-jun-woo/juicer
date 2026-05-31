@@ -14,7 +14,7 @@ class NotAView:
     pass
 `
 	fi := newTestFileInfo(t, src)
-	views := collectAPIViewsFromFile(fi)
+	views := collectAPIViewsFromFile(fi, nil)
 	if len(views) != 1 {
 		t.Fatalf("expected 1 APIView (non-view class skipped), got %d", len(views))
 	}

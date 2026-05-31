@@ -13,7 +13,7 @@ class Plain:
     pass
 `
 	fi := newTestFileInfo(t, src)
-	vs := collectViewSetsFromFile(fi)
+	vs := collectViewSetsFromFile(fi, nil)
 	if len(vs) != 1 {
 		t.Fatalf("expected 1 viewset (Plain skipped), got %d", len(vs))
 	}

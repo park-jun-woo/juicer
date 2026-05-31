@@ -8,7 +8,7 @@ func TestBuildControllerInfo_NotController(t *testing.T) {
 	src := []byte(`export class PlainClass {}`)
 	root, _ := parseTypeScript(src)
 	cls := findAllByType(root, "class_declaration")[0]
-	if _, ok := buildControllerInfo(cls, src, "x.ts", "/abs/x.ts", map[string]string{}); ok {
+	if _, ok := buildControllerInfo(cls, src, "x.ts", "/abs/x.ts", map[string]string{}, root, "/tmp"); ok {
 		t.Fatal("expected not ok for non-controller")
 	}
 }

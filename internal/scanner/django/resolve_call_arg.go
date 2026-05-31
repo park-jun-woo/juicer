@@ -26,6 +26,7 @@ func resolveCallArg(entry *urlEntry, arg *sitter.Node, src []byte) {
 		attrText := nodeText(callAttr, src)
 		if strings.HasSuffix(attrText, ".as_view") {
 			entry.viewName = strings.TrimSuffix(attrText, ".as_view")
+			entry.methodActions = parseAsViewDict(arg, src)
 			return
 		}
 		entry.viewName = attrText

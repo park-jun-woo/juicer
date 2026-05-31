@@ -27,6 +27,18 @@ func TestExtractAuthMiddleware_ClassifyAuthMiddleware(t *testing.T) {
 		{"validateRequest", ""},
 		{"logger", ""},
 		{"cors", ""},
+		// Phase139: 부분일치 — member_expression 전체 텍스트(객체 한정자 포함).
+		{"mw.authAdminApi", "auth"},
+		{"mw.authAdminApiWithUrl", "auth"},
+		{"mw.authenticatePublic", "auth"},
+		{"middleware.authMemberByUuid", "auth"},
+		{"ensureLoggedIn", "auth"},
+		{"JwtAuthGuard", "auth"},
+		{"AdminGuard", "auth"},
+		// public 유지 (auth 부분문자열 없음 / auth 어근 없는 헬퍼).
+		{"mw.publicAdminApi", ""},
+		{"requireAll", ""},
+		{"ensureDir", ""},
 	}
 	for _, tt := range tests {
 		got := classifyAuthMiddleware(tt.name)

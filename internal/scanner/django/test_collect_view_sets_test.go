@@ -10,7 +10,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
 `
 	fi := newTestFileInfo(t, src)
-	vs := collectViewSets([]fileInfo{fi})
+	vs := collectViewSets([]fileInfo{fi}, nil)
 	if len(vs) != 1 {
 		t.Fatalf("expected 1 viewset, got %d", len(vs))
 	}

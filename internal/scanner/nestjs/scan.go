@@ -4,6 +4,7 @@ package nestjs
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/park-jun-woo/codistill/internal/scanner"
@@ -22,12 +23,16 @@ func Scan(root string) (*scanner.ScanResult, error) {
 		return nil, fmt.Errorf("finding ts files: %w", err)
 	}
 	if len(tsFiles) == 0 {
+		fmt.Fprintf(os.Stderr, "warning: nestjs scanner found no .ts files under %s (checked %s and root itself)\n", absRoot, filepath.Join(absRoot, "src"))
 		return &scanner.ScanResult{}, nil
 	}
 	globalPrefix := detectGlobalPrefix(absRoot)
 	uriVersioning := detectURIVersioning(absRoot)
 	allControllers := collectControllers(tsFiles, absRoot)
+	if len(allControllers) == 0 {
+		fmt.Fprintf(os.Stderr, "warning: nestjs scanner found %d .ts files but no @Controller classes under %s\n", len(tsFiles), absRoot)
+	}
 	endpoints, dtoReqs := buildAllEndpoints(globalPrefix, uriVersioning, allControllers, absRoot)
-	resolveAllDTOs(dtoReqs, endpoints)
-	return &scanner.ScanResult{Endpoints: endpoints}, nil
+	schemas := resolveAllDTOs(dtoReqs, endpoints)
+	return &scanner.ScanResult{Endpoints: endpoints, Schemas: schemas}, nil
 }

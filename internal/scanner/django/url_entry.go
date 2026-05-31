@@ -8,4 +8,7 @@ type urlEntry struct {
 	viewName      string // view reference e.g. "UserViewSet" or "views.health_check"
 	isInclude     bool   // whether the second arg is include(...)
 	includeModule string // module path for include("app.urls")
+	// methodActions maps an HTTP method (lowercase, e.g. "get") to its ViewSet
+	// action (e.g. "list") as declared in as_view({"get": "list", ...}).
+	methodActions map[string]string
 }

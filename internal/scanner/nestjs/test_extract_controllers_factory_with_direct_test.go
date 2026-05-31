@@ -42,7 +42,7 @@ export class ProductController extends BaseController<Product, ProductDto>(Creat
 		t.Fatal(err)
 	}
 
-	controllers := extractControllers(root, []byte(childSrc), "src/product/product.controller.ts", childFile)
+	controllers := extractControllers(root, []byte(childSrc), "src/product/product.controller.ts", childFile, "/tmp")
 	if len(controllers) != 1 {
 		t.Fatalf("expected 1 controller, got %d", len(controllers))
 	}

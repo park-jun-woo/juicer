@@ -7,7 +7,7 @@ import "testing"
 func TestParseApiViewClass_Round5(t *testing.T) {
 	fi := newTestFileInfo(t, "class PingView(APIView):\n    def get(self, request):\n        return Response()\n")
 	cls := djFirst(t, fi.root, "class_definition")
-	av := parseAPIViewClass(cls, fi)
+	av := parseAPIViewClass(cls, fi, nil)
 	if av == nil || av.name != "PingView" {
 		t.Fatalf("apiview: %+v", av)
 	}

@@ -6,10 +6,10 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-func extractBuilderRoutes(fi *fileInfo) []builderRoute {
+func extractBuilderRoutes(fi *fileInfo, handlerFuncs map[string]*handlerInfo) []builderRoute {
 	var routes []builderRoute
 	walkNodes(fi.root, func(n *sitter.Node) {
-		collectTopLevelServiceCall(n, fi, &routes)
+		collectTopLevelServiceCall(n, fi, &routes, handlerFuncs)
 	})
 	return deduplicateBuilderRoutes(routes)
 }

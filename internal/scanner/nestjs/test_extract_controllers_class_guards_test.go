@@ -21,7 +21,7 @@ export class TasksController {
 	if err != nil {
 		t.Fatal(err)
 	}
-	controllers := extractControllers(root, src, "test.ts", "test.ts")
+	controllers := extractControllers(root, src, "test.ts", "test.ts", "/tmp")
 	if len(controllers) != 1 {
 		t.Fatalf("expected 1 controller, got %d", len(controllers))
 	}

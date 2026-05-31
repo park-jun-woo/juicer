@@ -6,7 +6,7 @@ import "testing"
 
 func TestCollectViewSetsFromFile_None(t *testing.T) {
 	fi := newTestFileInfo(t, "x = 1\n")
-	if v := collectViewSetsFromFile(fi); len(v) != 0 {
+	if v := collectViewSetsFromFile(fi, nil); len(v) != 0 {
 		t.Fatalf("expected none, got %d", len(v))
 	}
 }

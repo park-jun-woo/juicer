@@ -5,13 +5,13 @@ package django
 import "testing"
 
 func TestIsViewSetSubclass(t *testing.T) {
-	if !isViewSetSubclass([]string{"ModelViewSet"}) {
+	if !isViewSetSubclass([]string{"ModelViewSet"}, nil) {
 		t.Error("expected true for ModelViewSet")
 	}
-	if isViewSetSubclass([]string{"object"}) {
+	if isViewSetSubclass([]string{"object"}, nil) {
 		t.Error("expected false for non-viewset parent")
 	}
-	if isViewSetSubclass(nil) {
+	if isViewSetSubclass(nil, nil) {
 		t.Error("expected false for no parents")
 	}
 }

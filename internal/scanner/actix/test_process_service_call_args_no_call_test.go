@@ -14,7 +14,7 @@ func TestProcessServiceCallArgs_NoCall(t *testing.T) {
 	call := findCallByFuncSuffix(root, src, ".service")
 	args := findChildByType(call, "arguments")
 	var routes []builderRoute
-	processServiceCallArgs(args, src, "", &routes)
+	processServiceCallArgs(args, src, "", &routes, nil, map[string]bool{})
 	if len(routes) != 0 {
 		t.Fatalf("expected no routes, got %+v", routes)
 	}

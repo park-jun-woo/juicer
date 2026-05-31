@@ -14,7 +14,7 @@ export class UsersController {
 `)
 	root, _ := parseTypeScript(src)
 	cls := findAllByType(root, "class_declaration")[0]
-	ci, ok := buildControllerInfo(cls, src, "users.controller.ts", "/abs/users.controller.ts", map[string]string{})
+	ci, ok := buildControllerInfo(cls, src, "users.controller.ts", "/abs/users.controller.ts", map[string]string{}, root, "/tmp")
 	if !ok {
 		t.Fatal("expected ok")
 	}

@@ -16,6 +16,10 @@ import (
 //	res.sendStatus(N)           → N   / empty
 //	res.send(...)               → 200 / text
 //	res.status(N).send(...)     → N   / text
+//	res.render(...)             → 200 / html
+//	res.status(N).render(...)   → N   / html
+//	res.redirect(...)           → 302 / empty
+//	res.status(N).redirect(...) → N   / empty
 func extractOneResponse(call *sitter.Node, src []byte) *scanner.Response {
 	methodName, ok := isResMethodCall(call, src)
 	if !ok {
@@ -41,6 +45,21 @@ func extractOneResponse(call *sitter.Node, src []byte) *scanner.Response {
 		status := extractSendStatusArg(call, src)
 		if status == "" {
 			status = "200"
+		}
+		return &scanner.Response{Status: status, Kind: "empty"}
+
+	case "render":
+		status := extractStatusFromChain(call, src)
+		if status == "" {
+			status = "200"
+		}
+		return &scanner.Response{Status: status, Kind: "html"}
+
+	case "redirect":
+		// res.redirect는 기본 302. res.status(N).redirect(...)면 체인 상태코드 반영.
+		status := extractStatusFromChain(call, src)
+		if status == "" {
+			status = "302"
 		}
 		return &scanner.Response{Status: status, Kind: "empty"}
 	}

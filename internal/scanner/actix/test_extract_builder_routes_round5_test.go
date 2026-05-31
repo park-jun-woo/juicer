@@ -6,7 +6,7 @@ import "testing"
 
 func TestExtractBuilderRoutes_Round5(t *testing.T) {
 	fi := aFi(t, builderSrc)
-	routes := extractBuilderRoutes(fi)
+	routes := extractBuilderRoutes(fi, nil)
 	if len(routes) == 0 {
 		t.Fatalf("expected builder routes, got %d", len(routes))
 	}

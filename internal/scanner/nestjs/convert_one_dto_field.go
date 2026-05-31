@@ -19,5 +19,9 @@ func convertOneDtoField(f dtoField) scanner.Field {
 	sf.Enum = f.enum
 	sf.MinLength = f.minLength
 	sf.MaxLength = f.maxLength
+	// Named DTO/enum field types become $ref so they are emitted as separate
+	// component schemas (registered recursively in resolveAllDTOs). Skip inlined
+	// enums (@IsEnum) which already carry their values.
+	applyNamedRef(&sf, f.tsType)
 	return sf
 }

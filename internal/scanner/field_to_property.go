@@ -14,6 +14,17 @@ func fieldToProperty(f Field) map[string]any {
 		prop["nullable"] = true
 	}
 
+	// named 타입 참조 ($ref). 배열이면 type:array + items:$ref.
+	if f.Ref != "" {
+		ref := map[string]any{"$ref": "#/components/schemas/" + f.Ref}
+		if goType == "array" || strings.HasPrefix(goType, "[]") {
+			prop["type"] = "array"
+			prop["items"] = ref
+			return prop
+		}
+		return ref
+	}
+
 	// 중첩 struct
 	if len(f.Fields) > 0 {
 		if strings.HasPrefix(goType, "[]") {
@@ -34,7 +45,7 @@ func fieldToProperty(f Field) map[string]any {
 		prop["type"] = "array"
 		oaElem := goTypeToOpenAPI(elemType)
 		if oaElem == "object" {
-			prop["items"] = map[string]any{"$ref": "#/components/schemas/" + lcFirst(elemType)}
+			prop["items"] = map[string]any{"$ref": "#/components/schemas/" + elemType}
 		} else {
 			prop["items"] = map[string]any{"type": oaElem}
 		}

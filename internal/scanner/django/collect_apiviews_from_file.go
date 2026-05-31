@@ -3,10 +3,10 @@
 package django
 
 // collectAPIViewsFromFile finds APIView classes in a single file.
-func collectAPIViewsFromFile(fi fileInfo) []apiviewInfo {
+func collectAPIViewsFromFile(fi fileInfo, idx classIndex) []apiviewInfo {
 	var views []apiviewInfo
 	for _, classNode := range findAllByType(fi.root, "class_definition") {
-		av := parseAPIViewClass(classNode, fi)
+		av := parseAPIViewClass(classNode, fi, idx)
 		if av != nil {
 			views = append(views, *av)
 		}

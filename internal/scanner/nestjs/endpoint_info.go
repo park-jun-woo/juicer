@@ -7,7 +7,8 @@ import "github.com/park-jun-woo/codistill/internal/scanner"
 // endpointInfo holds a single extracted endpoint before DTO resolution.
 type endpointInfo struct {
 	method       string
-	path         string
+	path         string   // first path (backward-compatible single-path field)
+	paths        []string // all paths when the HTTP decorator uses an array, e.g. @Get(['/a','/b'])
 	handler      string
 	file         string
 	line         int

@@ -4,7 +4,7 @@
   <img src="codistill.webp" alt="codistill — extract structured specs from web framework source code" width="480">
 </p>
 
-[![Version](https://img.shields.io/badge/version-v0.1.10-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
+[![Version](https://img.shields.io/badge/version-v0.1.11-blue.svg)](https://github.com/park-jun-woo/codistill/releases)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![skills.sh](https://skills.sh/b/park-jun-woo/codistill)](https://skills.sh/park-jun-woo/codistill)
 
@@ -148,6 +148,15 @@ codist sql [flags] [repository-dir]
 ```
 
 ## Changelog
+
+### v0.1.11
+
+**Scanner accuracy fixes from real-world repos.** Validated codist against 7 large open-source projects (Immich, Ghost, Wiki.js, NocoDB, Plane, AppFlowy, Medusa) and fixed 12 extraction defects the synthetic test fixtures never exercised. `go test ./...` green, `filefunc validate` clean, function-level test status (tsma) at 100%.
+
+- **NestJS** — `@Controller(Enum.X)` member-expression paths now resolved (Immich `RouteKey.*` no longer leaks into paths); `@Get(['/a','/b'])` array-path decorators fan out to one endpoint per path (NocoDB 90→553); a comment between decorator and method no longer drops the route; nested DTO/enum schemas are recursively registered and `$ref`/schema casing is preserved (no more `xxxDto[]` pseudo-schemas); scanning a path that already ends in `src/` no longer silently yields 0 (now warns / falls back).
+- **Express** — the usage-fallback router heuristic no longer mistakes `req.get()`/`config.get()`/`model.get()` for routes (Ghost false positives −53%); auth middleware is matched by substring so `authAdminApi`-style guards register security; `res.render`/`res.redirect` and method-default status codes (POST→201, DELETE→204) are inferred; cross-file same-path routes under different mounts are no longer dedup-collapsed.
+- **Django** — custom intermediate base classes (`BaseViewSet`→`ModelViewSet`, `BaseAPIView`→`APIView`) are resolved transitively; `as_view({"get":"list",...})` method dicts are honored instead of single-GET fallback (Plane write-methods 7→219); package `__init__.py` star-import URL aggregation is followed so `include()` prefixes compose correctly.
+- **Actix (Rust)** — `fn() -> Scope` indirect builder registration (`App.service(workspace_scope())`) is resolved across files with scope-prefix synthesis (AppFlowy 1→185 routes).
 
 ### v0.1.10
 

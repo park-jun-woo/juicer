@@ -11,7 +11,7 @@ class PingView(APIView):
         return Response()
 `
 	fi := newTestFileInfo(t, src)
-	views := collectAPIViews([]fileInfo{fi})
+	views := collectAPIViews([]fileInfo{fi}, nil)
 	if len(views) != 1 {
 		t.Fatalf("expected 1 APIView, got %d", len(views))
 	}

@@ -4,8 +4,10 @@ package nestjs
 
 import "github.com/park-jun-woo/codistill/internal/scanner"
 
-// resolveAllDTOs resolves all DTO types and fills fields into endpoints.
-func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) {
+// resolveAllDTOs resolves all DTO types and fills fields into endpoints. It
+// also recursively registers nested DTO/enum named types as separate component
+// schemas, returning that schema map for ScanResult.Schemas.
+func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) map[string]any {
 	cache := make(map[string][]scanner.Field)
 	for _, dr := range dtoReqs {
 		fields, err := resolveDTOFields(dr, cache)
@@ -25,4 +27,7 @@ func resolveAllDTOs(dtoReqs []dtoRequest, endpoints []scanner.Endpoint) {
 			ep.Responses[0].Fields = fields
 		}
 	}
+	schemas := make(map[string]any)
+	registerNestedSchemas(dtoReqs, cache, schemas)
+	return schemas
 }

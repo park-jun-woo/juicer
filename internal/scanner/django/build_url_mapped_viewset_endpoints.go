@@ -8,7 +8,7 @@ import "github.com/park-jun-woo/codistill/internal/scanner"
 func buildURLMappedViewSetEndpoints(entry urlEntry, vs *viewsetInfo, serializers map[string]serializerInfo) []scanner.Endpoint {
 	openAPIPath := ensureLeadingSlash(djangoURLToOpenAPI(entry.pattern))
 	urlParams := extractURLParams(entry.pattern)
-	methods := resolveViewSetMethods(vs.parents)
+	methods := urlEntryViewSetMethods(entry, vs)
 
 	var endpoints []scanner.Endpoint
 	for _, am := range methods {

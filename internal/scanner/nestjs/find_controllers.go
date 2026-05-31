@@ -1,5 +1,5 @@
 //ff:func feature=scan type=extract control=sequence topic=nestjs
-//ff:what src/ 디렉토리에서 TypeScript 파일 경로를 수집한다
+//ff:what src/ 디렉토리(없으면 root 자체)에서 TypeScript 파일 경로를 수집한다
 package nestjs
 
 import (
@@ -8,16 +8,19 @@ import (
 	"strings"
 )
 
-// findTSFiles walks root/src/ and collects .ts file paths,
-// excluding node_modules, dist, and .git directories.
+// findTSFiles walks root/src/ (falling back to root itself when root/src is
+// absent, e.g. when the scan root already ends in src) and collects .ts file
+// paths, excluding node_modules, dist, and .git directories.
 func findTSFiles(root string) ([]string, error) {
-	srcDir := filepath.Join(root, "src")
-	info, err := os.Stat(srcDir)
+	walkDir := filepath.Join(root, "src")
+	info, err := os.Stat(walkDir)
 	if err != nil || !info.IsDir() {
-		return nil, nil
+		// Fallback: scan root directly when root/src does not exist. This
+		// covers the case where the caller already passes a .../src path.
+		walkDir = root
 	}
 	var files []string
-	err = filepath.Walk(srcDir, func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(walkDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}

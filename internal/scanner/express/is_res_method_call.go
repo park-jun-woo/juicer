@@ -8,6 +8,8 @@ var resMethodNames = map[string]bool{
 	"json":       true,
 	"send":       true,
 	"sendStatus": true,
+	"render":     true,
+	"redirect":   true,
 }
 
 var resObjectNames = map[string]bool{
@@ -41,7 +43,7 @@ func isResMethodCall(call *sitter.Node, src []byte) (methodName string, ok bool)
 		return "", false
 	}
 
-	if obj.Type() == "call_expression" && (propName == "json" || propName == "send") {
+	if obj.Type() == "call_expression" && (propName == "json" || propName == "send" || propName == "render" || propName == "redirect") {
 		if isResStatusCall(obj, src) {
 			return propName, true
 		}

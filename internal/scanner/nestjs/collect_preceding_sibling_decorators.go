@@ -10,6 +10,11 @@ func collectPrecedingSiblingDecorators(parent, node *sitter.Node, src []byte) []
 	var result []decoratorInfo
 	for i := nodeIdx - 1; i >= 0; i-- {
 		child := parent.Child(i)
+		// Comments between a decorator and its method must be skipped (not
+		// treated as a boundary), otherwise the route is silently dropped.
+		if child.Type() == "comment" {
+			continue
+		}
 		if child.Type() != "decorator" {
 			break
 		}

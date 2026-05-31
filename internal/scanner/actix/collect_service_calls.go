@@ -6,8 +6,8 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-func collectServiceCalls(node *sitter.Node, src []byte, prefix string, routes *[]builderRoute) {
+func collectServiceCalls(node *sitter.Node, src []byte, prefix string, routes *[]builderRoute, handlerFuncs map[string]*handlerInfo, visited map[string]bool) {
 	findServiceCalls(node, src, func(args *sitter.Node) {
-		processServiceCallArgs(args, src, prefix, routes)
+		processServiceCallArgs(args, src, prefix, routes, handlerFuncs, visited)
 	})
 }

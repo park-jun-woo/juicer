@@ -15,4 +15,9 @@ type Field struct {
 	MinLength *int     `yaml:"min_length,omitempty" json:"min_length,omitempty"`
 	MaxLength *int     `yaml:"max_length,omitempty" json:"max_length,omitempty"`
 	Fields    []Field  `yaml:"fields,omitempty"  json:"fields,omitempty"`
+	// Ref names a component schema this field references (a nested named
+	// DTO/enum). When set, the field is emitted as a $ref (array-wrapped when
+	// Type=="array") instead of an inline object. The schema itself is expected
+	// to be registered separately (see ScanResult.Schemas).
+	Ref string `yaml:"ref,omitempty" json:"ref,omitempty"`
 }

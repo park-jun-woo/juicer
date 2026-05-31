@@ -5,13 +5,13 @@ package django
 import "testing"
 
 func TestIsAPIViewSubclass(t *testing.T) {
-	if !isAPIViewSubclass([]string{"object", "APIView"}) {
+	if !isAPIViewSubclass([]string{"object", "APIView"}, nil) {
 		t.Error("expected true when APIView is a parent")
 	}
-	if isAPIViewSubclass([]string{"object", "Mixin"}) {
+	if isAPIViewSubclass([]string{"object", "Mixin"}, nil) {
 		t.Error("expected false without an APIView base")
 	}
-	if isAPIViewSubclass(nil) {
+	if isAPIViewSubclass(nil, nil) {
 		t.Error("expected false for no parents")
 	}
 }

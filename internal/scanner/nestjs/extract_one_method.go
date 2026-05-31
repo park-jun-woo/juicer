@@ -16,6 +16,7 @@ func extractOneMethod(m *sitter.Node, src []byte, file string) (endpointInfo, bo
 		if method, ok := httpMethods[d.name]; ok {
 			ep.method = method
 			ep.path = d.arg
+			ep.paths = d.args // array-path decorators carry multiple paths
 			foundHTTP = true
 		}
 		if d.name == DecHttpCode {

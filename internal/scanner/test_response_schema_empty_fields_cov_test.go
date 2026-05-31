@@ -8,7 +8,7 @@ func TestResponseSchema_EmptyFieldsCov(t *testing.T) {
 	resp := Response{TypeName: "SomeType"}
 	schemas := map[string]any{}
 	result := responseSchema(resp, schemas)
-	if result["$ref"] != "#/components/schemas/someType" {
-		t.Fatalf("expected $ref to someType, got %v", result)
+	if result["$ref"] != "#/components/schemas/SomeType" {
+		t.Fatalf("expected $ref to SomeType, got %v", result)
 	}
 }

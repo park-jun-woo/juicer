@@ -6,11 +6,11 @@ import (
 	sitter "github.com/smacker/go-tree-sitter"
 )
 
-func processServiceCallArgs(args *sitter.Node, src []byte, prefix string, routes *[]builderRoute) {
+func processServiceCallArgs(args *sitter.Node, src []byte, prefix string, routes *[]builderRoute, handlerFuncs map[string]*handlerInfo, visited map[string]bool) {
 	for i := 0; i < int(args.ChildCount()); i++ {
 		arg := args.Child(i)
 		if arg.Type() == "call_expression" {
-			processServiceArg(arg, src, prefix, routes)
+			processServiceArg(arg, src, prefix, routes, handlerFuncs, visited)
 		}
 	}
 }

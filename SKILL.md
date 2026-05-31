@@ -4,7 +4,7 @@ description: Static analysis tool that extracts OpenAPI specs, DDL schemas, and 
 license: MIT
 metadata:
   author: park-jun-woo
-  version: "0.1.4"
+  version: "0.1.11"
 ---
 
 # codistill — Extract structured specs from web framework source code

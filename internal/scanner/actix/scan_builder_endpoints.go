@@ -9,7 +9,7 @@ import (
 func scanBuilderEndpoints(files []*fileInfo, sIdx structIndex, cache map[string][]scanner.Field, handlerFuncs map[string]*handlerInfo) []scanner.Endpoint {
 	var endpoints []scanner.Endpoint
 	for _, fi := range files {
-		for _, br := range extractBuilderRoutes(fi) {
+		for _, br := range extractBuilderRoutes(fi, handlerFuncs) {
 			endpoints = append(endpoints, buildBuilderEndpoint(br, sIdx, cache, handlerFuncs))
 		}
 	}

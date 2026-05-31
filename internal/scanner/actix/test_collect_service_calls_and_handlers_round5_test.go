@@ -11,8 +11,8 @@ func TestCollectServiceCallsAndHandlers_Round5(t *testing.T) {
 	fi := aFi(t, `fn config(cfg: &mut web::ServiceConfig) { cfg.service(web::scope("/api").service(h1).service(h2)); }`)
 	var routes []builderRoute
 	walkNodes(fi.root, func(n *sitter.Node) {
-		collectServiceCalls(n, fi.src, "/api", &routes)
-		collectTopLevelServiceCall(n, fi, &routes)
+		collectServiceCalls(n, fi.src, "/api", &routes, nil, map[string]bool{})
+		collectTopLevelServiceCall(n, fi, &routes, nil)
 	})
 
 	scopeCall := aFirst(t, fi.root, "call_expression")

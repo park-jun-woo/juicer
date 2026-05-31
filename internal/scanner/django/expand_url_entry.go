@@ -7,7 +7,7 @@ package django
 func expandURLEntry(entry urlEntry, prefix string, byModule map[string][]urlEntry, visited map[string]bool) []urlEntry {
 	combined := combinePath(prefix, entry.pattern)
 	if !entry.isInclude {
-		return []urlEntry{{pattern: combined, viewName: entry.viewName}}
+		return []urlEntry{{pattern: combined, viewName: entry.viewName, methodActions: entry.methodActions}}
 	}
 	mod, ok := resolveIncludeModule(entry.includeModule, byModule)
 	if !ok {

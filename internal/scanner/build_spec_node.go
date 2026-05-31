@@ -8,6 +8,10 @@ import (
 
 func buildSpecNode(result *ScanResult) *yaml.Node {
 	schemas := map[string]any{}
+	// Seed extra named schemas (nested DTOs/enums) discovered during scanning.
+	for name, sch := range result.Schemas {
+		schemas[name] = sch
+	}
 	paths := map[string]map[string]any{}
 
 	deduplicated := DeduplicateEndpoints(result.Endpoints)

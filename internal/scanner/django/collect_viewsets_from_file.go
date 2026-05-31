@@ -3,10 +3,10 @@
 package django
 
 // collectViewSetsFromFile finds ViewSet classes in a single file.
-func collectViewSetsFromFile(fi fileInfo) []viewsetInfo {
+func collectViewSetsFromFile(fi fileInfo, idx classIndex) []viewsetInfo {
 	var viewsets []viewsetInfo
 	for _, classNode := range findAllByType(fi.root, "class_definition") {
-		vs := parseViewSetClass(classNode, fi)
+		vs := parseViewSetClass(classNode, fi, idx)
 		if vs != nil {
 			viewsets = append(viewsets, *vs)
 		}

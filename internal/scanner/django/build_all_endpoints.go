@@ -8,8 +8,9 @@ import "github.com/park-jun-woo/codistill/internal/scanner"
 func buildAllEndpoints(files []fileInfo) []scanner.Endpoint {
 	urlEntries := collectURLs(files)
 	routerRegs := extractRouterRegistrations(files)
-	viewsets := collectViewSets(files)
-	apiviews := collectAPIViews(files)
+	classes := buildClassIndex(files)
+	viewsets := collectViewSets(files, classes)
+	apiviews := collectAPIViews(files, classes)
 	funcViews := collectFuncViews(files)
 	serializers := extractSerializers(files)
 
